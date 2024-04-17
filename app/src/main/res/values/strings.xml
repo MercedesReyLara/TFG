@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">ProductView</string>
+    <string name="iniciar_sesion">Iniciar Sesión</string>
+    <string name="registro">¿Non tes conta? Rexístrate aquí</string>
+    <string name="subir">Subir o meu producto</string>
+    <string name="eliminar">Eliminar este producto</string>
+    <string name="modificar">Modificar este producto</string>
+    <string name="modificarUsuario">Modificar o meu perfil</string>
+    <string name="filtrar">Aplicar filtro</string>
+    <string name="btnModificar">Modificar un producto</string>
+    <string name="txtModificar">Escolla un producto a modificar</string>
+    <string name="credencialCorreo">Mail ou Nome de usuario</string>
+    <string name="credencialCotraseña">Contrasinal</string>
+    <string name="cerrarSesion">Pechar sesión</string>
+    <string name="txtRegistro">Introduzca estos datos para rexistrarse</string>
+    <string name="nombreEdit">Nome de usuario</string>
+    <string name="apellidosEdit">Apelidos</string>
+    <string name="mailEdit">Correo electrónico</string>
+    <string name="contraseñaEdit">Contrasinal</string>
+    <string name="confirm">Confirmar contrasinal</string>
+    <string name="volverInicio">Volver ao inicio de sesión</string>
+    <string name="registrarse">Rexistrarme</string>
+</resources>
