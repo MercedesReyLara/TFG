@@ -116,6 +116,7 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/button"
         android:text="@string/volverInicio"
         app:layout_constraintEnd_toEndOf="@id/guidelinev2"
         app:layout_constraintHorizontal_bias="0.5"
