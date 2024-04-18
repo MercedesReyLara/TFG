@@ -20,4 +20,11 @@
     <string name="confirm">Confirmar contraseña</string>
     <string name="volverInicio">Volver al inicio de sesión</string>
     <string name="registrarse">Registrarme</string>
+    <string name="saludo">Bienvenido a PRORATER</string>
+    <string name="opciones">¿Que quieres hacer hoy?</string>
+    <string name="eliminarMenu">Eliminar una reseña</string>
+    <string name="errorVacios">Los campos no pueden estar vacíos</string>
+    <string name="irUsuario">Ir a mi perfil</string>
+    <string name="errorCorreo">El correo tiene que acabar en @gmail.com</string>
+    <string name="errorContraseña">La contraseña tiene que tener mayúsculaa,minúsculaa, números e símbolos</string>
 </resources>

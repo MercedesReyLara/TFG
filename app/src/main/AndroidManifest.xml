@@ -13,10 +13,10 @@
         android:theme="@style/Base.Theme.TFG"
         tools:targetApi="31">
         <activity
-            android:name=".register"
+            android:name=".mainMenu"
             android:exported="false" />
         <activity
-            android:name=".prueba"
+            android:name=".register"
             android:exported="false" />
         <activity
             android:name=".logIn"

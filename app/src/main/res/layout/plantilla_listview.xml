@@ -42,9 +42,10 @@
             android:id="@+id/detailsTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/button"
             android:text="Product Details"
-            android:textSize="14sp"
-            android:textColor="@android:color/black"/>
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
 
     </LinearLayout>
 

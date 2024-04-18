@@ -7,4 +7,7 @@
     <style name="SplashTheme" parent="AppTheme">
         <item name="android:windowBackground">@drawable/splash</item>
     </style>
+    <style name="BotonPersonalizado">
+        <item name="android:background">@drawable/degradado_boton</item>
+    </style>
 </resources>
