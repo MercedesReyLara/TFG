@@ -21,11 +21,12 @@ class logIn : AppCompatActivity() {
         val logIn: Button =findViewById(R.id.iniciarSesion)
         val register:Button=findViewById(R.id.registrar)
         val email:EditText=findViewById(R.id.editTextUsername)
-        val password:EditText=findViewById(R.id.editTextPassword)
+        val password:EditText=findViewById(R.id.passwordUser)
         val validator=generalFunctions()
         //Declaración de variables
 
-
+        validator.clearHint(email)
+        validator.clearHint(password)
         register.setOnClickListener {
             val intentRegister= Intent(this,register::class.java)
             startActivity(intentRegister)

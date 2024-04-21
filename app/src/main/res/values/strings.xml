@@ -27,4 +27,9 @@
     <string name="opciones">¿Que queres faces hoxe?</string>
     <string name="errorCorreo">O correo ten que acabar en @gmail.com</string>
     <string name="errorContraseña">O contrasinal ten que ter mayúsculas,minúsculas, números e símbolos</string>
+    <string name="coincidir">As contrasinais teñen que coincidir</string>
+    <string name="menuReseñas">Publique a sua reseña</string>
+    <string name="nomeReseña">Titulo da reseña</string>
+    <string name="descripcionReseña">Descripción da reseña</string>
+    <string name="puntuacionReseña">Puntuación da reseña</string>
 </resources>

@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondo"
     tools:context=".register">
 
     <androidx.constraintlayout.widget.Guideline
@@ -48,7 +49,7 @@
         app:layout_constraintGuide_percent="0.05" />
 
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/nameUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/input_personalizado"
@@ -61,7 +62,7 @@
         tools:layout_editor_absoluteY="125dp" />
 
     <EditText
-        android:id="@+id/editTextPassword"
+        android:id="@+id/passwordUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/input_personalizado"
@@ -74,7 +75,7 @@
         tools:layout_editor_absoluteY="367dp" />
 
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/confirmPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/input_personalizado"
@@ -87,7 +88,7 @@
         tools:layout_editor_absoluteY="448dp" />
 
     <EditText
-        android:id="@+id/editTextTextEmailAddress"
+        android:id="@+id/mailUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/input_personalizado"
@@ -100,7 +101,7 @@
         tools:layout_editor_absoluteY="286dp" />
 
     <EditText
-        android:id="@+id/editTextText2"
+        android:id="@+id/lastNameUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/input_personalizado"
@@ -113,7 +114,7 @@
         tools:layout_editor_absoluteY="205dp" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/goBackLogIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/volverInicio"
@@ -123,7 +124,7 @@
         tools:layout_editor_absoluteY="628dp" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/rexistro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/registrarse"

@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
+    android:background="@drawable/fondo"
     android:layout_height="match_parent"
-    android:backgroundTint="@color/button"
     tools:context=".logIn">
 
         <TextView
@@ -17,8 +17,8 @@
             app:flow_horizontalBias="0."
             app:layout_constraintBottom_toTopOf="@+id/imageView"
             app:layout_constraintEnd_toEndOf="@id/guidelineV2"
-            app:layout_constraintHorizontal_bias="0.507"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@id/guidelineV1"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
@@ -30,9 +30,9 @@
             android:layout_marginEnd="90dp"
             android:src="@drawable/ic_launcher_foreground"
             app:layout_constraintBottom_toTopOf="@+id/editTextUsername"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.493"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guidelineV2"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@id/guidelineV1"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <EditText
@@ -42,14 +42,14 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/input_personalizado"
             android:hint="@string/credencialCorreo"
-            app:layout_constraintBottom_toTopOf="@+id/editTextPassword"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/passwordUser"
+            app:layout_constraintEnd_toEndOf="@id/guidelineV2"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guidelineV1"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
         <EditText
-            android:id="@+id/editTextPassword"
+            android:id="@+id/passwordUser"
             android:layout_width="295dp"
             android:layout_height="45dp"
             android:layout_marginTop="4dp"
@@ -57,9 +57,9 @@
             android:hint="@string/credencialCotraseña"
             android:inputType="textPassword"
             app:layout_constraintBottom_toTopOf="@+id/iniciarSesion"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guidelineV2"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guidelineV1"
             app:layout_constraintTop_toBottomOf="@+id/editTextUsername" />
 
         <Button
@@ -70,10 +70,10 @@
             android:backgroundTint="@color/button"
             android:text="@string/iniciar_sesion"
             app:layout_constraintBottom_toTopOf="@+id/registrar"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guidelineV2"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
+            app:layout_constraintStart_toStartOf="@id/guidelineV1"
+            app:layout_constraintTop_toBottomOf="@+id/passwordUser" />
 
         <Button
             android:id="@+id/registrar"
@@ -83,9 +83,9 @@
             android:backgroundTint="@color/button"
             android:text="@string/registro"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guidelineV2"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guidelineV1"
             app:layout_constraintTop_toBottomOf="@+id/iniciarSesion" />
 
         <androidx.constraintlayout.widget.Guideline

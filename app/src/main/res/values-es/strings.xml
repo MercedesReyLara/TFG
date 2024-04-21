@@ -26,5 +26,10 @@
     <string name="errorVacios">Los campos no pueden estar vacíos</string>
     <string name="irUsuario">Ir a mi perfil</string>
     <string name="errorCorreo">El correo tiene que acabar en @gmail.com</string>
-    <string name="errorContraseña">La contraseña tiene que tener mayúsculaa,minúsculaa, números e símbolos</string>
+    <string name="errorContraseña">La contraseña tiene que tener mayúscula,minúsculaa, números e símbolos</string>
+    <string name="coincidir">Las contraseñas tienen que coincidir</string>
+    <string name="menuReseñas">Publique su reseña</string>
+    <string name="nomeReseña">Titulo da reseña</string>
+    <string name="descripcionReseña">Descripción de la reseña</string>
+    <string name="puntuacionReseña">Puntuación de la reseña</string>
 </resources>
