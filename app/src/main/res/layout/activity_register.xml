@@ -25,14 +25,13 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:text="@string/txtRegistro"
         android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@id/guidelinev2"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@id/guidelinev1"
-        app:layout_constraintTop_toBottomOf="@id/guidelineH1" />
+        tools:layout_editor_absoluteY="51dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH2"
@@ -56,11 +55,10 @@
         android:ems="10"
         android:hint="@string/nombreEdit"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/editTextText2"
         app:layout_constraintEnd_toEndOf="@id/guidelinev2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@id/guidelinev1"
-        app:layout_constraintTop_toBottomOf="@+id/guidelineH3" />
+        tools:layout_editor_absoluteY="125dp" />
 
     <EditText
         android:id="@+id/editTextPassword"
@@ -70,11 +68,10 @@
         android:ems="10"
         android:hint="@string/contraseñaEdit"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPassword"
         app:layout_constraintEnd_toEndOf="@id/guidelinev2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@id/guidelinev1"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
+        tools:layout_editor_absoluteY="367dp" />
 
     <EditText
         android:id="@+id/editTextTextPassword"
@@ -84,11 +81,10 @@
         android:ems="10"
         android:hint="@string/confirm"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
         app:layout_constraintEnd_toEndOf="@id/guidelinev2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@id/guidelinev1"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
+        tools:layout_editor_absoluteY="448dp" />
 
     <EditText
         android:id="@+id/editTextTextEmailAddress"
@@ -98,11 +94,10 @@
         android:ems="10"
         android:hint="@string/mailEdit"
         android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toTopOf="@+id/editTextPassword"
         app:layout_constraintEnd_toEndOf="@id/guidelinev2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@id/guidelinev1"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText2" />
+        tools:layout_editor_absoluteY="286dp" />
 
     <EditText
         android:id="@+id/editTextText2"
@@ -112,49 +107,44 @@
         android:ems="10"
         android:hint="@string/apellidosEdit"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextEmailAddress"
         app:layout_constraintEnd_toEndOf="@id/guidelinev2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@id/guidelinev1"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText" />
+        tools:layout_editor_absoluteY="205dp" />
 
     <Button
         android:id="@+id/button"
-        style="@style/BotonPersonalizado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:backgroundTint="@color/button"
         android:text="@string/volverInicio"
-        app:layout_constraintBottom_toTopOf="@id/guidelineH2"
-        app:layout_constraintEnd_toEndOf="@id/guidelinev2"
-        app:layout_constraintStart_toStartOf="@id/guidelinev1" />
-
-    <Button
-        android:id="@+id/button2"
-        style="@style/BotonPersonalizado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:stateListAnimator="@android:anim/accelerate_decelerate_interpolator"
-        android:text="@string/registrarse"
-        app:circularflow_radiusInDP="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH4"
         app:layout_constraintEnd_toEndOf="@id/guidelinev2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@id/guidelinev1"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+        tools:layout_editor_absoluteY="628dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/registrarse"
+        android:backgroundTint="@color/button"
+        app:circularflow_radiusInDP="20dp"
+        app:layout_constraintEnd_toEndOf="@id/guidelinev2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/guidelinev1"
+        tools:layout_editor_absoluteY="528dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.13" />
+        app:layout_constraintGuide_percent="0.13"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.83" />
+        app:layout_constraintGuide_percent="0.83"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
