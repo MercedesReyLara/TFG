@@ -1,17 +1,15 @@
 package com.TFG.TFG.ServiceREST;
 
+import com.TFG.TFG.Model.Producto;
 import com.TFG.TFG.Model.User;
 import com.TFG.TFG.Respository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-public class Controller {
+public class UserController {
 
     @Autowired
     private UserRepository ur;
@@ -30,5 +28,12 @@ public class Controller {
     public String postUser(@RequestBody User user){
         ur.save(user);
         return "Usuario guardado";
+    }
+
+    @DeleteMapping(value = "/deleteUser/{id}")
+    public String deleteUser(@PathVariable long id){
+        User u=ur.findById(id);
+        ur.delete(u);
+        return "Usuario eliminado";
     }
 }
