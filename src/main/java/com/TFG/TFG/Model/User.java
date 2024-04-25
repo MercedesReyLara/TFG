@@ -4,6 +4,7 @@ package com.TFG.TFG.Model;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="user")
@@ -33,7 +34,10 @@ public class User {
             name = "reviews",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private ArrayList<Producto> productos = new ArrayList<>();
+    private List<Producto> productos = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<Review> resenas=new ArrayList<>();
     public int getId() {
         return id;
     }
@@ -82,11 +86,19 @@ public class User {
         this.contrasena = contrasena;
     }
 
-    public ArrayList<Producto> getProductos() {
+    public List<Producto> getProductos() {
         return productos;
     }
 
-    public void setProductos(ArrayList<Producto> productos) {
+    public void setProductos(List<Producto> productos) {
         this.productos = productos;
+    }
+
+    public List<Review> getResenas() {
+        return resenas;
+    }
+
+    public void setResenas(List<Review> resenas) {
+        this.resenas = resenas;
     }
 }

@@ -22,9 +22,9 @@ public class ProductController {
     }
 
     @PostMapping(value = "/postProducto")
-    public String postProductos(@PathVariable@RequestBody Producto producto){
+    public String postProductos(@RequestBody Producto producto){
         pr.save(producto);
-        return "Usuario guardado";
+        return "Producto guardado";
     }
 
     /*@DeleteMapping(value = "/deleteProducto/{id}")
