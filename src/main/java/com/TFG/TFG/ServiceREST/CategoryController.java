@@ -34,6 +34,11 @@ public class CategoryController {
         return "Categoria borrada";
     }
 
+    @GetMapping(value = "getCategories")
+    private List<Category> getCategories(){
+        return cr.findAll();
+    }
+
     /*@PutMapping(value="/updateC")
     private String updateC(@RequestBody Category category){
         Category c=cr.findById(category.getId());

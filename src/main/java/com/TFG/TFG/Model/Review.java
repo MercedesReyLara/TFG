@@ -3,6 +3,8 @@ package com.TFG.TFG.Model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name="mn")
 public class Review {
@@ -22,6 +24,8 @@ public class Review {
     @JoinColumn(name="product_id",nullable = false)
     private Producto product;
 
+    @OneToMany(mappedBy = "review")
+    private List<Comment> comments;
     public long getId() {
         return id;
     }
@@ -52,5 +56,13 @@ public class Review {
 
     public void setProduct(Producto product) {
         this.product = product;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }
