@@ -23,11 +23,12 @@ public class Producto {
     @Column(name = "precio")
     private Double precio;
 
-    @ManyToMany(mappedBy = "productos")
-    private List<User> users=new ArrayList<>();
-
     @OneToMany(mappedBy = "product")
     private List<Review> resenas=new ArrayList<>();
+
+    @ManyToOne/*MIRAR(cascade = CascadeType.DETACH)*/
+    @JoinColumn(name = "category_id",nullable = false)
+    private Category category;
     /*@Column(name="")*/
 
     public long getId() {
@@ -62,19 +63,19 @@ public class Producto {
         this.precio = precio;
     }
 
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
-
     public List<Review> getResenas() {
         return resenas;
     }
 
     public void setResenas(List<Review> resenas) {
         this.resenas = resenas;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

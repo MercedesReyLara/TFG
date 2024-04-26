@@ -39,13 +39,9 @@ public class ReviewController {
         Review r=rr.save(review);
         User u=ur.findById(user_id);
         Producto p=pr.findById(product_id);
-         /*Añadimos la reseña al usuario y al producto, y a la vez añadimos el producto
-        al usuario porque es uno de los muchos  que tiene
-         */
+         /*Añadimos la reseña al usuario y al producto*/
         u.getResenas().add(r);
         p.getResenas().add(r);
-        u.getProductos().add(p);
-        p.getUsers().add(u);
         /*En cambio aquí le ponemos valores fijos porque esa reseña solo puede ser de 1
         producto y de 1 usuario
          */

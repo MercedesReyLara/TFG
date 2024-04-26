@@ -29,13 +29,6 @@ public class User {
     @Column(name="descipcion")
     private String descripcion;
 
-    @ManyToMany
-    @JoinTable(
-            name = "reviews",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private List<Producto> productos = new ArrayList<>();
-
     @OneToMany(mappedBy = "user")
     private List<Review> resenas=new ArrayList<>();
     public int getId() {
@@ -84,14 +77,6 @@ public class User {
 
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
-    }
-
-    public List<Producto> getProductos() {
-        return productos;
-    }
-
-    public void setProductos(List<Producto> productos) {
-        this.productos = productos;
     }
 
     public List<Review> getResenas() {
