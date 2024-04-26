@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-<item android:drawable="@color/white"/>
-<item >
-    <bitmap android:src="@drawable/corunamap"></bitmap>
+<item android:drawable="@drawable/fondo"/>
+<item>
+    <bitmap android:src="@drawable/imagen_2024_04_22_110039483_removebg_preview"
+        android:gravity="center"
+        android:width="100dp"
+        android:height="100dp"/>
 </item>
 </layer-list>

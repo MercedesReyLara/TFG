@@ -3,7 +3,7 @@
     <string name="iniciar_sesion">Iniciar Sesión</string>
     <string name="registro">¿No tienes cuenta? Registrate</string>
     <string name="subir">Subir mi producto</string>
-    <string name="eliminar">Eliminar este producto</string>
+    <string name="eliminar">Eliminar esta reseña</string>
     <string name="modificar">Modificar este producto</string>
     <string name="modificarUsuario">Modificar mi perfil</string>
     <string name="filtrar">Aplicar filtro</string>
@@ -30,6 +30,10 @@
     <string name="coincidir">Las contraseñas tienen que coincidir</string>
     <string name="menuReseñas">Publique su reseña</string>
     <string name="nomeReseña">Titulo da reseña</string>
+    <string name="botonPublicar">Publicar esta reseña</string>
     <string name="descripcionReseña">Descripción de la reseña</string>
+    <string name="volverMain">Volver al menú principal</string>
     <string name="puntuacionReseña">Puntuación de la reseña</string>
+    <string name="escogerEliminar">Escoge un producto para eliminar</string>
+    <string name="txtEliminar">Bienvenido al menú de eliminación de reseñas</string>
 </resources>

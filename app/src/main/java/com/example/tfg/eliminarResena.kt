@@ -6,9 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-class reviewProduct : AppCompatActivity() {
+class eliminarResena : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_review_product)
+        setContentView(R.layout.activity_eliminar_resena)
+
+        //Búsqueda de elementos visuales
+
     }
 }

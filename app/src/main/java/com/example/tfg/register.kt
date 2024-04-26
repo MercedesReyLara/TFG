@@ -64,5 +64,9 @@ class register : AppCompatActivity() {
             }
 
         }
+        backButton.setOnClickListener {
+            val intentBack=Intent(this,logIn::class.java)
+            startActivity(intentBack)
+        }
         }
     }

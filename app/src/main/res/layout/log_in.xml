@@ -12,28 +12,15 @@
             android:id="@+id/textView"
             android:layout_width="133dp"
             android:layout_height="26dp"
+            android:textColor="@color/black"
             android:text="@string/app_name"
             android:textAlignment="center"
             app:flow_horizontalBias="0."
             app:layout_constraintBottom_toTopOf="@+id/imageView"
             app:layout_constraintEnd_toEndOf="@id/guidelineV2"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_bias="0.499"
             app:layout_constraintStart_toStartOf="@id/guidelineV1"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="164dp"
-            android:layout_height="123dp"
-            android:layout_marginStart="97dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="90dp"
-            android:src="@drawable/ic_launcher_foreground"
-            app:layout_constraintBottom_toTopOf="@+id/editTextUsername"
-            app:layout_constraintEnd_toEndOf="@id/guidelineV2"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@id/guidelineV1"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toTopOf="@id/spinnerLanguages" />
 
         <EditText
             android:id="@+id/editTextUsername"
@@ -44,9 +31,49 @@
             android:hint="@string/credencialCorreo"
             app:layout_constraintBottom_toTopOf="@+id/passwordUser"
             app:layout_constraintEnd_toEndOf="@id/guidelineV2"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_bias="0.493"
             app:layout_constraintStart_toStartOf="@id/guidelineV1"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="128dp"
+            android:layout_height="93dp"
+            android:layout_marginStart="97dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="90dp"
+            android:src="@drawable/imagen_2024_04_22_110039483_removebg_preview"
+            app:layout_constraintBottom_toTopOf="@+id/editTextUsername"
+            app:layout_constraintEnd_toEndOf="@id/guidelineV2"
+            app:layout_constraintHorizontal_bias="0.491"
+            app:layout_constraintStart_toStartOf="@id/guidelineV1"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <Button
+            android:id="@+id/registrar"
+            android:layout_width="300dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="4dp"
+            android:backgroundTint="@color/button"
+            android:text="@string/registro"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guidelineV2"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="@id/guidelineV1"
+            app:layout_constraintTop_toBottomOf="@+id/iniciarSesion" />
+
+        <Button
+            android:id="@+id/iniciarSesion"
+            android:layout_width="300dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@color/button"
+            android:text="@string/iniciar_sesion"
+            app:layout_constraintBottom_toTopOf="@+id/registrar"
+            app:layout_constraintEnd_toEndOf="@id/guidelineV2"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="@id/guidelineV1"
+            app:layout_constraintTop_toBottomOf="@+id/passwordUser" />
 
         <EditText
             android:id="@+id/passwordUser"
@@ -58,35 +85,9 @@
             android:inputType="textPassword"
             app:layout_constraintBottom_toTopOf="@+id/iniciarSesion"
             app:layout_constraintEnd_toEndOf="@id/guidelineV2"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_bias="0.493"
             app:layout_constraintStart_toStartOf="@id/guidelineV1"
             app:layout_constraintTop_toBottomOf="@+id/editTextUsername" />
-
-        <Button
-            android:id="@+id/iniciarSesion"
-            android:layout_width="300dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="12dp"
-            android:backgroundTint="@color/button"
-            android:text="@string/iniciar_sesion"
-            app:layout_constraintBottom_toTopOf="@+id/registrar"
-            app:layout_constraintEnd_toEndOf="@id/guidelineV2"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@id/guidelineV1"
-            app:layout_constraintTop_toBottomOf="@+id/passwordUser" />
-
-        <Button
-            android:id="@+id/registrar"
-            android:layout_width="300dp"
-            android:layout_height="42dp"
-            android:layout_marginTop="4dp"
-            android:backgroundTint="@color/button"
-            android:text="@string/registro"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/guidelineV2"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@id/guidelineV1"
-            app:layout_constraintTop_toBottomOf="@+id/iniciarSesion" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineV1"
@@ -101,5 +102,37 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.95" />
+
+        <Spinner
+            android:id="@+id/spinnerLanguages"
+            style="@style/spinner"
+            android:layout_width="137dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toStartOf="@id/guidelineV2"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@id/guidelineV1"
+            app:layout_constraintTop_toBottomOf="@id/guidelineH1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineH1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.02" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineH2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.98" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineH3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.14" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -40,9 +40,11 @@
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/black"
         android:text="@string/menuReseñas"
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toEndOf="@id/guidelineV1"
         app:layout_constraintTop_toBottomOf="@id/guidelineH1" />
 
@@ -52,49 +54,52 @@
         android:layout_height="110dp"
         android:background="@drawable/input_personalizado"
         android:ems="10"
-        android:inputType="textMultiLine"
-        android:imeOptions="actionDone"
-        android:maxLines="5"
-        android:textColor="@color/gray"
         android:gravity="top|start"
+        android:imeOptions="actionDone"
+        android:inputType="textMultiLine"
+        android:maxLines="5"
         android:text="@string/descripcionReseña"
+        android:textColor="@color/gray"
+        android:textSize="14sp"
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
         app:layout_constraintStart_toEndOf="@id/guidelineV1"
-        tools:layout_editor_absoluteY="206dp" />
+        tools:layout_editor_absoluteY="175dp" />
 
     <EditText
         android:id="@+id/editTextNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="225dp"
+        android:layout_height="30dp"
         android:background="@drawable/input_personalizado"
         android:ems="10"
         android:fontFamily="sans-serif-condensed-light"
         android:textColor="#000000"
         android:textColorHint="@color/bordes"
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
-        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toEndOf="@id/guidelineV1"
-        tools:layout_editor_absoluteY="372dp" />
+        tools:layout_editor_absoluteY="333dp" />
 
     <TextView
         android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/puntuacionReseña"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
-        app:layout_constraintHorizontal_bias="0.427"
+        app:layout_constraintHorizontal_bias="0.432"
         app:layout_constraintStart_toEndOf="@id/guidelineV1"
-        tools:layout_editor_absoluteY="344dp" />
+        tools:layout_editor_absoluteY="304dp" />
 
     <EditText
         android:id="@+id/editTextText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="225dp"
+        android:layout_height="30dp"
         android:background="@drawable/input_personalizado"
         android:ems="10"
         android:inputType="text"
         android:text="@string/nomeReseña"
         android:textColor="@color/gray"
+        android:textSize="14sp"
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toEndOf="@id/guidelineV1"
@@ -106,5 +111,34 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.13"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineH4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.85" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/button"
+        android:text="@string/volverMain"
+        app:layout_constraintEnd_toStartOf="@id/guidelineV2"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toEndOf="@id/guidelineV1"
+        tools:layout_editor_absoluteY="627dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/button"
+        android:text="@string/botonPublicar"
+        app:layout_constraintEnd_toStartOf="@id/guidelineV2"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toEndOf="@id/guidelineV1"
+        tools:layout_editor_absoluteY="562dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

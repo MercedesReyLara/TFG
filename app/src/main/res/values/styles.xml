@@ -9,5 +9,10 @@
     </style>
     <style name="BotonPersonalizado">
         <item name="android:background">@drawable/degradado_boton</item>
+        <item name="android:textColor">#FFFFFF</item>
     </style>
+    <style name="spinner" parent="Theme.AppCompat.Light">
+        <item name="spinnerStyle">@style/Widget.AppCompat.Spinner.DropDown</item>
+    </style>
+
 </resources>

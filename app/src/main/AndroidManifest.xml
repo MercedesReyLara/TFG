@@ -4,14 +4,21 @@
 
     <application
         android:allowBackup="true"
+        android:configChanges="locale"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/corunamap"
+        android:icon="@drawable/imagen_2024_04_22_110039483_removebg_preview"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/corunamap"
+        android:roundIcon="@drawable/imagen_2024_04_22_110039483_removebg_preview"
         android:supportsRtl="true"
         android:theme="@style/Base.Theme.TFG"
         tools:targetApi="31">
+        <activity
+            android:name=".perfilUser"
+            android:exported="false" />
+        <activity
+            android:name=".eliminarResena"
+            android:exported="false" />
         <activity
             android:name=".reviewProduct"
             android:exported="false" />
