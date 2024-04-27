@@ -22,11 +22,7 @@ public class ReviewController {
     private ProductRepository pr;
     private UserRepository ur;
     private ReviewRepository rr;
-    private ReviewController(ProductRepository pr, UserRepository ur, ReviewRepository rr){
-        this.rr=rr;
-        this.pr=pr;
-        this.ur=ur;
-    }
+
 
     @GetMapping(value = "/getReviews")
     private List<Review> getReviews(){
