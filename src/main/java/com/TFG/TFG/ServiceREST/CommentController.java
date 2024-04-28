@@ -36,4 +36,12 @@ public class CommentController {
 
         return "Comentario posteado con exito";
     }
+
+    @DeleteMapping(value = "{id}/deleteComment")
+    private String deleteComment(@PathVariable long id){
+        Comment c=cr.findById(id);
+        cr.delete(c);
+        return "Comentario eliminado";
+    }
+
 }

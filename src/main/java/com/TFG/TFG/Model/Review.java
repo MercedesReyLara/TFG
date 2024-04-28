@@ -3,6 +3,7 @@ package com.TFG.TFG.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.hibernate.annotations.Cascade;
 
 import java.util.List;
 
@@ -19,13 +20,14 @@ public class Review {
 
     @ManyToOne
     @JoinColumn(name="user_id",nullable = false)
+    @JsonIgnore
     private User user;
 
     @ManyToOne
     @JoinColumn(name="product_id",nullable = false)
     private Producto product;
 
-    @OneToMany(mappedBy = "review")
+    @OneToMany(mappedBy = "review",cascade=CascadeType.REMOVE)
     @JsonIgnore
     private List<Comment> comments;
     public long getId() {

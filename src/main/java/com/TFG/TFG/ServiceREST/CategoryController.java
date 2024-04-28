@@ -39,11 +39,14 @@ public class CategoryController {
         return cr.findAll();
     }
 
-    /*@PutMapping(value="/updateC")
+    @PutMapping(value="/updateC")
     private String updateC(@RequestBody Category category){
         Category c=cr.findById(category.getId());
         c.setName(category.getName());
         c.setDescription(category.getDescription());
         c.setProducts(category.getProducts());
-    }*/
+
+        cr.save(c);
+        return "Categoria guardada";
+    }
 }

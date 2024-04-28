@@ -20,7 +20,7 @@ public class Category {
     @Column(name="description")
     private String description;
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category",cascade=CascadeType.REMOVE)
     @JsonIgnore
     private List<Producto> products;
 

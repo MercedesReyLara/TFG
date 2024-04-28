@@ -24,13 +24,17 @@ public class Producto {
     @Column(name = "precio")
     private Double precio;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product",cascade=CascadeType.REMOVE)
     @JsonIgnore
     private List<Review> resenas=new ArrayList<>();
 
     @ManyToOne/*MIRAR(cascade = CascadeType.DETACH)*/
     @JoinColumn(name = "category_id",nullable = false)
     private Category category;
+
+    @ManyToMany(mappedBy = "productsU")
+    @JsonIgnore
+    private List<User> users=new ArrayList<>();
     /*@Column(name="")*/
 
     public long getId() {
@@ -79,5 +83,13 @@ public class Producto {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }

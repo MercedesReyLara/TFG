@@ -3,6 +3,7 @@ package com.TFG.TFG.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.hibernate.annotations.Cascade;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,7 @@ public class User {
     @Column(name = "apellidos")
     private String apellidos;
 
-    @Column(name="mail")
+    @Column(name="mail",unique = true)
     private String mail;
 
     @Column(name = "contrasena")
@@ -30,9 +31,18 @@ public class User {
     @Column(name="descipcion")
     private String descripcion;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",cascade=CascadeType.REMOVE)
     @JsonIgnore
     private List<Review> resenas=new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "tener",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    @JsonIgnore
+    private List<Producto> productsU=new ArrayList<>();
     public int getId() {
         return id;
     }
@@ -87,5 +97,13 @@ public class User {
 
     public void setResenas(List<Review> resenas) {
         this.resenas = resenas;
+    }
+
+    public List<Producto> getProductsU() {
+        return productsU;
+    }
+
+    public void setProductsU(List<Producto> productsU) {
+        this.productsU = productsU;
     }
 }

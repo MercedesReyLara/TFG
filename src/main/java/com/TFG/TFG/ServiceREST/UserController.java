@@ -36,4 +36,10 @@ public class UserController {
         ur.delete(u);
         return "Usuario eliminado";
     }
+
+    @GetMapping(value = "/{id}/getUserProducts")
+    public List<Producto> getProducts(@PathVariable long id){
+        User u=ur.findById(id);
+        return u.getProductsU();
+    }
 }

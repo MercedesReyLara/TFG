@@ -30,14 +30,15 @@ public class ReviewController {
     }
 
     @PostMapping(value = "/postReviews")
-    private String postReviews(@RequestBody Review review,@PathVariable String name,
-                               @PathVariable long id){
-        User u=ur.findById(id);
-        Producto p=pr.findByName(name);
+    private String postReviews(@RequestBody Review review){
+        User u=ur.findById(review.getUser().getId());
+        Producto p=pr.findByNombreP(review.getProduct().getNombreP());
          /*Añadimos la reseña al usuario y al producto*/
         u.getResenas().add(review);
+        u.getProductsU().add(p);
         ur.save(u);
         p.getResenas().add(review);
+        p.getUsers().add(u);
         pr.save(p);
         /*En cambio aquí le ponemos valores fijos porque esa reseña solo puede ser de 1
         producto y de 1 usuario.
@@ -56,5 +57,12 @@ public class ReviewController {
         Producto p=pr.findById(id_product);
         return p.getResenas();
 
+    }
+
+    @DeleteMapping(value = "{id}/deleteReview")
+    public String deleteReview(@PathVariable long id){
+        Review r=rr.findById(id);
+        rr.delete(r);
+        return "Resena eliminada";
     }
 }
