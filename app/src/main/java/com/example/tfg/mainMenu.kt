@@ -16,7 +16,7 @@ class mainMenu : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         context=baseContext
-        setContentView(R.layout.activity_perfil_user)
+        setContentView(R.layout.activity_pantalla_principal)
 
         //Búsqueda de elementos visuales
         val eliminar: Button =findViewById(R.id.eliminarResena)

@@ -50,8 +50,8 @@
 
     <EditText
         android:id="@+id/editTextText2"
-        android:layout_width="225dp"
-        android:layout_height="110dp"
+        android:layout_width="226dp"
+        android:layout_height="175dp"
         android:background="@drawable/input_personalizado"
         android:ems="10"
         android:gravity="top|start"
@@ -64,31 +64,6 @@
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
         app:layout_constraintStart_toEndOf="@id/guidelineV1"
         tools:layout_editor_absoluteY="175dp" />
-
-    <EditText
-        android:id="@+id/editTextNumber"
-        android:layout_width="225dp"
-        android:layout_height="30dp"
-        android:background="@drawable/input_personalizado"
-        android:ems="10"
-        android:fontFamily="sans-serif-condensed-light"
-        android:textColor="#000000"
-        android:textColorHint="@color/bordes"
-        app:layout_constraintEnd_toStartOf="@id/guidelineV2"
-        app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toEndOf="@id/guidelineV1"
-        tools:layout_editor_absoluteY="333dp" />
-
-    <TextView
-        android:id="@+id/textView16"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/puntuacionReseña"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toStartOf="@id/guidelineV2"
-        app:layout_constraintHorizontal_bias="0.432"
-        app:layout_constraintStart_toEndOf="@id/guidelineV1"
-        tools:layout_editor_absoluteY="304dp" />
 
     <EditText
         android:id="@+id/editTextText"
@@ -126,9 +101,9 @@
         android:backgroundTint="@color/button"
         android:text="@string/volverMain"
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
-        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toEndOf="@id/guidelineV1"
-        tools:layout_editor_absoluteY="627dp" />
+        tools:layout_editor_absoluteY="637dp" />
 
     <Button
         android:id="@+id/button2"

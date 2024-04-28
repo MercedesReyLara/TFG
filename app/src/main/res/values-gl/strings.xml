@@ -10,8 +10,9 @@
     <string name="irUsuario">Ir ao meu perfil</string>
     <string name="filtrar">Aplicar filtro</string>
     <string name="btnModificar">Modificar unha reseña</string>
+    <string name="DNI">DNI</string>
     <string name="txtModificar">Escolla un producto a modificar</string>
-    <string name="escogerEliminar">Escolla un producto a eliminar</string>
+    <string name="escogerEliminar">Escolla un producto</string>
     <string name="txtEliminar">Benvido ao menu de eliminación de reseñas</string>
     <string name="credencialCorreo">Mail ou Nome de usuario</string>
     <string name="credencialCotraseña">Contrasinal</string>
