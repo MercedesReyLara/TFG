@@ -33,7 +33,6 @@ public class Producto {
     private Category category;
 
     @ManyToMany(mappedBy = "productsU")
-    @JsonIgnore
     private List<User> users=new ArrayList<>();
     /*@Column(name="")*/
 

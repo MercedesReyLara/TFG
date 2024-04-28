@@ -22,6 +22,7 @@ public class Comment {
 
     @ManyToOne
     @JoinColumn(name="review_id",nullable = false)
+    @JsonIgnore
     private Review review;
 
     public long getId() {

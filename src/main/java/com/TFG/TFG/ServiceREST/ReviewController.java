@@ -50,7 +50,7 @@ public class ReviewController {
     }
 
     @GetMapping(value = "/{id}/getReviews")
-    public List<Review> getUserWork(@RequestBody long id_product){
+    public List<Review> getReviewsProductos(@RequestBody long id_product){
         /*Queremos ver las reseñas de ese producto. Buscamos el producto por id
         y devolvemos su lista de reseñas
          */
