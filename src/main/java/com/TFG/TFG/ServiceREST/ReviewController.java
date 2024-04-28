@@ -63,4 +63,16 @@ public class ReviewController {
         rr.delete(r);
         return "Resena eliminada";
     }
+
+    @PutMapping(value="/updateR")
+    public String updateR(@RequestBody Review r){
+        Review rU=rr.findById(r.getId());
+        rU.setOpinion(r.getOpinion());
+        rU.setUser(r.getUser());
+        rU.setProduct(r.getProduct());
+        rU.setComments(r.getComments());
+
+        rr.save(rU);
+        return "Actualzacion review";
+    }
 }

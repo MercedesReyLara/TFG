@@ -49,4 +49,16 @@ public class CategoryController {
         cr.save(c);
         return "Categoria guardada";
     }
+
+    @PutMapping(value = "updateCt")
+    public String updateCt(@RequestBody Category c){
+        Category cU=cr.findById(c.getId());
+
+        cU.setName(c.getName());
+        cU.setDescription(c.getDescription());
+
+        cr.save(cU);
+
+        return "Categoria updateada";
+    }
 }

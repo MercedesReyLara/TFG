@@ -44,4 +44,15 @@ public class CommentController {
         return "Comentario eliminado";
     }
 
+    @PutMapping(value="updateC")
+    public String updateC(@RequestBody Comment c){
+        Comment cU=cr.findById(c.getId());
+        cU.setTitle(c.getTitle());
+        cU.setReview(c.getReview());
+
+        cr.save(cU);
+
+        return "Comentario updateado";
+    }
+
 }

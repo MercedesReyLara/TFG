@@ -49,12 +49,22 @@ public class ProductController {
     }
 
     @GetMapping(value = "/{id}/product")
-    private List<Producto> getProducstByUser(@PathVariable long id){
-        User u=ur.findById(id);
-        List<Producto>products=new ArrayList<>();
-        for(Review r:u.getResenas()){
-            products.add(r.getProduct());
-        }
-        return products;
+    private List<User> getUsersByProduct(@PathVariable long id){
+        Producto p=pr.findById(id);
+        return p.getUsers();
+    }
+
+    @PutMapping(value = "{id}/updateP")
+    private String updateProduct(@PathVariable long id,@RequestBody Producto product){
+        Producto p=pr.findById(id);
+        p.setNombreP(product.getNombreP());
+        p.setDescripcionP(product.getDescripcionP());
+        p.setResenas(product.getResenas());
+        p.setCategory(product.getCategory());
+        p.setUsers(product.getUsers());
+
+        pr.save(p);
+
+        return "Modificado";
     }
 }
