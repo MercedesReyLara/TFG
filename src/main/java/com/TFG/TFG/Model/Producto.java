@@ -1,6 +1,7 @@
 package com.TFG.TFG.Model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ public class Producto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "nombreP")
+    @Column(name = "nombreP",unique = true)
     private String nombreP;
 
     @Column(name = "descripcionP")
@@ -24,6 +25,7 @@ public class Producto {
     private Double precio;
 
     @OneToMany(mappedBy = "product")
+    @JsonIgnore
     private List<Review> resenas=new ArrayList<>();
 
     @ManyToOne/*MIRAR(cascade = CascadeType.DETACH)*/

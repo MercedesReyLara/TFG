@@ -1,6 +1,7 @@
 package com.TFG.TFG.Model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class Category {
     private String description;
 
     @OneToMany(mappedBy = "category")
+    @JsonIgnore
     private List<Producto> products;
 
 

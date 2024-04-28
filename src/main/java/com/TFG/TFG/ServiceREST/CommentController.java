@@ -15,6 +15,7 @@ public class CommentController {
 
     @Autowired
     private CommentRepository cr;
+    @Autowired
     private ReviewRepository rr;
 
 
@@ -24,8 +25,8 @@ public class CommentController {
     }
     
     @PostMapping(value="postComment/{id}")
-    private String postComment(@RequestBody Comment comment, @PathVariable long id_review){
-        Review r= rr.findById(id_review);
+    private String postComment(@RequestBody Comment comment){
+        Review r= rr.findById(comment.getReview().getId());
         if (r== null) {
            return "Review no encontrada";
         }

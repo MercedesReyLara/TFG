@@ -1,6 +1,7 @@
 package com.TFG.TFG.Model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class Review {
     private Producto product;
 
     @OneToMany(mappedBy = "review")
+    @JsonIgnore
     private List<Comment> comments;
     public long getId() {
         return id;

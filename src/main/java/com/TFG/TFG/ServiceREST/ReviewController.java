@@ -10,7 +10,6 @@ import com.TFG.TFG.Respository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -18,9 +17,10 @@ public class ReviewController {
 
 
     @Autowired
-
     private ProductRepository pr;
+    @Autowired
     private UserRepository ur;
+    @Autowired
     private ReviewRepository rr;
 
 
@@ -30,19 +30,21 @@ public class ReviewController {
     }
 
     @PostMapping(value = "/postReviews")
-    private String postReviews(@PathVariable long product_id, @PathVariable long user_id,
-                               @RequestBody Review review){
-        Review r=rr.save(review);
-        User u=ur.findById(user_id);
-        Producto p=pr.findById(product_id);
+    private String postReviews(@RequestBody Review review,@PathVariable String name,
+                               @PathVariable long id){
+        User u=ur.findById(id);
+        Producto p=pr.findByName(name);
          /*Añadimos la reseña al usuario y al producto*/
-        u.getResenas().add(r);
-        p.getResenas().add(r);
+        u.getResenas().add(review);
+        ur.save(u);
+        p.getResenas().add(review);
+        pr.save(p);
         /*En cambio aquí le ponemos valores fijos porque esa reseña solo puede ser de 1
-        producto y de 1 usuario
+        producto y de 1 usuario.
          */
-        r.setUser(u);
-        r.setProduct(p);
+        review.setUser(u);
+        review.setProduct(p);
+        rr.save(review);
         return "Review guardada";
     }
 

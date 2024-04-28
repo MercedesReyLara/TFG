@@ -1,6 +1,7 @@
 package com.TFG.TFG.Model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class User {
     private String descripcion;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<Review> resenas=new ArrayList<>();
     public int getId() {
         return id;
