@@ -2,6 +2,7 @@ package com.TFG.TFG.ServiceREST;
 
 import com.TFG.TFG.Model.Producto;
 import com.TFG.TFG.Model.User;
+import com.TFG.TFG.Respository.ProductRepository;
 import com.TFG.TFG.Respository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,8 @@ public class UserController {
 
     @Autowired
     private UserRepository ur;
+    @Autowired
+    private ProductRepository pr;
 
     /*@GetMapping(value = "/hola")
     public String prove(){
@@ -42,4 +45,15 @@ public class UserController {
         User u=ur.findById(id);
         return u.getProductsU();
     }
+
+    /*@PostMapping(value = "/{id}/{idU}/pU")
+    public String usuarioTiene(@PathVariable long id_user,@PathVariable long id_product){
+        User u=ur.findById(id_user);
+        Producto p=pr.findById(id_product);
+        u.getProductsU().add(p);
+        p.getUsers().add(u);
+        pr.save(p);
+        ur.save(u);
+        return "Guardado";
+    }*/
 }

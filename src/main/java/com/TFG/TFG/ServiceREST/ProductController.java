@@ -26,7 +26,7 @@ public class ProductController {
     @Autowired
     private CategoryRepository cr;
 
-    @GetMapping(value = "/getProduct")
+    @GetMapping(value = "/getProducts")
     public List<Producto> getProductos(){
         return pr.findAll();
     }

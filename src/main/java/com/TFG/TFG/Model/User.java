@@ -38,8 +38,8 @@ public class User {
     @ManyToMany
     @JoinTable(
             name = "tener",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id")
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "product_id")}
     )
     @JsonIgnore
     private List<Producto> productsU=new ArrayList<>();
