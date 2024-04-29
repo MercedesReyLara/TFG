@@ -8,14 +8,16 @@ import org.hibernate.annotations.Cascade;
 import java.util.List;
 
 @Entity
-@Table(name="mn")
+@Table(name="review")
 public class Review {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column
+    @Column(name="nombreR")
+    private String nombreR;
+    @Column(name="opinion")
     private String opinion;
 
     @ManyToOne
@@ -27,15 +29,19 @@ public class Review {
     @JoinColumn(name="product_id",nullable = false)
     private Producto product;
 
-    @OneToMany(mappedBy = "review",cascade=CascadeType.REMOVE)
-    @JsonIgnore
-    private List<Comment> comments;
-    public long getId() {
-        return id;
-    }
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public long getId(){return id;}
+
+    public String getNombreR() {
+        return nombreR;
+    }
+
+    public void setNombreR(String nombreR) {
+        this.nombreR = nombreR;
     }
 
     public String getOpinion() {
@@ -62,11 +68,4 @@ public class Review {
         this.product = product;
     }
 
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
 }

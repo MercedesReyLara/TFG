@@ -70,7 +70,6 @@ public class ReviewController {
         rU.setOpinion(r.getOpinion());
         rU.setUser(r.getUser());
         rU.setProduct(r.getProduct());
-        rU.setComments(r.getComments());
 
         rr.save(rU);
         return "Actualzacion review";

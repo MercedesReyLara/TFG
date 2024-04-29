@@ -14,11 +14,11 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name="name",unique = true)
-    private String name;
+    @Column(name="nombreC",unique = true)
+    private String nombreCa;
 
-    @Column(name="description")
-    private String description;
+    @Column(name="descripcionC")
+    private String descripcionCa;
 
     @OneToMany(mappedBy = "category")
     @JsonIgnore
@@ -33,20 +33,20 @@ public class Category {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNombreCa() {
+        return nombreCa;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNombreCa(String nombreCa) {
+        this.nombreCa = nombreCa;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDescripcionCa() {
+        return descripcionCa;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescripcionCa(String descripcionCa) {
+        this.descripcionCa = descripcionCa;
     }
 
     public List<Producto> getProducts() {

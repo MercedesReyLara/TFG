@@ -42,8 +42,8 @@ public class CategoryController {
     @PutMapping(value="/updateC")
     private String updateC(@RequestBody Category category){
         Category c=cr.findById(category.getId());
-        c.setName(category.getName());
-        c.setDescription(category.getDescription());
+        c.setNombreCa(category.getNombreCa());
+        c.setDescripcionCa(category.getDescripcionCa());
         c.setProducts(category.getProducts());
 
         cr.save(c);
@@ -54,8 +54,8 @@ public class CategoryController {
     public String updateCt(@RequestBody Category c){
         Category cU=cr.findById(c.getId());
 
-        cU.setName(c.getName());
-        cU.setDescription(c.getDescription());
+        cU.setNombreCa(c.getNombreCa());
+        cU.setDescripcionCa(c.getDescripcionCa());
 
         cr.save(cU);
 
