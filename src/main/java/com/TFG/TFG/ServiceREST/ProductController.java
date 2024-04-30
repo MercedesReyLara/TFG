@@ -42,20 +42,20 @@ public class ProductController {
     }
 
     @DeleteMapping(value = "/deleteProducto/{id}")
-    public String deleteProductos(@PathVariable long id){
+    public String deleteProductos(@PathVariable int id){
         Producto p=pr.findById(id);
         pr.delete(p);
         return "Producto eliminado";
     }
 
     @GetMapping(value = "/{id}/product")
-    private List<User> getUsersByProduct(@PathVariable long id){
+    private List<User> getUsersByProduct(@PathVariable int id){
         Producto p=pr.findById(id);
         return p.getUsers();
     }
 
-    @PutMapping(value = "{id}/updateP")
-    private String updateProduct(@PathVariable long id,@RequestBody Producto product){
+    @PutMapping(value = "/{id}/updateP")
+    private String updateProduct(@PathVariable int id,@RequestBody Producto product){
         Producto p=pr.findById(id);
         p.setNombreP(product.getNombreP());
         p.setDescripcionP(product.getDescripcionP());
@@ -66,5 +66,18 @@ public class ProductController {
         pr.save(p);
 
         return "Modificado";
+    }
+
+    @PutMapping(value = "{id}/anadirUser")
+    private String anadirUser(@PathVariable int id,@RequestBody User user){
+        Producto p=pr.findById(id);
+        User u=ur.findByDNI(user.getDNI());
+        p.getUsers().add(user);
+        u.getProductsU().add(p);
+
+        pr.save(p);
+        ur.save(u);
+
+        return "Producto añadido a usuario";
     }
 }

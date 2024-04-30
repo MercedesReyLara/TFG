@@ -31,8 +31,8 @@ public class ReviewController {
 
     @PostMapping(value = "/postReviews")
     private String postReviews(@RequestBody Review review){
-        User u=ur.findById(review.getUser().getId());
-        Producto p=pr.findByNombreP(review.getProduct().getNombreP());
+        User u=ur.findByDNI(review.getUser().getDNI());
+        Producto p=pr.findById(review.getProduct().getId());
          /*Añadimos la reseña al usuario y al producto*/
         u.getResenas().add(review);
         ur.save(u);
@@ -48,7 +48,7 @@ public class ReviewController {
     }
 
     @GetMapping(value = "/{id}/getReviews")
-    public List<Review> getReviewsProductos(@RequestBody long id_product){
+    public List<Review> getReviewsProductos(@RequestBody int id_product){
         /*Queremos ver las reseñas de ese producto. Buscamos el producto por id
         y devolvemos su lista de reseñas
          */
@@ -57,8 +57,8 @@ public class ReviewController {
 
     }
 
-    @DeleteMapping(value = "{id}/deleteReview")
-    public String deleteReview(@PathVariable long id){
+    @DeleteMapping(value = "/{id}/deleteReview")
+    public String deleteReview(@PathVariable int id){
         Review r=rr.findById(id);
         rr.delete(r);
         return "Resena eliminada";

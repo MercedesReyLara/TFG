@@ -13,7 +13,7 @@ public class Producto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
 
     @Column(name = "nombreP",unique = true)
     private String nombreP;
@@ -33,14 +33,16 @@ public class Producto {
     private Category category;
 
     @ManyToMany(mappedBy = "productsU")
+    @JsonIgnore
     private List<User> users=new ArrayList<>();
-    /*@Column(name="")*/
 
-    public long getId() {
+    @Column(name="imagen")
+    private String imagen;
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -90,5 +92,13 @@ public class Producto {
 
     public void setUsers(List<User> users) {
         this.users = users;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 }

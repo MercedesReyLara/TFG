@@ -13,7 +13,7 @@ public class Review {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
 
     @Column(name="nombreR")
     private String nombreR;
@@ -22,7 +22,6 @@ public class Review {
 
     @ManyToOne
     @JoinColumn(name="user_id",nullable = false)
-    @JsonIgnore
     private User user;
 
     @ManyToOne
@@ -30,11 +29,11 @@ public class Review {
     private Producto product;
 
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public long getId(){return id;}
+    public int getId(){return id;}
 
     public String getNombreR() {
         return nombreR;

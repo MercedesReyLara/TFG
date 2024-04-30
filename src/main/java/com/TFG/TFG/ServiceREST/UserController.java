@@ -17,10 +17,6 @@ public class UserController {
     @Autowired
     private ProductRepository pr;
 
-    /*@GetMapping(value = "/hola")
-    public String prove(){
-        return "Hola 🧏‍♀️🧏‍♀️🧏‍♀️";
-    }*/
 
     @GetMapping(value = "/getUser")
     public List<User> getUsers(){
@@ -34,15 +30,15 @@ public class UserController {
     }
 
     @DeleteMapping(value = "/deleteUser/{id}")
-    public String deleteUser(@PathVariable long id){
-        User u=ur.findById(id);
+    public String deleteUser(@PathVariable String DNI){
+        User u=ur.findByDNI(DNI);
         ur.delete(u);
         return "Usuario eliminado";
     }
 
-    @GetMapping(value = "/{id}/getUserProducts")
-    public List<Producto> getProducts(@PathVariable long id){
-        User u=ur.findById(id);
+    @GetMapping(value = "/{DNI}/getUserProducts")
+    public List<Producto> getProducts(@PathVariable String DNI){
+        User u=ur.findByDNI(DNI);
         return u.getProductsU();
     }
 }

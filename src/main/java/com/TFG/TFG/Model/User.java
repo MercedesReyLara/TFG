@@ -3,60 +3,77 @@ package com.TFG.TFG.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import org.hibernate.annotations.Cascade;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="user")
+@Table(name="useer")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private String DNI;
 
-    @Column(name = "nombre")
-    private String nombre;
+    @Column(name = "nombreU")
+    private String nombreU;
 
-    @Column(name = "apellidos")
-    private String apellidos;
+    @Column(name = "apellidosU")
+    private String apellidosU;
 
-    @Column(name="mail",unique = true)
-    private String mail;
+    @Column(name="correo",unique = true)
+    private String correo;
 
     @Column(name = "contrasena")
     private String contrasena;
 
-    @Column(name="descipcion")
+    @Column(name="descripcion")
     private String descripcion;
 
+    @Column(name="profileP")
+    private String profileP;
     @OneToMany(mappedBy = "user",cascade=CascadeType.REMOVE)
     @JsonIgnore
     private List<Review> resenas=new ArrayList<>();
 
     @ManyToMany
     @JoinTable(
-            name = "tener",
+            name = "pu",
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "product_id")}
     )
     @JsonIgnore
     private List<Producto> productsU=new ArrayList<>();
-    public int getId() {
-        return id;
+    public String getDNI() {
+        return DNI;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setDNI(String DNI) {
+        this.DNI = DNI;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombreU() {
+        return nombreU;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombreU(String nombreU) {
+        this.nombreU = nombreU;
+    }
+
+    public String getApellidosU() {
+        return apellidosU;
+    }
+
+    public void setApellidosU(String apellidosU) {
+        this.apellidosU = apellidosU;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public String getDescripcion() {
@@ -67,20 +84,12 @@ public class User {
         this.descripcion = descripcion;
     }
 
-    public String getApellidos() {
-        return apellidos;
+    public String getProfileP() {
+        return profileP;
     }
 
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
-    }
-
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
+    public void setProfileP(String profileP) {
+        this.profileP = profileP;
     }
 
     public String getContrasena() {

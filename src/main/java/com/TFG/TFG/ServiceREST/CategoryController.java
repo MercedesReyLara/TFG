@@ -16,7 +16,7 @@ public class CategoryController {
     private CategoryRepository cr;
 
     @GetMapping(value = "/getProductByCategory/{id}")
-    private List<Producto> productListC(@PathVariable long category_id){
+    private List<Producto> productListC(@PathVariable int category_id){
         Category c=cr.findById(category_id);
         return c.getProducts();
     }
@@ -28,13 +28,13 @@ public class CategoryController {
     }
 
     @DeleteMapping(value = "/deleteC/{id}")
-    private String deleteC(@PathVariable long id){
+    private String deleteC(@PathVariable int id){
         Category c=cr.findById(id);
         cr.delete(c);
         return "Categoria borrada";
     }
 
-    @GetMapping(value = "getCategories")
+    @GetMapping(value = "/getCategories")
     private List<Category> getCategories(){
         return cr.findAll();
     }
@@ -42,20 +42,20 @@ public class CategoryController {
     @PutMapping(value="/updateC")
     private String updateC(@RequestBody Category category){
         Category c=cr.findById(category.getId());
-        c.setNombreCa(category.getNombreCa());
-        c.setDescripcionCa(category.getDescripcionCa());
+        c.setNombre(category.getNombre());
+        c.setDescripcion(category.getDescripcion());
         c.setProducts(category.getProducts());
 
         cr.save(c);
         return "Categoria guardada";
     }
 
-    @PutMapping(value = "updateCt")
+    @PutMapping(value = "/updateCt")
     public String updateCt(@RequestBody Category c){
         Category cU=cr.findById(c.getId());
 
-        cU.setNombreCa(c.getNombreCa());
-        cU.setDescripcionCa(c.getDescripcionCa());
+        cU.setNombre(c.getNombre());
+        cU.setDescripcion(c.getDescripcion());
 
         cr.save(cU);
 

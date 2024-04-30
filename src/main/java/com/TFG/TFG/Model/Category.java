@@ -12,41 +12,41 @@ public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
 
-    @Column(name="nombreC",unique = true)
-    private String nombreCa;
+    @Column(name="nombre",unique = true)
+    private String nombre;
 
-    @Column(name="descripcionC")
-    private String descripcionCa;
+    @Column(name="descripcion")
+    private String descripcion;
 
     @OneToMany(mappedBy = "category")
     @JsonIgnore
     private List<Producto> products;
 
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getNombreCa() {
-        return nombreCa;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNombreCa(String nombreCa) {
-        this.nombreCa = nombreCa;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getDescripcionCa() {
-        return descripcionCa;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setDescripcionCa(String descripcionCa) {
-        this.descripcionCa = descripcionCa;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public List<Producto> getProducts() {
