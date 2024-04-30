@@ -10,8 +10,8 @@
     <string name="btnModificar" >Modificar un producto</string>
     <string name="txtModificar" >Escoge un producto</string>
     <string name="DNI">DNI</string>
-    <string name="credencialCorreo" >Mail ou Nome de usuario</string>
-    <string name="credencialCotraseña" >Contrasinal</string>
+    <string name="credencialCorreo" >Mail o Nombre de usuario</string>
+    <string name="credencialCotraseña" >Contraseña</string>
     <string name="cerrarSesion" >Pechar sesión</string>
     <string name="txtRegistro">Introduzca estos datos para registrarte</string>
     <string name="nombreEdit">Nombre de usuario</string>

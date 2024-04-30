@@ -3,6 +3,7 @@ package com.example.tfg
 
 import android.app.Activity
 import android.content.Context
+import android.content.res.Configuration
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.EditText
@@ -49,13 +50,19 @@ class generalFunctions {
         return spinner
     }
 
-    fun setLocal(context: Context,code:String){
-        val local:Locale=Locale(code)
-        Locale.setDefault(local)
-        val resources=context.resources
-        val config=resources.configuration
-        config.setLocale(local)
-        context.createConfigurationContext(config)
+    fun setLanguage(activity:Activity, languageCode: String) {
+        val locale = Locale(languageCode)
+        Locale.setDefault(locale)
+
+        val configuration = activity.resources.configuration
+        configuration.setLocale(locale)
+
+        val resources = activity.baseContext.resources
+        val context = activity.baseContext.createConfigurationContext(configuration)
+
+        val intent = activity.intent
+        activity.finish()
+        activity.startActivity(intent)
     }
     /*fun writePDF(work:String):File{
         document.add(Paragraph("Lista de jornadas"))

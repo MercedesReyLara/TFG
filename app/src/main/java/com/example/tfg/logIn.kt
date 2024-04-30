@@ -34,7 +34,7 @@ class logIn : AppCompatActivity() {
         val spinnerIdiomas: Spinner = findViewById(R.id.spinnerLanguages)
         val validator = generalFunctions()
         //Declaración de variables
-        val languages = arrayListOf("Selecciona idioma","Castelan", "Galego")
+        /*val languages = arrayListOf("Selecciona idioma","Castelan", "Galego")
         val adapter:ArrayAdapter<String> = ArrayAdapter(this,android.R.layout.simple_spinner_item,languages)
         spinnerIdiomas.setSelection(0)
         spinnerIdiomas.adapter=adapter
@@ -46,12 +46,10 @@ class logIn : AppCompatActivity() {
                 id: Long
             ) {
                 val selectedLanguage = parent?.getItemAtPosition(position).toString()
-                if (selectedLanguage == "Galego") {
-                    validator.setLocal(context,"gl")
-                    finish()
-                    startActivity(intent)
-                } else if (selectedLanguage == "Castelan") {
-                    validator.setLocal(context,"es")
+                if (selectedLanguage == "Galego") {*/
+
+                /*} else if (selectedLanguage == "Castelan") {
+                    validator.setLanguage(this@logIn,"es")
                     finish()
                     startActivity(intent)
                 }
@@ -60,7 +58,7 @@ class logIn : AppCompatActivity() {
             override fun onNothingSelected(p0: AdapterView<*>?) {
                 TODO("Not yet implemented")
             }
-        }
+        }*/
         val sharedPreff = SharedPreff(context)
 
         /*Si las shared preferences tienen inciada sesión, vamos directamente al menú principal
