@@ -31,7 +31,7 @@ public class ProductController {
         return pr.findAll();
     }
 
-    @PostMapping(value = "/postProducto")
+    /*@PostMapping(value = "/postProducto")
     public String postProductos(@RequestBody Producto producto){
         Category cF=producto.getCategory();
         Category c=cr.findById(cF.getId());
@@ -39,20 +39,7 @@ public class ProductController {
         pr.save(producto);
         cr.save(c);
         return "Producto guardado";
-    }
-
-    @DeleteMapping(value = "/deleteProducto/{id}")
-    public String deleteProductos(@PathVariable int id){
-        Producto p=pr.findById(id);
-        pr.delete(p);
-        return "Producto eliminado";
-    }
-
-    @GetMapping(value = "/{id}/product")
-    private List<User> getUsersByProduct(@PathVariable int id){
-        Producto p=pr.findById(id);
-        return p.getUsers();
-    }
+    } No voy a utilizarlas en la parte de usuario
 
     @PutMapping(value = "/{id}/updateP")
     private String updateProduct(@PathVariable int id,@RequestBody Producto product){
@@ -67,17 +54,16 @@ public class ProductController {
 
         return "Modificado";
     }
-
-    @PutMapping(value = "{id}/anadirUser")
-    private String anadirUser(@PathVariable int id,@RequestBody User user){
+    @DeleteMapping(value = "/deleteProducto/{id}")
+    public String deleteProductos(@PathVariable int id){
         Producto p=pr.findById(id);
-        User u=ur.findByDNI(user.getDNI());
-        p.getUsers().add(user);
-        u.getProductsU().add(p);
+        pr.delete(p);
+        return "Producto eliminado";
+    }*/
 
-        pr.save(p);
-        ur.save(u);
-
-        return "Producto añadido a usuario";
+    @GetMapping(value = "/{id}/product")
+    private List<User> getUsersByProduct(@PathVariable int id){
+        Producto p=pr.findById(id);
+        return p.getUsers();
     }
 }

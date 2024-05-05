@@ -15,31 +15,31 @@ public class CategoryController {
     @Autowired
     private CategoryRepository cr;
 
-    @GetMapping(value = "/getProductByCategory/{id}")
+    @GetMapping(value = "/getPBC/{id}")
     private List<Producto> productListC(@PathVariable int category_id){
         Category c=cr.findById(category_id);
         return c.getProducts();
-    }
-
-    @PostMapping(value="/postCategory")
-    private String postCategory(@RequestBody Category c){
-        cr.save(c);
-        return "Categoria guardada";
-    }
-
-    @DeleteMapping(value = "/deleteC/{id}")
-    private String deleteC(@PathVariable int id){
-        Category c=cr.findById(id);
-        cr.delete(c);
-        return "Categoria borrada";
     }
 
     @GetMapping(value = "/getCategories")
     private List<Category> getCategories(){
         return cr.findAll();
     }
+    /*@PostMapping(value="/postCategory")
+    private String postCategory(@RequestBody Category c){
+        cr.save(c);
+        return "Categoria guardada";
+    }
 
-    @PutMapping(value="/updateC")
+    /*@DeleteMapping(value = "/deleteC/{id}")
+    private String deleteC(@PathVariable int id){
+        Category c=cr.findById(id);
+        cr.delete(c);
+        return "Categoria borrada";
+    }
+
+
+    /*@PutMapping(value="/updateC")
     private String updateC(@RequestBody Category category){
         Category c=cr.findById(category.getId());
         c.setNombre(category.getNombre());
@@ -48,9 +48,9 @@ public class CategoryController {
 
         cr.save(c);
         return "Categoria guardada";
-    }
+    } No son necesarias para la parte de usuario
 
-    @PutMapping(value = "/updateCt")
+    /*@PutMapping(value = "/updateCt")
     public String updateCt(@RequestBody Category c){
         Category cU=cr.findById(c.getId());
 
@@ -60,5 +60,5 @@ public class CategoryController {
         cr.save(cU);
 
         return "Categoria updateada";
-    }
+    }*/
 }

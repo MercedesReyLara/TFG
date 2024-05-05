@@ -29,9 +29,9 @@ public class ReviewController {
         return rr.findAll();
     }
 
-    @PostMapping(value = "/postReviews")
-    private String postReviews(@RequestBody Review review){
-        User u=ur.findByDNI(review.getUser().getDNI());
+    @PostMapping(value = "/postReviews/{DNI}")
+    private String postReviews(@RequestBody Review review,@PathVariable String DNI){
+        User u=ur.findByDNI(DNI);
         Producto p=pr.findById(review.getProduct().getId());
          /*Añadimos la reseña al usuario y al producto*/
         u.getResenas().add(review);
@@ -47,13 +47,23 @@ public class ReviewController {
         return "Review guardada";
     }
 
-    @GetMapping(value = "/{id}/getReviews")
-    public List<Review> getReviewsProductos(@RequestBody int id_product){
+    @GetMapping(value = "/{id}/getReviewsP")
+    public List<Review> getReviewsProductos(@PathVariable int id){
         /*Queremos ver las reseñas de ese producto. Buscamos el producto por id
         y devolvemos su lista de reseñas
          */
-        Producto p=pr.findById(id_product);
+        Producto p=pr.findById(id);
         return p.getResenas();
+
+    }
+
+    @GetMapping(value = "/{DNI}/getReviewsU")
+    public List<Review> getReviewsProductos(@PathVariable String DNI){
+        /*Queremos ver las reseñas de ese producto. Buscamos el producto por id
+        y devolvemos su lista de reseñas
+         */
+        User u=ur.findByDNI(DNI);
+        return u.getResenas();
 
     }
 
