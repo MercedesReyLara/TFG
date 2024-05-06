@@ -24,34 +24,38 @@ public class UserController {
         return ur.findAll();
     }
 
-    @GetMapping(value = "/getUser")
-    public ResponseEntity<User> getUser(@RequestBody User user){
-        User u=ur.findByCorreo(user.getCorreo());
-        if(u.getContrasena().equals(user.getContrasena())){
-            return ResponseEntity.ok(u);
-        }else{
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @PostMapping(value = "/postUser/{DNI}")
-    public String postUser(@RequestBody User user,@PathVariable String DNI){
-        String mensaje="";
-        List<User> us=ur.findAll();
-        for(User uT:us){
-            if (uT.getDNI().equals(DNI)) {
-                mensaje = "Ese usuario ya existe";
-                break;
-            }else if(uT.getCorreo().equals(user.getCorreo())) {
-                mensaje = "Ese usuario ya existe";
-                break;
+    @GetMapping(value = "/logIn")
+    public ResponseEntity<User> getUser(User user){
+        /*if(ur.findByNombreU(user.getNombreU())!=null||ur.findByCorreo(user.getCorreo())!=null){No sé exactamente
+        como lo voy a abordar
+         */
+        User u=ur.findByNombreU(user.getNombreU());
+            if(u.getContrasena().equals(user.getContrasena())){
+                return ResponseEntity.ok(u);
             }else{
-                user.setDNI(DNI);
-                ur.save(user);
-                mensaje="Usuario guardado";
-                }
+                return ResponseEntity.notFound().build();
             }
-        return mensaje;
+        }
+
+    @GetMapping(value = "/getUser")
+    public ResponseEntity<User> getDNI(User user){
+        User u=ur.findByDNI(user.getDNI());
+        return ResponseEntity.ok(u);
+    }
+    @PostMapping(value = "/postUser/{DNI}")
+    public boolean postUser(@RequestBody User user,@PathVariable String DNI){
+        List<User> us=ur.findAll();
+        for(User uT:us) {
+            if (uT.getDNI().equals(DNI)) {
+                return false;
+            }
+            if (uT.getCorreo().equals(user.getCorreo())||uT.getNombreU().equals(user.getNombreU())) {
+                return false;
+            }
+        }
+        user.setDNI(DNI);
+        ur.save(user);
+        return true;
     }
 
     @DeleteMapping(value = "/deleteUser/{DNI}")
