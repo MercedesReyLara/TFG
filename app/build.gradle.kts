@@ -44,6 +44,10 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.preference.ktx)
     testImplementation(libs.junit)
+    implementation(platform("com.squareup.okhttp3:okhttp-bom:4.12.0"))
+    implementation ("com.google.code.gson:gson:2.8.8")
+    implementation("com.squareup.okhttp3:okhttp")
+    implementation("com.squareup.okhttp3:logging-interceptor")
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }

@@ -47,7 +47,7 @@ class mainMenu : AppCompatActivity() {
          Si le damos al botón establece el login como false y nos pide introducir nuestros datos de nuevo*/
         val sharedPreff = SharedPreff(context)
         sharedPreff.saveLogin(context, false)
-        sharedPreff.savePressed(context,false)
+        /*sharedPreff.savePressed(context,false)*/
         var intent = Intent(this, logIn::class.java)
         startActivity(intent)
     }

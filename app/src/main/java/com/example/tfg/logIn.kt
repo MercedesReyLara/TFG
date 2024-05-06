@@ -12,7 +12,12 @@ import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import model.SharedPreff
+import model.User
 
 
 class logIn : AppCompatActivity() {
@@ -46,9 +51,12 @@ class logIn : AppCompatActivity() {
                 id: Long
             ) {
                 val selectedLanguage = parent?.getItemAtPosition(position).toString()
-                if (selectedLanguage == "Galego") {*/
+                if (selectedLanguage == "Galego") {
+                    validator.setLanguage(this@logIn,"gl")
+                    finish()
+                    startActivity(intent)
 
-                /*} else if (selectedLanguage == "Castelan") {
+                } else if (selectedLanguage == "Castelan") {
                     validator.setLanguage(this@logIn,"es")
                     finish()
                     startActivity(intent)
@@ -60,7 +68,7 @@ class logIn : AppCompatActivity() {
             }
         }*/
         val sharedPreff = SharedPreff(context)
-
+        val httPettitions=httPettitions()
         /*Si las shared preferences tienen inciada sesión, vamos directamente al menú principal
         si no nos quedamos en la actividad y hacemos las operaciones adecuadas
          */
@@ -71,45 +79,61 @@ class logIn : AppCompatActivity() {
             validator.clearHint(email)
             validator.clearHint(password)
 
-                /*Iniciar sesión:
+            /*Iniciar sesión:
             1-Comprueba que los campos no estén vacíos
             2-Comprueba si el email cumple el patrón: @gmail.com
             3-Comrpueba si la contraseña cumple las reglas: mayúscula, minúscula,numero y símbolo
             4-Si es válido,inicia sesión si es que encuentra el usuario en la base de datos
             TODOS LOS MENSAJES DE LOS TOAST SON PERSONALIZADOS SEGÚN EL TIPO DE ERROR
              */
-                logIn.setOnClickListener {
-                    val emailText = email.text.toString().trim()
-                    val passwordText = password.text.toString().trim()
+            logIn.setOnClickListener {
+                val emailText = email.text.toString().trim()
+                val passwordText = password.text.toString().trim()
 
-                    if (emailText.isEmpty() || passwordText.isEmpty()) {
-                        Toast.makeText(
-                            this,
-                            this.getString(R.string.errorVacios),
-                            Toast.LENGTH_LONG
-                        )
-                            .show()
-                    } else if (!validator.validateEmail(emailText)) {
+                if (emailText.isEmpty() || passwordText.isEmpty()) {
+                    Toast.makeText(
+                        this,
+                        this.getString(R.string.errorVacios),
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
+                    /*} else if (!validator.validateEmail(emailText)) {
                         Toast.makeText(
                             this,
                             this.getString(R.string.errorCorreo),
                             Toast.LENGTH_LONG
                         )
-                            .show()
-                    } else if (!validator.validatePassword(passwordText)) {
+                            .show()*/
+                    /*} else if (!validator.validatePassword(passwordText)) {
                         Toast.makeText(
                             this,
                             this.getString(R.string.errorContraseña),
                             Toast.LENGTH_LONG
-                        ).show()
-                    } else {
-                        sharedPreff.saveLogin(context, true)
-                        sharedPreff.saveUser(context, 1)
-                        val intentLogIn = Intent(this, mainMenu::class.java)
-                        startActivity(intentLogIn)
+                        ).show()*/
+                } else {
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        val encontrado = httPettitions.getUser(emailText, passwordText)
+                        withContext(Dispatchers.Main) {
+                            if (encontrado) {
+                                sharedPreff.saveLogin(context, true)
+                                sharedPreff.saveUser(context, emailText)
+                                val intentLogIn = Intent(this@logIn, mainMenu::class.java)
+                                startActivity(intentLogIn)
+                            } else {
+                                Toast.makeText(
+                                    this@logIn,
+                                    "Usuario no encontrado",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
                     }
 
+
                 }
+
+            }
+        }
             registerBut.setOnClickListener {
                 val intentRegister = Intent(this, register::class.java)
                 startActivity(intentRegister)
@@ -118,5 +142,5 @@ class logIn : AppCompatActivity() {
             }
 
         }
-    }
+
 

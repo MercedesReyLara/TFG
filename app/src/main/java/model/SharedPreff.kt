@@ -19,27 +19,16 @@ class SharedPreff(val contexto:Context) {
         return sharedPreff.getBoolean("login",false)
     }
 
-    fun savePressed(context:Context,boolean:Boolean){
+
+    fun saveUser(context:Context,userID:String){/*Funcion para guardar el id*/
         val sharedPreff=PreferenceManager.getDefaultSharedPreferences(context)
         val editor=sharedPreff.edit()
-        editor.putBoolean("pressed",boolean)
+        editor.putString("userID",userID)
         editor.commit()
     }
 
-    fun getPressed(context: Context):Boolean{
+    fun getUser(context:Context): String? {
         val sharedPreff=PreferenceManager.getDefaultSharedPreferences(context)
-        return sharedPreff.getBoolean("pressed",false)
-    }
-
-    fun saveUser(context:Context,userID:Int){/*Funcion para guardar el id*/
-        val sharedPreff=PreferenceManager.getDefaultSharedPreferences(context)
-        val editor=sharedPreff.edit()
-        editor.putInt("userID",userID)
-        editor.commit()
-    }
-
-    fun getUser(context:Context):Int{
-        val sharedPreff=PreferenceManager.getDefaultSharedPreferences(context)
-        return sharedPreff.getInt("userID",0)
+        return sharedPreff.getString("userID","A")
     }
 }

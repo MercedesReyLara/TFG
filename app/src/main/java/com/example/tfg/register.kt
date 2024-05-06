@@ -22,6 +22,7 @@ class register : AppCompatActivity() {
 
         val backButton: Button =findViewById(R.id.goBackLogIn)
         val registerButton:Button=findViewById(R.id.rexistro)
+        val DNIT:EditText=findViewById(R.id.DNI)
         val name:EditText=findViewById(R.id.nameUser)
         val lastName:EditText=findViewById(R.id.lastNameUser)
         val mail:EditText=findViewById(R.id.mailUser)
@@ -34,6 +35,7 @@ class register : AppCompatActivity() {
 
 
         //Utilizamos el método para limpiar los inputs cuando esten on click
+        validatorCleaner.clearHint(DNIT)
         validatorCleaner.clearHint(name)
         validatorCleaner.clearHint(lastName)
         validatorCleaner.clearHint(mail)
@@ -51,10 +53,10 @@ class register : AppCompatActivity() {
                 Toast.makeText(this,this.getString(R.string.errorVacios),Toast.LENGTH_LONG).show()
             }else if(!validatorCleaner.validateEmail(mailTXT)){
                 Toast.makeText(this,this.getString(R.string.errorCorreo),Toast.LENGTH_LONG).show()
-            }else if(!validatorCleaner.validatePassword(passwordTXT)){
+           /* }else if(!validatorCleaner.validatePassword(passwordTXT)){
                 password.text.clear()
                 passwordConfirm.text.clear()
-                Toast.makeText(this,this.getString(R.string.errorContraseña),Toast.LENGTH_LONG).show()
+                Toast.makeText(this,this.getString(R.string.errorContraseña),Toast.LENGTH_LONG).show()*/
             }else if(passwordTXT.equals(passwordConfTXT)){
                 Toast.makeText(this,this.getString(R.string.coincidir),Toast.LENGTH_LONG).show()
                 passwordConfirm.text.clear()
