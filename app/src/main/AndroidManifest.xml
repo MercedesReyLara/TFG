@@ -13,13 +13,16 @@
         android:configChanges="locale"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:networkSecurityConfig="@xml/network_security_config"
         android:icon="@drawable/imagen_2024_04_22_110039483_removebg_preview"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@drawable/imagen_2024_04_22_110039483_removebg_preview"
         android:supportsRtl="true"
         android:theme="@style/Base.Theme.TFG"
         tools:targetApi="31">
+        <activity
+            android:name=".ajustes"
+            android:exported="false" />
         <activity
             android:name=".perfilUser"
             android:exported="false" />

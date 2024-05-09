@@ -53,20 +53,21 @@ class generalFunctions {
         return spinner
     }
 
-    fun setLanguage(activity:Activity, languageCode: String) {
+    /*fun setLanguage(activity:Activity, languageCode: String) {
         val locale = Locale(languageCode)
         Locale.setDefault(locale)
 
-        val configuration = activity.resources.configuration
+        val configuration = Configutation()
         configuration.setLocale(locale)
 
+        resources.updateConfiguration(configuration, resources.displayMetrics)
         val resources = activity.baseContext.resources
         val context = activity.baseContext.createConfigurationContext(configuration)
 
         val intent = activity.intent
         activity.finish()
         activity.startActivity(intent)
-    }
+    }*/
     /*fun writePDF(work:String):File{
         document.add(Paragraph("Lista de jornadas"))
         document.add(Paragraph(work))

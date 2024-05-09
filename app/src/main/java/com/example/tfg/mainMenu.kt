@@ -24,11 +24,15 @@ class mainMenu : AppCompatActivity() {
         val subir:Button=findViewById(R.id.subirResena)
         val perfilU:Button=findViewById(R.id.perfil)
         val cerrarSesion:ImageButton=findViewById(R.id.pechar)
+        val ajustes:ImageButton=findViewById(R.id.ajustes)
 
         //Declaración de variables que vamos a utilizar
 
 
-
+         ajustes.setOnClickListener {
+             val intent=Intent(this,ajustes::class.java)
+             startActivity(intent)
+         }
         cerrarSesion.setOnClickListener {
             var builder: AlertDialog.Builder =
                 AlertDialog.Builder(this)/*Creamos el objeto diálogo*/

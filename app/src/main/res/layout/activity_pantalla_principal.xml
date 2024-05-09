@@ -37,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.95" />
+        app:layout_constraintGuide_percent="0.89" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineV1"
@@ -119,15 +119,15 @@
         android:text="@string/irUsuario"
         app:layout_constraintBottom_toTopOf="@id/guidelineH2"
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
-        app:layout_constraintHorizontal_bias="0.059"
+        app:layout_constraintHorizontal_bias="0.243"
         app:layout_constraintStart_toEndOf="@id/guidelineV1"
         app:layout_constraintTop_toBottomOf="@id/guidelineH4"
-        app:layout_constraintVertical_bias="0.677" />
+        app:layout_constraintVertical_bias="0.722" />
 
     <ImageButton
         android:id="@+id/pechar"
-        android:layout_width="57dp"
-        android:layout_height="43dp"
+        android:layout_width="50dp"
+        android:layout_height="32dp"
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="@id/guidelineH2"
@@ -147,7 +147,7 @@
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/pechar"
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
-        app:layout_constraintHorizontal_bias="0.954"
+        app:layout_constraintHorizontal_bias="0.953"
         app:layout_constraintStart_toEndOf="@id/guidelineV1"
         app:layout_constraintTop_toBottomOf="@+id/guidelineH4"
         app:layout_constraintVertical_chainStyle="packed" />
@@ -161,4 +161,25 @@
         app:layout_constraintHorizontal_bias="0.093"
         app:layout_constraintStart_toEndOf="@id/guidelineV1"
         app:layout_constraintTop_toTopOf="@id/guidelineH1" />
+
+    <ImageButton
+        android:id="@+id/ajustes"
+        android:layout_width="46dp"
+        android:layout_height="40dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@id/guidelineH5"
+        app:layout_constraintEnd_toStartOf="@id/guidelineV2"
+        app:layout_constraintHorizontal_bias="0.047"
+        app:layout_constraintStart_toEndOf="@id/guidelineV1"
+        app:layout_constraintTop_toBottomOf="@id/guidelineH2"
+        app:layout_constraintVertical_bias="1.0"
+        tools:srcCompat="@drawable/efewf_removebg_preview" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineH5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.99" />
 </androidx.constraintlayout.widget.ConstraintLayout>

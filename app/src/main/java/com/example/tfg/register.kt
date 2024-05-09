@@ -57,7 +57,7 @@ class register : AppCompatActivity() {
                 password.text.clear()
                 passwordConfirm.text.clear()
                 Toast.makeText(this,this.getString(R.string.errorContraseña),Toast.LENGTH_LONG).show()*/
-            }else if(passwordTXT.equals(passwordConfTXT)){
+            }else if(passwordTXT == passwordConfTXT){
                 Toast.makeText(this,this.getString(R.string.coincidir),Toast.LENGTH_LONG).show()
                 passwordConfirm.text.clear()
             }else{

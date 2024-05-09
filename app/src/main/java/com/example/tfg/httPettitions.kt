@@ -13,12 +13,12 @@ import java.util.Base64
 
 class httPettitions {
 
-    suspend fun getUser(correo:String,contrasena:String): Boolean {
+    suspend fun getUser(ip:String?,correo:String,contrasena:String): Boolean {
         return withContext(Dispatchers.IO) {
             try {
                 val client = OkHttpClient()
 
-                val url="http://192.168.1.73:8080/getUser?nombreU=$correo&contrasena=$contrasena"
+                val url="http://$ip:8080/getUser?nombreU=$correo&contrasena=$contrasena"
                 val request: Request = Request.Builder()
                     .url(url)
                     .build()
@@ -32,9 +32,51 @@ class httPettitions {
                     }
                 }
             } catch (e: IOException) {
-                e.printStackTrace()
+                return@withContext  false
             }
             return@withContext false
+        }
+    }
+    suspend fun postUser(ip:String,user: User,dni:String): Boolean {
+        return withContext(Dispatchers.IO) {
+            val client = OkHttpClient()
+            val gson = Gson()
+            val json = gson.toJson(user)
+            val mediaType = "application/json; charset=utf-8".toMediaTypeOrNull()
+            val requestBody = json.toRequestBody(mediaType)
+            val url = "http://$ip:8080/postUser/$dni"
+            val request: Request = Request.Builder()
+                .url(url)
+                .post(requestBody)
+                .build()
+            /*Falla al hacer la publicación del json*/
+            val response = client.newCall(request).execute()
+
+
+            /*Pone "Method not allowed*/
+            val responseBody = response.body?.string()
+            return@withContext response.isSuccessful && !responseBody.isNullOrEmpty()
+        }
+    }
+
+
+    suspend fun deleteUser(ip:String,dni:String):Boolean {
+        return withContext(Dispatchers.IO) {
+            val client = OkHttpClient()
+            val url = "http://$ip:8080/delete/$dni"
+
+            val request = Request.Builder()
+                .url(url)
+                .delete()
+                .build()
+
+            val response = client.newCall(request).execute()
+
+
+            /*Pone "Method not allowed*/
+            val responseBody = response.body?.string()
+            // Verificar si el DNI del usuario encontrado coincide con el DNI buscado y que se ha borrado
+            return@withContext response.isSuccessful && !responseBody.isNullOrEmpty()
         }
     }
 }

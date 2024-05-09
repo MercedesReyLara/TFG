@@ -3,6 +3,7 @@ package com.example.tfg
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -18,19 +19,23 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import model.SharedPreff
 import model.User
+import java.util.Locale
 
 
 class logIn : AppCompatActivity() {
-    @SuppressLint("MissingInflatedId")
     private lateinit var context: Context
+    private lateinit var sharedPreff:SharedPreff
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
 
         Thread.sleep(1500)
         setTheme(R.style.Base_Theme_TFG)
         super.onCreate(savedInstanceState)
         context = baseContext
+        sharedPreff = SharedPreff(context)
+        applyLanguage()
         setContentView(R.layout.log_in)
-
+        /*^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$ regex ip igual la uso*/
         //Búsqueda de elementos visuales
         val logIn: Button = findViewById(R.id.iniciarSesion)
         val registerBut: Button = findViewById(R.id.registrar)
@@ -39,10 +44,10 @@ class logIn : AppCompatActivity() {
         val spinnerIdiomas: Spinner = findViewById(R.id.spinnerLanguages)
         val validator = generalFunctions()
         //Declaración de variables
-        /*val languages = arrayListOf("Selecciona idioma","Castelan", "Galego")
+        val languages = arrayListOf("Castelan", "Galego","")
         val adapter:ArrayAdapter<String> = ArrayAdapter(this,android.R.layout.simple_spinner_item,languages)
-        spinnerIdiomas.setSelection(0)
         spinnerIdiomas.adapter=adapter
+        spinnerIdiomas.setSelection(2)
         spinnerIdiomas.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
@@ -52,22 +57,18 @@ class logIn : AppCompatActivity() {
             ) {
                 val selectedLanguage = parent?.getItemAtPosition(position).toString()
                 if (selectedLanguage == "Galego") {
-                    validator.setLanguage(this@logIn,"gl")
-                    finish()
-                    startActivity(intent)
-
+                    sharedPreff.setLanguage(context, "gl")
+                    recreate()
+                // Reinicia la actividad para aplicar el nuevo idioma
                 } else if (selectedLanguage == "Castelan") {
-                    validator.setLanguage(this@logIn,"es")
-                    finish()
-                    startActivity(intent)
+                    sharedPreff.setLanguage(context, "es")
+                    recreate()
+                // Reinicia la actividad para aplicar el nuevo idioma
                 }
             }
-
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
             }
-        }*/
-        val sharedPreff = SharedPreff(context)
+        }
         val httPettitions=httPettitions()
         /*Si las shared preferences tienen inciada sesión, vamos directamente al menú principal
         si no nos quedamos en la actividad y hacemos las operaciones adecuadas
@@ -111,27 +112,36 @@ class logIn : AppCompatActivity() {
                             Toast.LENGTH_LONG
                         ).show()*/
                 } else {
-                    lifecycleScope.launch(Dispatchers.IO) {
-                        val encontrado = httPettitions.getUser(emailText, passwordText)
-                        withContext(Dispatchers.Main) {
-                            if (encontrado) {
-                                sharedPreff.saveLogin(context, true)
-                                sharedPreff.saveUser(context, emailText)
-                                val intentLogIn = Intent(this@logIn, mainMenu::class.java)
-                                startActivity(intentLogIn)
-                            } else {
-                                Toast.makeText(
-                                    this@logIn,
-                                    "Usuario no encontrado",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                    val direcIP = sharedPreff.getIp(this@logIn)
+                    if (direcIP != sharedPreff.ipReal(context)) {
+                        Toast.makeText(
+                            this@logIn,
+                            "IP no válida, fallo en la conexión con el servidor",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        lifecycleScope.launch(Dispatchers.IO) {
+                            val encontrado = httPettitions.getUser(direcIP, emailText, passwordText)
+                            withContext(Dispatchers.Main) {
+                                if (encontrado) {
+                                    sharedPreff.saveLogin(context, true)
+                                    sharedPreff.saveUser(context, emailText)
+                                    val intentLogIn = Intent(this@logIn, mainMenu::class.java)
+                                    startActivity(intentLogIn)
+                                } else {
+                                    Toast.makeText(
+                                        this@logIn,
+                                        "Usuario no encontrado",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
                             }
                         }
+
+
                     }
 
-
                 }
-
             }
         }
             registerBut.setOnClickListener {
@@ -139,8 +149,16 @@ class logIn : AppCompatActivity() {
                 startActivity(intentRegister)
 
             }
-            }
 
+            }
+    fun Context.applyLanguage() {
+        val language = sharedPreff.getLanguage(this)
+        val locale = Locale(language)
+        Locale.setDefault(locale)
+        val config = Configuration()
+        config.setLocale(locale)
+        resources.updateConfiguration(config, resources.displayMetrics)
+    }
         }
 
 

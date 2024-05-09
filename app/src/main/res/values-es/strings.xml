@@ -10,6 +10,11 @@
     <string name="btnModificar" >Modificar un producto</string>
     <string name="txtModificar" >Escoge un producto</string>
     <string name="DNI">DNI</string>
+    <string name="letra">Seleccione el tamaño de la letra</string>
+    <string name="pequeña">Letra pequeña</string>
+    <string name="grande">Letra grande</string>
+    <string name="aplicar">Aplicar este tamaño</string>
+    <string name="ip">Introduzca la dirección ip</string>
     <string name="credencialCorreo" >Mail o Nombre de usuario</string>
     <string name="credencialCotraseña" >Contraseña</string>
     <string name="cerrarSesion" >Pechar sesión</string>

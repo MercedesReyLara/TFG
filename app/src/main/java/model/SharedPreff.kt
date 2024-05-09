@@ -31,4 +31,38 @@ class SharedPreff(val contexto:Context) {
         val sharedPreff=PreferenceManager.getDefaultSharedPreferences(context)
         return sharedPreff.getString("userID","A")
     }
+
+    fun getLanguage(context: Context): String {
+        val sharedPreferences = context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        return sharedPreferences.getString("idioma", "gl") ?: "gl"
+    }
+
+    fun setLanguage(context: Context, language: String) {
+        val sharedPreferences = context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        sharedPreferences.edit().putString("idioma", language).apply()
+    }
+
+    fun getIp(context: Context): String? {
+        val sharedPreff=PreferenceManager.getDefaultSharedPreferences(context)
+        return sharedPreff.getString("IP","null")
+    }
+
+    fun saveIP(context:Context,ip:String){
+        val sharedPreff=PreferenceManager.getDefaultSharedPreferences(context)
+        val editor=sharedPreff.edit()
+        editor.putString("IP",ip)
+        editor.commit()
+    }
+
+    fun ipReal(context:Context):String?{
+        val sharedPreff=PreferenceManager.getDefaultSharedPreferences(context)
+        return sharedPreff.getString("IP","192.168.5.14")
+    }
+
+    fun saveIPReal(context:Context){
+        val sharedPreff=PreferenceManager.getDefaultSharedPreferences(context)
+        val editor=sharedPreff.edit()
+        editor.putString("IP","192.168.5.14")
+        editor.commit()
+    }
 }

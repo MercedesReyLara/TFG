@@ -10,6 +10,11 @@
     <string name="irUsuario">Ir ao meu perfil</string>
     <string name="filtrar">Aplicar filtro</string>
     <string name="DNI">DNI</string>
+    <string name="letra">Seleccione o tamano da letra</string>
+    <string name="pequeña">Letra pequena</string>
+    <string name="grande">Letra grande</string>
+    <string name="ip">Introduza a dirección ip</string>
+    <string name="aplicar">Aplicar este tamaño</string>
     <string name="btnModificar">Modificar unha reseña</string>
     <string name="txtModificar">Escolla un producto a modificar</string>
     <string name="escogerEliminar">Escolla un producto</string>

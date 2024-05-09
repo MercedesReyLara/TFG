@@ -40,14 +40,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.95" />
+        app:layout_constraintGuide_percent="0.99" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.05" />
+        app:layout_constraintGuide_percent="0.04" />
 
     <EditText
         android:id="@+id/DNI"
@@ -58,10 +58,10 @@
         android:hint="@string/DNI"
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/nameUser"
-        app:layout_constraintTop_toBottomOf="@+id/guidelineH3"
         app:layout_constraintEnd_toEndOf="@id/guidelinev2"
-        app:layout_constraintHorizontal_bias="0.489"
-        app:layout_constraintStart_toStartOf="@id/guidelinev1"/>
+        app:layout_constraintHorizontal_bias="0.80"
+        app:layout_constraintStart_toStartOf="@id/guidelineV3"
+        app:layout_constraintTop_toBottomOf="@+id/guidelineH3" />
 
     <EditText
         android:id="@+id/nameUser"
@@ -72,10 +72,10 @@
         android:hint="@string/nombreEdit"
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/lastNameUser"
-        app:layout_constraintTop_toBottomOf="@+id/DNI"
         app:layout_constraintEnd_toEndOf="@id/guidelinev2"
-        app:layout_constraintHorizontal_bias="0.489"
-        app:layout_constraintStart_toStartOf="@id/guidelinev1"/>
+        app:layout_constraintHorizontal_bias="0.80"
+        app:layout_constraintStart_toStartOf="@id/guidelineV3"
+        app:layout_constraintTop_toBottomOf="@+id/DNI" />
 
     <EditText
         android:id="@+id/mailUser"
@@ -86,10 +86,10 @@
         android:hint="@string/mailEdit"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toTopOf="@+id/passwordUser"
-        app:layout_constraintTop_toBottomOf="@+id/lastNameUser"
         app:layout_constraintEnd_toEndOf="@id/guidelinev2"
-        app:layout_constraintHorizontal_bias="0.489"
-        app:layout_constraintStart_toStartOf="@id/guidelinev1" />
+        app:layout_constraintHorizontal_bias="0.80"
+        app:layout_constraintStart_toStartOf="@id/guidelineV3"
+        app:layout_constraintTop_toBottomOf="@+id/lastNameUser" />
 
     <EditText
         android:id="@+id/lastNameUser"
@@ -100,10 +100,10 @@
         android:hint="@string/apellidosEdit"
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/mailUser"
-        app:layout_constraintTop_toBottomOf="@+id/nameUser"
         app:layout_constraintEnd_toEndOf="@id/guidelinev2"
-        app:layout_constraintHorizontal_bias="0.489"
-        app:layout_constraintStart_toStartOf="@id/guidelinev1"/>
+        app:layout_constraintHorizontal_bias="0.80"
+        app:layout_constraintStart_toStartOf="@id/guidelineV3"
+        app:layout_constraintTop_toBottomOf="@+id/nameUser" />
 
     <EditText
         android:id="@+id/confirmPassword"
@@ -113,11 +113,11 @@
         android:ems="10"
         android:hint="@string/confirm"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/rexistro"
-        app:layout_constraintTop_toBottomOf="@+id/passwordUser"
+        app:layout_constraintBottom_toTopOf="@id/guidelineH5"
         app:layout_constraintEnd_toEndOf="@id/guidelinev2"
-        app:layout_constraintHorizontal_bias="0.489"
-        app:layout_constraintStart_toStartOf="@id/guidelinev1" />
+        app:layout_constraintHorizontal_bias="0.80"
+        app:layout_constraintStart_toStartOf="@id/guidelineV3"
+        app:layout_constraintTop_toBottomOf="@+id/passwordUser" />
 
     <EditText
         android:id="@+id/passwordUser"
@@ -128,20 +128,19 @@
         android:hint="@string/contraseñaEdit"
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/confirmPassword"
-        app:layout_constraintTop_toBottomOf="@+id/mailUser"
         app:layout_constraintEnd_toEndOf="@id/guidelinev2"
-        app:layout_constraintHorizontal_bias="0.489"
-        app:layout_constraintStart_toStartOf="@id/guidelinev1" />
+        app:layout_constraintHorizontal_bias="0.80"
+        app:layout_constraintStart_toStartOf="@id/guidelineV3"
+        app:layout_constraintTop_toBottomOf="@+id/mailUser" />
 
     <Button
         android:id="@+id/goBackLogIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
         android:backgroundTint="@color/button"
         android:text="@string/volverInicio"
         app:layout_constraintEnd_toEndOf="@id/guidelinev2"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="@id/guidelinev1"
         app:layout_constraintTop_toBottomOf="@id/guidelineH4" />
 
@@ -149,14 +148,14 @@
         android:id="@+id/rexistro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:backgroundTint="@color/button"
         android:text="@string/registrarse"
         app:circularflow_radiusInDP="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH4"
-        app:layout_constraintTop_toBottomOf="@+id/confirmPassword"
         app:layout_constraintEnd_toEndOf="@id/guidelinev2"
-        app:layout_constraintHorizontal_bias="0.489"
-        app:layout_constraintStart_toStartOf="@id/guidelinev1" />
+        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintStart_toStartOf="@id/guidelinev1"
+        app:layout_constraintTop_toBottomOf="@id/guidelineH5" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH3"
@@ -170,5 +169,59 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.83" />
+        app:layout_constraintGuide_percent="0.85" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineH5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.71" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineV3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="175dp" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@+id/imageButton"
+        app:layout_constraintEnd_toStartOf="@id/guidelineV3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@id/guidelinev1"
+        app:layout_constraintTop_toBottomOf="@+id/guidelineH3"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Subir foto"
+        android:backgroundTint="@color/button"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH5"
+        app:layout_constraintEnd_toStartOf="@id/guidelineV3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@id/guidelinev1"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="67dp"
+        android:layout_height="55dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@+id/button4"
+        app:layout_constraintEnd_toStartOf="@id/guidelineV3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@id/guidelinev1"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:srcCompat="@drawable/imagen_2024_04_22_110039483_removebg_preview" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
