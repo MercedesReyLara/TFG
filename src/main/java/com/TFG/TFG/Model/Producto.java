@@ -36,8 +36,8 @@ public class Producto {
     @JsonIgnore
     private List<User> users=new ArrayList<>();
 
-    @Column(name="imagen")
-    private String imagen;
+    /*Column(name="imagen",columnDefinition = "BLOB")
+    private byte[] profilePicture;*/
     public int getId() {
         return id;
     }
@@ -94,11 +94,11 @@ public class Producto {
         this.users = users;
     }
 
-    public String getImagen() {
+   /* public byte[] getImagen() {
         return imagen;
     }
 
-    public void setImagen(String imagen) {
+    public void setImagen(byte[] imagen) {
         this.imagen = imagen;
-    }
+    }*/
 }

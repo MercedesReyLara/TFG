@@ -4,6 +4,7 @@ package com.TFG.TFG.Model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,8 +31,8 @@ public class User {
     @Column(name="descripcion")
     private String descripcion;
 
-    @Column(name="profileP")
-    private String profileP;
+    /*@Column(name="profileP")
+    private Blob profileP;*/
     @OneToMany(mappedBy = "user",cascade=CascadeType.REMOVE)
     @JsonIgnore
     private List<Review> resenas=new ArrayList<>();
@@ -84,13 +85,13 @@ public class User {
         this.descripcion = descripcion;
     }
 
-    public String getProfileP() {
+    /*public Blob getProfileP() {
         return profileP;
     }
 
-    public void setProfileP(String profileP) {
+    public void setProfileP(Blob profileP) {
         this.profileP = profileP;
-    }
+    }*/
 
     public String getContrasena() {
         return contrasena;

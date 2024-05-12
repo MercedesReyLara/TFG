@@ -25,22 +25,19 @@ public class UserController {
     }
 
     @GetMapping(value = "/logIn")
-    public ResponseEntity<User> getUser(User user){
-        /*if(ur.findByNombreU(user.getNombreU())!=null||ur.findByCorreo(user.getCorreo())!=null){No sé exactamente
-        como lo voy a abordar
-         */
-        User u=ur.findByNombreU(user.getNombreU());
-            if(u.getContrasena().equals(user.getContrasena())){
-                return ResponseEntity.ok(u);
-            }else{
-                return ResponseEntity.notFound().build();
+    public User getUser(@RequestParam (value = "nombreU",defaultValue = "")String nombreU,
+                        @RequestParam (value = "contrasena",defaultValue = "")String contrasena){
+        User u=ur.findByNombreU(nombreU);
+            if(u.getContrasena().equals(contrasena)){
+                return u;
             }
+            return null;
         }
 
-    @GetMapping(value = "/getUser")
-    public ResponseEntity<User> getDNI(User user){
-        User u=ur.findByDNI(user.getDNI());
-        return ResponseEntity.ok(u);
+    @GetMapping(value = "/getUser/{DNI}")
+    public User getDNI(@PathVariable String DNI){
+        User u=ur.findByDNI(DNI);
+        return u;
     }
     @PostMapping(value = "/postUser/{DNI}")
     public boolean postUser(@RequestBody User user,@PathVariable String DNI){
@@ -59,15 +56,21 @@ public class UserController {
     }
 
     @DeleteMapping(value = "/deleteUser/{DNI}")
-    public String deleteUser(@PathVariable String DNI){
+    public Boolean deleteUser(@PathVariable String DNI){
         User u=ur.findByDNI(DNI);
+        if(u==null){
+            return false;
+        }
         ur.delete(u);
-        return "Usuario eliminado";
+        return true;
     }
 
     @GetMapping(value = "/{DNI}/getUserProducts")
     public List<Producto> getProducts(@PathVariable String DNI){
         User u=ur.findByDNI(DNI);
+        if(u==null){
+            return null;
+        }
         return u.getProductsU();
     }
 }

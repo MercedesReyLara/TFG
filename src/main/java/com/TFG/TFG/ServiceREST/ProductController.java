@@ -1,5 +1,6 @@
 package com.TFG.TFG.ServiceREST;
 
+import com.TFG.TFG.DTO.ProductDTO;
 import com.TFG.TFG.Model.Category;
 import com.TFG.TFG.Model.Producto;
 import com.TFG.TFG.Model.Review;
@@ -27,8 +28,20 @@ public class ProductController {
     private CategoryRepository cr;
 
     @GetMapping(value = "/getProducts")
-    public List<Producto> getProductos(){
-        return pr.findAll();
+    public List<ProductDTO> getProductos(){
+        List<Producto> productos=pr.findAll();
+        List<ProductDTO> DTOS=new ArrayList<>();
+        for(Producto p:productos){
+            ProductDTO pDTO=new ProductDTO(
+                    p.getId(),
+                    p.getNombreP(),
+                    p.getDescripcionP(),
+                    p.getPrecio(),
+                    p.getCategory().getNombre()
+            );
+           DTOS.add(pDTO);
+        }
+        return  DTOS;
     }
 
     /*@PostMapping(value = "/postProducto")

@@ -1,12 +1,15 @@
 package com.TFG.TFG.ServiceREST;
 
 
+import com.TFG.TFG.DTO.CategoryDTO;
+import com.TFG.TFG.DTO.ProductDTO;
 import com.TFG.TFG.Model.Category;
 import com.TFG.TFG.Model.Producto;
 import com.TFG.TFG.Respository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -16,14 +19,38 @@ public class CategoryController {
     private CategoryRepository cr;
 
     @GetMapping(value = "/getPBC/{id}")
-    private List<Producto> productListC(@PathVariable int category_id){
+    private List<ProductDTO> productListC(@PathVariable int category_id){
         Category c=cr.findById(category_id);
-        return c.getProducts();
+        if(c!=null) {
+            List<Producto> productos = c.getProducts();
+            List<ProductDTO> DTOS = new ArrayList<>();
+            for (Producto p : productos) {
+                ProductDTO pDTO = new ProductDTO(
+                        p.getId(),
+                        p.getNombreP(),
+                        p.getDescripcionP(),
+                        p.getPrecio()
+                );
+                DTOS.add(pDTO);
+            }
+            return DTOS;
+        }
+        return null;
     }
 
     @GetMapping(value = "/getCategories")
-    private List<Category> getCategories(){
-        return cr.findAll();
+    private List<CategoryDTO> getCategories(){
+        List<Category> categories= cr.findAll();
+        List<CategoryDTO> DTOS=new ArrayList<>();
+        for(Category c:categories){
+            CategoryDTO cDTO= new CategoryDTO(
+                    c.getId(),
+                    c.getNombre(),
+                    c.getDescripcion()
+            );
+           DTOS.add(cDTO);
+        }
+        return DTOS;
     }
     /*@PostMapping(value="/postCategory")
     private String postCategory(@RequestBody Category c){
