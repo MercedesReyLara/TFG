@@ -20,7 +20,7 @@ class SharedPreff(val contexto:Context) {
     }
 
 
-    fun saveUser(context:Context,userID:String){/*Funcion para guardar el id*/
+    fun saveUser(context:Context,userID:String){/*Funcion para guardar el DNI*/
         val sharedPreff=PreferenceManager.getDefaultSharedPreferences(context)
         val editor=sharedPreff.edit()
         editor.putString("userID",userID)
@@ -44,7 +44,7 @@ class SharedPreff(val contexto:Context) {
 
     fun getIp(context: Context): String? {
         val sharedPreff=PreferenceManager.getDefaultSharedPreferences(context)
-        return sharedPreff.getString("IP","null")
+        return sharedPreff.getString("IP","192.168.5.14")
     }
 
     fun saveIP(context:Context,ip:String){

@@ -10,6 +10,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +18,8 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import model.Category
+import model.Review
 import model.SharedPreff
 import model.User
 import java.util.Locale
@@ -43,6 +46,7 @@ class logIn : AppCompatActivity() {
         val password: EditText = findViewById(R.id.passwordUser)
         val spinnerIdiomas: Spinner = findViewById(R.id.spinnerLanguages)
         val validator = generalFunctions()
+        val ajustesButton:ImageButton=findViewById(R.id.ajustes)
         //Declaración de variables
         val languages = arrayListOf("Castelan", "Galego","")
         val adapter:ArrayAdapter<String> = ArrayAdapter(this,android.R.layout.simple_spinner_item,languages)
@@ -112,44 +116,78 @@ class logIn : AppCompatActivity() {
                             Toast.LENGTH_LONG
                         ).show()*/
                 } else {
-                    val direcIP = sharedPreff.getIp(this@logIn)
+                    /*val direcIP = sharedPreff.getIp(this@logIn)
                     if (direcIP != sharedPreff.ipReal(context)) {
                         Toast.makeText(
                             this@logIn,
                             "IP no válida, fallo en la conexión con el servidor",
                             Toast.LENGTH_SHORT
                         ).show()
-                    } else {
-                        lifecycleScope.launch(Dispatchers.IO) {
-                            val encontrado = httPettitions.getUser(direcIP, emailText, passwordText)
-                            withContext(Dispatchers.Main) {
-                                if (encontrado) {
+                    } else {*/
+                     /*   lifecycleScope.launch(Dispatchers.Main) {
+                            val encontrado:User?
+                            withContext(Dispatchers.IO) {
+                                 encontrado=httPettitions.getUser(emailText, passwordText)
+                            }
+                                if (encontrado!=null) {
                                     sharedPreff.saveLogin(context, true)
-                                    sharedPreff.saveUser(context, emailText)
-                                    val intentLogIn = Intent(this@logIn, mainMenu::class.java)
-                                    startActivity(intentLogIn)
-                                } else {
+                                    sharedPreff.saveUser(context, encontrado.dni)
+                                    /*val intentLogIn = Intent(this@logIn, mainMenu::class.java)
+                                    startActivity(intentLogIn)*/
+                                } else{
                                     Toast.makeText(
                                         this@logIn,
-                                        "Usuario no encontrado",
+                                        "Nombre de usuario o contraseña incorrectos",
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 }
-                            }
+                            }*/
+                    lifecycleScope.launch(Dispatchers.Main) {
+                        val encontrados:List<Category>
+                        withContext(Dispatchers.IO) {
+                            encontrados=httPettitions.getCategories()
+                        }
+                        if (encontrados.isNotEmpty()) {
+                          Toast.makeText(this@logIn,"Encontradas",Toast.LENGTH_SHORT).show()
+                        } else{
+                            Toast.makeText(
+                                this@logIn,
+                                "Nombre de usuario o contraseña incorrectos",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                    /*lifecycleScope.launch(Dispatchers.Main) {
+                        val encontrados:List<Review>
+                        withContext(Dispatchers.IO) {
+                            encontrados=httPettitions.getReviews()
+                        }
+                        if (encontrados.isNotEmpty()) {
+                            Toast.makeText(this@logIn,"Ecnontradas",Toast.LENGTH_SHORT).show()
+                        } else{
+                            Toast.makeText(
+                                this@logIn,
+                                "Nombre de usuario o contraseña incorrectos",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }*/
                         }
 
 
                     }
 
                 }
-            }
-        }
+
             registerBut.setOnClickListener {
                 val intentRegister = Intent(this, register::class.java)
                 startActivity(intentRegister)
 
             }
-
+        ajustesButton.setOnClickListener {
+        val intentAjustes=Intent(this,ajustes::class.java)
+        startActivity(intentAjustes)
+        }
             }
     fun Context.applyLanguage() {
         val language = sharedPreff.getLanguage(this)
@@ -160,5 +198,6 @@ class logIn : AppCompatActivity() {
         resources.updateConfiguration(config, resources.displayMetrics)
     }
         }
+
 
 

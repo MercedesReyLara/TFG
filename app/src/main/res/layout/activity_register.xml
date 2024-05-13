@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.05" />
+        app:layout_constraintGuide_percent="0.02" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelinev2"
@@ -26,12 +26,12 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="3dp"
         android:text="@string/txtRegistro"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@id/guidelinev2"
-        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="@id/guidelinev1"
         app:layout_constraintTop_toBottomOf="@id/guidelineH1" />
 
@@ -47,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.04" />
+        app:layout_constraintGuide_percent="0.02" />
 
     <EditText
         android:id="@+id/DNI"
@@ -162,21 +162,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.13" />
+        app:layout_constraintGuide_percent="0.09" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.85" />
+        app:layout_constraintGuide_percent="0.82" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.71" />
+        app:layout_constraintGuide_percent="0.66" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineV3"
@@ -186,13 +186,13 @@
         app:layout_constraintGuide_begin="175dp" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/profileP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="76dp"
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton"
+        app:layout_constraintBottom_toTopOf="@+id/camara"
         app:layout_constraintEnd_toStartOf="@id/guidelineV3"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@id/guidelinev1"
@@ -209,10 +209,10 @@
         app:layout_constraintEnd_toStartOf="@id/guidelineV3"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@id/guidelinev1"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton" />
+        app:layout_constraintTop_toBottomOf="@+id/camara" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/camara"
         android:layout_width="67dp"
         android:layout_height="55dp"
         android:background="@android:color/transparent"
@@ -221,7 +221,7 @@
         app:layout_constraintEnd_toStartOf="@id/guidelineV3"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@id/guidelinev1"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"
-        app:srcCompat="@drawable/imagen_2024_04_22_110039483_removebg_preview" />
+        app:layout_constraintTop_toBottomOf="@+id/profileP"
+        app:srcCompat="@android:drawable/ic_menu_camera" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

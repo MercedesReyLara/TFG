@@ -4,7 +4,7 @@
     <string name="registro">¿No tienes cuenta? Registrate</string>
     <string name="subir">Subir mi producto</string>
     <string name="eliminar">Eliminar esta reseña</string>
-    <string name="modificar">Modificar este producto</string>
+    <string name="ver">Ver todas las reseñas</string>
     <string name="modificarUsuario">Modificar mi perfil</string>
     <string name="filtrar">Aplicar filtro</string>
     <string name="btnModificar" >Modificar un producto</string>
@@ -28,7 +28,7 @@
     <string name="registrarse">Registrarme</string>
     <string name="saludo">Bienvenido a PRORATER</string>
     <string name="opciones">¿Que quieres hacer hoy?</string>
-    <string name="eliminarMenu">Eliminar una reseña</string>
+    <string name="consultar">Buscar por usuario</string>
     <string name="errorVacios">Los campos no pueden estar vacíos</string>
     <string name="irUsuario">Ir a mi perfil</string>
     <string name="errorCorreo">El correo tiene que acabar en @gmail.com</string>
@@ -42,4 +42,9 @@
     <string name="puntuacionReseña">Puntuación de la reseña</string>
     <string name="escogerEliminar">Escoge un producto para eliminar</string>
     <string name="txtEliminar">Bienvenido al menú de eliminación de reseñas</string>
+    <string name="nombreU">Nombre</string>
+    <string name="apellidosU">Apellidos</string>
+    <string name="emailU">Email</string>
+    <string name="DNIU">DNI</string>
+    <string name="descripcionU">Sobre mi</string>
 </resources>

@@ -4,8 +4,8 @@
     <string name="registro">¿Non tes conta? Rexístrate aquí</string>
     <string name="subir">Subir a miña reseña</string>
     <string name="eliminar">Eliminar esta reseña</string>
-    <string name="eliminarMenu">Eliminar unha reseña</string>
-    <string name="modificar">Modificar este producto</string>
+    <string name="consultar">Buscar por usuario</string>
+    <string name="ver">Ver todas as resenas</string>
     <string name="modificarUsuario">Modificar o meu perfil</string>
     <string name="irUsuario">Ir ao meu perfil</string>
     <string name="filtrar">Aplicar filtro</string>
@@ -33,13 +33,19 @@
     <string name="registrarse">Rexistrarme</string>
     <string name="saludo">Benvido a PRORATER</string>
     <string name="volverMain">Volver ao menú principal</string>
-    <string name="opciones">¿Que queres faces hoxe?</string>
+    <string name="opciones">¿Que queres facer hoxe?</string>
     <string name="errorCorreo">O correo ten que acabar en @gmail.com</string>
     <string name="errorContraseña">O contrasinal ten que ter mayúsculas,minúsculas, números e símbolos</string>
     <string name="coincidir">As contrasinais teñen que coincidir</string>
     <string name="menuReseñas">Publique a sua reseña</string>
     <string name="botonPublicar">Publicar esta reseña</string>
     <string name="nomeReseña">Titulo da reseña</string>
+    <string name="puntuacionReseña">Puntuación de la reseña</string>
     <string name="descripcionReseña">Descripción da reseña</string>
-    <string name="puntuacionReseña">Puntuación da reseña</string>
+    <string name="nombreU">Nome</string>
+    <string name="apellidosU">Apelidos</string>
+    <string name="emailU">Email</string>
+    <string name="DNIU">DNI</string>
+    <string name="descripcionU">Sobre mi</string>
+
 </resources>

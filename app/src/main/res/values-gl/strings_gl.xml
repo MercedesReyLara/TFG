@@ -5,8 +5,8 @@
     <string name="registro">¿Non tes conta? Rexístrate aquí</string>
     <string name="subir">Subir a miña reseña</string>
     <string name="eliminar">Eliminar esta reseña</string>
-    <string name="eliminarMenu">Eliminar unha reseña</string>
-    <string name="modificar">Modificar este producto</string>
+    <string name="consultar">Buscar por usuario</string>
+    <string name="ver">Ver todas as resenas</string>
     <string name="modificarUsuario">Modificar o meu perfil</string>
     <string name="irUsuario">Ir ao meu perfil</string>
     <string name="filtrar">Aplicar filtro</string>
@@ -43,4 +43,9 @@
     <string name="nomeReseña">Titulo da reseña</string>
     <string name="descripcionReseña">Descripción da reseña</string>
     <string name="puntuacionReseña">Puntuación da reseña</string>
+    <string name="nombreU">Nome</string>
+    <string name="apellidosU">Apelidos</string>
+    <string name="emailU">Email</string>
+    <string name="DNIU">DNI</string>
+    <string name="descripcionU">Sobre mi</string>
 </resources>

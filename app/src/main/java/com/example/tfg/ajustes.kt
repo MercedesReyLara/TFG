@@ -46,7 +46,7 @@ class ajustes : AppCompatActivity() {
             sharedPreff.saveIP(context,IP)
         }
         volverMain.setOnClickListener {
-            val intentMain= Intent(this,mainMenu::class.java)
+            val intentMain= Intent(this,logIn::class.java)
             startActivity(intentMain)
         }
     }

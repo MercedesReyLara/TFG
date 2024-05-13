@@ -24,12 +24,12 @@ class generalFunctions {
         return matcherEmail.matches()
     }
 
-  /*  fun validatePassword(password:String):Boolean{
+   fun validatePassword(password:String):Boolean{
         val regexPassword="^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9!@#\$%^&*()-_+=]{8,}$"
         val patternPassword: Pattern = Pattern.compile(regexPassword)
         val matcherPassword: Matcher =patternPassword.matcher(password)
         return matcherPassword.matches()
-    }*/
+    }
 
     fun clearHint(text: EditText) {
         text.setOnFocusChangeListener { _, hasFocus ->
