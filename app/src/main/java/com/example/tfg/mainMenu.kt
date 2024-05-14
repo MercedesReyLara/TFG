@@ -34,7 +34,7 @@ class mainMenu : AppCompatActivity() {
              startActivity(intent)
          }
         cerrarSesion.setOnClickListener {
-            var builder: AlertDialog.Builder =
+            val builder: AlertDialog.Builder =
                 AlertDialog.Builder(this)/*Creamos el objeto diálogo*/
             builder.setTitle("¿Cerrar sesión?")/*Establecemos el título, el mensaje principal y las dos opciones*/
             builder.setMessage("¿Seguro que quieres cerrar sesión?")
@@ -42,8 +42,13 @@ class mainMenu : AppCompatActivity() {
                 logOutFun()
             }
             builder.setNegativeButton(("No"), { _, _ -> })
-            var dialog = builder.create()/*Lo construímos con las distintas partes*/
+            val dialog = builder.create()/*Lo construímos con las distintas partes*/
             dialog.show()/*Lo mostramos*/
+        }
+
+        perfilU.setOnClickListener {
+            val intentPerfil=Intent(this,perfilUser::class.java)
+            startActivity(intentPerfil)
         }
     }
     fun logOutFun() {

@@ -14,6 +14,8 @@
     <string name="letra">Seleccione o tamano da letra</string>
     <string name="pequeña">Letra pequena</string>
     <string name="grande">Letra grande</string>
+    <string name="ipText">Cambia a dirección ip</string>
+    <string name="detalles">Detalles do prodcuto</string>
     <string name="ip">Introduza a dirección ip</string>
     <string name="aplicar">Aplicar este tamaño</string>
     <string name="btnModificar">Modificar unha reseña</string>

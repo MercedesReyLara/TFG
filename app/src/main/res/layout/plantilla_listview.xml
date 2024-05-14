@@ -3,11 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:background="@drawable/fondo"
+    android:background="@android:color/transparent"
     android:padding="16dp">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imagenP"
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:scaleType="centerCrop"
@@ -21,32 +21,24 @@
         android:layout_marginStart="16dp">
 
         <TextView
-            android:id="@+id/nameTextView"
+            android:id="@+id/nombreP"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Product Name"
-            android:textSize="18sp"
-            android:textColor="@android:color/black"
-            android:textStyle="bold"
-            android:layout_marginBottom="4dp"/>
-        <TextView
-            android:id="@+id/utility"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Utility"
-            android:textSize="18sp"
+            android:textSize="15sp"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:layout_marginBottom="4dp"/>
 
-        <Button
-            android:id="@+id/detailsTextView"
+        <TextView
+            android:id="@+id/precioP"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/button"
-            android:text="Product Details"
-            android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:layout_marginBottom="4dp"
+            android:text="Utility"
+            android:textColor="@android:color/black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

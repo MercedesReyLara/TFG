@@ -113,11 +113,11 @@ class httPettitions {
         }
     }
 
-    suspend fun getProductos():ArrayList<Product>{
+    suspend fun getProductos(dni:String?):ArrayList<Product>{
         return withContext(Dispatchers.IO) {
             val products = object : TypeToken<ArrayList<Product>>() {}.type
             val client = OkHttpClient()
-            val url:String= "http://192.168.1.73:8080/logIn"
+            val url:String= "http://192.168.1.73:8080/$dni/getUserProducts"
             var listProductos:ArrayList<Product> = arrayListOf()
             val request: Request = Request.Builder()
                 .url(url)

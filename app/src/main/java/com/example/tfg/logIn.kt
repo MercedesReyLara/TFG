@@ -44,35 +44,9 @@ class logIn : AppCompatActivity() {
         val registerBut: Button = findViewById(R.id.registrar)
         val email: EditText = findViewById(R.id.editTextUsername)
         val password: EditText = findViewById(R.id.passwordUser)
-        val spinnerIdiomas: Spinner = findViewById(R.id.spinnerLanguages)
         val validator = generalFunctions()
         val ajustesButton:ImageButton=findViewById(R.id.ajustes)
         //Declaración de variables
-        val languages = arrayListOf("Castelan", "Galego","")
-        val adapter:ArrayAdapter<String> = ArrayAdapter(this,android.R.layout.simple_spinner_item,languages)
-        spinnerIdiomas.adapter=adapter
-        spinnerIdiomas.setSelection(2)
-        spinnerIdiomas.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                val selectedLanguage = parent?.getItemAtPosition(position).toString()
-                if (selectedLanguage == "Galego") {
-                    sharedPreff.setLanguage(context, "gl")
-                    recreate()
-                // Reinicia la actividad para aplicar el nuevo idioma
-                } else if (selectedLanguage == "Castelan") {
-                    sharedPreff.setLanguage(context, "es")
-                    recreate()
-                // Reinicia la actividad para aplicar el nuevo idioma
-                }
-            }
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-            }
-        }
         val httPettitions=httPettitions()
         /*Si las shared preferences tienen inciada sesión, vamos directamente al menú principal
         si no nos quedamos en la actividad y hacemos las operaciones adecuadas
@@ -124,7 +98,7 @@ class logIn : AppCompatActivity() {
                             Toast.LENGTH_SHORT
                         ).show()
                     } else {*/
-                     /*   lifecycleScope.launch(Dispatchers.Main) {
+                       lifecycleScope.launch(Dispatchers.Main) {
                             val encontrado:User?
                             withContext(Dispatchers.IO) {
                                  encontrado=httPettitions.getUser(emailText, passwordText)
@@ -132,8 +106,8 @@ class logIn : AppCompatActivity() {
                                 if (encontrado!=null) {
                                     sharedPreff.saveLogin(context, true)
                                     sharedPreff.saveUser(context, encontrado.dni)
-                                    /*val intentLogIn = Intent(this@logIn, mainMenu::class.java)
-                                    startActivity(intentLogIn)*/
+                                    val intentLogIn = Intent(this@logIn, mainMenu::class.java)
+                                    startActivity(intentLogIn)
                                 } else{
                                     Toast.makeText(
                                         this@logIn,
@@ -141,37 +115,7 @@ class logIn : AppCompatActivity() {
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 }
-                            }*/
-                    lifecycleScope.launch(Dispatchers.Main) {
-                        val encontrados:List<Category>
-                        withContext(Dispatchers.IO) {
-                            encontrados=httPettitions.getCategories()
-                        }
-                        if (encontrados.isNotEmpty()) {
-                          Toast.makeText(this@logIn,"Encontradas",Toast.LENGTH_SHORT).show()
-                        } else{
-                            Toast.makeText(
-                                this@logIn,
-                                "Nombre de usuario o contraseña incorrectos",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    }
-                    /*lifecycleScope.launch(Dispatchers.Main) {
-                        val encontrados:List<Review>
-                        withContext(Dispatchers.IO) {
-                            encontrados=httPettitions.getReviews()
-                        }
-                        if (encontrados.isNotEmpty()) {
-                            Toast.makeText(this@logIn,"Ecnontradas",Toast.LENGTH_SHORT).show()
-                        } else{
-                            Toast.makeText(
-                                this@logIn,
-                                "Nombre de usuario o contraseña incorrectos",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    }*/
+                            }
                         }
 
 

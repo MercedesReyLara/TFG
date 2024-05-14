@@ -23,7 +23,7 @@
             app:layout_constraintTop_toTopOf="@id/spinnerLanguages" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imagenP"
             android:layout_width="128dp"
             android:layout_height="93dp"
             android:src="@drawable/imagen_2024_04_22_110039483_removebg_preview"
@@ -80,7 +80,7 @@
             app:layout_constraintEnd_toEndOf="@id/guidelineV2"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@id/guidelineV1"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            app:layout_constraintTop_toBottomOf="@+id/imagenP" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineV1"
@@ -95,17 +95,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.95" />
-
-        <Spinner
-            android:id="@+id/spinnerLanguages"
-            style="@style/spinner"
-            android:layout_width="137dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toStartOf="@id/guidelineV2"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@id/guidelineV1"
-            app:layout_constraintTop_toBottomOf="@id/guidelineH1" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineH1"

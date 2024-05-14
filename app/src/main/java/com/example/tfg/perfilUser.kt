@@ -32,6 +32,7 @@ class perfilUser : AppCompatActivity() {
         val about:TextView=findViewById(R.id.descripcionU)
         var profilePick:ImageView=findViewById(R.id.profilePD)
         val buttonBack:ImageButton=findViewById(R.id.backButton)
+        val productList:ImageButton=findViewById(R.id.productosList)
 
         /*Declaracion de variables*/
         val context=baseContext
@@ -58,6 +59,11 @@ class perfilUser : AppCompatActivity() {
         buttonBack.setOnClickListener {
             val intentMain= Intent(this,mainMenu::class.java)
             startActivity(intentMain)
+        }
+
+        productList.setOnClickListener {
+            val intentProductos=Intent(this,productosList::class.java)
+            startActivity(intentProductos)
         }
     }
 }

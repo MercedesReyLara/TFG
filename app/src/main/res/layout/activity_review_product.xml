@@ -142,15 +142,15 @@
 
     <ImageButton
         android:id="@+id/imageButton2"
-        android:layout_width="67dp"
-        android:layout_height="55dp"
+        android:layout_width="53dp"
+        android:layout_height="39dp"
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
-        android:src="@drawable/imagen_2024_04_22_110039483_removebg_preview"
+        android:src="@android:drawable/ic_menu_revert"
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
         app:layout_constraintHorizontal_bias="0.034"
         app:layout_constraintStart_toEndOf="@id/guidelineV1"
-        tools:layout_editor_absoluteY="633dp" />
+        tools:layout_editor_absoluteY="649dp" />
 
     <ImageButton
         android:id="@+id/imageButton3"

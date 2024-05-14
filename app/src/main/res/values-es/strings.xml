@@ -14,6 +14,8 @@
     <string name="pequeña">Letra pequeña</string>
     <string name="grande">Letra grande</string>
     <string name="aplicar">Aplicar este tamaño</string>
+    <string name="ipText">Cambia la dirección ip</string>
+    <string name="detalles">Detalles del prodcuto</string>
     <string name="ip">Introduzca la dirección ip</string>
     <string name="credencialCorreo" >Mail o Nombre de usuario</string>
     <string name="credencialCotraseña" >Contraseña</string>

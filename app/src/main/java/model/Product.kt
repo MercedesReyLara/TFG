@@ -4,10 +4,24 @@ import java.io.Serializable
 
 class Product:Serializable {
     var id:Int=0
-    var nombre:String=""
-    var descripcion:String=""
+    var nombreP:String=""
+    var descripcionP:String=""
     var precio:Double=0.0
-    var categoria:String=""
+    var nombreCategoria:String=""
     constructor()
+    constructor(
+        id: Int,
+        nombreP: String,
+        descripcionP: String,
+        precio: Double,
+        nombreCategoria: String
+    ) {
+        this.id = id
+        this.nombreP = nombreP
+        this.descripcionP = descripcionP
+        this.precio = precio
+        this.nombreCategoria = nombreCategoria
+    }
+
 
 }
