@@ -11,8 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import model.SharedPreff
 
 class mainMenu : AppCompatActivity() {
-    @SuppressLint("MissingInflatedId")
     private lateinit var context:Context
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         context=baseContext
@@ -22,16 +22,16 @@ class mainMenu : AppCompatActivity() {
         val eliminar: Button =findViewById(R.id.eliminarResena)
         val modificar:Button=findViewById(R.id.modificaResena)
         val subir:Button=findViewById(R.id.subirResena)
-        val perfilU:Button=findViewById(R.id.perfil)
+        val perfilU:ImageButton=findViewById(R.id.botonPerfilU)
         val cerrarSesion:ImageButton=findViewById(R.id.pechar)
-        val ajustes:ImageButton=findViewById(R.id.ajustes)
+        val ajustesButton:ImageButton=findViewById(R.id.ajustes)
 
         //Declaración de variables que vamos a utilizar
 
 
-         ajustes.setOnClickListener {
-             val intent=Intent(this,ajustes::class.java)
-             startActivity(intent)
+         ajustesButton.setOnClickListener {
+             val intentAjustes=Intent(this,ajustes::class.java)
+             startActivity(intentAjustes)
          }
         cerrarSesion.setOnClickListener {
             val builder: AlertDialog.Builder =
