@@ -14,18 +14,21 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import model.Product
 import model.SharedPreff
+import model.User
+
 class productosList : AppCompatActivity() {
     private val httPetitions=httPettitions()
     private var listProductos:ArrayList<Product> = arrayListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
+        val functions=generalFunctions()
         val context: Context =baseContext
         val sharedPreff=SharedPreff(context)
-        val DNI:String?=sharedPreff.getUser(context)
+        val DNI:String=functions.decrypt(functions.clave,sharedPreff.getUser(context).toString()).toString()
         val adapter = ProductAdapter(context,listProductos);
         lifecycleScope.launch(Dispatchers.Main) {
             var newProducts:ArrayList<Product>
             withContext(Dispatchers.IO) {
-                newProducts = httPetitions.getProductos(DNI)!!
+                newProducts = httPetitions.getProductos(User(DNI))!!
             }
             if(newProducts.isEmpty()){
                 Toast.makeText(this@productosList,"Peticion denegada", Toast.LENGTH_SHORT).show()

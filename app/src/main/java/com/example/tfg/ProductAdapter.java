@@ -41,7 +41,6 @@ public class ProductAdapter extends BaseAdapter {
     }
 
 
-
     @NonNull
     @Override
     public View getView(int position, @Nullable View view, @Nullable ViewGroup parent) {

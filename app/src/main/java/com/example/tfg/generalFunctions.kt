@@ -4,6 +4,7 @@ package com.example.tfg
 import android.app.Activity
 import android.content.Context
 import android.content.res.Configuration
+import android.util.Base64
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.EditText
@@ -11,6 +12,9 @@ import android.widget.Spinner
 import java.util.Locale
 import java.util.regex.Matcher
 import java.util.regex.Pattern
+import javax.crypto.Cipher
+import javax.crypto.spec.IvParameterSpec
+import javax.crypto.spec.SecretKeySpec
 
 
 class generalFunctions {
@@ -53,6 +57,65 @@ class generalFunctions {
         return spinner
     }
 
+    fun validateDNI(dni:String):Boolean{
+        //Hacemos el string de las letras en orden según la página web
+        val letters = "TRWAGMYFPDXBNJZSQVHLCKE"
+        /*Hacemos una regex para obligar al usuario a que cumpla x condiciones
+        en este caso son: que empiece obligatoriamente por 8 numeros que sean exclusivamente del 0-9
+        y que acabe obligatoriamente en una letra que sea entre a y z
+         */
+        val dniRegex = Regex("^[0-9]{8}[A-Z]$")
+        if (!dni.matches(dniRegex)) {
+            //No cumple nuestro formato
+            return false
+        }
+
+        /*Cogemos el último caracter del string y lo parseamos a un entero. Si no se pudiera
+        parsear, devolvería false y saldría de la función
+         */
+        val dniNumbers = dni.substring(0, 8).toIntOrNull() ?: return false
+        val expectedLetter = letters[dniNumbers % 23]
+        /*Dividimos nuestro string sin letra entre la cantidad de letras, el número que de de resto
+        es la letra que debería tener
+         */
+
+        return dni[8] == expectedLetter
+    }
+
+    fun clearText(list: List<EditText>) {
+        for (editText in list) {
+            editText.text.clear()
+        }
+    }
+
+    val clave = "estaesmiclave123"
+    fun encrypt(value:String,key:String):String{
+        /*Hacemos un método para pasarle el valor y la key*/
+        /*Usamos la librería cipher que nos proporciona funcionalidades de cifrado
+        y ciframos a través de el algoritmo AES.
+        Luego configuramos el IV que utilizaremos para la encriptacion y lo encriptamos.
+        Por ultimo hacemos un return para poder guardarlo en la preferencias
+         */
+        val encryptSystem = Cipher.getInstance("AES/CBC/PKCS5Padding")
+        val secretKeySpec = SecretKeySpec(key.toByteArray(Charsets.UTF_8), "AES")
+        val ivParameterSpec = IvParameterSpec(key.toByteArray(Charsets.UTF_8))
+        encryptSystem.init(Cipher.ENCRYPT_MODE, secretKeySpec, ivParameterSpec)
+        val encrypted = encryptSystem.doFinal(value.toByteArray(Charsets.UTF_8))
+        return Base64.encodeToString(encrypted, Base64.DEFAULT)
+    }
+
+    fun decrypt(key:String,encryptedValue:String):String?{
+        /*Prodceso inverso a la encriptación, es decir, declaramos el mismo algoritmo
+        Pero en vez de encriptar desencriptamos y devolvemos el string que encriptamos que en mi
+        caso lo guardé en las shared preferences.
+         */
+        val  encryptSystem= Cipher.getInstance("AES/CBC/PKCS5Padding")
+        val secretKeySpec = SecretKeySpec(key.toByteArray(Charsets.UTF_8), "AES")
+        val ivParameterSpec = IvParameterSpec(key.toByteArray(Charsets.UTF_8))
+        encryptSystem.init(Cipher.DECRYPT_MODE, secretKeySpec, ivParameterSpec)
+        val decrypted = encryptSystem.doFinal(Base64.decode(encryptedValue, Base64.DEFAULT))
+        return String(decrypted, Charsets.UTF_8)
+    }
     /*fun setLanguage(activity:Activity, languageCode: String) {
         val locale = Locale(languageCode)
         Locale.setDefault(locale)

@@ -57,7 +57,7 @@ class mainMenu : AppCompatActivity() {
         val sharedPreff = SharedPreff(context)
         sharedPreff.saveLogin(context, false)
         /*sharedPreff.savePressed(context,false)*/
-        var intent = Intent(this, logIn::class.java)
+        val intent = Intent(this, logIn::class.java)
         startActivity(intent)
     }
 }

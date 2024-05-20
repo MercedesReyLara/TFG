@@ -12,6 +12,7 @@ class User :Serializable {
     var descripcion:String=""
     /*var profileP:ByteArray= "Hola".toByteArray()*/
     constructor()
+
     constructor(
         nombreU: String,
         dni: String,
@@ -28,6 +29,10 @@ class User :Serializable {
         this.contrasena = contrasena
         this.descripcion=descripcion
         /*this.profileP=profileP*/
+    }
+
+    constructor(dni: String) {
+        this.dni = dni
     }
 
 }

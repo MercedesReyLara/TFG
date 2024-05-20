@@ -8,6 +8,7 @@
     <string name="ver">Ver todas as resenas</string>
     <string name="modificarUsuario">Modificar o meu perfil</string>
     <string name="irUsuario">Ir ao meu perfil</string>
+    <string name="DNIMal">O DNI ten que ser formato XXXXXXXXA</string>
     <string name="filtrar">Aplicar filtro</string>
     <string name="DNI">DNI</string>
     <string name="letra">Seleccione o tamano da letra</string>

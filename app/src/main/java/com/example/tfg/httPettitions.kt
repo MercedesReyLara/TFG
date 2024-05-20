@@ -18,41 +18,51 @@ import java.io.IOException
 class httPettitions {
 
 
-    suspend fun getUser(correo:String,contrasena:String): User? {
+    suspend fun getUser(nombre:String,contrasena:String): User? {
+        /*La hago suspend para poder lanzarla en hilo secundario*/
+        /*El return este te lo pone automático pero basicamente le estás diciendo
+        que te mande la respuesta al hilo secundario
+         */
         return withContext(Dispatchers.IO) {
             val client = OkHttpClient()
-            val uri:String= Uri.parse("http://192.168.1.73:8080/logIn").buildUpon()
-                .appendQueryParameter("nombreU",correo)
+            /*Peticion en este caso con nombre y contraseña*/
+            val uri:String= Uri.parse("http://192.168.5.14:8080/logIn").buildUpon()
+                .appendQueryParameter("nombreU",nombre)
                 .appendQueryParameter("contrasena",contrasena)
                 .build().toString()
+            var user:User=User()
             val request: Request = Request.Builder()
                 .url(uri)
                 .build()
             val response:Response
+            /*Try catch para manejar la excepcion de conexion*/
             try {
                 response = client.newCall(request).execute()
                 val responseBody = response.body?.string()
+                /*Si responde manda un objeto parsedo de json a user*/
                 if (response.isSuccessful&&!responseBody.isNullOrEmpty()) {
                     val gson = Gson()
-                    val user=gson.fromJson(responseBody, User::class.java)
+                    user=gson.fromJson(responseBody, User::class.java)
                     return@withContext user
                 }else {
-                    return@withContext null
+                    /*Si no returnea el user vacío para saber que el fallo ha sido en la peticion*/
+                    return@withContext user
                 }
             }catch(e:IOException){
+                /*En cambio aqui returnea null para saber que el fallo ha sido en la conexion*/
                 return@withContext null
             }
 
         }
     }
-    suspend fun postUser(ip:String,user: User,dni:String): Boolean {
+    suspend fun postUser(user: User): Boolean {
         return withContext(Dispatchers.IO) {
             val client = OkHttpClient()
             val gson = Gson()
             val json = gson.toJson(user)
             val mediaType = "application/json; charset=utf-8".toMediaTypeOrNull()
             val requestBody = json.toRequestBody(mediaType)
-            val url = "http://$ip:8080/postUser/$dni"
+            val url = "http://192.168.5.14:8080/postUser"
             val request: Request = Request.Builder()
                 .url(url)
                 .post(requestBody)
@@ -68,10 +78,10 @@ class httPettitions {
     }
 
 
-    suspend fun deleteUser(ip:String,dni:String):Boolean {
+    suspend fun deleteUser(dni:String):Boolean {
         return withContext(Dispatchers.IO) {
             val client = OkHttpClient()
-            val url = "http://$ip:8080/delete/$dni"
+            val url = "http://192.168.5.14:8080/delete/$dni"
 
             val request = Request.Builder()
                 .url(url)
@@ -91,7 +101,7 @@ class httPettitions {
     suspend fun getUserByDNI(dni:String): User? {
         return withContext(Dispatchers.IO) {
             val client = OkHttpClient()
-            val url:String="http://192.168.1.73:8080/getUser/$dni"
+            val url:String="http://192.168.5.14:8080/getUser/$dni"
             val request: Request = Request.Builder()
                 .url(url)
                 .build()
@@ -113,14 +123,15 @@ class httPettitions {
         }
     }
 
-    suspend fun getProductos(dni:String?):ArrayList<Product>{
+    suspend fun getProductos(user:User?):ArrayList<Product>{
         return withContext(Dispatchers.IO) {
             val products = object : TypeToken<ArrayList<Product>>() {}.type
             val client = OkHttpClient()
-            val url:String= "http://192.168.1.73:8080/$dni/getUserProducts"
+            val url:String= "http://192.168.5.14:8080/getUserProducts"
             var listProductos:ArrayList<Product> = arrayListOf()
             val request: Request = Request.Builder()
                 .url(url)
+                /*.post()*/
                 .build()
             val response:Response
             try {
@@ -144,7 +155,7 @@ class httPettitions {
         return withContext(Dispatchers.IO) {
             val reviews = object : TypeToken<ArrayList<Review>>() {}.type
             val client = OkHttpClient()
-            val url:String= "http://192.168.1.73:8080/getReviews"
+            val url:String= "http://192.168.5.14:8080/getReviews"
             var listReviews:ArrayList<Review> = arrayListOf()
             val request: Request = Request.Builder()
                 .url(url)
@@ -171,7 +182,7 @@ class httPettitions {
         return withContext(Dispatchers.IO) {
             val categories = object : TypeToken<ArrayList<Category>>() {}.type
             val client = OkHttpClient()
-            val url:String= "http://192.168.1.73:8080/getCategories"
+            val url:String= "http://192.168.5.14:8080/getCategories"
             var listCategories:ArrayList<Category> = arrayListOf()
             val request: Request = Request.Builder()
                 .url(url)

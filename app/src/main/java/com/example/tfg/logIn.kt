@@ -44,7 +44,7 @@ class logIn : AppCompatActivity() {
         val registerBut: Button = findViewById(R.id.registrar)
         val email: EditText = findViewById(R.id.editTextUsername)
         val password: EditText = findViewById(R.id.passwordUser)
-        val validator = generalFunctions()
+        val functions = generalFunctions()
         val ajustesButton:ImageButton=findViewById(R.id.ajustes)
         //Declaración de variables
         val httPettitions=httPettitions()
@@ -55,8 +55,8 @@ class logIn : AppCompatActivity() {
             val intent = Intent(this, mainMenu::class.java)
             startActivity(intent)
         } else {
-            validator.clearHint(email)
-            validator.clearHint(password)
+            functions.clearHint(email)
+            functions.clearHint(password)
 
             /*Iniciar sesión:
             1-Comprueba que los campos no estén vacíos
@@ -98,14 +98,20 @@ class logIn : AppCompatActivity() {
                             Toast.LENGTH_SHORT
                         ).show()
                     } else {*/
+                    /*Llamo al hilo principal para saber donde tiene que ejecutar las acciones siguiente
+                    Esto creo que no es necesario pero hazlo por si acaso
+                     */
                        lifecycleScope.launch(Dispatchers.Main) {
                             val encontrado:User?
+                            /*Lanzo la petición en el hilo secundario para no crashear*/
                             withContext(Dispatchers.IO) {
                                  encontrado=httPettitions.getUser(emailText, passwordText)
                             }
+                           /*Acaba la petición entonces manejo los datos*/
                                 if (encontrado!=null) {
                                     sharedPreff.saveLogin(context, true)
-                                    sharedPreff.saveUser(context, encontrado.dni)
+                                    val encryptedDNI = functions.encrypt(encontrado.dni, functions.clave)
+                                    sharedPreff.saveUser(context, encryptedDNI)
                                     val intentLogIn = Intent(this@logIn, mainMenu::class.java)
                                     startActivity(intentLogIn)
                                 } else{

@@ -37,7 +37,8 @@ class perfilUser : AppCompatActivity() {
         /*Declaracion de variables*/
         val context=baseContext
         val sharedPreff=SharedPreff(context)
-        val DNIRecuperado:String=sharedPreff.getUser(context).toString()
+        val functions=generalFunctions()
+        val DNIRecuperado:String=functions.decrypt(functions.clave,sharedPreff.getUser(context).toString()).toString()
         var userData:User?= User()
         /*Hacemos la peticion*/
         lifecycleScope.launch (Dispatchers.IO){
