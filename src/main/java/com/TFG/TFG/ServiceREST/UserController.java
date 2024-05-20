@@ -1,5 +1,7 @@
 package com.TFG.TFG.ServiceREST;
 
+import com.TFG.TFG.DTO.ProductDTO;
+import com.TFG.TFG.DTO.UserDTO;
 import com.TFG.TFG.Model.Producto;
 import com.TFG.TFG.Model.User;
 import com.TFG.TFG.Respository.ProductRepository;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -34,30 +37,30 @@ public class UserController {
             return null;
         }
 
-    @GetMapping(value = "/getUser/{DNI}")
-    public User getDNI(@PathVariable String DNI){
-        User u=ur.findByDNI(DNI);
-        return u;
+    @GetMapping(value = "/getUser")
+    public UserDTO getDNI(@RequestBody User user){
+        User u=ur.findByDNI(user.getDNI());
+        UserDTO uDTO=new UserDTO(u.getDNI(),u.getNombreU(),u.getApellidosU(),u.getCorreo(),u.getContrasena(),u.getDescripcion());
+        return uDTO;
     }
-    @PostMapping(value = "/postUser/{DNI}")
-    public boolean postUser(@RequestBody User user,@PathVariable String DNI){
+    @PostMapping(value = "/postUser")
+    public boolean postUser(@RequestBody User user){
         List<User> us=ur.findAll();
         for(User uT:us) {
-            if (uT.getDNI().equals(DNI)) {
+            if (uT.getDNI().equals(user.getDNI())) {
                 return false;
             }
             if (uT.getCorreo().equals(user.getCorreo())||uT.getNombreU().equals(user.getNombreU())) {
                 return false;
             }
         }
-        user.setDNI(DNI);
         ur.save(user);
         return true;
     }
 
-    @DeleteMapping(value = "/deleteUser/{DNI}")
-    public Boolean deleteUser(@PathVariable String DNI){
-        User u=ur.findByDNI(DNI);
+    @DeleteMapping(value = "/deleteUser")
+    public Boolean deleteUser(@RequestBody User user){
+        User u=ur.findByDNI(user.getDNI());
         if(u==null){
             return false;
         }
@@ -65,12 +68,24 @@ public class UserController {
         return true;
     }
 
-    @GetMapping(value = "/{DNI}/getUserProducts")
-    public List<Producto> getProducts(@PathVariable String DNI){
-        User u=ur.findByDNI(DNI);
+    @GetMapping(value = "/getUserProducts")
+    public List<ProductDTO> getProducts(@RequestBody User user){
+        User u=ur.findByDNI(user.getDNI());
         if(u==null){
             return null;
         }
-        return u.getProductsU();
+        List<Producto> products=u.getProductsU();
+        List<ProductDTO> DTOS=new ArrayList<>();
+        for(Producto p:products){
+            ProductDTO DTO=new ProductDTO(
+                 p.getId(),
+                 p.getNombreP(),
+                 p.getDescripcionP(),
+                 p.getPrecio(),
+                 p.getCategory().getNombre()
+            );
+            DTOS.add(DTO);
+        }
+        return DTOS;
     }
 }

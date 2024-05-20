@@ -1,12 +1,22 @@
 package com.TFG.TFG.DTO;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class ReviewDTO {
+
+    @JsonProperty
     private int id;
+    @JsonProperty
     private String nombre;
+    @JsonProperty
     private String opinionU;
+    @JsonProperty
     private String user;
-    private String userName; // Nuevo campo para el nombre de usuario
+    @JsonProperty
+    private String userName;
+    @JsonProperty
     private int product;
+    @JsonProperty
     private String productName;
 
     // Constructor

@@ -19,8 +19,8 @@ public class CategoryController {
     private CategoryRepository cr;
 
     @GetMapping(value = "/getPBC/{id}")
-    private List<ProductDTO> productListC(@PathVariable int category_id){
-        Category c=cr.findById(category_id);
+    private List<ProductDTO> productListC(@RequestBody CategoryDTO categoryDTO){
+        Category c=cr.findById(categoryDTO.getId());
         if(c!=null) {
             List<Producto> productos = c.getProducts();
             List<ProductDTO> DTOS = new ArrayList<>();
@@ -29,7 +29,8 @@ public class CategoryController {
                         p.getId(),
                         p.getNombreP(),
                         p.getDescripcionP(),
-                        p.getPrecio()
+                        p.getPrecio(),
+                        p.getCategory().getNombre()
                 );
                 DTOS.add(pDTO);
             }

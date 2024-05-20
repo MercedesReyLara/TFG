@@ -1,6 +1,7 @@
 package com.TFG.TFG.ServiceREST;
 
 
+import com.TFG.TFG.DTO.ProductDTO;
 import com.TFG.TFG.DTO.ReviewDTO;
 import com.TFG.TFG.Model.Producto;
 import com.TFG.TFG.Model.Review;
@@ -45,7 +46,7 @@ public class ReviewController {
         return DTOS;
     }
 
-    @PostMapping(value = "/postReviews/{DNI}")
+    @PostMapping(value = "/postReviews")
     private Boolean postReviews(@RequestBody ReviewDTO review){
         User u=ur.findByDNI(review.getUser());
         Producto p=pr.findById(review.getProduct());
@@ -62,12 +63,12 @@ public class ReviewController {
         return true;
     }
 
-    @GetMapping(value = "/{id}/getReviewsP")
-    public List<ReviewDTO> getReviewsProductos(@PathVariable int id){
+    @GetMapping(value = "/getReviewsP")
+    public List<ReviewDTO> getReviewsProductos(@RequestBody ProductDTO productDTO){
         /*Queremos ver las reseñas de ese producto. Buscamos el producto por id
         y devolvemos su lista de reseñas
          */
-        Producto p=pr.findById(id);
+        Producto p=pr.findById(productDTO.getId());
         if(p!=null) {
             List<Review> reviews = p.getResenas();
             List<ReviewDTO> reviewsDTO = new ArrayList<>();
