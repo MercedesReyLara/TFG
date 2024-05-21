@@ -123,15 +123,19 @@ class httPettitions {
         }
     }
 
-    suspend fun getProductos(user:User?):ArrayList<Product>{
+    suspend fun getProductos(user:User?,ip:String):ArrayList<Product>{
         return withContext(Dispatchers.IO) {
             val products = object : TypeToken<ArrayList<Product>>() {}.type
             val client = OkHttpClient()
-            val url:String= "http://192.168.5.14:8080/getUserProducts"
+            val url:String= "http://$ip:8080/getUserProducts"
+            val gson = Gson()
+            val json = gson.toJson(user)
+            val mediaType = "application/json; charset=utf-8".toMediaTypeOrNull()
+            val requestBody = json.toRequestBody(mediaType)
             var listProductos:ArrayList<Product> = arrayListOf()
             val request: Request = Request.Builder()
                 .url(url)
-                /*.post()*/
+                .post(requestBody)
                 .build()
             val response:Response
             try {

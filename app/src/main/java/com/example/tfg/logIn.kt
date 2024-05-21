@@ -36,6 +36,7 @@ class logIn : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         context = baseContext
         sharedPreff = SharedPreff(context)
+        sharedPreff.saveIP(context,"192.168.")
         applyLanguage()
         setContentView(R.layout.log_in)
         /*^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$ regex ip igual la uso*/

@@ -28,7 +28,7 @@ class productosList : AppCompatActivity() {
         lifecycleScope.launch(Dispatchers.Main) {
             var newProducts:ArrayList<Product>
             withContext(Dispatchers.IO) {
-                newProducts = httPetitions.getProductos(User(DNI))!!
+                newProducts = httPetitions.getProductos(User(DNI),sharedPreff.ipReal(context).toString())
             }
             if(newProducts.isEmpty()){
                 Toast.makeText(this@productosList,"Peticion denegada", Toast.LENGTH_SHORT).show()
