@@ -65,4 +65,17 @@ class SharedPreff(val contexto:Context) {
         editor.putString("IP","192.168.5.14")
         editor.commit()
     }
+
+    fun saveImg(context: Context,imagen:String){
+        val sharedPreff=PreferenceManager.getDefaultSharedPreferences(context)
+        val editor=sharedPreff.edit()
+        editor.putString("imagen","")
+        editor.commit()
+    }
+
+    fun getImg(context: Context):ByteArray{
+        val sharedPreff=PreferenceManager.getDefaultSharedPreferences(context)
+        val imagen=sharedPreff.getString("imagen"," ") .toString()
+        return imagen.toByteArray()
+    }
 }

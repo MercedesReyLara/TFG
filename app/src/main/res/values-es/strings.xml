@@ -10,6 +10,7 @@
     <string name="btnModificar" >Modificar un producto</string>
     <string name="txtModificar" >Escoge un producto</string>
     <string name="DNI">DNI</string>
+    <string name="fotoDefecto">Seleccionar foto</string>
     <string name="letra">Seleccione el tamaño de la letra</string>
     <string name="DNIMal">El DNI tiene que ser formato XXXXXXXXA</string>
     <string name="pequeña">Letra pequeña</string>
@@ -31,7 +32,10 @@
     <string name="registrarse">Registrarme</string>
     <string name="saludo">Bienvenido a PRORATER</string>
     <string name="opciones">¿Que quieres hacer hoy?</string>
-    <string name="consultar">Buscar por usuario</string>
+    <string name="consultar">Buscar por producto</string>
+    <string name="tp">Tu inventario</string>
+    <string name="mp">Listar mis productos</string>
+    <string name="mr">Listar mis reseñas</string>
     <string name="errorVacios">Los campos no pueden estar vacíos</string>
     <string name="irUsuario">Ir a mi perfil</string>
     <string name="errorCorreo">El correo tiene que acabar en @gmail.com</string>

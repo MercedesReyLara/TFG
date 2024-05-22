@@ -13,44 +13,102 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import model.Product
+import model.Review
 import model.SharedPreff
 import model.User
 
 class productosList : AppCompatActivity() {
     private val httPetitions=httPettitions()
     private var listProductos:ArrayList<Product> = arrayListOf()
+    private var listReviews:ArrayList<Review> = arrayListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        /*Esta activity la voy a usar tanto como para mostrar productos como reseñas
+        Haré 2 botones, cuando pulse no hará la petición de productos y cuando pulse el otro de reseñas
+         */
         val functions=generalFunctions()
         val context: Context =baseContext
         val sharedPreff=SharedPreff(context)
         val DNI:String=functions.decrypt(functions.clave,sharedPreff.getUser(context).toString()).toString()
-        val adapter = ProductAdapter(context,listProductos);
-        lifecycleScope.launch(Dispatchers.Main) {
-            var newProducts:ArrayList<Product>
-            withContext(Dispatchers.IO) {
-                newProducts = httPetitions.getProductos(User(DNI),sharedPreff.ipReal(context).toString())
-            }
-            if(newProducts.isEmpty()){
-                Toast.makeText(this@productosList,"Peticion denegada", Toast.LENGTH_SHORT).show()
-            }else{
-                listProductos.clear()
-                listProductos.addAll(newProducts)
-                adapter.notifyDataSetChanged()
-            }
-        }
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_productos_list)
         /*Declaración de elementos visuales*/
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-        val lista:ListView=findViewById(R.id.listaProductos)
-        lista.adapter=adapter
+
         val back: ImageButton =findViewById(R.id.backProfile)
-        lista.setOnItemClickListener { parent, view, position, id ->
-            val product=parent.getItemAtPosition(position) as Product
-            val intentDetails=Intent(this,DetailsProduct::class.java)
-            intentDetails.putExtra("product",product)
-            startActivity(intentDetails)
+
+        val lista:ListView=findViewById(R.id.listaProductos)
+        val showProducts:ImageButton=findViewById(R.id.listarProductos)
+        val showReviews:ImageButton=findViewById(R.id.listarResenas)
+        val adapterProductos = ProductAdapter(context,listProductos)
+        val adapterResenas = ProductAdapter(context,listProductos)
+
+        /*En este lo que hacemos es listar los productos del usuario*/
+        showProducts.setOnClickListener {
+            lifecycleScope.launch(Dispatchers.Main) {
+                var newProducts:ArrayList<Product>
+                withContext(Dispatchers.IO) {
+                    newProducts = httPetitions.getProductos(User(DNI),sharedPreff.ipReal(context).toString())
+                }
+                if(newProducts.isEmpty()){
+                    Toast.makeText(this@productosList,"Peticion denegada", Toast.LENGTH_SHORT).show()
+                }else{
+                    listProductos.clear()
+                    listProductos.addAll(newProducts)
+                    adapterProductos.notifyDataSetChanged()
+                }
+            }
+            lista.adapter=adapterProductos
         }
+
+        /*En este listamos las reseñas del usuario*/
+        showReviews.setOnClickListener {
+            lifecycleScope.launch(Dispatchers.Main) {
+                var newReviews:ArrayList<Review>
+                withContext(Dispatchers.IO) {
+                    newReviews = httPetitions.getReviewsByUser(User(DNI))
+                }
+                if(newReviews.isEmpty()){
+                    Toast.makeText(this@productosList,"Peticion denegada", Toast.LENGTH_SHORT).show()
+                }else{
+                    listReviews.clear()
+                    listReviews.addAll(newReviews)
+                    adapterProductos.notifyDataSetChanged()
+                }
+            }
+            lista.adapter=adapterProductos
+        }
+
+        /*En este if else lo que hacemos es mirar que adaptador tiene y adaptar el onItemClick listner
+        dependiendo del adaptador que tenga la lista
+         */
+        if(lista.adapter==adapterProductos){
+            lista.setOnItemClickListener { parent, view, position, id ->
+                val product=parent.getItemAtPosition(position) as Product
+                val intentDetails=Intent(this,DetailsProduct::class.java)
+                intentDetails.putExtra("product",product)
+                startActivity(intentDetails)
+            }
+        }else if(lista.adapter==adapterResenas){
+            lista.setOnItemClickListener { parent, view, position, id ->
+                val review=parent.getItemAtPosition(position) as Review
+                var done:Boolean=true
+                lifecycleScope.launch(Dispatchers.Main) {
+                    withContext(Dispatchers.IO) {
+                        done = httPetitions.deleteReview(review)
+                    }
+                    if(!done){
+                        Toast.makeText(this@productosList,"Peticion denegada", Toast.LENGTH_SHORT).show()
+                    }else{
+                        Toast.makeText(this@productosList,"Resena eliminada", Toast.LENGTH_SHORT).show()
+                        listReviews.remove(review)
+                        adapterResenas.notifyDataSetChanged()
+                    }
+                }
+            }
+        }
+
 
         back.setOnClickListener {
             val intentBack=Intent(this,perfilUser::class.java)

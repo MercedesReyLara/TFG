@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.03" />
+        app:layout_constraintGuide_percent="0.01" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH2"
@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.80"  />
+        app:layout_constraintGuide_percent="0.75" />
 
     <ListView
         android:id="@+id/listaProductos"
@@ -50,19 +50,84 @@
         app:layout_constraintStart_toEndOf="@id/guidelineV1"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
-        app:layout_constraintTop_toBottomOf="@id/guidelineH1"
+        app:layout_constraintTop_toBottomOf="@id/guidelineH4"
         app:layout_constraintBottom_toTopOf="@id/guidelineH3"/>
 
     <ImageButton
         android:id="@+id/backProfile"
         android:layout_width="53dp"
         android:layout_height="39dp"
-        android:layout_marginBottom="24dp"
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         android:src="@android:drawable/ic_menu_revert"
         app:layout_constraintBottom_toTopOf="@id/guidelineH2"
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
-        app:layout_constraintHorizontal_bias="0.056"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toEndOf="@id/guidelineV1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineH4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.07" />
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tp"
+        app:layout_constraintStart_toEndOf="@id/guidelineV1"
+        app:layout_constraintEnd_toStartOf="@id/guidelineV2"
+        app:layout_constraintBottom_toTopOf="@id/guidelineH4"
+        app:layout_constraintTop_toBottomOf="@id/guidelineH1"/>
+
+    <ImageButton
+        android:id="@+id/listarProductos"
+        android:layout_width="54dp"
+        android:layout_height="40dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toStartOf="@id/guidelineV2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@id/guidelineV1"
+        app:srcCompat="@drawable/imagen_2024_05_13_183223206_removebg_preview"
+        app:layout_constraintTop_toBottomOf="@id/textView24"
+        app:layout_constraintBottom_toTopOf="@id/listarResenas"/>
+
+    <ImageButton
+        android:id="@+id/listarResenas"
+        android:layout_width="54dp"
+        android:layout_height="40dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@id/guidelineH2"
+        app:layout_constraintEnd_toStartOf="@id/guidelineV2"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toEndOf="@id/guidelineV1"
+        app:layout_constraintTop_toBottomOf="@id/listarProductos"
+        app:layout_constraintVertical_bias="0.741"
+        app:srcCompat="@drawable/imagen_2024_05_13_183223206_removebg_preview" />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mr"
+        app:layout_constraintEnd_toStartOf="@id/guidelineV2"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toEndOf="@id/guidelineV1"
+        app:layout_constraintBottom_toTopOf="@id/listarResenas"
+        app:layout_constraintTop_toBottomOf="@id/listarProductos"/>
+
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mp"
+        app:layout_constraintBottom_toTopOf="@id/listarProductos"
+        app:layout_constraintEnd_toStartOf="@id/guidelineV2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@id/guidelineV1"
+        app:layout_constraintTop_toBottomOf="@id/guidelineH3" />
 </androidx.constraintlayout.widget.ConstraintLayout>

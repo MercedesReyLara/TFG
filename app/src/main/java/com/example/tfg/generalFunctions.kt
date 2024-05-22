@@ -15,6 +15,9 @@ import java.util.regex.Pattern
 import javax.crypto.Cipher
 import javax.crypto.spec.IvParameterSpec
 import javax.crypto.spec.SecretKeySpec
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import java.io.ByteArrayOutputStream
 
 
 class generalFunctions {
@@ -116,6 +119,21 @@ class generalFunctions {
         val decrypted = encryptSystem.doFinal(Base64.decode(encryptedValue, Base64.DEFAULT))
         return String(decrypted, Charsets.UTF_8)
     }
+
+
+
+    fun imageToByteArray(context: Context, resourceId: Int): ByteArray {
+        // Obtener el Bitmap de los recursos
+        val bitmap = BitmapFactory.decodeResource(context.resources, resourceId)
+
+        // Convertir el Bitmap en un ByteArrayOutputStream
+        val stream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+
+        // Obtener el byte array desde el ByteArrayOutputStream
+        return stream.toByteArray()
+    }
+
     /*fun setLanguage(activity:Activity, languageCode: String) {
         val locale = Locale(languageCode)
         Locale.setDefault(locale)

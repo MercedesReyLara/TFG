@@ -141,7 +141,7 @@
         tools:layout_editor_absoluteY="483dp" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/makeReview"
         android:layout_width="53dp"
         android:layout_height="39dp"
         android:background="@android:color/transparent"

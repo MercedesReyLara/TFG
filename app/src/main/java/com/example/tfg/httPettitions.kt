@@ -98,6 +98,26 @@ class httPettitions {
         }
     }
 
+        suspend fun deleteReview(review:Review):Boolean {
+            return withContext(Dispatchers.IO) {
+                val client = OkHttpClient()
+                val url = "http://192.168.5.14:8080/deleteReview"
+
+                val request = Request.Builder()
+                    .url(url)
+                    .delete()
+                    .build()
+
+                val response = client.newCall(request).execute()
+
+
+                /*Pone "Method not allowed*/
+                val responseBody = response.body?.string()
+                // Verificar si el DNI del usuario encontrado coincide con el DNI buscado y que se ha borrado
+                return@withContext response.isSuccessful && !responseBody.isNullOrEmpty()
+            }
+    }
+
     suspend fun getUserByDNI(dni:String): User? {
         return withContext(Dispatchers.IO) {
             val client = OkHttpClient()
@@ -155,14 +175,19 @@ class httPettitions {
         }
     }
 
-    suspend fun getReviews():ArrayList<Review>{
+    suspend fun getReviewsByUser(user:User):ArrayList<Review>{
         return withContext(Dispatchers.IO) {
             val reviews = object : TypeToken<ArrayList<Review>>() {}.type
             val client = OkHttpClient()
-            val url:String= "http://192.168.5.14:8080/getReviews"
+            val url:String= "http://192.168.5.14:8080/getReviewsUser"
+            val gsonA = Gson()
+            val json = gsonA.toJson(user)
+            val mediaType = "application/json; charset=utf-8".toMediaTypeOrNull()
+            val requestBody = json.toRequestBody(mediaType)
             var listReviews:ArrayList<Review> = arrayListOf()
             val request: Request = Request.Builder()
                 .url(url)
+                .post(requestBody)
                 .build()
             val response:Response
             try {
@@ -182,7 +207,7 @@ class httPettitions {
         }
     }
 
-    suspend fun getCategories():ArrayList<Category>{
+    suspend fun getAllCategories():ArrayList<Category>{
         return withContext(Dispatchers.IO) {
             val categories = object : TypeToken<ArrayList<Category>>() {}.type
             val client = OkHttpClient()
@@ -204,6 +229,92 @@ class httPettitions {
                 }
             }catch(e:IOException){
                 return@withContext listCategories
+            }
+
+        }
+    }
+
+    suspend fun getAllReviews():ArrayList<Review>?{
+        return withContext(Dispatchers.IO) {
+            val reviews = object : TypeToken<ArrayList<Review>>() {}.type
+            val client = OkHttpClient()
+            val url:String= "http://192.168.5.14:8080/getReviews"
+            var listReviews:ArrayList<Review> = arrayListOf()
+            val request: Request = Request.Builder()
+                .url(url)
+                .build()
+            val response:Response
+            try {
+                response = client.newCall(request).execute()
+                val responseBody = response.body?.string()
+                if (response.isSuccessful&&!responseBody.isNullOrEmpty()) {
+                    val gson = Gson()
+                    listReviews= gson.fromJson(responseBody, reviews)
+                    return@withContext listReviews
+                }else {
+                    return@withContext listReviews
+                }
+            }catch(e:IOException){
+                return@withContext null
+            }
+
+        }
+    }
+
+    suspend fun getAllProducts():ArrayList<Product>?{
+        return withContext(Dispatchers.IO) {
+            val products = object : TypeToken<ArrayList<Product>>() {}.type
+            val client = OkHttpClient()
+            val url:String= "http://192.168.5.14:8080/getProducts"
+            var listProducts:ArrayList<Product> = arrayListOf()
+            val request: Request = Request.Builder()
+                .url(url)
+                .build()
+            val response:Response
+            try {
+                response = client.newCall(request).execute()
+                val responseBody = response.body?.string()
+                if (response.isSuccessful&&!responseBody.isNullOrEmpty()) {
+                    val gson = Gson()
+                    listProducts= gson.fromJson(responseBody, products)
+                    return@withContext listProducts
+                }else {
+                    return@withContext listProducts
+                }
+            }catch(e:IOException){
+                return@withContext null
+            }
+
+        }
+    }
+
+    suspend fun getProductsByCategorie(category: Category):ArrayList<Product>?{
+        return withContext(Dispatchers.IO) {
+            val products = object : TypeToken<ArrayList<Product>>() {}.type
+            val client = OkHttpClient()
+            val url:String= "http://192.168.5.14:8080/getProducts"
+            val gsonA = Gson()
+            val json = gsonA.toJson(category)
+            val mediaType = "application/json; charset=utf-8".toMediaTypeOrNull()
+            val requestBody = json.toRequestBody(mediaType)
+            var listProducts:ArrayList<Product> = arrayListOf()
+            val request: Request = Request.Builder()
+                .url(url)
+                .post(requestBody)
+                .build()
+            val response:Response
+            try {
+                response = client.newCall(request).execute()
+                val responseBody = response.body?.string()
+                if (response.isSuccessful&&!responseBody.isNullOrEmpty()) {
+                    val gson = Gson()
+                    listProducts= gson.fromJson(responseBody, products)
+                    return@withContext listProducts
+                }else {
+                    return@withContext listProducts
+                }
+            }catch(e:IOException){
+                return@withContext null
             }
 
         }

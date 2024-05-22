@@ -23,6 +23,10 @@ import model.SharedPreff
 import model.User
 
 class register : AppCompatActivity() {
+    private lateinit var sharedPreff:SharedPreff
+    private lateinit var context:Context
+    private var imagenRecogida: ByteArray?= byteArrayOf()
+    private val functions=generalFunctions()
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,14 +43,13 @@ class register : AppCompatActivity() {
         val mail:EditText=findViewById(R.id.mailUser)
         val password:EditText=findViewById(R.id.passwordUser)
         val passwordConfirm:EditText=findViewById(R.id.confirmPassword)
-        val functions=generalFunctions()
-        val pettitions=httPettitions()
+        val buscarFotos:Button=findViewById(R.id.changeProfileP)
         val camera:ImageButton=findViewById(R.id.camara)
         val profileP: ImageView =findViewById(R.id.profileP)
-        val context: Context =baseContext
-        val sharedPreff=SharedPreff(context)
         //Declaracion de variables
-
+        val pettitions=httPettitions()
+        context =baseContext
+         sharedPreff=SharedPreff(context)
 
 
         //Utilizamos el método para limpiar los inputs cuando esten on click
@@ -58,10 +61,10 @@ class register : AppCompatActivity() {
         functions.clearHint(passwordConfirm)
         val resultado=registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
                 activityResult->
-            if(activityResult.resultCode== RESULT_OK){
-                val imagenRecogida = activityResult.data?.extras?.get("data") as Bitmap
+           /* if(activityResult.resultCode== RESULT_OK){
+                imagenRecogida = activityResult.data?.extras?.get("data") as Bitmap
                 profileP.setImageBitmap(imagenRecogida)
-            }
+            }*/
         }
         registerButton.setOnClickListener {
             val dniTXT=DNIT.text.toString().trim()
@@ -116,18 +119,27 @@ class register : AppCompatActivity() {
             setResult(RESULT_OK,imagenCaptura)
             resultado.launch(imagenCaptura)
         }
+
+        buscarFotos.setOnClickListener {
+            val listaFotos:ArrayList<ByteArray> = arrayListOf(
+                functions.imageToByteArray(context,R.drawable.uno),
+                functions.imageToByteArray(context,R.drawable.dos),
+                functions.imageToByteArray(context,R.drawable.tres),
+                functions.imageToByteArray(context,R.drawable.cuatro),
+                functions.imageToByteArray(context,R.drawable.cinco))
+
         }
-   /* override fun onSaveInstanceState(outState: Bundle) {
+        }
+
+   override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         // Guardar datos en el Bundle
-        val imagen=imagenRecogida.
-        outState.putByteArray("profileP", imagen)
+        val imagen=imagenRecogida.toString()
+        sharedPreff.saveImg(context,imagen)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        // Restaurar datos desde el Bundle
-        val value = savedInstanceState.getBoolean("key")
-        start.isPressed=value
-    }*/
+        imagenRecogida=sharedPreff.getImg(context)
+    }
     }
