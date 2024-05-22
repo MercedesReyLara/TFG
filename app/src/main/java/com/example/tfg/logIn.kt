@@ -111,8 +111,8 @@ class logIn : AppCompatActivity() {
                            /*Acaba la petición entonces manejo los datos*/
                                 if (encontrado!=null) {
                                     sharedPreff.saveLogin(context, true)
-                                    val encryptedDNI = functions.encrypt(encontrado.dni, functions.clave)
-                                    sharedPreff.saveUser(context, encryptedDNI)
+                                    /*val encryptedDNI = functions.encrypt(encontrado.dni, functions.clave)*/
+                                    sharedPreff.saveUser(context, encontrado.dni)
                                     val intentLogIn = Intent(this@logIn, mainMenu::class.java)
                                     startActivity(intentLogIn)
                                 } else{

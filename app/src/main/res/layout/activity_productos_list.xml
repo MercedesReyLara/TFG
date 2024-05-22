@@ -45,13 +45,13 @@
 
     <ListView
         android:id="@+id/listaProductos"
-        android:layout_width="350dp"
-        android:layout_height="533dp"
-        app:layout_constraintStart_toEndOf="@id/guidelineV1"
-        app:layout_constraintHorizontal_bias="0.5"
+        android:layout_width="349dp"
+        android:layout_height="400dp"
+        app:layout_constraintBottom_toTopOf="@id/guidelineH3"
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
-        app:layout_constraintTop_toBottomOf="@id/guidelineH4"
-        app:layout_constraintBottom_toTopOf="@id/guidelineH3"/>
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@id/guidelineV1"
+        app:layout_constraintTop_toBottomOf="@id/guidelineH4" />
 
     <ImageButton
         android:id="@+id/backProfile"
@@ -77,6 +77,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/tp"
+        android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@id/guidelineV1"
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
         app:layout_constraintBottom_toTopOf="@id/guidelineH4"

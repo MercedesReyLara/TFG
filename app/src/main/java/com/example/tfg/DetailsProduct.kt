@@ -31,8 +31,8 @@ class DetailsProduct : AppCompatActivity() {
 
         val functions=generalFunctions()
         /*Recperamos el producto mandado a través del intent y le asignamos a cada campo su valor*/
-        val product=intent.getSerializableExtra("producto") as Product
-        name.text=product.nombreP
+        val product=intent.getSerializableExtra("producto") as Product?
+        name.text=product!!.nombreP
         price.text=product.precio.toString()
         description.text=product.descripcionP
         category.text=product.nombreCategoria

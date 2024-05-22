@@ -26,7 +26,7 @@ class httPettitions {
         return withContext(Dispatchers.IO) {
             val client = OkHttpClient()
             /*Peticion en este caso con nombre y contraseña*/
-            val uri:String= Uri.parse("http://192.168.5.14:8080/logIn").buildUpon()
+            val uri:String= Uri.parse("http://192.168.1.73:8080/logIn").buildUpon()
                 .appendQueryParameter("nombreU",nombre)
                 .appendQueryParameter("contrasena",contrasena)
                 .build().toString()
@@ -62,7 +62,7 @@ class httPettitions {
             val json = gson.toJson(user)
             val mediaType = "application/json; charset=utf-8".toMediaTypeOrNull()
             val requestBody = json.toRequestBody(mediaType)
-            val url = "http://192.168.5.14:8080/postUser"
+            val url = "http://192.168.1.73:8080/postUser"
             val request: Request = Request.Builder()
                 .url(url)
                 .post(requestBody)
@@ -81,7 +81,7 @@ class httPettitions {
     suspend fun deleteUser(dni:String):Boolean {
         return withContext(Dispatchers.IO) {
             val client = OkHttpClient()
-            val url = "http://192.168.5.14:8080/delete/$dni"
+            val url = "http://192.168.1.73:8080/delete/$dni"
 
             val request = Request.Builder()
                 .url(url)
@@ -101,7 +101,7 @@ class httPettitions {
         suspend fun deleteReview(review:Review):Boolean {
             return withContext(Dispatchers.IO) {
                 val client = OkHttpClient()
-                val url = "http://192.168.5.14:8080/deleteReview"
+                val url = "http://192.168.1.73:8080/deleteReview"
 
                 val request = Request.Builder()
                     .url(url)
@@ -118,21 +118,26 @@ class httPettitions {
             }
     }
 
-    suspend fun getUserByDNI(dni:String): User? {
+    suspend fun getUserByDNI(user:User): User? {
         return withContext(Dispatchers.IO) {
             val client = OkHttpClient()
-            val url:String="http://192.168.5.14:8080/getUser/$dni"
+            val url:String="http://192.168.1.73:8080/getUser"
+            val gson = Gson()
+            val json = gson.toJson(user)
+            val mediaType = "application/json; charset=utf-8".toMediaTypeOrNull()
+            val requestBody = json.toRequestBody(mediaType)
             val request: Request = Request.Builder()
                 .url(url)
+                .post(requestBody)
                 .build()
             val response:Response
             try {
                 response = client.newCall(request).execute()
                 val responseBody = response.body?.string()
                 if (response.isSuccessful&&!responseBody.isNullOrEmpty()) {
-                    val gson = Gson()
-                    val user=gson.fromJson(responseBody, User::class.java)
-                    return@withContext user
+                    val gson2 = Gson()
+                    val useR=gson2.fromJson(responseBody, User::class.java)
+                    return@withContext useR
                 }else {
                     return@withContext null
                 }
@@ -147,7 +152,7 @@ class httPettitions {
         return withContext(Dispatchers.IO) {
             val products = object : TypeToken<ArrayList<Product>>() {}.type
             val client = OkHttpClient()
-            val url:String= "http://$ip:8080/getUserProducts"
+            val url:String= "http://192.168.1.73:8080/getUserProducts"
             val gson = Gson()
             val json = gson.toJson(user)
             val mediaType = "application/json; charset=utf-8".toMediaTypeOrNull()
@@ -179,7 +184,7 @@ class httPettitions {
         return withContext(Dispatchers.IO) {
             val reviews = object : TypeToken<ArrayList<Review>>() {}.type
             val client = OkHttpClient()
-            val url:String= "http://192.168.5.14:8080/getReviewsUser"
+            val url:String= "http://192.168.1.73:8080/getReviewsUser"
             val gsonA = Gson()
             val json = gsonA.toJson(user)
             val mediaType = "application/json; charset=utf-8".toMediaTypeOrNull()

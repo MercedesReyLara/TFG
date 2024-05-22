@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.ListView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Dispatchers
@@ -29,7 +30,7 @@ class productosList : AppCompatActivity() {
         val functions=generalFunctions()
         val context: Context =baseContext
         val sharedPreff=SharedPreff(context)
-        val DNI:String=functions.decrypt(functions.clave,sharedPreff.getUser(context).toString()).toString()
+        val DNI:String=/*functions.decrypt(functions.clave,*/sharedPreff.getUser(context).toString()
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_productos_list)
@@ -42,7 +43,7 @@ class productosList : AppCompatActivity() {
         val showProducts:ImageButton=findViewById(R.id.listarProductos)
         val showReviews:ImageButton=findViewById(R.id.listarResenas)
         val adapterProductos = ProductAdapter(context,listProductos)
-        val adapterResenas = ProductAdapter(context,listProductos)
+        val adapterResenas = reviewAdapter(context,listReviews)
 
         /*En este lo que hacemos es listar los productos del usuario*/
         showProducts.setOnClickListener {
@@ -74,41 +75,47 @@ class productosList : AppCompatActivity() {
                 }else{
                     listReviews.clear()
                     listReviews.addAll(newReviews)
-                    adapterProductos.notifyDataSetChanged()
+                    adapterResenas.notifyDataSetChanged()
                 }
             }
-            lista.adapter=adapterProductos
+            lista.adapter=adapterResenas
         }
 
         /*En este if else lo que hacemos es mirar que adaptador tiene y adaptar el onItemClick listner
         dependiendo del adaptador que tenga la lista
          */
-        if(lista.adapter==adapterProductos){
             lista.setOnItemClickListener { parent, view, position, id ->
-                val product=parent.getItemAtPosition(position) as Product
-                val intentDetails=Intent(this,DetailsProduct::class.java)
-                intentDetails.putExtra("product",product)
-                startActivity(intentDetails)
-            }
-        }else if(lista.adapter==adapterResenas){
-            lista.setOnItemClickListener { parent, view, position, id ->
-                val review=parent.getItemAtPosition(position) as Review
-                var done:Boolean=true
-                lifecycleScope.launch(Dispatchers.Main) {
-                    withContext(Dispatchers.IO) {
-                        done = httPetitions.deleteReview(review)
+                if(lista.adapter==adapterProductos) {
+                    val product = parent.getItemAtPosition(position) as Product
+                    val intentDetails = Intent(this, DetailsProduct::class.java)
+                    intentDetails.putExtra("product", product)
+                    startActivity(intentDetails)
+                }else {
+                    val review=parent.getItemAtPosition(position) as Review
+                    var done:Boolean
+                    val builder: AlertDialog.Builder =
+                        AlertDialog.Builder(this)/*Creamos el objeto diálogo*/
+                    builder.setTitle("¿Cerrar sesión?")/*Establecemos el título, el mensaje principal y las dos opciones*/
+                    builder.setMessage("¿Seguro que quieres cerrar sesión?")
+                    builder.setPositiveButton("Si") { _, _ ->
+                        lifecycleScope.launch(Dispatchers.Main) {
+                            withContext(Dispatchers.IO) {
+                                done = httPetitions.deleteReview(review)
+                            }
+                            if(!done){
+                                Toast.makeText(this@productosList,"Peticion denegada", Toast.LENGTH_SHORT).show()
+                            }else{
+                                Toast.makeText(this@productosList,"Resena eliminada", Toast.LENGTH_SHORT).show()
+                                listReviews.remove(review)
+                                adapterResenas.notifyDataSetChanged()
+                            }
+                        }
                     }
-                    if(!done){
-                        Toast.makeText(this@productosList,"Peticion denegada", Toast.LENGTH_SHORT).show()
-                    }else{
-                        Toast.makeText(this@productosList,"Resena eliminada", Toast.LENGTH_SHORT).show()
-                        listReviews.remove(review)
-                        adapterResenas.notifyDataSetChanged()
-                    }
+                    builder.setNegativeButton(("No"), { _, _ -> })
+                    val dialog = builder.create()/*Lo construímos con las distintas partes*/
+                    dialog.show()/*Lo mostramos*/
                 }
             }
-        }
-
 
         back.setOnClickListener {
             val intentBack=Intent(this,perfilUser::class.java)
