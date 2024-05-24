@@ -18,7 +18,7 @@ public class CategoryController {
     @Autowired
     private CategoryRepository cr;
 
-    @GetMapping(value = "/getPBC/{id}")
+    @GetMapping(value = "/getPBC")
     private List<ProductDTO> productListC(@RequestBody CategoryDTO categoryDTO){
         Category c=cr.findById(categoryDTO.getId());
         if(c!=null) {

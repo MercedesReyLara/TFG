@@ -1,8 +1,10 @@
 package com.TFG.TFG.ServiceREST;
 
 import com.TFG.TFG.DTO.ProductDTO;
+import com.TFG.TFG.DTO.ReviewDTO;
 import com.TFG.TFG.DTO.UserDTO;
 import com.TFG.TFG.Model.Producto;
+import com.TFG.TFG.Model.Review;
 import com.TFG.TFG.Model.User;
 import com.TFG.TFG.Respository.ProductRepository;
 import com.TFG.TFG.Respository.UserRepository;
@@ -37,7 +39,7 @@ public class UserController {
             return null;
         }
 
-    @GetMapping(value = "/getUser")
+    @PostMapping(value = "/getUser")
     public UserDTO getDNI(@RequestBody User user){
         User u=ur.findByDNI(user.getDNI());
         UserDTO uDTO=new UserDTO(u.getDNI(),u.getNombreU(),u.getApellidosU(),u.getCorreo(),u.getContrasena(),u.getDescripcion());
@@ -68,7 +70,7 @@ public class UserController {
         return true;
     }
 
-    @GetMapping(value = "/getUserProducts")
+    @PostMapping(value = "/getUserProducts")
     public List<ProductDTO> getProducts(@RequestBody User user){
         User u=ur.findByDNI(user.getDNI());
         if(u==null){
@@ -83,6 +85,29 @@ public class UserController {
                  p.getDescripcionP(),
                  p.getPrecio(),
                  p.getCategory().getNombre()
+            );
+            DTOS.add(DTO);
+        }
+        return DTOS;
+    }
+
+    @PostMapping(value = "/getReviewsUser")
+    public List<ReviewDTO> getReviews(@RequestBody User user){
+        User u=ur.findByDNI(user.getDNI());
+        if(u==null){
+            return null;
+        }
+        List<Review> reviews=u.getResenas();
+        List<ReviewDTO> DTOS=new ArrayList<>();
+        for(Review r:reviews){
+            ReviewDTO DTO=new ReviewDTO(
+                    r.getId(),
+                    r.getNombreR(),
+                    r.getOpinion(),
+                    r.getUser().getCorreo(),
+                    r.getUser().getNombreU(),
+                    r.getProduct().getId(),
+                    r.getProduct().getNombreP()
             );
             DTOS.add(DTO);
         }

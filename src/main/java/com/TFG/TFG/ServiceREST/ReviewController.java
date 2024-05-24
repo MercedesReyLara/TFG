@@ -46,11 +46,11 @@ public class ReviewController {
         return DTOS;
     }
 
-    @PostMapping(value = "/postReviews")
+    /*@PostMapping(value = "/postReviews")
     private Boolean postReviews(@RequestBody ReviewDTO review){
         User u=ur.findByDNI(review.getUser());
         Producto p=pr.findById(review.getProduct());
-         /*Añadimos la reseña al usuario y al producto*/
+         /*Añadimos la reseña al usuario y al producto
         Review r=new Review(review.getNombre(),review.getOpinionU(),u,p);
         u.getResenas().add(r);
         ur.save(u);
@@ -58,10 +58,10 @@ public class ReviewController {
         pr.save(p);
         /*En cambio aquí le ponemos valores fijos porque esa reseña solo puede ser de 1
         producto y de 1 usuario.
-         */
+
         rr.save(r);
         return true;
-    }
+    }*/
 
     @GetMapping(value = "/getReviewsP")
     public List<ReviewDTO> getReviewsProductos(@RequestBody ProductDTO productDTO){
@@ -89,35 +89,10 @@ public class ReviewController {
         return null;
     }
 
-    @GetMapping(value = "/{DNI}/getReviewsU")
-    public List<ReviewDTO> getReviewsProductos(@PathVariable String DNI){
-        /*Queremos ver las reseñas de ese producto. Buscamos el producto por id
-        y devolvemos su lista de reseñas
-         */
-        User u=ur.findByDNI(DNI);
-        if(u!=null) {
-            List<Review> reviews = u.getResenas();
-            List<ReviewDTO> reviewsDTO = new ArrayList<>();
-            for (Review r : reviews) {
-                ReviewDTO rDTO = new ReviewDTO(
-                        r.getId(),
-                        r.getNombreR(),
-                        r.getOpinion(),
-                        r.getUser().getDNI(),
-                        r.getUser().getCorreo(),
-                        r.getProduct().getId(),
-                        r.getProduct().getNombreP()
-                );
-                reviewsDTO.add(rDTO);
-            }
-            return reviewsDTO;
-        }
-        return null;
-    }
 
-    @DeleteMapping(value = "/{id}/deleteReview")
-    public Boolean deleteReview(@PathVariable int id){
-        Review r=rr.findById(id);
+    @DeleteMapping(value = "/deleteReview")
+    public Boolean deleteReview(@RequestBody ReviewDTO reviewDTO){
+        Review r=rr.findById(reviewDTO.getId());
         if(r!=null){
             rr.delete(r);
             return true;

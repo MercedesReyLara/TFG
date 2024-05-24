@@ -74,9 +74,9 @@ public class ProductController {
         return "Producto eliminado";
     }*/
 
-    @GetMapping(value = "/{id}/product")
-    private List<User> getUsersByProduct(@PathVariable int id){
-        Producto p=pr.findById(id);
+    @GetMapping(value = "/Uproduct")
+    private List<User> getUsersByProduct(@RequestBody ProductDTO productDTO){
+        Producto p=pr.findById(productDTO.getId());
         return p.getUsers();
     }
 }
