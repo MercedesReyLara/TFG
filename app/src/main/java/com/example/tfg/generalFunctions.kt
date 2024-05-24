@@ -4,6 +4,7 @@ package com.example.tfg
 import android.app.Activity
 import android.content.Context
 import android.content.res.Configuration
+import android.content.res.Resources
 import android.util.Base64
 import android.view.View
 import android.widget.ArrayAdapter
@@ -17,6 +18,8 @@ import javax.crypto.spec.IvParameterSpec
 import javax.crypto.spec.SecretKeySpec
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.util.DisplayMetrics
+import model.SharedPreff
 import java.io.ByteArrayOutputStream
 
 
@@ -134,21 +137,14 @@ class generalFunctions {
         return stream.toByteArray()
     }
 
-    /*fun setLanguage(activity:Activity, languageCode: String) {
-        val locale = Locale(languageCode)
-        Locale.setDefault(locale)
-
-        val configuration = Configutation()
-        configuration.setLocale(locale)
-
-        resources.updateConfiguration(configuration, resources.displayMetrics)
-        val resources = activity.baseContext.resources
-        val context = activity.baseContext.createConfigurationContext(configuration)
-
-        val intent = activity.intent
-        activity.finish()
-        activity.startActivity(intent)
-    }*/
+    fun setLanguage(context:Context) {
+        val resources:Resources=context.resources
+        val DM:DisplayMetrics=resources.displayMetrics
+        val configuration:Configuration=resources.configuration
+        val sharedPreff=SharedPreff(context)
+        configuration.setLocale(Locale(sharedPreff.getLanguage(context)))
+        resources.updateConfiguration(configuration,DM)
+    }
     /*fun writePDF(work:String):File{
         document.add(Paragraph("Lista de jornadas"))
         document.add(Paragraph(work))

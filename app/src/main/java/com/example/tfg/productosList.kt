@@ -95,9 +95,9 @@ class productosList : AppCompatActivity() {
                     var done:Boolean
                     val builder: AlertDialog.Builder =
                         AlertDialog.Builder(this)/*Creamos el objeto diálogo*/
-                    builder.setTitle("¿Cerrar sesión?")/*Establecemos el título, el mensaje principal y las dos opciones*/
-                    builder.setMessage("¿Seguro que quieres cerrar sesión?")
-                    builder.setPositiveButton("Si") { _, _ ->
+                    builder.setTitle("¿Que quieres hacer?")/*Establecemos el título, el mensaje principal y las dos opciones*/
+                    builder.setMessage("Elige una opción")
+                    builder.setPositiveButton("Eliminar reseña") { _, _ ->
                         lifecycleScope.launch(Dispatchers.Main) {
                             withContext(Dispatchers.IO) {
                                 done = httPetitions.deleteReview(review)
@@ -111,7 +111,10 @@ class productosList : AppCompatActivity() {
                             }
                         }
                     }
-                    builder.setNegativeButton(("No"), { _, _ -> })
+                    builder.setNegativeButton("Modificar mi reseña") { _, _ ->
+                        val intentModificar=Intent(this,detailsReview::class.java)
+                        startActivity(intentModificar)
+                    }
                     val dialog = builder.create()/*Lo construímos con las distintas partes*/
                     dialog.show()/*Lo mostramos*/
                 }

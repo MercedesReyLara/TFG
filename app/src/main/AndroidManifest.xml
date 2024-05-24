@@ -25,6 +25,12 @@
         android:theme="@style/Base.Theme.TFG"
         tools:targetApi="31">
         <activity
+            android:name=".detailsReview"
+            android:exported="false" />
+        <activity
+            android:name=".listaResenas"
+            android:exported="false" />
+        <activity
             android:name=".DetailsProduct"
             android:exported="false" />
         <activity
@@ -38,7 +44,7 @@
             android:name=".perfilUser"
             android:exported="false" />
         <activity
-            android:name=".eliminarResena"
+            android:name=".modificaResena"
             android:exported="false" />
         <activity
             android:name=".reviewProduct"

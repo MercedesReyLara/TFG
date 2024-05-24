@@ -243,7 +243,7 @@ class httPettitions {
         return withContext(Dispatchers.IO) {
             val reviews = object : TypeToken<ArrayList<Review>>() {}.type
             val client = OkHttpClient()
-            val url:String= "http://192.168.5.14:8080/getReviews"
+            val url:String= "http://192.168.1.73:8080/getReviews"
             var listReviews:ArrayList<Review> = arrayListOf()
             val request: Request = Request.Builder()
                 .url(url)
@@ -270,7 +270,7 @@ class httPettitions {
         return withContext(Dispatchers.IO) {
             val products = object : TypeToken<ArrayList<Product>>() {}.type
             val client = OkHttpClient()
-            val url:String= "http://192.168.5.14:8080/getProducts"
+            val url:String= "http://192.168.1.73:8080/getProducts"
             var listProducts:ArrayList<Product> = arrayListOf()
             val request: Request = Request.Builder()
                 .url(url)
@@ -297,7 +297,7 @@ class httPettitions {
         return withContext(Dispatchers.IO) {
             val products = object : TypeToken<ArrayList<Product>>() {}.type
             val client = OkHttpClient()
-            val url:String= "http://192.168.5.14:8080/getProducts"
+            val url:String= "http://192.168.1.73:8080/getPBC"
             val gsonA = Gson()
             val json = gsonA.toJson(category)
             val mediaType = "application/json; charset=utf-8".toMediaTypeOrNull()

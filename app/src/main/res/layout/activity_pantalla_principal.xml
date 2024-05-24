@@ -18,10 +18,10 @@
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@id/guidelineV1"
-        app:layout_constraintTop_toBottomOf="@+id/modificaResena" />
+        app:layout_constraintTop_toBottomOf="@+id/listaResenasGlobal" />
 
     <Button
-        android:id="@+id/modificaResena"
+        android:id="@+id/listaResenasGlobal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/button"
@@ -73,7 +73,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/button"
         android:text="@string/subir"
-        app:layout_constraintBottom_toTopOf="@+id/modificaResena"
+        app:layout_constraintBottom_toTopOf="@+id/listaResenasGlobal"
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@id/guidelineV1"

@@ -152,8 +152,8 @@
     <Spinner
         android:id="@+id/spinnerLanguages"
         style="@style/spinner"
-        android:layout_width="137dp"
-        android:layout_height="wrap_content"
+        android:layout_width="246dp"
+        android:layout_height="25dp"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
         app:layout_constraintHorizontal_bias="0.0"

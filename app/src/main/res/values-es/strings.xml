@@ -38,6 +38,7 @@
     <string name="mr">Listar mis reseñas</string>
     <string name="errorVacios">Los campos no pueden estar vacíos</string>
     <string name="irUsuario">Ir a mi perfil</string>
+    <string name="panel">Panel de reseñas</string>
     <string name="errorCorreo">El correo tiene que acabar en @gmail.com</string>
     <string name="errorContraseña">La contraseña tiene que tener mayúscula,minúsculaa, números e símbolos</string>
     <string name="coincidir">Las contraseñas tienen que coincidir</string>

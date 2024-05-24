@@ -20,7 +20,7 @@ class mainMenu : AppCompatActivity() {
 
         //Búsqueda de elementos visuales
         val eliminar: Button =findViewById(R.id.eliminarResena)
-        val modificar:Button=findViewById(R.id.modificaResena)
+        val listar:Button=findViewById(R.id.listaResenasGlobal)
         val subir:Button=findViewById(R.id.subirResena)
         val perfilU:ImageButton=findViewById(R.id.botonPerfilU)
         val cerrarSesion:ImageButton=findViewById(R.id.pechar)
@@ -49,6 +49,11 @@ class mainMenu : AppCompatActivity() {
         perfilU.setOnClickListener {
             val intentPerfil=Intent(this,perfilUser::class.java)
             startActivity(intentPerfil)
+        }
+
+        listar.setOnClickListener {
+            val intentResenas=Intent(this,listaResenas::class.java)
+            startActivity(intentResenas)
         }
     }
     fun logOutFun() {

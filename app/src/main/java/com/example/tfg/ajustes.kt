@@ -21,7 +21,8 @@ class ajustes : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ajustes_tamano_letra)
 
-
+        val functions=generalFunctions()
+        val context: Context =baseContext
         /*Declaración de elementos visuales*/
         val lpequena:CheckBox=findViewById(R.id.pequena)
         val lgrande:CheckBox=findViewById(R.id.grande)
@@ -32,10 +33,9 @@ class ajustes : AppCompatActivity() {
 
         val spinnerIdiomas: Spinner = findViewById(R.id.spinnerLanguages)
         //Declaración de variables
-        val context: Context =baseContext
         val tamanoFuente:Int=12
         val sharedPreff=SharedPreff(context)
-        val languages = arrayListOf("Castelan", "Galego","")
+        val languages = arrayListOf("es", "gl","SELECCIONE IDIOMA")
         val adapter: ArrayAdapter<String> = ArrayAdapter(this,android.R.layout.simple_spinner_item,languages)
         spinnerIdiomas.adapter=adapter
         spinnerIdiomas.setSelection(2)
@@ -47,14 +47,21 @@ class ajustes : AppCompatActivity() {
                 id: Long
             ) {
                 val selectedLanguage = parent?.getItemAtPosition(position).toString()
-                if (selectedLanguage == "Galego") {
-                    sharedPreff.setLanguage(context, "gl")
-                    recreate()
-                    // Reinicia la actividad para aplicar el nuevo idioma
-                } else if (selectedLanguage == "Castelan") {
-                    sharedPreff.setLanguage(context, "es")
-                    recreate()
-                    // Reinicia la actividad para aplicar el nuevo idioma
+                if (selectedLanguage == "gl") {
+                    if(!sharedPreff.getLanguage(context).equals("gl")){
+                        sharedPreff.setLanguage(context, "gl")
+                        val intent=intent
+                        functions.setLanguage(context)
+                        startActivity(intent)
+                    }
+
+                } else if (selectedLanguage == "es") {
+                    if (!sharedPreff.getLanguage(context).equals("es")) {
+                        sharedPreff.setLanguage(context, "es")
+                        val intent=intent
+                        functions.setLanguage(context)
+                        startActivity(intent)
+                    }
                 }
             }
             override fun onNothingSelected(p0: AdapterView<*>?) {
