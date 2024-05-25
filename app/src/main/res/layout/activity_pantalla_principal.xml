@@ -97,24 +97,22 @@
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
         app:layout_constraintHorizontal_bias="0.934"
         app:layout_constraintStart_toEndOf="@id/guidelineV1"
-        app:layout_constraintTop_toBottomOf="@+id/textView17"
         app:layout_constraintVertical_bias="0.20"
         app:srcCompat="@drawable/free_sign_out_icon_3300_thumb" />
+
 
     <TextView
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="56dp"
         android:text="@string/cerrarSesion"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/pechar"
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
-        app:layout_constraintHorizontal_bias="0.953"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@id/guidelineV1"
-        app:layout_constraintTop_toBottomOf="@+id/guidelineH4"
+        app:layout_constraintBottom_toTopOf="@+id/pechar"
         app:layout_constraintVertical_chainStyle="packed" />
-
 
     <ImageButton
         android:id="@+id/ajustes"

@@ -7,7 +7,9 @@ class Category:Serializable {
     var nombre:String=""
     var descripcion:String=""
 
-    constructor()
+    constructor(nombre:String){
+        this.nombre=nombre
+    }
     constructor(id: Int, nombre: String, descripcion: String) {
         this.id = id
         this.nombre = nombre

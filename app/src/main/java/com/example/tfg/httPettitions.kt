@@ -216,7 +216,7 @@ class httPettitions {
         return withContext(Dispatchers.IO) {
             val categories = object : TypeToken<ArrayList<Category>>() {}.type
             val client = OkHttpClient()
-            val url:String= "http://192.168.5.14:8080/getCategories"
+            val url:String= "http://192.168.1.73:8080/getCategories"
             var listCategories:ArrayList<Category> = arrayListOf()
             val request: Request = Request.Builder()
                 .url(url)
@@ -293,16 +293,16 @@ class httPettitions {
         }
     }
 
-    suspend fun getProductsByCategorie(category: Category):ArrayList<Product>?{
+    suspend fun getReviewsByCategorie(category: Category):ArrayList<Review>?{
         return withContext(Dispatchers.IO) {
-            val products = object : TypeToken<ArrayList<Product>>() {}.type
+            val reviewType = object : TypeToken<ArrayList<Review>>() {}.type
             val client = OkHttpClient()
             val url:String= "http://192.168.1.73:8080/getPBC"
             val gsonA = Gson()
             val json = gsonA.toJson(category)
             val mediaType = "application/json; charset=utf-8".toMediaTypeOrNull()
             val requestBody = json.toRequestBody(mediaType)
-            var listProducts:ArrayList<Product> = arrayListOf()
+            var listReviews:ArrayList<Review> = arrayListOf()
             val request: Request = Request.Builder()
                 .url(url)
                 .post(requestBody)
@@ -313,10 +313,10 @@ class httPettitions {
                 val responseBody = response.body?.string()
                 if (response.isSuccessful&&!responseBody.isNullOrEmpty()) {
                     val gson = Gson()
-                    listProducts= gson.fromJson(responseBody, products)
-                    return@withContext listProducts
+                    listReviews= gson.fromJson(responseBody, reviewType)
+                    return@withContext listReviews
                 }else {
-                    return@withContext listProducts
+                    return@withContext listReviews
                 }
             }catch(e:IOException){
                 return@withContext null

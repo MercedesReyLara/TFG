@@ -69,7 +69,7 @@
     <ListView
         android:id="@+id/listReviews"
         android:layout_width="360dp"
-        android:layout_height="553dp"
+        android:layout_height="540dp"
         app:layout_constraintBottom_toTopOf="@id/guidelineH4"
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
         app:layout_constraintStart_toEndOf="@id/guidelineV1"
@@ -100,14 +100,14 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/applyFilter"
         android:layout_width="159dp"
         android:layout_height="35dp"
         android:backgroundTint="@color/button"
         android:text="@string/filtrar"
         app:layout_constraintBottom_toTopOf="@id/guidelineH3"
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
-        app:layout_constraintHorizontal_bias="0.852"
+        app:layout_constraintHorizontal_bias="0.597"
         app:layout_constraintStart_toEndOf="@id/filtroCategory"
         app:layout_constraintTop_toBottomOf="@id/textView26"
         app:layout_constraintVertical_bias="1.0" />
