@@ -46,22 +46,22 @@ public class ReviewController {
         return DTOS;
     }
 
-    /*@PostMapping(value = "/postReviews")
+    @PostMapping(value = "/postReview")
     private Boolean postReviews(@RequestBody ReviewDTO review){
-        User u=ur.findByDNI(review.getUser());
-        Producto p=pr.findById(review.getProduct());
-         /*Añadimos la reseña al usuario y al producto
-        Review r=new Review(review.getNombre(),review.getOpinionU(),u,p);
+        User u=ur.findByDNI(review.getId_user());
+        Producto p=pr.findByNombreP(review.getNombreProducto());
+         /*Añadimos la reseña al usuario y al producto*/
+        Review r=new Review(review.getNombre(),review.getDescripcion(),u,p);
         u.getResenas().add(r);
         ur.save(u);
         p.getResenas().add(r);
         pr.save(p);
         /*En cambio aquí le ponemos valores fijos porque esa reseña solo puede ser de 1
-        producto y de 1 usuario.
+        producto y de 1 usuario.*/
 
         rr.save(r);
         return true;
-    }*/
+    }
 
     @GetMapping(value = "/getReviewsP")
     public List<ReviewDTO> getReviewsProductos(@RequestBody ProductDTO productDTO){

@@ -9,25 +9,25 @@ public class ReviewDTO {
     @JsonProperty
     private String nombre;
     @JsonProperty
-    private String opinionU;
+    private String descripcion;
     @JsonProperty
-    private String user;
+    private String id_user;
     @JsonProperty
     private String userName;
     @JsonProperty
     private int product;
     @JsonProperty
-    private String productName;
+    private String nombreProducto;
 
     // Constructor
-    public ReviewDTO(int id, String nombre, String opinionU, String user, String userName, int product, String productName) {
+    public ReviewDTO(int id, String nombre, String descripcion, String id_user, String userName, int product, String nombreProducto) {
         this.id = id;
         this.nombre = nombre;
-        this.opinionU = opinionU;
-        this.user = user;
+        this.descripcion = descripcion;
+        this.id_user = id_user;
         this.userName = userName;
         this.product = product;
-        this.productName = productName;
+        this.nombreProducto = nombreProducto;
     }
 
     public int getId() {
@@ -46,20 +46,20 @@ public class ReviewDTO {
         this.nombre = nombre;
     }
 
-    public String getOpinionU() {
-        return opinionU;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setOpinionU(String opinionU) {
-        this.opinionU = opinionU;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
-    public String getUser() {
-        return user;
+    public String getId_user() {
+        return id_user;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setId_user(String id_user) {
+        this.id_user = id_user;
     }
 
     public String getUserName() {
@@ -78,12 +78,12 @@ public class ReviewDTO {
         this.product = product;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getNombreProducto() {
+        return nombreProducto;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setNombreProducto(String nombreProducto) {
+        this.nombreProducto = nombreProducto;
     }
 }
 

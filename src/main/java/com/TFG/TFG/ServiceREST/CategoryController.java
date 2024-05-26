@@ -3,8 +3,10 @@ package com.TFG.TFG.ServiceREST;
 
 import com.TFG.TFG.DTO.CategoryDTO;
 import com.TFG.TFG.DTO.ProductDTO;
+import com.TFG.TFG.DTO.ReviewDTO;
 import com.TFG.TFG.Model.Category;
 import com.TFG.TFG.Model.Producto;
+import com.TFG.TFG.Model.Review;
 import com.TFG.TFG.Respository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,21 +20,26 @@ public class CategoryController {
     @Autowired
     private CategoryRepository cr;
 
-    @GetMapping(value = "/getPBC")
-    private List<ProductDTO> productListC(@RequestBody CategoryDTO categoryDTO){
-        Category c=cr.findById(categoryDTO.getId());
+    @PostMapping(value = "/getPBC")
+    private List<ReviewDTO> productListC(@RequestBody CategoryDTO categoryDTO){
+        Category c=cr.findByNombre(categoryDTO.getNombre());
         if(c!=null) {
             List<Producto> productos = c.getProducts();
-            List<ProductDTO> DTOS = new ArrayList<>();
+            List<ReviewDTO> DTOS = new ArrayList<>();
             for (Producto p : productos) {
-                ProductDTO pDTO = new ProductDTO(
-                        p.getId(),
-                        p.getNombreP(),
-                        p.getDescripcionP(),
-                        p.getPrecio(),
-                        p.getCategory().getNombre()
-                );
-                DTOS.add(pDTO);
+                for(Review r:p.getResenas()){
+                    ReviewDTO DTO=new ReviewDTO(
+                            r.getId(),
+                            r.getNombreR(),
+                            r.getOpinion(),
+                            r.getUser().getDNI(),
+                            r.getUser().getNombreU(),
+                            p.getId(),
+                            p.getNombreP()
+                    );
+                    DTOS.add(DTO);
+                }
+
             }
             return DTOS;
         }
