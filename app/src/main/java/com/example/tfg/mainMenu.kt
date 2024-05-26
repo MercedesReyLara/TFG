@@ -55,6 +55,11 @@ class mainMenu : AppCompatActivity() {
             val intentResenas=Intent(this,listaResenas::class.java)
             startActivity(intentResenas)
         }
+
+        eliminar.setOnClickListener {
+            val intentEliminar=Intent(this,listaResenas::class.java)
+            startActivity(intentEliminar)
+        }
     }
     fun logOutFun() {
         /*Esta función nos redirige a la pantalla principal

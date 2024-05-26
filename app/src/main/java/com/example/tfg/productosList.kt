@@ -1,5 +1,6 @@
 package com.example.tfg
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
@@ -10,6 +11,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -22,6 +25,7 @@ class productosList : AppCompatActivity() {
     private val httPetitions=httPettitions()
     private var listProductos:ArrayList<Product> = arrayListOf()
     private var listReviews:ArrayList<Review> = arrayListOf()
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
 
         /*Esta activity la voy a usar tanto como para mostrar productos como reseñas
@@ -35,11 +39,11 @@ class productosList : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_productos_list)
         /*Declaración de elementos visuales*/
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
         val back: ImageButton =findViewById(R.id.backProfile)
 
         val lista:ListView=findViewById(R.id.listaProductos)
+
         val showProducts:ImageButton=findViewById(R.id.listarProductos)
         val showReviews:ImageButton=findViewById(R.id.listarResenas)
         val adapterProductos = ProductAdapter(context,listProductos)
@@ -60,7 +64,7 @@ class productosList : AppCompatActivity() {
                     adapterProductos.notifyDataSetChanged()
                 }
             }
-            lista.adapter=adapterProductos
+            lista.adapter = adapterProductos
         }
 
         /*En este listamos las reseñas del usuario*/

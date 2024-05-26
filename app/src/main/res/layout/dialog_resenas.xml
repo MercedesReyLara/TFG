@@ -1,48 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView27"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/textView27"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    <ImageButton
-        android:id="@+id/xDelete"
-        android:layout_width="55dp"
-        android:layout_height="34dp"
-        android:background="@android:color/transparent"
-        android:scaleType="fitCenter"
-        app:srcCompat="@drawable/imagen_2024_04_22_110039483_removebg_preview"
-        tools:layout_editor_absoluteX="48dp"
-        tools:layout_editor_absoluteY="107dp" />
+        <TextView
+            android:id="@+id/textView28"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.49"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView27" />
 
-    <ImageButton
-        android:id="@+id/modify"
-        android:layout_width="55dp"
-        android:layout_height="34dp"
-        android:background="@android:color/transparent"
-        android:scaleType="fitCenter"
-        app:srcCompat="@drawable/imagen_2024_04_22_110039483_removebg_preview"
-        tools:layout_editor_absoluteX="231dp"
-        tools:layout_editor_absoluteY="107dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView27"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-    <TextView
-        android:id="@+id/textView28"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="140dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView27" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageButton
+                android:id="@+id/xDelete"
+                android:layout_width="55dp"
+                android:layout_height="34dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                app:layout_constraintEnd_toEndOf="@id/modify"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/imagen_2024_04_22_110039483_removebg_preview"
+                tools:layout_editor_absoluteY="107dp" />
+
+            <ImageButton
+                android:id="@+id/modify"
+                android:layout_width="55dp"
+                android:layout_height="34dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/imagen_2024_04_22_110039483_removebg_preview"
+                tools:layout_editor_absoluteX="231dp"
+                tools:layout_editor_absoluteY="107dp" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

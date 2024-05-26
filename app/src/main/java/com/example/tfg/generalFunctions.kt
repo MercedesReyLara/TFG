@@ -51,8 +51,17 @@ class generalFunctions {
         }
     }
 
-    fun putHint(text:EditText){
-        text.revealOnFocusHint
+    fun clearHint(text:List<EditText>,hint:List<CharSequence>){
+        for (editText in text) {
+            val position=text.indexOf(editText)
+            editText.setOnFocusChangeListener { _, hasFocus ->
+                if (hasFocus) {
+                    editText.hint = ""
+                }else{
+                    editText.hint= hint[position].toString()
+                }
+            }
+        }
     }
     fun spinnerLanguages(context:Context,spinner: Spinner):Spinner{
         val adapterSpinner:ArrayAdapter<String> = ArrayAdapter(context,android.R.layout.simple_spinner_item,languages)
@@ -61,6 +70,16 @@ class generalFunctions {
         spinner.setSelection(0)
 
         return spinner
+    }
+    fun manipulateEdits(edit: List<EditText>){
+        for (editText in edit) {
+            editText.text.clear()
+        }
+        for(e in edit){
+            if(e.hasFocus()){
+                e.clearFocus()
+            }
+        }
     }
 
     fun validateDNI(dni:String):Boolean{

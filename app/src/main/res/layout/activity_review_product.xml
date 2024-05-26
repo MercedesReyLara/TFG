@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.95"  />
+        app:layout_constraintGuide_percent="0.97" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineV1"
@@ -34,24 +34,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.03" />
+        app:layout_constraintGuide_percent="0.0" />
 
     <TextView
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:textColor="@color/black"
         android:text="@string/menuReseñas"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@id/guidelineH3"
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toEndOf="@id/guidelineV1"
-        app:layout_constraintTop_toBottomOf="@id/guidelineH1" />
+        app:layout_constraintTop_toBottomOf="@id/guidelineH1"
+        app:layout_constraintVertical_bias="0.5" />
 
     <EditText
-        android:id="@+id/editTextText2"
-        android:layout_width="226dp"
-        android:layout_height="175dp"
+        android:id="@+id/descripcion"
+        android:layout_width="263dp"
+        android:layout_height="109dp"
         android:background="@drawable/input_personalizado"
         android:ems="10"
         android:gravity="top|start"
@@ -61,13 +63,14 @@
         android:text="@string/descripcionReseña"
         android:textColor="@color/gray"
         android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/puntuacion"
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@id/guidelineV1"
-        tools:layout_editor_absoluteY="278dp" />
+        app:layout_constraintTop_toBottomOf="@+id/titulo" />
 
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/titulo"
         android:layout_width="225dp"
         android:layout_height="30dp"
         android:background="@drawable/input_personalizado"
@@ -76,44 +79,47 @@
         android:text="@string/nomeReseña"
         android:textColor="@color/gray"
         android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/descripcion"
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
-        app:layout_constraintHorizontal_bias="0.471"
+        app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toEndOf="@id/guidelineV1"
-        tools:layout_editor_absoluteY="222dp" />
+        app:layout_constraintTop_toBottomOf="@+id/guidelineH5" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1" />
+        app:layout_constraintGuide_percent="0.07" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.85" />
+        app:layout_constraintGuide_percent="0.9" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/publicar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
         android:backgroundTint="@color/button"
         android:text="@string/botonPublicar"
         app:layout_constraintBottom_toTopOf="@id/guidelineH4"
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
-        app:layout_constraintStart_toEndOf="@id/guidelineV1" />
+        app:layout_constraintStart_toEndOf="@id/guidelineV1"
+        app:layout_constraintTop_toBottomOf="@+id/puntuacion" />
 
     <Spinner
         android:id="@+id/productos"
         android:layout_width="230dp"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/guidelineH5"
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@id/guidelineV1"
-        tools:layout_editor_absoluteY="154dp" />
+        app:layout_constraintTop_toBottomOf="@id/textView21"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView21"
@@ -123,11 +129,12 @@
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toEndOf="@id/guidelineV1"
+        app:layout_constraintBottom_toTopOf="@id/productos"
         app:layout_constraintTop_toBottomOf="@id/guidelineH3"
         tools:layout_editor_absoluteY="117dp" />
 
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/puntuacion"
         android:layout_width="225dp"
         android:layout_height="30dp"
         android:background="@drawable/input_personalizado"
@@ -136,32 +143,30 @@
         android:text="@string/puntuacionReseña"
         android:textColor="@color/gray"
         android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/publicar"
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@id/guidelineV1"
-        tools:layout_editor_absoluteY="483dp" />
+        app:layout_constraintTop_toBottomOf="@+id/descripcion" />
 
     <ImageButton
-        android:id="@+id/makeReview"
+        android:id="@+id/backMainR"
         android:layout_width="53dp"
         android:layout_height="39dp"
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         android:src="@android:drawable/ic_menu_revert"
+        app:layout_constraintBottom_toTopOf="@id/guidelineH2"
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
         app:layout_constraintHorizontal_bias="0.034"
         app:layout_constraintStart_toEndOf="@id/guidelineV1"
-        tools:layout_editor_absoluteY="649dp" />
+        app:layout_constraintTop_toBottomOf="@id/guidelineH4" />
 
-    <ImageButton
-        android:id="@+id/imageButton3"
-        android:layout_width="67dp"
-        android:layout_height="55dp"
-        android:background="@android:color/transparent"
-        android:scaleType="fitCenter"
-        android:src="@drawable/imagen_2024_04_22_110039483_removebg_preview"
-        app:layout_constraintEnd_toStartOf="@id/guidelineV2"
-        app:layout_constraintHorizontal_bias="0.889"
-        app:layout_constraintStart_toEndOf="@id/guidelineV1"
-        tools:layout_editor_absoluteY="633dp" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineH5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.23" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

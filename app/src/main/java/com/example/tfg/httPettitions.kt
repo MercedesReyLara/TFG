@@ -324,4 +324,25 @@ class httPettitions {
 
         }
     }
+
+    suspend fun postReview(review: Review): Boolean {
+        return withContext(Dispatchers.IO) {
+            val client = OkHttpClient()
+            val gson = Gson()
+            val json = gson.toJson(review)
+            val mediaType = "application/json; charset=utf-8".toMediaTypeOrNull()
+            val requestBody = json.toRequestBody(mediaType)
+            val url = "http://192.168.1.73:8080/postUser"
+            val request: Request = Request.Builder()
+                .url(url)
+                .post(requestBody)
+                .build()
+            /*Falla al hacer la publicación del json*/
+            val response = client.newCall(request).execute()
+
+            /*Pone "Method not allowed*/
+            val responseBody = response.body?.string()
+            return@withContext response.isSuccessful && !responseBody.isNullOrEmpty()
+        }
+    }
 }

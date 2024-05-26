@@ -17,6 +17,7 @@
     <string name="pequeña">Letra pequena</string>
     <string name="grande">Letra grande</string>
     <string name="tp">O teu inventario</string>
+    <string name="eliminaR">Eliminar reseña</string>
     <string name="mp">Listar os meus productos</string>
     <string name="mr">Listar as miñas reseñas</string>
     <string name="ipText">Cambia a dirección ip</string>

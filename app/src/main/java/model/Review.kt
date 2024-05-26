@@ -30,5 +30,12 @@ class Review:Serializable {
         this.nombrePorducto = nombrePorducto
     }
 
+    constructor(nombre: String, descripcion: String, id_User: String, nombrePorducto: String) {
+        this.nombre = nombre
+        this.descripcion = descripcion
+        this.id_User = id_User
+        this.nombrePorducto=nombrePorducto
+    }
+
 
 }
