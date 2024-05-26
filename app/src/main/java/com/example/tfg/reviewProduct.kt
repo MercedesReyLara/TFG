@@ -46,10 +46,12 @@ class reviewProduct : AppCompatActivity() {
         val hintNombre=nombre.hint
         val hintDescripcion=descripcion.hint
         val hintPuntuacion=puntuacion.hint
-
-        functions.clearHint(listOf(nombre,descripcion,puntuacion),
+        nombre.text.clear()
+        descripcion.text.clear()
+        puntuacion.text.clear()
+        /*functions.clearHint(listOf(nombre,descripcion,puntuacion),
             listOf (hintNombre,hintDescripcion,hintPuntuacion)
-        )
+        )*/
         lifecycleScope.launch(Dispatchers.Main) {
             var products: ArrayList<Product>
             withContext(Dispatchers.IO) {

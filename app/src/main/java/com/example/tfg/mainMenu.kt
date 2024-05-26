@@ -60,6 +60,11 @@ class mainMenu : AppCompatActivity() {
             val intentEliminar=Intent(this,listaResenas::class.java)
             startActivity(intentEliminar)
         }
+
+        subir.setOnClickListener {
+            val intentResenar=Intent(this,reviewProduct::class.java)
+            startActivity(intentResenar)
+        }
     }
     fun logOutFun() {
         /*Esta función nos redirige a la pantalla principal
