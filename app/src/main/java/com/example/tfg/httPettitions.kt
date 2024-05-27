@@ -26,7 +26,7 @@ class httPettitions {
         return withContext(Dispatchers.IO) {
             val client = OkHttpClient()
             /*Peticion en este caso con nombre y contraseña*/
-            val uri:String= Uri.parse("http://192.168.1.73:8080/logIn").buildUpon()
+            val uri:String= Uri.parse("http://192.168.5.5:8080/logIn").buildUpon()
                 .appendQueryParameter("nombreU",nombre)
                 .appendQueryParameter("contrasena",contrasena)
                 .build().toString()
@@ -62,7 +62,7 @@ class httPettitions {
             val json = gson.toJson(user)
             val mediaType = "application/json; charset=utf-8".toMediaTypeOrNull()
             val requestBody = json.toRequestBody(mediaType)
-            val url = "http://192.168.1.73:8080/postUser"
+            val url = "http://192.168.5.5:8080/postUser"
             val request: Request = Request.Builder()
                 .url(url)
                 .post(requestBody)
@@ -121,7 +121,7 @@ class httPettitions {
     suspend fun getUserByDNI(user:User): User? {
         return withContext(Dispatchers.IO) {
             val client = OkHttpClient()
-            val url:String="http://192.168.1.73:8080/getUser"
+            val url:String="http://192.168.5.5:8080/getUser"
             val gson = Gson()
             val json = gson.toJson(user)
             val mediaType = "application/json; charset=utf-8".toMediaTypeOrNull()

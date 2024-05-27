@@ -6,28 +6,39 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.drawable.toBitmap
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
+import com.example.tfg.sqlite.GalleryDbHelper
+import com.example.tfg.sqlite.Image
+import com.example.tfg.sqlite.ImageDAO
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import model.SharedPreff
 import model.User
+import java.io.IOException
+
 
 class register : AppCompatActivity() {
     private lateinit var sharedPreff:SharedPreff
     private lateinit var context:Context
-    private var imagenRecogida: ByteArray?= byteArrayOf()
+    private var imagenRecogida: ByteArray= byteArrayOf()
     private val functions=generalFunctions()
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint("MissingInflatedId", "SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -46,11 +57,37 @@ class register : AppCompatActivity() {
         val buscarFotos:Button=findViewById(R.id.changeProfileP)
         val camera:ImageButton=findViewById(R.id.camara)
         val profileP: ImageView =findViewById(R.id.profileP)
+        val insertar:ImageButton=findViewById(R.id.insertar)
+        val spinnerImg: Spinner =findViewById(R.id.spinnerImg)
+
         //Declaracion de variables
+        val listaSpinner:List<String> = listOf("Imagen 1","Imagen 2","Imagen 3","Imagen 4","Imagen 5")
+        val adapter: ArrayAdapter<String> = ArrayAdapter(this,android.R.layout.simple_spinner_item,listaSpinner)
+        spinnerImg.adapter=adapter
+        spinnerImg.setSelection(0)
         val pettitions=httPettitions()
         context =baseContext
-         sharedPreff=SharedPreff(context)
-
+        sharedPreff=SharedPreff(context)
+        val helper:GalleryDbHelper= GalleryDbHelper(context)
+        val DAO:ImageDAO= ImageDAO()
+        var asigned=false
+        spinnerImg.isVisible=false
+        val resultado=registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+                activityResult->
+            if(activityResult.resultCode== RESULT_OK){
+                try {
+                    val result =activityResult.data?.extras?.get("data") as Bitmap
+                    profileP.setImageBitmap(/*functions.byteArrayToBitmap*/(result))
+                    imagenRecogida=functions.imageViewToByteArray(profileP)
+                    asigned = true
+                }catch(exception:Exception){
+                    exception.toString()
+                }
+            }
+        }
+        if(asigned&&imagenRecogida.isNotEmpty()){
+            profileP.setImageBitmap(functions.byteArrayToBitmap(imagenRecogida))
+        }
 
         //Utilizamos el método para limpiar los inputs cuando esten on click
         functions.clearHint(DNIT)
@@ -59,13 +96,6 @@ class register : AppCompatActivity() {
         functions.clearHint(mail)
         functions.clearHint(password)
         functions.clearHint(passwordConfirm)
-        val resultado=registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-                activityResult->
-           /* if(activityResult.resultCode== RESULT_OK){
-                imagenRecogida = activityResult.data?.extras?.get("data") as Bitmap
-                profileP.setImageBitmap(imagenRecogida)
-            }*/
-        }
         registerButton.setOnClickListener {
             val dniTXT=DNIT.text.toString().trim()
             val nameTXT=name.text.toString().trim()
@@ -85,21 +115,26 @@ class register : AppCompatActivity() {
                 password.text.clear()
                 passwordConfirm.text.clear()
                 Toast.makeText(this,this.getString(R.string.errorContraseña),Toast.LENGTH_LONG).show()
-            }else if(passwordTXT == passwordConfTXT){
+            }else if(passwordTXT != passwordConfTXT){
                 Toast.makeText(this,this.getString(R.string.coincidir),Toast.LENGTH_LONG).show()
                 passwordConfirm.text.clear()
             }else{
-                val newUser= User(dniTXT,nameTXT,lastNameTXT,mailTXT,passwordConfTXT,"")
+                val pfp:ByteArray = if(profileP.drawable==null){
+                    functions.imageToByteArray(context,R.drawable.uno)
+                }else {
+                    functions.imageViewToByteArray(profileP)
+                }
+                val newUser= User(dniTXT,nameTXT,lastNameTXT,mailTXT,passwordConfTXT,"Sin descripcion",pfp.toString())
                 var success:Boolean=false
                 lifecycleScope.launch (Dispatchers.IO){
                     success=pettitions.postUser(newUser)
                 }
                 if(success){
-                    Toast.makeText(this,"rwr",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,"Usuario registrado con exito",Toast.LENGTH_SHORT).show()
                     functions.clearText(listOf(DNIT,name,lastName,password,passwordConfirm,mail))
                     sharedPreff.saveLogin(context, true)
-                    val encryptedDNI = functions.encrypt(dniTXT, functions.clave)
-                    sharedPreff.saveUser(context, encryptedDNI)
+                    /*val encryptedDNI = functions.encrypt(dniTXT, functions.clave)*/
+                    sharedPreff.saveUser(context, dniTXT)
                     val intentMainMenu= Intent(this,mainMenu::class.java)
                     startActivity(intentMainMenu)
                 }else{
@@ -121,6 +156,36 @@ class register : AppCompatActivity() {
         }
 
         buscarFotos.setOnClickListener {
+            var listaObtenidas:ArrayList<Image> = arrayListOf()
+            try{
+              listaObtenidas=DAO.visualizarImagenes(helper)
+                Toast.makeText(this,"Obtenidas",
+                    Toast.LENGTH_SHORT).show()
+                spinnerImg.isVisible=true
+                spinnerImg.onItemSelectedListener= object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                        val imgSelect=spinnerImg.selectedItem.toString()
+                        for(img in listaObtenidas){
+                            when(imgSelect){
+                                "Imagen 1"->profileP.setImageBitmap(functions.byteArrayToBitmap(listaObtenidas[0].valor))
+                                "Imagen 2"->profileP.setImageBitmap(functions.byteArrayToBitmap(listaObtenidas[1].valor))
+                                "Imagen 3"->profileP.setImageBitmap(functions.byteArrayToBitmap(listaObtenidas[2].valor))
+                                "Imagen 4"->profileP.setImageBitmap(functions.byteArrayToBitmap(listaObtenidas[3].valor))
+                                "Imagen 5"->profileP.setImageBitmap(functions.byteArrayToBitmap(listaObtenidas[4].valor))
+                            }
+                        }
+                    }
+                    override fun onNothingSelected(p0: AdapterView<*>?) {
+                        TODO("Not yet implemented")
+                    }
+                }
+            }catch (exception:IOException){
+                Toast.makeText(this,"Error en la visualizacion de imagenes",
+                    Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        insertar.setOnClickListener {
             val listaFotos:ArrayList<ByteArray> = arrayListOf(
                 functions.imageToByteArray(context,R.drawable.uno),
                 functions.imageToByteArray(context,R.drawable.dos),
@@ -128,14 +193,27 @@ class register : AppCompatActivity() {
                 functions.imageToByteArray(context,R.drawable.cuatro),
                 functions.imageToByteArray(context,R.drawable.cinco))
 
+            helper.writableDatabase
+
+            try{
+                for(foto in listaFotos){
+                    DAO.crearImagen(helper, Image(foto))
+                }
+            }catch(exception:IOException){
+                Toast.makeText(this,"Error en la inserción de imagenes",
+                    Toast.LENGTH_SHORT).show()
+            }
+
         }
         }
 
    override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         // Guardar datos en el Bundle
-        val imagen=imagenRecogida.toString()
-        sharedPreff.saveImg(context,imagen)
+       if(imagenRecogida.isNotEmpty()) {
+           val imagen=imagenRecogida.toString()
+           sharedPreff.saveImg(context,imagen)
+       }
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {

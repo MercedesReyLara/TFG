@@ -10,5 +10,9 @@ class Image {
         this.valor = valor
     }
 
+    constructor(valor: ByteArray) {
+        this.valor = valor
+    }
+
 
 }

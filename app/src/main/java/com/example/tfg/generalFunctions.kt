@@ -19,6 +19,8 @@ import javax.crypto.spec.SecretKeySpec
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.DisplayMetrics
+import android.widget.ImageView
+import androidx.core.graphics.drawable.toBitmap
 import model.SharedPreff
 import java.io.ByteArrayOutputStream
 
@@ -156,6 +158,21 @@ class generalFunctions {
         return stream.toByteArray()
     }
 
+    fun imageViewToByteArray(imageView: ImageView): ByteArray {
+        // Obtener el Bitmap del ImageView
+        val bitmap = imageView.drawable.toBitmap()
+
+        // Convertir el Bitmap en un ByteArrayOutputStream
+        val stream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+
+        // Obtener el byte array desde el ByteArrayOutputStream
+        return stream.toByteArray()
+    }
+
+    fun byteArrayToBitmap(image:ByteArray?):Bitmap{
+        return BitmapFactory.decodeByteArray(image,0,image!!.size)
+    }
     fun setLanguage(context:Context) {
         val resources:Resources=context.resources
         val DM:DisplayMetrics=resources.displayMetrics

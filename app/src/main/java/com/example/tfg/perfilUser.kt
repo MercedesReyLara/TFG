@@ -3,6 +3,7 @@ package com.example.tfg
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -51,6 +52,9 @@ class perfilUser : AppCompatActivity() {
                     correo.text=userData!!.correo
                     DNI.text=userData!!.dni
                     about.text=userData!!.descripcion
+                    /*val valorImagen=functions.byteArrayToBitmap(userData!!.profileP.toString().toByteArray())
+                    Log.i("xd",valorImagen.toString())
+                    profilePick.setImageBitmap(valorImagen)*/
                 }else{
                     Toast.makeText(this@perfilUser,"Error en la obtencion de datos",Toast.LENGTH_SHORT).show()
                 }

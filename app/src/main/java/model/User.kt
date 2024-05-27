@@ -4,31 +4,31 @@ import java.io.Serializable
 import java.time.LocalDateTime
 
 class User :Serializable {
-    var nombreU: String=""
     var dni:String=""
+    var nombreU: String=""
     var apellidosU:String=""
     var correo: String=""
     var contrasena: String=""
     var descripcion:String=""
-    /*var profileP:ByteArray= "Hola".toByteArray()*/
+    var profileP:String= "Hola"
     constructor()
 
     constructor(
-        nombreU: String,
         dni: String,
+        nombreU: String,
         apellidosU: String,
         correo: String,
         contrasena: String,
         descripcion: String,
-        /*profileP:ByteArray*/
+        profileP:String
     ) {
-        this.nombreU = nombreU
         this.dni = dni
+        this.nombreU = nombreU
         this.apellidosU = apellidosU
         this.correo = correo
         this.contrasena = contrasena
         this.descripcion=descripcion
-        /*this.profileP=profileP*/
+        this.profileP=profileP
     }
 
     constructor(dni: String) {

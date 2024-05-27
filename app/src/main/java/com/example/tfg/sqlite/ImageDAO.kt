@@ -5,7 +5,7 @@ import android.provider.BaseColumns
 
 class ImageDAO {
 
-    fun crearLibro(galllery: GalleryDbHelper, image: Image): Long {
+    fun crearImagen(galllery: GalleryDbHelper, image: Image): Long {
         val db = galllery.writableDatabase
 
         val values = ContentValues().apply {
@@ -15,7 +15,7 @@ class ImageDAO {
         return db.insert(ImageContract.ImageEntry.TABLE_NAME, null, values)
     }
 
-    fun visualizarLibros(galllery: GalleryDbHelper): ArrayList<Image> {
+    fun visualizarImagenes(galllery: GalleryDbHelper): ArrayList<Image> {
         val db = galllery.readableDatabase
 
         val projection = arrayOf(
@@ -33,7 +33,7 @@ class ImageDAO {
             null
         )
 
-        val lista = ArrayList<Image>()
+        val lista:ArrayList<Image> = arrayListOf()
         while (cursor.moveToNext()) {
             val image = Image(
                 cursor.getInt(cursor.getColumnIndexOrThrow(BaseColumns._ID)),

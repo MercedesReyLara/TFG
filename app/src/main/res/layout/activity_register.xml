@@ -224,4 +224,25 @@
         app:layout_constraintTop_toBottomOf="@+id/profileP"
         app:srcCompat="@android:drawable/ic_menu_camera" />
 
+    <ImageButton
+        android:id="@+id/insertar"
+        android:layout_width="67dp"
+        android:layout_height="55dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@id/guidelineH2"
+        app:layout_constraintEnd_toStartOf="@id/guidelinev2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/guidelinev1"
+        app:srcCompat="@drawable/efewf_removebg_preview" />
+
+    <Spinner
+        android:id="@+id/spinnerImg"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/guidelinev1"
+        app:layout_constraintEnd_toStartOf="@id/guidelineV3"
+        app:layout_constraintTop_toBottomOf="@id/guidelineH3"
+        app:layout_constraintBottom_toTopOf="@id/profileP"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

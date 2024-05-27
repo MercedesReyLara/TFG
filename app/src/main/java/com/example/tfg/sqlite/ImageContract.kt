@@ -10,7 +10,7 @@ object ImageContract {
         const val SQL_CREATE_ENTRIES =
             "CREATE TABLE $TABLE_NAME (" +
                     "${BaseColumns._ID} INTEGER PRIMARY KEY," +
-                    "$COLUMN_NAME_CONTENIDO TEXT)"
+                    "$COLUMN_NAME_CONTENIDO BLOB)"
 
         const val SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS $TABLE_NAME"
