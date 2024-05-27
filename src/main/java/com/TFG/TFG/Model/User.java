@@ -31,8 +31,9 @@ public class User {
     @Column(name="descripcion")
     private String descripcion;
 
-    /*@Column(name="profileP")
-    private Blob profileP;*/
+    @Column(name="profileP")
+    private String profileP;
+
     @OneToMany(mappedBy = "user",cascade=CascadeType.REMOVE)
     @JsonIgnore
     private List<Review> resenas=new ArrayList<>();
@@ -115,5 +116,13 @@ public class User {
 
     public void setProductsU(List<Producto> productsU) {
         this.productsU = productsU;
+    }
+
+    public String getProfileP() {
+        return profileP;
+    }
+
+    public void setProfileP(String profileP) {
+        this.profileP = profileP;
     }
 }

@@ -40,9 +40,10 @@ public class UserController {
         }
 
     @PostMapping(value = "/getUser")
-    public UserDTO getDNI(@RequestBody User user){
-        User u=ur.findByDNI(user.getDNI());
-        UserDTO uDTO=new UserDTO(u.getDNI(),u.getNombreU(),u.getApellidosU(),u.getCorreo(),u.getContrasena(),u.getDescripcion());
+    public UserDTO getDNI(@RequestBody UserDTO user){
+        User u=ur.findByDNI(user.getDni());
+        UserDTO uDTO=new UserDTO(u.getDNI(),u.getNombreU(),u.getApellidosU(),
+                u.getCorreo(),u.getContrasena(),u.getDescripcion(),u.getProfileP());
         return uDTO;
     }
     @PostMapping(value = "/postUser")
