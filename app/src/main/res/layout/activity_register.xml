@@ -231,10 +231,10 @@
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toTopOf="@id/guidelineH2"
-        app:layout_constraintEnd_toStartOf="@id/guidelinev2"
+        app:layout_constraintEnd_toStartOf="@id/guidelineV3"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@id/guidelinev1"
-        app:srcCompat="@drawable/efewf_removebg_preview" />
+        app:srcCompat="@android:drawable/ic_menu_upload" />
 
     <Spinner
         android:id="@+id/spinnerImg"

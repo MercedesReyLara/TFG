@@ -13,6 +13,7 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Dispatchers
@@ -110,11 +111,48 @@ class logIn : AppCompatActivity() {
                             }
                            /*Acaba la petición entonces manejo los datos*/
                                 if (encontrado!=null) {
-                                    sharedPreff.saveLogin(context, true)
-                                    /*val encryptedDNI = functions.encrypt(encontrado.dni, functions.clave)*/
-                                    sharedPreff.saveUser(context, encontrado.dni)
-                                    val intentLogIn = Intent(this@logIn, mainMenu::class.java)
-                                    startActivity(intentLogIn)
+                                    if(!encontrado.activo){
+                                        val builderActivar: AlertDialog.Builder =
+                                            AlertDialog.Builder(this@logIn)/*Creamos el objeto diálogo*/
+                                        builderActivar.setTitle("¿Reactivar cuenta?")/*Establecemos el título, el mensaje principal y las dos opciones*/
+                                        builderActivar.setMessage("¿Desea reactivar su cuenta de PRORATER?")
+                                        builderActivar.setPositiveButton("Reactivar") { _, _ ->
+                                            /*Si le damos a reactivar se lanzará la petición que hará que nuestro usuario
+                                            se reactivo e iniciará sesión de nuevo, volverá a guardar el dni...
+                                             */
+                                            lifecycleScope.launch(Dispatchers.Main) {
+                                                var done:Boolean?=false
+                                                withContext(Dispatchers.IO){
+                                                    done=httPettitions.reactivarUsuario(encontrado)
+                                                }
+                                                when (done) {
+                                                    null -> {
+                                                        Toast.makeText(this@logIn,"error en la conexion",Toast.LENGTH_SHORT).show()
+                                                    }
+                                                    true -> {
+                                                        sharedPreff.saveLogin(context, true)
+                                                        /*val encryptedDNI = functions.encrypt(encontrado.dni, functions.clave)*/
+                                                        sharedPreff.saveUser(context, encontrado.dni)
+                                                        val intentLogIn = Intent(this@logIn, mainMenu::class.java)
+                                                        startActivity(intentLogIn)
+                                                    }
+                                                    else -> {
+                                                        Toast.makeText(this@logIn,"ERROR",Toast.LENGTH_SHORT).show()
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        /*Si cancelamos no hace nada*/
+                                        builderActivar.setNegativeButton(("Cancelar"), { _, _ -> })
+                                        val dialog = builderActivar.create()/*Lo construímos con las distintas partes*/
+                                        dialog.show()/*Lo mostramos*/
+                                    }else {
+                                        sharedPreff.saveLogin(context, true)
+                                        /*val encryptedDNI = functions.encrypt(encontrado.dni, functions.clave)*/
+                                        sharedPreff.saveUser(context, encontrado.dni)
+                                        val intentLogIn = Intent(this@logIn, mainMenu::class.java)
+                                        startActivity(intentLogIn)
+                                    }
                                 } else{
                                     Toast.makeText(
                                         this@logIn,

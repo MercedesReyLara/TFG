@@ -58,16 +58,19 @@ public class reviewAdapter extends BaseAdapter {
 
         @NonNull
         @Override
+        @SuppressLint("MissingInflatedId")
         public View getView(int position, @Nullable View view, @Nullable ViewGroup parent) {
             LayoutInflater layout= LayoutInflater.from(context);
             View elemento= layout.inflate(R.layout.plantilla_listview,parent,false);
             Review currentReview=(Review)getItem(position);
             TextView nombre=elemento.findViewById(R.id.nombreP);
-            TextView precio=elemento.findViewById(R.id.precioP);
+            TextView puntuacion=elemento.findViewById(R.id.precioP);
+            TextView descripcion=elemento.findViewById(R.id.descripcionPR);
             ImageView imagen=elemento.findViewById(R.id.imagenP);
 
             nombre.setText(currentReview.getNombre());
-            precio.setText( currentReview.getDescripcion());
+            puntuacion.setText( String.valueOf(currentReview.getPuntuacion()));
+            descripcion.setText(currentReview.getDescripcion());
         /*byte[] imagenBytes = currentUser.getProfileP();
         if (imagenBytes != null && imagenBytes.length > 0) {
             Bitmap bitmap = BitmapFactory.decodeByteArray(imagenBytes, 0, imagenBytes.length);

@@ -79,6 +79,7 @@ class httPettitions {
 
 
     suspend fun deleteUser(dni:String):Boolean? {
+        /*Le mando el DNI para que pueda buscar a usuario por DNI*/
         return withContext(Dispatchers.IO) {
             val client = OkHttpClient()
             val url = "http://192.168.5.5:8080/deleteUser/$dni"
@@ -89,12 +90,12 @@ class httPettitions {
                 .build()
 
             try {
+                /*Try catch para que no crashee por error de conexion*/
                 val response = client.newCall(request).execute()
-
-
-                /*Pone "Method not allowed*/
                 val responseBody = response.body?.string()
-                // Verificar si el DNI del usuario encontrado coincide con el DNI buscado y que se ha borrado
+                /*Verificar si el DNI del usuario encontrado coincide con el DNI buscado y que se ha borrado
+                Si es así devuelve true, si no devuelve false
+                 */
                 if (response.isSuccessful&&!responseBody.isNullOrEmpty()) {
                     return@withContext true
                 }else{
@@ -118,11 +119,7 @@ class httPettitions {
 
                 try{
                 val response = client.newCall(request).execute()
-
-
-                /*Pone "Method not allowed*/
                 val responseBody = response.body?.string()
-                // Verificar si el DNI del usuario encontrado coincide con el DNI buscado y que se ha borrado
                 if (response.isSuccessful&&!responseBody.isNullOrEmpty()) {
                     return@withContext true
                 }else{
@@ -151,6 +148,7 @@ class httPettitions {
                 response = client.newCall(request).execute()
                 val responseBody = response.body?.string()
                 if (response.isSuccessful&&!responseBody.isNullOrEmpty()) {
+                    /*Transformamos el response body recibido en nuestra clase usuario*/
                     val gson2 = Gson()
                     val useR=gson2.fromJson(responseBody, User::class.java)
                     return@withContext useR
@@ -341,7 +339,7 @@ class httPettitions {
         }
     }
 
-    suspend fun postReview(review: Review): Boolean {
+    suspend fun postReview(review: Review): Boolean? {
         return withContext(Dispatchers.IO) {
             val client = OkHttpClient()
             val gson = Gson()
@@ -353,12 +351,43 @@ class httPettitions {
                 .url(url)
                 .post(requestBody)
                 .build()
-            /*Falla al hacer la publicación del json*/
-            val response = client.newCall(request).execute()
+            try{
+                val response = client.newCall(request).execute()
+                val responseBody = response.body?.string()
+                if (response.isSuccessful&&!responseBody.isNullOrEmpty()) {
+                    return@withContext true
+                }else{
+                    return@withContext false
+                }
+            }catch (exception:IOException){
+                return@withContext  null
+            }
+        }
+    }
 
-            /*Pone "Method not allowed*/
-            val responseBody = response.body?.string()
-            return@withContext response.isSuccessful && !responseBody.isNullOrEmpty()
+    suspend fun reactivarUsuario(user:User):Boolean?{
+        return withContext(Dispatchers.IO) {
+            val client = OkHttpClient()
+            val gson = Gson()
+            val json = gson.toJson(user)
+            val mediaType = "application/json; charset=utf-8".toMediaTypeOrNull()
+            val requestBody = json.toRequestBody(mediaType)
+            val url = "http://192.168.5.5:8080/reactivarUser"
+            val request: Request = Request.Builder()
+                .url(url)
+                .put(requestBody)
+                .build()
+            try{
+                val response = client.newCall(request).execute()
+                val responseBody = response.body?.string()
+                if (response.isSuccessful&&!responseBody.isNullOrEmpty()) {
+                    return@withContext true
+                }else{
+                    return@withContext false
+                }
+            }catch (exception:IOException){
+                return@withContext  null
+            }
         }
     }
 }

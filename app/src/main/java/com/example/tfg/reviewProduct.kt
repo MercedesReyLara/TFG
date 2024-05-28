@@ -10,15 +10,11 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Spinner
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import model.Category
 import model.Product
 import model.Review
 import model.SharedPreff
@@ -85,23 +81,40 @@ class reviewProduct : AppCompatActivity() {
             /*Comprobamos que no haya ningun campo vacio*/
             if(nombreTXT.isEmpty()||descripcionTXT.isEmpty()||puntuacionTXT.isEmpty()){
                 Toast.makeText(this@reviewProduct, "Los campos no puden estar vacios", Toast.LENGTH_SHORT).show()
+            }else if(isInt(puntuacionTXT)) {
+                Toast.makeText(this@reviewProduct, "El valor puntuacion tiene que ser un número entero", Toast.LENGTH_SHORT).show()
+            }else if(puntuacionTXT.toInt()<0 || puntuacionTXT.toInt()>10) {
+                Toast.makeText(
+                    this@reviewProduct,
+                    "El valor puntuacion tiene que ser un número entero entre el 1 y e 10",
+                    Toast.LENGTH_SHORT
+                ).show()
             }else{
                 /*Creamos el objeto review*/
-                val review= Review(nombreTXT,descripcionTXT,DNI,spinnerProductos.selectedItem.toString())
+                val review= Review(nombreTXT,descripcionTXT,puntuacionTXT.toInt(),DNI,spinnerProductos.selectedItem.toString())
                 lifecycleScope.launch(Dispatchers.Main) {
-                    var done=false
+                    var done:Boolean?=false
                     withContext(Dispatchers.IO){
                         /*Hacemos la peticion para publicar la reseña*/
                         done=pettitions.postReview(review)
                     }
-                    if(done){
-                        /*Exitosa*/
-                        Toast.makeText(this@reviewProduct, "Reseña publicada", Toast.LENGTH_SHORT).show()
-                        /*Se limpian todos los campos*/
-                        functions.manipulateEdits(listOf(nombre,descripcion,puntuacion))
-                    }else{
-                        /*Fallo para que no se cierre la aplicación*/
-                        Toast.makeText(this@reviewProduct, "Error en la peticion", Toast.LENGTH_SHORT).show()
+                    when (done) {
+                        null -> {
+                            Toast.makeText(
+                                this@reviewProduct,
+                                "error en la conexion",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            startActivity(functions.logOutFun(this@reviewProduct))
+                        }
+
+                        true -> {
+                            startActivity(functions.logOutFun(this@reviewProduct))
+                        }
+
+                        else -> {
+                            Toast.makeText(this@reviewProduct, "ERROR", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
             }
@@ -112,5 +125,13 @@ class reviewProduct : AppCompatActivity() {
             val intentMain= Intent(this,mainMenu::class.java)
             startActivity(intentMain)
         }
+    }
+    private fun isInt(puntuacion: String): Boolean {
+        try {
+            puntuacion.toInt()
+        } catch (e: NumberFormatException) {
+            return false
+        }
+        return true
     }
 }

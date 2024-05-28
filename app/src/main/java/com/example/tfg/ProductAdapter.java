@@ -49,10 +49,12 @@ public class ProductAdapter extends BaseAdapter {
         Product currentProduct=(Product)getItem(position);
         TextView nombre=elemento.findViewById(R.id.nombreP);
         TextView precio=elemento.findViewById(R.id.precioP);
+        TextView descripcion=elemento.findViewById(R.id.descripcionPR);
         ImageView imagen=elemento.findViewById(R.id.imagenP);
 
         nombre.setText(currentProduct.getNombreP());
-        precio.setText( currentProduct.getDescripcionP());
+        precio.setText( String.valueOf(currentProduct.getPrecio()));
+        descripcion.setText(currentProduct.getDescripcionP());
         /*byte[] imagenBytes = currentUser.getProfileP();
         if (imagenBytes != null && imagenBytes.length > 0) {
             Bitmap bitmap = BitmapFactory.decodeByteArray(imagenBytes, 0, imagenBytes.length);
