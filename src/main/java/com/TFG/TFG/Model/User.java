@@ -34,6 +34,8 @@ public class User {
     @Column(name="profileP")
     private String profileP;
 
+    @Column(name="activo")
+    private Boolean activo;
     @OneToMany(mappedBy = "user",cascade=CascadeType.REMOVE)
     @JsonIgnore
     private List<Review> resenas=new ArrayList<>();
@@ -124,5 +126,13 @@ public class User {
 
     public void setProfileP(String profileP) {
         this.profileP = profileP;
+    }
+
+    public Boolean getActivo() {
+        return activo;
+    }
+
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
     }
 }

@@ -11,6 +11,8 @@ public class ReviewDTO {
     @JsonProperty
     private String descripcion;
     @JsonProperty
+    private int puntuacion;
+    @JsonProperty
     private String id_user;
     @JsonProperty
     private String userName;
@@ -20,10 +22,11 @@ public class ReviewDTO {
     private String nombreProducto;
 
     // Constructor
-    public ReviewDTO(int id, String nombre, String descripcion, String id_user, String userName, int product, String nombreProducto) {
+    public ReviewDTO(int id, String nombre, String descripcion,int puntuacion, String id_user, String userName, int product, String nombreProducto) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
+        this.puntuacion=puntuacion;
         this.id_user = id_user;
         this.userName = userName;
         this.product = product;
@@ -84,6 +87,14 @@ public class ReviewDTO {
 
     public void setNombreProducto(String nombreProducto) {
         this.nombreProducto = nombreProducto;
+    }
+
+    public int getPuntuacion() {
+        return puntuacion;
+    }
+
+    public void setPuntuacion(int puntuacion) {
+        this.puntuacion = puntuacion;
     }
 }
 

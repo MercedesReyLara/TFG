@@ -32,6 +32,7 @@ public class CategoryController {
                             r.getId(),
                             r.getNombreR(),
                             r.getOpinion(),
+                            r.getPuntuacion(),
                             r.getUser().getDNI(),
                             r.getUser().getNombreU(),
                             p.getId(),

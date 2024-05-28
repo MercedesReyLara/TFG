@@ -19,7 +19,8 @@ public class Review {
     private String nombreR;
     @Column(name="opinion")
     private String opinion;
-
+    @Column(name="puntuacion")
+    private int puntuacion;
     @ManyToOne
     @JoinColumn(name="user_id",nullable = false)
     private User user;
@@ -31,9 +32,10 @@ public class Review {
    /*public Review() {
     }*/
 
-    public Review(String nombreR, String opinion, User user, Producto product) {
+    public Review(String nombreR, String opinion,int puntuacion, User user, Producto product) {
         this.nombreR = nombreR;
         this.opinion = opinion;
+        this.puntuacion=puntuacion;
         this.user = user;
         this.product = product;
     }
@@ -76,4 +78,11 @@ public class Review {
         this.product = product;
     }
 
+    public int getPuntuacion() {
+        return puntuacion;
+    }
+
+    public void setPuntuacion(int puntuacion) {
+        this.puntuacion = puntuacion;
+    }
 }

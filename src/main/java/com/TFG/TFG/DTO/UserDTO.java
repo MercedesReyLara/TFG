@@ -20,9 +20,10 @@ public class UserDTO {
     private String descripcion;
     @JsonProperty
     private String profileP;
-
+    @JsonProperty
+    private boolean activo;
     // Constructor
-    public UserDTO(String dni, String nombreU, String apellidosU, String correo, String contrasena, String descripcion,String profileP) {
+    public UserDTO(String dni, String nombreU, String apellidosU, String correo, String contrasena, String descripcion,String profileP,Boolean activo) {
         this.dni = dni;
         this.nombreU = nombreU;
         this.apellidosU = apellidosU;
@@ -30,6 +31,7 @@ public class UserDTO {
         this.contrasena = contrasena;
         this.descripcion = descripcion;
         this.profileP=profileP;
+        this.activo=activo;
     }
 
     public String getDni() {
@@ -86,5 +88,13 @@ public class UserDTO {
 
     public void setProfileP(String profileP) {
         this.profileP = profileP;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 }

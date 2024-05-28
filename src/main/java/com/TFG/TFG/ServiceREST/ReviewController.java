@@ -36,6 +36,7 @@ public class ReviewController {
                     r.getId(),
                     r.getNombreR(),
                     r.getOpinion(),
+                    r.getPuntuacion(),
                     r.getUser().getDNI(),
                     r.getUser().getCorreo(),
                     r.getProduct().getId(),
@@ -51,7 +52,7 @@ public class ReviewController {
         User u=ur.findByDNI(review.getId_user());
         Producto p=pr.findByNombreP(review.getNombreProducto());
          /*Añadimos la reseña al usuario y al producto*/
-        Review r=new Review(review.getNombre(),review.getDescripcion(),u,p);
+        Review r=new Review(review.getNombre(),review.getDescripcion(),review.getPuntuacion(),u,p);
         u.getResenas().add(r);
         ur.save(u);
         p.getResenas().add(r);
@@ -77,6 +78,7 @@ public class ReviewController {
                         r.getId(),
                         r.getNombreR(),
                         r.getOpinion(),
+                        r.getPuntuacion(),
                         r.getUser().getDNI(),
                         r.getUser().getCorreo(),
                         r.getProduct().getId(),
@@ -104,6 +106,7 @@ public class ReviewController {
     public String updateR(@RequestBody Review r){
         Review rU=rr.findById(r.getId());
         rU.setOpinion(r.getOpinion());
+        rU.setPuntuacion(r.getPuntuacion());
         rU.setUser(r.getUser());
         rU.setProduct(r.getProduct());
 
