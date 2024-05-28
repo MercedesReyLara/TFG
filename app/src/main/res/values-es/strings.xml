@@ -3,7 +3,7 @@
     <string name="iniciar_sesion">Iniciar Sesión</string>
     <string name="registro">¿No tienes cuenta? Registrate</string>
     <string name="subir">Subir mi producto</string>
-    <string name="eliminar">Eliminar esta reseña</string>
+    <string name="eliminar">Modificar esta reseña</string>
     <string name="ver">Ver todas las reseñas</string>
     <string name="modificarUsuario">Modificar mi perfil</string>
     <string name="filtrar">Aplicar filtro</string>
@@ -39,7 +39,7 @@
     <string name="errorVacios">Los campos no pueden estar vacíos</string>
     <string name="irUsuario">Ir a mi perfil</string>
     <string name="panel">Panel de reseñas</string>
-    <string name="eliminaR">Eliminar reseña</string>
+    <string name="eliminaR">Modificar reseña</string>
     <string name="errorCorreo">El correo tiene que acabar en @gmail.com</string>
     <string name="errorContraseña">La contraseña tiene que tener mayúscula,minúsculaa, números e símbolos</string>
     <string name="coincidir">Las contraseñas tienen que coincidir</string>
@@ -50,7 +50,7 @@
     <string name="volverMain">Volver al menú principal</string>
     <string name="puntuacionReseña">Puntuación de la reseña</string>
     <string name="escogerEliminar">Escoge un producto para eliminar</string>
-    <string name="txtEliminar">Bienvenido al menú de eliminación de reseñas</string>
+    <string name="txtEliminar">Bienvenido al menú de modificación de reseñas</string>
     <string name="nombreU">Nombre</string>
     <string name="apellidosU">Apellidos</string>
     <string name="emailU">Email</string>

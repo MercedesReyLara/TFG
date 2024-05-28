@@ -78,27 +78,35 @@ class httPettitions {
     }
 
 
-    suspend fun deleteUser(dni:String):Boolean {
+    suspend fun deleteUser(dni:String):Boolean? {
         return withContext(Dispatchers.IO) {
             val client = OkHttpClient()
-            val url = "http://192.168.1.73:8080/delete/$dni"
+            val url = "http://192.168.5.5:8080/deleteUser/$dni"
 
             val request = Request.Builder()
                 .url(url)
                 .delete()
                 .build()
 
-            val response = client.newCall(request).execute()
+            try {
+                val response = client.newCall(request).execute()
 
 
-            /*Pone "Method not allowed*/
-            val responseBody = response.body?.string()
-            // Verificar si el DNI del usuario encontrado coincide con el DNI buscado y que se ha borrado
-            return@withContext response.isSuccessful && !responseBody.isNullOrEmpty()
+                /*Pone "Method not allowed*/
+                val responseBody = response.body?.string()
+                // Verificar si el DNI del usuario encontrado coincide con el DNI buscado y que se ha borrado
+                if (response.isSuccessful&&!responseBody.isNullOrEmpty()) {
+                    return@withContext true
+                }else{
+                    return@withContext false
+                }
+            }catch (exception:IOException){
+                return@withContext  null
+            }
         }
     }
 
-        suspend fun deleteReview(review:Review):Boolean {
+        suspend fun deleteReview(review:Review):Boolean? {
             return withContext(Dispatchers.IO) {
                 val client = OkHttpClient()
                 val url = "http://192.168.1.73:8080/deleteReview"
@@ -108,13 +116,21 @@ class httPettitions {
                     .delete()
                     .build()
 
+                try{
                 val response = client.newCall(request).execute()
 
 
                 /*Pone "Method not allowed*/
                 val responseBody = response.body?.string()
                 // Verificar si el DNI del usuario encontrado coincide con el DNI buscado y que se ha borrado
-                return@withContext response.isSuccessful && !responseBody.isNullOrEmpty()
+                if (response.isSuccessful&&!responseBody.isNullOrEmpty()) {
+                    return@withContext true
+                }else{
+                    return@withContext false
+                }
+            }catch (exception:IOException){
+                return@withContext  null
+            }
             }
     }
 
@@ -148,7 +164,7 @@ class httPettitions {
         }
     }
 
-    suspend fun getProductos(user:User?,ip:String):ArrayList<Product>{
+    suspend fun getProductos(user:User?):ArrayList<Product>{
         return withContext(Dispatchers.IO) {
             val products = object : TypeToken<ArrayList<Product>>() {}.type
             val client = OkHttpClient()

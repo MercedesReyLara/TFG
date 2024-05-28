@@ -11,6 +11,7 @@ class User :Serializable {
     var contrasena: String=""
     var descripcion:String=""
     var profileP:String= "Hola"
+    var activo:Boolean=false
     constructor()
 
     constructor(
@@ -20,7 +21,8 @@ class User :Serializable {
         correo: String,
         contrasena: String,
         descripcion: String,
-        profileP:String
+        profileP:String,
+        activo:Boolean
     ) {
         this.dni = dni
         this.nombreU = nombreU
@@ -29,6 +31,7 @@ class User :Serializable {
         this.contrasena = contrasena
         this.descripcion=descripcion
         this.profileP=profileP
+        this.activo=activo
     }
 
     constructor(dni: String) {

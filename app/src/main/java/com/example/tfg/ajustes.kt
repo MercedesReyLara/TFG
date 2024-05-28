@@ -30,11 +30,14 @@ class ajustes : AppCompatActivity() {
         val volverMain: ImageButton =findViewById(R.id.backToMain)
         val ip:Button=findViewById(R.id.aplicarIp)
         val direcIP:EditText=findViewById(R.id.direccionIP)
-
         val spinnerIdiomas: Spinner = findViewById(R.id.spinnerLanguages)
         //Declaración de variables
         val tamanoFuente:Int=12
         val sharedPreff=SharedPreff(context)
+        /*Crearemos el spinner que se encarga de los idiomas. Creamos una lista con 3 elementos, 2 códigos y un string
+        * indicando al usuario que escoja el idioma. Según el código cambiaremos el local del dispositivo para que
+        * se aplique el idioma en cuestión*/
+
         val languages = arrayListOf("es", "gl","SELECCIONE IDIOMA")
         val adapter: ArrayAdapter<String> = ArrayAdapter(this,android.R.layout.simple_spinner_item,languages)
         spinnerIdiomas.adapter=adapter
@@ -50,24 +53,22 @@ class ajustes : AppCompatActivity() {
                 if (selectedLanguage == "gl") {
                     if(!sharedPreff.getLanguage(context).equals("gl")){
                         sharedPreff.setLanguage(context, "gl")
-                        val intent=intent
                         functions.setLanguage(context)
-                        startActivity(intent)
+                        recreate()
                     }
 
                 } else if (selectedLanguage == "es") {
                     if (!sharedPreff.getLanguage(context).equals("es")) {
                         sharedPreff.setLanguage(context, "es")
-                        val intent=intent
                         functions.setLanguage(context)
-                        startActivity(intent)
+                        recreate()
                     }
                 }
             }
             override fun onNothingSelected(p0: AdapterView<*>?) {
             }
         }
-        /*Declaracion de elementos de uso*/
+        /*Declaracion de elementos de uso
         lgrande.isEnabled = !lpequena.isChecked
         aplicar.setOnClickListener {
             val configuration = resources.configuration
@@ -76,8 +77,8 @@ class ajustes : AppCompatActivity() {
             finish()
             val intent=Intent(this,ajustes::class.java)
             startActivity(intent)
-        }
-
+        }*/
+        /*Boton para establecer el cambio de ip*/
         ip.setOnClickListener {
             val IP:String=direcIP.text.toString()
             sharedPreff.saveIP(context,IP)

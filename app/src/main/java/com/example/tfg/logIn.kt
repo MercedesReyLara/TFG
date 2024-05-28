@@ -31,13 +31,21 @@ class logIn : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
 
+        /*Dromimos el main para que se vea el splash*/
         Thread.sleep(1500)
+        /*Aplicamos el tema por defecto de mi app*/
         setTheme(R.style.Base_Theme_TFG)
         super.onCreate(savedInstanceState)
+        /*Instanciamos el contexto y las shared prefferences, que por tema del cambio de idioma tienen que
+        estar declaradas fuera del onCreate para poder referenciarlas en la función del cambio de idioma
+         */
         context = baseContext
         sharedPreff = SharedPreff(context)
+        /*Hacemos que las preferencias pillen la ip indicada*/
         sharedPreff.saveIP(context,"192.168.")
-        applyLanguage()
+        /*Esta función está más abajo, y se ejecuta en el onCreate porque cuando ejecutamos la funcion,
+        esta cuenta con el método recreate() que lo que hace es llamar al onCreate para poder aplicar el idioma
+         */
         setContentView(R.layout.log_in)
         /*^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$ regex ip igual la uso*/
         //Búsqueda de elementos visuales
@@ -45,9 +53,9 @@ class logIn : AppCompatActivity() {
         val registerBut: Button = findViewById(R.id.registrar)
         val email: EditText = findViewById(R.id.editTextUsername)
         val password: EditText = findViewById(R.id.passwordUser)
-        val functions = generalFunctions()
         val ajustesButton:ImageButton=findViewById(R.id.ajustes)
         //Declaración de variables
+        val functions = generalFunctions()
         val httPettitions=httPettitions()
         /*Si las shared preferences tienen inciada sesión, vamos directamente al menú principal
         si no nos quedamos en la actividad y hacemos las operaciones adecuadas
@@ -77,14 +85,8 @@ class logIn : AppCompatActivity() {
                         Toast.LENGTH_LONG
                     )
                         .show()
-                    /*} else if (!validator.validateEmail(emailText)) {
-                        Toast.makeText(
-                            this,
-                            this.getString(R.string.errorCorreo),
-                            Toast.LENGTH_LONG
-                        )
-                            .show()*/
-                    /*} else if (!validator.validatePassword(passwordText)) {
+                    /*Validamos contraseña con la regex establecida*/
+                   /* } else if (!functions.validatePassword(passwordText)) {
                         Toast.makeText(
                             this,
                             this.getString(R.string.errorContraseña),
@@ -99,9 +101,7 @@ class logIn : AppCompatActivity() {
                             Toast.LENGTH_SHORT
                         ).show()
                     } else {*/
-                    /*Llamo al hilo principal para saber donde tiene que ejecutar las acciones siguiente
-                    Esto creo que no es necesario pero hazlo por si acaso
-                     */
+                    /*Llamo al hilo principal para saber donde tiene que ejecutar las acciones siguiente*/
                        lifecycleScope.launch(Dispatchers.Main) {
                             val encontrado:User?
                             /*Lanzo la petición en el hilo secundario para no crashear*/
@@ -130,24 +130,18 @@ class logIn : AppCompatActivity() {
 
                 }
 
+        /*Cambio de pantalla al registro por si no tienes cuenta*/
             registerBut.setOnClickListener {
                 val intentRegister = Intent(this, register::class.java)
                 startActivity(intentRegister)
 
             }
+        /*Ir al boton de ajustes para cambiar ip e idioma*/
         ajustesButton.setOnClickListener {
         val intentAjustes=Intent(this,ajustes::class.java)
         startActivity(intentAjustes)
         }
             }
-    fun Context.applyLanguage() {
-        val language = sharedPreff.getLanguage(this)
-        val locale = Locale(language)
-        Locale.setDefault(locale)
-        val config = Configuration()
-        config.setLocale(locale)
-        resources.updateConfiguration(config, resources.displayMetrics)
-    }
         }
 
 

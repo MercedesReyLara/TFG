@@ -4,7 +4,7 @@
     <string name="iniciar_sesion">Iniciar Sesión</string>
     <string name="registro">¿Non tes conta? Rexístrate aquí</string>
     <string name="subir">Subir a miña reseña</string>
-    <string name="eliminar">Eliminar esta reseña</string>
+    <string name="eliminar">Modificar esta reseña</string>
     <string name="consultar">Buscar por producto</string>
     <string name="ver">Ver todas as resenas</string>
     <string name="modificarUsuario">Modificar o meu perfil</string>
@@ -13,7 +13,7 @@
     <string name="DNI">DNI</string>
     <string name="panel">Panel de reseñas</string>
     <string name="mp">Listar os meus productos</string>
-    <string name="eliminaR">Eliminar reseña</string>
+    <string name="eliminaR">Modificar reseña</string>
     <string name="mr">Listar as miñas reseñas</string>
     <string name="tp">O teu inventario</string>
     <string name="fotoDefecto">Seleccionar foto</string>
@@ -28,7 +28,7 @@
     <string name="btnModificar">Modificar unha reseña</string>
     <string name="txtModificar">Escolla un producto a modificar</string>
     <string name="escogerEliminar">Escolla un producto</string>
-    <string name="txtEliminar">Benvido ao menu de eliminación de reseñas</string>
+    <string name="txtEliminar">Benvido ao menu de modificación de reseñas</string>
     <string name="credencialCorreo">Mail ou Nome de usuario</string>
     <string name="credencialCotraseña">Contrasinal</string>
     <string name="errorVacios">Os campos non poden estar vacíos</string>

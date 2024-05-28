@@ -28,7 +28,7 @@ class productosList : AppCompatActivity() {
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        /*Esta activity la voy a usar tanto como para mostrar productos como reseñas
+        /*Esta activity la voy a usar tanto como para mostrar productos como reseñas, voy a reutilizar un listview
         Haré 2 botones, cuando pulse no hará la petición de productos y cuando pulse el otro de reseñas
          */
         val functions=generalFunctions()
@@ -54,7 +54,7 @@ class productosList : AppCompatActivity() {
             lifecycleScope.launch(Dispatchers.Main) {
                 var newProducts:ArrayList<Product>
                 withContext(Dispatchers.IO) {
-                    newProducts = httPetitions.getProductos(User(DNI),sharedPreff.ipReal(context).toString())
+                    newProducts = httPetitions.getProductos(User(DNI))
                 }
                 if(newProducts.isEmpty()){
                     Toast.makeText(this@productosList,"Peticion denegada", Toast.LENGTH_SHORT).show()
@@ -90,11 +90,15 @@ class productosList : AppCompatActivity() {
          */
             lista.setOnItemClickListener { parent, view, position, id ->
                 if(lista.adapter==adapterProductos) {
+                    /*En este caso iremos a una pantalla para ver los detalles del producto*/
                     val product = parent.getItemAtPosition(position) as Product
                     val intentDetails = Intent(this, DetailsProduct::class.java)
                     intentDetails.putExtra("product", product)
                     startActivity(intentDetails)
                 }else {
+                    /*En este otro, si pulsamos la opcion 1 eliminaremos esa reseña, y si pulsamos la 2 iremos
+                    a un menú de modificación de la reseña
+                     */
                     val review=parent.getItemAtPosition(position) as Review
                     var done:Boolean
                     val builder: AlertDialog.Builder =
@@ -104,7 +108,7 @@ class productosList : AppCompatActivity() {
                     builder.setPositiveButton("Eliminar reseña") { _, _ ->
                         lifecycleScope.launch(Dispatchers.Main) {
                             withContext(Dispatchers.IO) {
-                                done = httPetitions.deleteReview(review)
+                                done = httPetitions.deleteReview(review)!!
                             }
                             if(!done){
                                 Toast.makeText(this@productosList,"Peticion denegada", Toast.LENGTH_SHORT).show()

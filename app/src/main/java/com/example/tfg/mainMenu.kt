@@ -27,7 +27,7 @@ class mainMenu : AppCompatActivity() {
         val ajustesButton:ImageButton=findViewById(R.id.ajustes)
 
         //Declaración de variables que vamos a utilizar
-
+        val functions=generalFunctions()
 
          ajustesButton.setOnClickListener {
              val intentAjustes=Intent(this,ajustes::class.java)
@@ -39,13 +39,14 @@ class mainMenu : AppCompatActivity() {
             builder.setTitle("¿Cerrar sesión?")/*Establecemos el título, el mensaje principal y las dos opciones*/
             builder.setMessage("¿Seguro que quieres cerrar sesión?")
             builder.setPositiveButton("Si") { _, _ ->
-                logOutFun()
+                startActivity(functions.logOutFun(this@mainMenu))
             }
             builder.setNegativeButton(("No"), { _, _ -> })
             val dialog = builder.create()/*Lo construímos con las distintas partes*/
             dialog.show()/*Lo mostramos*/
         }
 
+        /*Va hacia el perfil del usuario*/
         perfilU.setOnClickListener {
             val intentPerfil=Intent(this,perfilUser::class.java)
             startActivity(intentPerfil)
@@ -65,14 +66,5 @@ class mainMenu : AppCompatActivity() {
             val intentResenar=Intent(this,reviewProduct::class.java)
             startActivity(intentResenar)
         }
-    }
-    fun logOutFun() {
-        /*Esta función nos redirige a la pantalla principal
-         Si le damos al botón establece el login como false y nos pide introducir nuestros datos de nuevo*/
-        val sharedPreff = SharedPreff(context)
-        sharedPreff.saveLogin(context, false)
-        /*sharedPreff.savePressed(context,false)*/
-        val intent = Intent(this, logIn::class.java)
-        startActivity(intent)
     }
 }

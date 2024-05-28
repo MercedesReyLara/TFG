@@ -21,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.drawToBitmap
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.example.tfg.sqlite.GalleryDbHelper
@@ -124,7 +125,7 @@ class register : AppCompatActivity() {
                 }else {
                     functions.imageViewToByteArray(profileP)
                 }
-                val newUser= User(dniTXT,nameTXT,lastNameTXT,mailTXT,passwordConfTXT,"Sin descripcion",pfp.toString())
+                val newUser= User(dniTXT,nameTXT,lastNameTXT,mailTXT,passwordConfTXT,"Sin descripcion",pfp.toString(),true)
                 var success:Boolean=false
                 lifecycleScope.launch (Dispatchers.IO){
                     success=pettitions.postUser(newUser)

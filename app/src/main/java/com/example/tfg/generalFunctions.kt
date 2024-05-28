@@ -3,6 +3,7 @@ package com.example.tfg
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.util.Base64
@@ -158,6 +159,7 @@ class generalFunctions {
         return stream.toByteArray()
     }
 
+
     fun imageViewToByteArray(imageView: ImageView): ByteArray {
         // Obtener el Bitmap del ImageView
         val bitmap = imageView.drawable.toBitmap()
@@ -173,6 +175,12 @@ class generalFunctions {
     fun byteArrayToBitmap(image:ByteArray?):Bitmap{
         return BitmapFactory.decodeByteArray(image,0,image!!.size)
     }
+
+    fun bitmapToByteArray(bitmap: Bitmap): ByteArray {
+        val stream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+        return stream.toByteArray()
+    }
     fun setLanguage(context:Context) {
         val resources:Resources=context.resources
         val DM:DisplayMetrics=resources.displayMetrics
@@ -180,6 +188,15 @@ class generalFunctions {
         val sharedPreff=SharedPreff(context)
         configuration.setLocale(Locale(sharedPreff.getLanguage(context)))
         resources.updateConfiguration(configuration,DM)
+    }
+    fun logOutFun(context:Context):Intent {
+        /*Esta función nos redirige a la pantalla principal
+         Si le damos al botón establece el login como false y nos pide introducir nuestros datos de nuevo*/
+        val sharedPreff = SharedPreff(context)
+        sharedPreff.saveLogin(context, false)
+        /*sharedPreff.savePressed(context,false)*/
+        val intentSalir = Intent(context, logIn::class.java)
+        return intentSalir
     }
     /*fun writePDF(work:String):File{
         document.add(Paragraph("Lista de jornadas"))

@@ -22,6 +22,7 @@ import model.Category
 import model.Product
 import model.Review
 import model.SharedPreff
+import model.User
 
 class reviewProduct : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
@@ -46,6 +47,8 @@ class reviewProduct : AppCompatActivity() {
         val hintNombre=nombre.hint
         val hintDescripcion=descripcion.hint
         val hintPuntuacion=puntuacion.hint
+        /*Obtenemos el DNI del usuario a través de las sharedpreferences*/
+        val DNI:String=sharedPreff.getUser(context).toString()
         nombre.text.clear()
         descripcion.text.clear()
         puntuacion.text.clear()
@@ -55,16 +58,21 @@ class reviewProduct : AppCompatActivity() {
         lifecycleScope.launch(Dispatchers.Main) {
             var products: ArrayList<Product>
             withContext(Dispatchers.IO) {
-                products = pettitions.getAllProducts()!!
+                /*Obtenemos los productos de ese usuario en especifico*/
+                products = pettitions.getProductos(User(DNI))
             }
             if (products.isEmpty()) {
                 Toast.makeText(this@reviewProduct, "Peticion denegada", Toast.LENGTH_SHORT).show()
             } else {
                 for(p in products){
+                    /*Metemos en la lista de nombres de productos para el spinner los nombres de los productos
+                    que tiene el usuario
+                     */
                     nombresProductos.add(p.nombreP)
                 }
             }
         }
+        /*Creamos el adapter para obtener los productos que tiene ese usuario unicamente*/
         val adapter: ArrayAdapter<String> = ArrayAdapter(this,android.R.layout.simple_spinner_item,nombresProductos)
         spinnerProductos.adapter=adapter
         spinnerProductos.setSelection(0)
@@ -74,25 +82,32 @@ class reviewProduct : AppCompatActivity() {
             val descripcionTXT=descripcion.text.toString()
             val puntuacionTXT=puntuacion.text.toString()
 
+            /*Comprobamos que no haya ningun campo vacio*/
             if(nombreTXT.isEmpty()||descripcionTXT.isEmpty()||puntuacionTXT.isEmpty()){
                 Toast.makeText(this@reviewProduct, "Los campos no puden estar vacios", Toast.LENGTH_SHORT).show()
             }else{
-                val review= Review(nombreTXT,descripcionTXT,sharedPreff.getUser(context).toString(),spinnerProductos.selectedItem.toString())
+                /*Creamos el objeto review*/
+                val review= Review(nombreTXT,descripcionTXT,DNI,spinnerProductos.selectedItem.toString())
                 lifecycleScope.launch(Dispatchers.Main) {
                     var done=false
                     withContext(Dispatchers.IO){
+                        /*Hacemos la peticion para publicar la reseña*/
                         done=pettitions.postReview(review)
                     }
                     if(done){
+                        /*Exitosa*/
                         Toast.makeText(this@reviewProduct, "Reseña publicada", Toast.LENGTH_SHORT).show()
+                        /*Se limpian todos los campos*/
                         functions.manipulateEdits(listOf(nombre,descripcion,puntuacion))
                     }else{
+                        /*Fallo para que no se cierre la aplicación*/
                         Toast.makeText(this@reviewProduct, "Error en la peticion", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
         }
 
+        /*Nos lleva al menú principal*/
         back.setOnClickListener {
             val intentMain= Intent(this,mainMenu::class.java)
             startActivity(intentMain)
