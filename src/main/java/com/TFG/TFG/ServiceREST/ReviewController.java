@@ -38,7 +38,7 @@ public class ReviewController {
                     r.getOpinion(),
                     r.getPuntuacion(),
                     r.getUser().getDNI(),
-                    r.getUser().getCorreo(),
+                    r.getUser().getNombreU(),
                     r.getProduct().getId(),
                     r.getProduct().getNombreP()
             );
@@ -80,7 +80,7 @@ public class ReviewController {
                         r.getOpinion(),
                         r.getPuntuacion(),
                         r.getUser().getDNI(),
-                        r.getUser().getCorreo(),
+                        r.getUser().getNombreU(),
                         r.getProduct().getId(),
                         r.getProduct().getNombreP()
                 );
@@ -92,9 +92,9 @@ public class ReviewController {
     }
 
 
-    @DeleteMapping(value = "/deleteReview")
-    public Boolean deleteReview(@RequestBody ReviewDTO reviewDTO){
-        Review r=rr.findById(reviewDTO.getId());
+    @DeleteMapping(value = "/deleteReview/{id}")
+    public Boolean deleteReview(@PathVariable int id){
+        Review r=rr.findById(id);
         if(r!=null){
             rr.delete(r);
             return true;
