@@ -23,5 +23,9 @@ class Product:Serializable {
         this.nombreCategoria = nombreCategoria
     }
 
+    override fun toString(): String {
+        return "$nombreP/$descripcionP/$precio/$nombreCategoria"
+    }
+
 
 }

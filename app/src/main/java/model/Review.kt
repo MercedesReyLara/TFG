@@ -60,7 +60,7 @@ class Review:Serializable {
 
 
     override fun toString(): String {
-        return "$id/$nombre/$descripcion/$puntuacion/$id_user/$nombreProducto"
+        return "$id/$nombre/$descripcion/$puntuacion/$id_user/$nombreProducto/$user_name"
     }
 
 

@@ -3,16 +3,12 @@ package com.example.tfg
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -28,13 +24,13 @@ class perfilUser : AppCompatActivity() {
         setContentView(R.layout.details)
         /*Declaramos los elementos visuales*/
         val nombre:TextView=findViewById(R.id.nombreU)
-        val apellidos:TextView=findViewById(R.id.apellidos)
-        val correo:TextView=findViewById(R.id.emailUser)
-        val DNI:TextView=findViewById(R.id.DNIDetalles)
-        val about:TextView=findViewById(R.id.descripcionU)
+        val apellidos:TextView=findViewById(R.id.puntuacionR)
+        val correo:TextView=findViewById(R.id.emailUR)
+        val DNI:TextView=findViewById(R.id.productoN)
+        val about:TextView=findViewById(R.id.descripcionR)
         var profilePick:ImageView=findViewById(R.id.profilePD)
         val buttonBack:ImageButton=findViewById(R.id.backButton)
-        val productList:ImageButton=findViewById(R.id.productosList)
+        val productList:ImageButton=findViewById(R.id.detailsR)
         val deleteButton:ImageButton=findViewById(R.id.editDelete)
         /*Declaracion de variables*/
         val context=baseContext

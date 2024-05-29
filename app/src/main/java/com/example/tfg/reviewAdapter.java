@@ -66,16 +66,10 @@ public class reviewAdapter extends BaseAdapter {
             TextView nombre=elemento.findViewById(R.id.nombreP);
             TextView puntuacion=elemento.findViewById(R.id.precioP);
             TextView descripcion=elemento.findViewById(R.id.descripcionPR);
-            ImageView imagen=elemento.findViewById(R.id.imagenP);
 
             nombre.setText(currentReview.getNombre());
             puntuacion.setText( String.valueOf(currentReview.getPuntuacion()));
             descripcion.setText(currentReview.getDescripcion());
-        /*byte[] imagenBytes = currentUser.getProfileP();
-        if (imagenBytes != null && imagenBytes.length > 0) {
-            Bitmap bitmap = BitmapFactory.decodeByteArray(imagenBytes, 0, imagenBytes.length);
-            imagen.setImageBitmap(bitmap);
-        }*/
             return elemento;
         }
     }

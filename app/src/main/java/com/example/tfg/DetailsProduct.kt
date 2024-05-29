@@ -18,31 +18,21 @@ class DetailsProduct : AppCompatActivity() {
         setContentView(R.layout.activity_details_product)
 
         /*Declaracion de elementos visuales*/
-        val pick: ImageView =findViewById(R.id.productPick)
         val name:TextView=findViewById(R.id.nameProduct)
         val price:TextView=findViewById(R.id.pricePorduct)
         val description:TextView=findViewById(R.id.descriptionProduct)
         val category:TextView=findViewById(R.id.categoryProduct)
         val review: ImageButton =findViewById(R.id.makeReview)
-        val viewReviews:ImageButton=findViewById(R.id.reviewsP)
         val back:ImageButton=findViewById(R.id.backList)
 
-        /*Declaracion de variables*/
+        /*Recperamos el producto mandado a través del intent y lo partimos en las distintas partes del prodcuto
+        * para poder asignárselos a los distintos campos*/
+        val partes=intent.getStringExtra("producto").toString().split("/")
+        name.text=partes[0]
+        price.text=partes[2]
+        description.text=partes[1]
+        category.text=partes[3]
 
-        val functions=generalFunctions()
-        /*Recperamos el producto mandado a través del intent y le asignamos a cada campo su valor*/
-        val product=intent.getSerializableExtra("producto") as Product?
-        name.text=product!!.nombreP
-        price.text=product.precio.toString()
-        description.text=product.descripcionP
-        category.text=product.nombreCategoria
-
-
-        /*Este boton nos dirige a la lista de reviews de este producto en cuestion*/
-        viewReviews.setOnClickListener {
-            val intentList= Intent(this,productosList::class.java)
-            startActivity(intentList)
-        }
 
         /*Este nos dirige a la pantalla de la lista de productos del usuario en cuestión*/
         back.setOnClickListener {

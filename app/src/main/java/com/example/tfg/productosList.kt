@@ -93,7 +93,7 @@ class productosList : AppCompatActivity() {
                     /*En este caso iremos a una pantalla para ver los detalles del producto*/
                     val product = parent.getItemAtPosition(position) as Product
                     val intentDetails = Intent(this, DetailsProduct::class.java)
-                    intentDetails.putExtra("product", product)
+                    intentDetails.putExtra("product", product.toString())
                     startActivity(intentDetails)
                 }else {
                     /*En este otro, si pulsamos la opcion 1 eliminaremos esa reseña, y si pulsamos la 2 iremos
@@ -108,7 +108,7 @@ class productosList : AppCompatActivity() {
                     builder.setPositiveButton("Eliminar reseña") { _, _ ->
                         lifecycleScope.launch(Dispatchers.Main) {
                             withContext(Dispatchers.IO) {
-                                done = httPetitions.deleteReview(review)!!
+                                done = httPetitions.deleteReview(review.id)!!
                             }
                             if(!done){
                                 Toast.makeText(this@productosList,"Peticion denegada", Toast.LENGTH_SHORT).show()

@@ -107,10 +107,10 @@ class httPettitions {
         }
     }
 
-        suspend fun deleteReview(review:Review):Boolean? {
+        suspend fun deleteReview(id:Int):Boolean? {
             return withContext(Dispatchers.IO) {
                 val client = OkHttpClient()
-                val url = "http://192.168.1.73:8080/deleteReview"
+                val url = "http://192.168.1.73:8080/deleteReview/$id"
 
                 val request = Request.Builder()
                     .url(url)
