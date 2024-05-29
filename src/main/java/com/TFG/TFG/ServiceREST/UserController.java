@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 @RestController
@@ -37,7 +38,7 @@ public class UserController {
                    un.getCorreo(),
                    un.getContrasena(),
                    un.getDescripcion(),
-                   un.getProfileP(),
+                   /*un.getProfileP().toString(),*/
                    un.getActivo()
                 );
                 activos.add(DTO);
@@ -57,7 +58,7 @@ public class UserController {
                         u.getCorreo(),
                         u.getContrasena(),
                         u.getDescripcion(),
-                        u.getProfileP(),
+                        /*Base64.getEncoder().encodeToString(u.getProfileP()),*/
                         u.getActivo() );
                 return DTO;
             }
@@ -68,7 +69,8 @@ public class UserController {
     public UserDTO getDNI(@RequestBody UserDTO user){
         User u=ur.findByDNI(user.getDni());
         UserDTO uDTO=new UserDTO(u.getDNI(),u.getNombreU(),u.getApellidosU(),
-                u.getCorreo(),u.getContrasena(),u.getDescripcion(),u.getProfileP(),u.getActivo());
+                u.getCorreo(),u.getContrasena(),u.getDescripcion()
+                /*Base64.getEncoder().encodeToString(u.getProfileP())*/,u.getActivo());
         return uDTO;
     }
     @PostMapping(value = "/postUser")
@@ -82,6 +84,8 @@ public class UserController {
                 return false;
             }
         }
+        byte[] imageData = Base64.getUrlDecoder().decode(user.getProfileP());
+        user.setProfileP(imageData);
         ur.save(user);
         return true;
     }
@@ -144,13 +148,27 @@ public class UserController {
                     r.getNombreR(),
                     r.getOpinion(),
                     r.getPuntuacion(),
+                    r.getUser().getDNI(),
                     r.getUser().getCorreo(),
-                    r.getUser().getNombreU(),
                     r.getProduct().getId(),
                     r.getProduct().getNombreP()
             );
             DTOS.add(DTO);
         }
         return DTOS;
+    }
+
+    @PutMapping(value="/updateUser")
+    public Boolean updateUser(@RequestBody UserDTO user){
+        User u=ur.findByDNI(user.getDni());
+        if(u==null){
+            return false;
+        }
+        u.setCorreo(user.getCorreo());
+        u.setNombreU(user.getNombreU());
+        u.setApellidosU(user.getApellidosU());
+
+        ur.save(u);
+        return true;
     }
 }

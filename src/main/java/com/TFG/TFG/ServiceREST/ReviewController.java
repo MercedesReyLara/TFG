@@ -103,14 +103,17 @@ public class ReviewController {
     }
 
     @PutMapping(value="/updateR")
-    public String updateR(@RequestBody Review r){
+    public Boolean updateR(@RequestBody ReviewDTO r){
         Review rU=rr.findById(r.getId());
-        rU.setOpinion(r.getOpinion());
+        if(rU==null){
+            return false;
+        }
+        rU.setNombreR(r.getNombre());
+        rU.setOpinion(r.getDescripcion());
         rU.setPuntuacion(r.getPuntuacion());
-        rU.setUser(r.getUser());
-        rU.setProduct(r.getProduct());
+
 
         rr.save(rU);
-        return "Actualzacion review";
+        return true;
     }
 }

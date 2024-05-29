@@ -29,8 +29,8 @@ public class Review {
     @JoinColumn(name="product_id",nullable = false)
     private Producto product;
 
-   /*public Review() {
-    }*/
+   public Review() {
+    }
 
     public Review(String nombreR, String opinion,int puntuacion, User user, Producto product) {
         this.nombreR = nombreR;

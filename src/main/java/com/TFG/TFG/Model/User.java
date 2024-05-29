@@ -31,8 +31,9 @@ public class User {
     @Column(name="descripcion")
     private String descripcion;
 
-    @Column(name="profileP")
-    private String profileP;
+    @Lob
+    @Column(name="profileP",columnDefinition = "BLOB")
+    private byte[] profileP;
 
     @Column(name="activo")
     private Boolean activo;
@@ -120,11 +121,11 @@ public class User {
         this.productsU = productsU;
     }
 
-    public String getProfileP() {
+    public byte[] getProfileP() {
         return profileP;
     }
 
-    public void setProfileP(String profileP) {
+    public void setProfileP(byte[] profileP) {
         this.profileP = profileP;
     }
 
