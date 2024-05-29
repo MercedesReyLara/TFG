@@ -120,7 +120,9 @@ class productosList : AppCompatActivity() {
                         }
                     }
                     builder.setNegativeButton("Modificar mi reseña") { _, _ ->
-                        val intentModificar=Intent(this,detailsReview::class.java)
+                        val intentModificar=Intent(this,modificaResena::class.java)
+                        val resena=parent.getItemAtPosition(position) as Review
+                        intentModificar.putExtra("resena",resena.toString())
                         startActivity(intentModificar)
                     }
                     val dialog = builder.create()/*Lo construímos con las distintas partes*/

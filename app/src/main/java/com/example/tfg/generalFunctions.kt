@@ -1,7 +1,7 @@
 package com.example.tfg
 
 
-import android.app.Activity
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
@@ -20,6 +20,7 @@ import javax.crypto.spec.SecretKeySpec
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.DisplayMetrics
+import android.util.Log
 import android.widget.ImageView
 import androidx.core.graphics.drawable.toBitmap
 import model.SharedPreff
@@ -160,7 +161,7 @@ class generalFunctions {
     }
 
 
-    fun imageViewToByteArray(imageView: ImageView): ByteArray {
+   /* fun imageViewToByteArray(imageView: ImageView): ByteArray {
         // Obtener el Bitmap del ImageView
         val bitmap = imageView.drawable.toBitmap()
 
@@ -170,17 +171,45 @@ class generalFunctions {
 
         // Obtener el byte array desde el ByteArrayOutputStream
         return stream.toByteArray()
+    }*/
+   fun isInt(puntuacion: String): Boolean {
+       try {
+           puntuacion.toInt()
+       } catch (e: NumberFormatException) {
+           return false
+       }
+       return true
+   }
+    fun bitmapToString(bitmap: Bitmap): String {
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.WEBP_LOSSLESS, 100, byteArrayOutputStream)
+        val byteArray = byteArrayOutputStream.toByteArray()
+        return Base64.encodeToString(byteArray, Base64.URL_SAFE and Base64.NO_WRAP)
     }
 
-    fun byteArrayToBitmap(image:ByteArray?):Bitmap{
-        return BitmapFactory.decodeByteArray(image,0,image!!.size)
+
+    @SuppressLint("SuspiciousIndentation")
+    fun byteArrayToBitmap(image:ByteArray):Bitmap ?{
+        /*var bitmap = Bitmap()*/
+        try{
+       val bitmap=BitmapFactory.decodeByteArray(image,0,image!!.size)
+            return bitmap
+        }catch(exception:Exception){
+            Log.i("excepcion",exception.toString())
+        }
+        return null
     }
 
-    fun bitmapToByteArray(bitmap: Bitmap): ByteArray {
-        val stream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
-        return stream.toByteArray()
+    fun stringToBitmap(encodedString: String): Bitmap? {
+        return try {
+            val decodedBytes = Base64.decode(encodedString, Base64.DEFAULT)
+            BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
+        } catch (e: IllegalArgumentException) {
+            e.printStackTrace()
+            null
+        }
     }
+
     fun setLanguage(context:Context) {
         val resources:Resources=context.resources
         val DM:DisplayMetrics=resources.displayMetrics

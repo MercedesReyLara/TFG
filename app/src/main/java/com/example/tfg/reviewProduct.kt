@@ -81,7 +81,7 @@ class reviewProduct : AppCompatActivity() {
             /*Comprobamos que no haya ningun campo vacio*/
             if(nombreTXT.isEmpty()||descripcionTXT.isEmpty()||puntuacionTXT.isEmpty()){
                 Toast.makeText(this@reviewProduct, "Los campos no puden estar vacios", Toast.LENGTH_SHORT).show()
-            }else if(isInt(puntuacionTXT)) {
+            }else if(functions.isInt(puntuacionTXT)) {
                 Toast.makeText(this@reviewProduct, "El valor puntuacion tiene que ser un número entero", Toast.LENGTH_SHORT).show()
             }else if(puntuacionTXT.toInt()<0 || puntuacionTXT.toInt()>10) {
                 Toast.makeText(
@@ -125,13 +125,5 @@ class reviewProduct : AppCompatActivity() {
             val intentMain= Intent(this,mainMenu::class.java)
             startActivity(intentMain)
         }
-    }
-    private fun isInt(puntuacion: String): Boolean {
-        try {
-            puntuacion.toInt()
-        } catch (e: NumberFormatException) {
-            return false
-        }
-        return true
     }
 }

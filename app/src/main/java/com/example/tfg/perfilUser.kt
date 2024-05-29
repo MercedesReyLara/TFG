@@ -56,9 +56,7 @@ class perfilUser : AppCompatActivity() {
                     correo.text=userData!!.correo
                     DNI.text=userData!!.dni
                     about.text=userData!!.descripcion
-                    /*val valorImagen=functions.byteArrayToBitmap(userData!!.profileP.toString().toByteArray())
-                    Log.i("xd",valorImagen.toString())
-                    profilePick.setImageBitmap(valorImagen)*/
+                    profilePick.setImageBitmap(functions.stringToBitmap(userData!!.profileP))
                 }else{
                     Toast.makeText(this@perfilUser,"Error en la obtencion de datos",Toast.LENGTH_SHORT).show()
                 }

@@ -7,10 +7,10 @@ class Review:Serializable {
     var nombre:String=""
     var descripcion:String=""
     var puntuacion:Int=0
-    var id_User:String=""
-    var nombre_User:String=""
-    var id_Producto:Int=0
-    var nombrePorducto:String=""
+    var id_user:String=""
+    var user_name:String=""
+    var id_product:Int=0
+    var nombreProducto:String=""
 
     constructor()
     constructor(
@@ -18,27 +18,49 @@ class Review:Serializable {
         nombre: String,
         descripcion: String,
         puntuacion:Int,
-        id_User: String,
-        nombre_User: String,
-        id_Producto: Int,
-        nombrePorducto: String
+        id_user: String,
+        user_name: String,
+        id_product: Int,
+        nombreProducto: String
     ) {
         this.id = id
         this.nombre = nombre
         this.descripcion = descripcion
         this.puntuacion=puntuacion
-        this.id_User = id_User
-        this.nombre_User = nombre_User
-        this.id_Producto = id_Producto
-        this.nombrePorducto = nombrePorducto
+        this.id_user = id_user
+        this.user_name = user_name
+        this.id_product= id_product
+        this.nombreProducto = nombreProducto
     }
 
-    constructor(nombre: String, descripcion: String,puntuacion:Int, id_User: String, nombrePorducto: String) {
+    constructor(nombre: String, descripcion: String,puntuacion:Int,
+                id_user: String, nombreProducto: String) {
         this.nombre = nombre
         this.descripcion = descripcion
         this.puntuacion=puntuacion
-        this.id_User = id_User
-        this.nombrePorducto=nombrePorducto
+        this.id_user = id_user
+        this.nombreProducto=nombreProducto
+    }
+
+    constructor(
+        id: Int,
+        nombre: String,
+        descripcion: String,
+        puntuacion: Int,
+        id_user: String,
+        nombreProducto: String
+    ) {
+        this.id = id
+        this.nombre = nombre
+        this.descripcion = descripcion
+        this.puntuacion = puntuacion
+        this.id_user = id_user
+        this.nombreProducto=nombreProducto
+    }
+
+
+    override fun toString(): String {
+        return "$id/$nombre/$descripcion/$puntuacion/$id_user/$nombreProducto"
     }
 
 

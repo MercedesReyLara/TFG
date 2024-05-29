@@ -5,6 +5,9 @@
     <string name="subir">Subir mi producto</string>
     <string name="eliminar">Modificar esta reseña</string>
     <string name="ver">Ver todas las reseñas</string>
+    <string name="modificarNome">Modificar nombre</string>
+    <string name="modificarPuntuacion">Modificar puntuacion</string>
+    <string name="modificarDescripcion">Modificar descripcion</string>
     <string name="modificarUsuario">Modificar mi perfil</string>
     <string name="filtrar">Aplicar filtro</string>
     <string name="btnModificar" >Modificar un producto</string>

@@ -73,9 +73,8 @@ class SharedPreff(val contexto:Context) {
         editor.commit()
     }
 
-    fun getImg(context: Context):ByteArray{
+    fun getImg(context: Context):String{
         val sharedPreff=PreferenceManager.getDefaultSharedPreferences(context)
-        val imagen=sharedPreff.getString("imagen"," ") .toString()
-        return imagen.toByteArray()
+        return sharedPreff.getString("imagen"," ") .toString()
     }
 }

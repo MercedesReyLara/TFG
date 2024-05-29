@@ -5,6 +5,9 @@
     <string name="registro">¿Non tes conta? Rexístrate aquí</string>
     <string name="subir">Subir a miña reseña</string>
     <string name="eliminar">Modificar esta reseña</string>
+    <string name="modificarNome">Modificar nome</string>
+    <string name="modificarPuntuacion">Modificar puntuacion</string>
+    <string name="modificarDescripcion">Modificar descripcion</string>
     <string name="consultar">Buscar por producto</string>
     <string name="ver">Ver todas as resenas</string>
     <string name="modificarUsuario">Modificar o meu perfil</string>

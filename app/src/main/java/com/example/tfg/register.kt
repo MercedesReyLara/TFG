@@ -15,12 +15,9 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.drawable.toBitmap
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.drawToBitmap
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
@@ -37,7 +34,7 @@ import java.io.IOException
 class register : AppCompatActivity() {
     private lateinit var sharedPreff:SharedPreff
     private lateinit var context:Context
-    private var imagenRecogida: ByteArray= byteArrayOf()
+    private var imagenRecogida: String=""
     private val functions=generalFunctions()
     @SuppressLint("MissingInflatedId", "SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,7 +59,7 @@ class register : AppCompatActivity() {
         val spinnerImg: Spinner =findViewById(R.id.spinnerImg)
 
         //Declaracion de variables
-        val listaSpinner:List<String> = listOf("Imagen 1","Imagen 2","Imagen 3","Imagen 4","Imagen 5")
+        val listaSpinner:List<String> = listOf("Imagen 1","Imagen 2","Imagen 3","Imagen 4")
         val adapter: ArrayAdapter<String> = ArrayAdapter(this,android.R.layout.simple_spinner_item,listaSpinner)
         spinnerImg.adapter=adapter
         spinnerImg.setSelection(0)
@@ -72,6 +69,7 @@ class register : AppCompatActivity() {
         val helper:GalleryDbHelper= GalleryDbHelper(context)
         val DAO:ImageDAO= ImageDAO()
         var asigned=false
+        profileP.setImageResource(R.drawable.uno)
         spinnerImg.isVisible=false
         val resultado=registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
                 activityResult->
@@ -79,7 +77,7 @@ class register : AppCompatActivity() {
                 try {
                     val result =activityResult.data?.extras?.get("data") as Bitmap
                     profileP.setImageBitmap(/*functions.byteArrayToBitmap*/(result))
-                    imagenRecogida=functions.imageViewToByteArray(profileP)
+                    imagenRecogida=functions.bitmapToString(profileP.drawToBitmap())
                     asigned = true
                 }catch(exception:Exception){
                     exception.toString()
@@ -87,7 +85,7 @@ class register : AppCompatActivity() {
             }
         }
         if(asigned&&imagenRecogida.isNotEmpty()){
-            profileP.setImageBitmap(functions.byteArrayToBitmap(imagenRecogida))
+            profileP.setImageBitmap(functions.stringToBitmap(imagenRecogida))
         }
 
         //Utilizamos el método para limpiar los inputs cuando esten on click
@@ -120,17 +118,18 @@ class register : AppCompatActivity() {
                 Toast.makeText(this,this.getString(R.string.coincidir),Toast.LENGTH_LONG).show()
                 passwordConfirm.text.clear()
             }else{
-                val pfp:ByteArray = if(profileP.drawable==null){
+               /* val pfp:ByteArray = if(profileP.drawable==null){
                     functions.imageToByteArray(context,R.drawable.uno)
                 }else {
                     functions.imageViewToByteArray(profileP)
-                }
-                val newUser= User(dniTXT,nameTXT,lastNameTXT,mailTXT,passwordConfTXT,"Sin descripcion",pfp.toString(),true)
+                }*/
+                val pfp=functions.bitmapToString(profileP.drawable.toBitmap())
+                val newUser= User(dniTXT,nameTXT,lastNameTXT,mailTXT,passwordConfTXT,"Sin descripcion",pfp,true)
                 var success:Boolean=false
                 lifecycleScope.launch (Dispatchers.IO){
                     success=pettitions.postUser(newUser)
                 }
-                if(success){
+                if(success==true){
                     Toast.makeText(this,"Usuario registrado con exito",Toast.LENGTH_SHORT).show()
                     functions.clearText(listOf(DNIT,name,lastName,password,passwordConfirm,mail))
                     sharedPreff.saveLogin(context, true)
@@ -172,7 +171,6 @@ class register : AppCompatActivity() {
                                 "Imagen 2"->profileP.setImageBitmap(functions.byteArrayToBitmap(listaObtenidas[1].valor))
                                 "Imagen 3"->profileP.setImageBitmap(functions.byteArrayToBitmap(listaObtenidas[2].valor))
                                 "Imagen 4"->profileP.setImageBitmap(functions.byteArrayToBitmap(listaObtenidas[3].valor))
-                                "Imagen 5"->profileP.setImageBitmap(functions.byteArrayToBitmap(listaObtenidas[4].valor))
                             }
                         }
                     }
@@ -188,7 +186,6 @@ class register : AppCompatActivity() {
 
         insertar.setOnClickListener {
             val listaFotos:ArrayList<ByteArray> = arrayListOf(
-                functions.imageToByteArray(context,R.drawable.uno),
                 functions.imageToByteArray(context,R.drawable.dos),
                 functions.imageToByteArray(context,R.drawable.tres),
                 functions.imageToByteArray(context,R.drawable.cuatro),
