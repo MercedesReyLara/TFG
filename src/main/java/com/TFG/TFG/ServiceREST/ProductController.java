@@ -32,6 +32,9 @@ public class ProductController {
         List<Producto> productos=pr.findAll();
         List<ProductDTO> DTOS=new ArrayList<>();
         for(Producto p:productos){
+            if(p.getResenas().isEmpty()){
+                return DTOS;
+            }
             ProductDTO pDTO=new ProductDTO(
                     p.getId(),
                     p.getNombreP(),
@@ -44,35 +47,48 @@ public class ProductController {
         return  DTOS;
     }
 
-    /*@PostMapping(value = "/postProducto")
-    public String postProductos(@RequestBody Producto producto){
-        Category cF=producto.getCategory();
-        Category c=cr.findById(cF.getId());
-        c.getProducts().add(producto);
-        pr.save(producto);
-        cr.save(c);
-        return "Producto guardado";
-    } No voy a utilizarlas en la parte de usuario
-
-    @PutMapping(value = "/{id}/updateP")
-    private String updateProduct(@PathVariable int id,@RequestBody Producto product){
-        Producto p=pr.findById(id);
-        p.setNombreP(product.getNombreP());
-        p.setDescripcionP(product.getDescripcionP());
-        p.setResenas(product.getResenas());
-        p.setCategory(product.getCategory());
-        p.setUsers(product.getUsers());
-
-        pr.save(p);
-
-        return "Modificado";
+   @GetMapping(value="/lowProducts")
+   private List<ProductDTO> lowProducts(){
+        List<Producto> listaAll=new ArrayList<>();
+        listaAll=pr.findAll();
+        List<ProductDTO>DTOS=new ArrayList<>();
+        for(Producto p:listaAll){
+            for(Review r:p.getResenas()){
+                if(r.getPuntuacion()<5){
+                    ProductDTO pDTO=new ProductDTO(
+                            p.getId(),
+                            p.getNombreP(),
+                            p.getDescripcionP(),
+                            p.getPrecio(),
+                            p.getCategory().getNombre()
+                    );
+                    DTOS.add(pDTO);
+                }
+            }
+        }
+        return DTOS;
+   }
+    @GetMapping(value="/highProducts")
+    private List<ProductDTO> highProducts(){
+        List<Producto> listaAll=new ArrayList<>();
+        listaAll=pr.findAll();
+        List<ProductDTO>DTOS=new ArrayList<>();
+        for(Producto p:listaAll){
+            for(Review r:p.getResenas()){
+                if(r.getPuntuacion()>5){
+                    ProductDTO pDTO=new ProductDTO(
+                            p.getId(),
+                            p.getNombreP(),
+                            p.getDescripcionP(),
+                            p.getPrecio(),
+                            p.getCategory().getNombre()
+                    );
+                    DTOS.add(pDTO);
+                }
+            }
+        }
+        return DTOS;
     }
-    @DeleteMapping(value = "/deleteProducto/{id}")
-    public String deleteProductos(@PathVariable int id){
-        Producto p=pr.findById(id);
-        pr.delete(p);
-        return "Producto eliminado";
-    }*/
 
     @GetMapping(value = "/Uproduct")
     private List<User> getUsersByProduct(@RequestBody ProductDTO productDTO){

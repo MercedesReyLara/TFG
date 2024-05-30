@@ -7,6 +7,7 @@ import com.TFG.TFG.Model.Producto;
 import com.TFG.TFG.Model.Review;
 import com.TFG.TFG.Model.User;
 import com.TFG.TFG.Respository.ProductRepository;
+import com.TFG.TFG.Respository.ReviewRepository;
 import com.TFG.TFG.Respository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,8 @@ public class UserController {
     private UserRepository ur;
     @Autowired
     private ProductRepository pr;
+    @Autowired
+    private ReviewRepository rr;
 
 
     @GetMapping(value = "/getUsers")
@@ -90,14 +93,30 @@ public class UserController {
         return true;
     }
 
+    @PutMapping(value = "/darDeBaja")
+    public Boolean darBajaUser(@RequestBody UserDTO user){
+        User u=ur.findByDNI(user.getDni());
+        if(u==null){
+            return false;
+        }
+        u.setActivo(false);
+        ur.save(u);
+        return true;
+    }
+
     @DeleteMapping(value = "/deleteUser/{DNI}")
     public Boolean deleteUser(@PathVariable String DNI){
         User u=ur.findByDNI(DNI);
         if(u==null){
             return false;
         }
-        u.setActivo(false);
-        ur.save(u);
+        for(Review r:u.getResenas()){
+            rr.delete(r);
+        }
+
+        for(Producto p:u.getProductsU()){
+            p.getUsers().remove(u);
+        }
         return true;
     }
 
