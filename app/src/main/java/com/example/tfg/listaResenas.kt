@@ -41,7 +41,7 @@ class listaResenas : AppCompatActivity() {
         val list: ListView = findViewById(R.id.listReviews)
         val filter: Button = findViewById(R.id.applyFilter)
         val spinner: Spinner = findViewById(R.id.filtroCategory)
-        val nombresCategorias = arrayListOf("ninguna")
+        val nombresCategorias = arrayListOf("Ninguna categoria")
         lifecycleScope.launch(Dispatchers.Main) {
             var categories: ArrayList<Category>
             withContext(Dispatchers.IO) {
@@ -51,7 +51,7 @@ class listaResenas : AppCompatActivity() {
                 Toast.makeText(this@listaResenas, "Peticion denegada", Toast.LENGTH_SHORT).show()
             } else {
                 for(c in categories){
-                    nombresCategorias.add(c.nombre)
+                    nombresCategorias.add("Categoria de $c.nombre")
                 }
             }
         }

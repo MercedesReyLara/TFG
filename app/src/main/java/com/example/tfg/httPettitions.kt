@@ -416,4 +416,56 @@ class httPettitions {
             }
         }
     }
+    suspend fun getProductsHigh(ip:String):ArrayList<Product>{
+        return withContext(Dispatchers.IO) {
+            val products = object : TypeToken<ArrayList<Product>>() {}.type
+            val client = OkHttpClient()
+            val url:String= "http://$ip:8080/highProducts"
+            var listProductos:ArrayList<Product> = arrayListOf()
+            val request: Request = Request.Builder()
+                .url(url)
+                .build()
+            val response:Response
+            try {
+                response = client.newCall(request).execute()
+                val responseBody = response.body?.string()
+                if (response.isSuccessful&&!responseBody.isNullOrEmpty()) {
+                    val gson = Gson()
+                    listProductos= gson.fromJson(responseBody, products)
+                    return@withContext listProductos
+                }else {
+                    return@withContext listProductos
+                }
+            }catch(e:IOException){
+                return@withContext listProductos
+            }
+
+        }
+    }
+    suspend fun getProductsLow(ip:String):ArrayList<Product>{
+        return withContext(Dispatchers.IO) {
+            val products = object : TypeToken<ArrayList<Product>>() {}.type
+            val client = OkHttpClient()
+            val url:String= "http://$ip:8080/lowProducts"
+            var listProductos:ArrayList<Product> = arrayListOf()
+            val request: Request = Request.Builder()
+                .url(url)
+                .build()
+            val response:Response
+            try {
+                response = client.newCall(request).execute()
+                val responseBody = response.body?.string()
+                if (response.isSuccessful&&!responseBody.isNullOrEmpty()) {
+                    val gson = Gson()
+                    listProductos= gson.fromJson(responseBody, products)
+                    return@withContext listProductos
+                }else {
+                    return@withContext listProductos
+                }
+            }catch(e:IOException){
+                return@withContext listProductos
+            }
+
+        }
+    }
 }

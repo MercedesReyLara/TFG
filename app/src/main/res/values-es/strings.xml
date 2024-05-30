@@ -18,7 +18,8 @@
     <string name="DNIMal">El DNI tiene que ser en formato XXXXXXXXA</string>
     <string name="filtrar">Aplicar filtro</string>
     <string name="DNI">DNI</string>
-    <string name="panel">Panel de reseñas</string>
+    <string name="panel">Panel de reseñas para-filtro por categoría de produto</string>
+    <string name="panelProdutos">Panel de productos-filtro por puntuacion de reseña</string>
     <string name="fotoDefecto">Seleccionar foto</string>
     <string name="letra">Seleccione el tamaño de la letra</string>
     <string name="pequeña">Letra pequeña</string>

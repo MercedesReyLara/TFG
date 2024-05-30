@@ -8,7 +8,6 @@ import android.widget.Button
 import android.widget.ImageButton
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import model.SharedPreff
 
 class mainMenu : AppCompatActivity() {
     private lateinit var context:Context
@@ -19,7 +18,7 @@ class mainMenu : AppCompatActivity() {
         setContentView(R.layout.activity_pantalla_principal)
 
         //Búsqueda de elementos visuales
-        val eliminar: Button =findViewById(R.id.eliminarResena)
+        val productos: Button =findViewById(R.id.listarProductosR)
         val listar:Button=findViewById(R.id.listaResenasGlobal)
         val subir:Button=findViewById(R.id.subirResena)
         val perfilU:ImageButton=findViewById(R.id.botonPerfilU)
@@ -69,9 +68,9 @@ class mainMenu : AppCompatActivity() {
         }
 
         /*Va hacia la lista de los productos*/
-        eliminar.setOnClickListener {
-            val intentEliminar=Intent(this,listaResenas::class.java)
-            startActivity(intentEliminar)
+        productos.setOnClickListener {
+            val intentProductsList=Intent(this,allProductList::class.java)
+            startActivity(intentProductsList)
         }
 
         /*Va al menú de subida de una reseña*/
