@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,7 +14,6 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 
 import model.Product;
-import model.User;
 
 @SuppressLint("MissingInflatedId")
 public class ProductAdapter extends BaseAdapter {
@@ -45,13 +43,14 @@ public class ProductAdapter extends BaseAdapter {
     @Override
     public View getView(int position, @Nullable View view, @Nullable ViewGroup parent) {
         LayoutInflater layout= LayoutInflater.from(context);
-        View elemento= layout.inflate(R.layout.plantilla_listview,parent,false);
+        View elemento= layout.inflate(R.layout.plantilla_producto,parent,false);
         Product currentProduct=(Product)getItem(position);
         TextView nombre=elemento.findViewById(R.id.nombreP);
         TextView precio=elemento.findViewById(R.id.precioP);
-
+        TextView descripcion=elemento.findViewById(R.id.descripcionP);
         nombre.setText(currentProduct.getNombreP());
         precio.setText( String.valueOf(currentProduct.getPrecio()));
+        descripcion.setText(currentProduct.getDescripcionP());
         return elemento;
     }
 }

@@ -105,14 +105,18 @@ class logIn : AppCompatActivity() {
                     } else {*/
                     /*Llamo al hilo principal para saber donde tiene que ejecutar las acciones siguiente*/
                        lifecycleScope.launch(Dispatchers.Main) {
-                            val encontrado:User?
-                            val ip=sharedPreff.getIp(context)
-                            /*Lanzo la petición en el hilo secundario para no crashear*/
-                            withContext(Dispatchers.IO) {
-                                 encontrado=httPettitions.getUser(emailText, passwordText,ip)
-                            }
+                           val encontrado: User?
+                           val ip = sharedPreff.getIp(context)
+                           /*Lanzo la petición en el hilo secundario para no crashear*/
+                           withContext(Dispatchers.IO) {
+                               encontrado = httPettitions.getUser(emailText, passwordText, ip)
+                           }
                            /*Acaba la petición entonces manejo los datos*/
-                                if (encontrado!=null) {
+                           if(encontrado==null){
+                               Toast.makeText(this@logIn,this@logIn.getString(R.string.problemas),Toast.LENGTH_SHORT).show()
+                             }else if(encontrado.toString().isEmpty()) {
+
+                           }else{
                                     if(!encontrado.activo){
                                         val builderActivar: AlertDialog.Builder =
                                             AlertDialog.Builder(this@logIn)/*Creamos el objeto diálogo*/
@@ -140,7 +144,8 @@ class logIn : AppCompatActivity() {
                                                         startActivity(intentLogIn)
                                                     }
                                                     else -> {
-                                                        Toast.makeText(this@logIn,"ERROR",Toast.LENGTH_SHORT).show()
+                                                        Toast.makeText(this@logIn,this@logIn.getString(R.string.errorObtencion)
+                                                            ,Toast.LENGTH_SHORT).show()
                                                     }
                                                 }
                                             }
@@ -151,17 +156,11 @@ class logIn : AppCompatActivity() {
                                         dialog.show()/*Lo mostramos*/
                                     }else {
                                         sharedPreff.saveLogin(context, true)
-                                        /*val encryptedDNI = functions.encrypt(encontrado.dni, functions.clave)*/
-                                        sharedPreff.saveUser(context, encontrado.dni)
+                                        val encryptedDNI = functions.encrypt(encontrado.dni, functions.clave)
+                                        sharedPreff.saveUser(context, encryptedDNI)
                                         val intentLogIn = Intent(this@logIn, mainMenu::class.java)
                                         startActivity(intentLogIn)
                                     }
-                                } else{
-                                    Toast.makeText(
-                                        this@logIn,
-                                        "Nombre de usuario o contraseña incorrectos",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
                                 }
                             }
                         }

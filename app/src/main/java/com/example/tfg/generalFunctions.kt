@@ -28,7 +28,6 @@ import java.io.ByteArrayOutputStream
 
 
 class generalFunctions {
-    public var languages=arrayListOf<String>("Select Language","Español","Galego")
 
     constructor()
     fun validateEmail(email:String):Boolean{
@@ -66,14 +65,6 @@ class generalFunctions {
                 }
             }
         }
-    }
-    fun spinnerLanguages(context:Context,spinner: Spinner):Spinner{
-        val adapterSpinner:ArrayAdapter<String> = ArrayAdapter(context,android.R.layout.simple_spinner_item,languages)
-        adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner.adapter=adapterSpinner
-        spinner.setSelection(0)
-
-        return spinner
     }
     fun manipulateEdits(edit: List<EditText>){
         for (editText in edit) {
@@ -180,6 +171,7 @@ class generalFunctions {
        }
        return true
    }
+
     fun bitmapToString(bitmap: Bitmap): String {
         val byteArrayOutputStream = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.WEBP_LOSSLESS, 100, byteArrayOutputStream)

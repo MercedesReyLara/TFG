@@ -116,15 +116,17 @@
 
     <ImageButton
         android:id="@+id/ajustes"
-        android:layout_width="64dp"
-        android:layout_height="44dp"
+        android:layout_width="46dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toTopOf="@+id/textView13"
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
         app:layout_constraintHorizontal_bias="0.044"
         app:layout_constraintStart_toEndOf="@id/guidelineV1"
         app:layout_constraintTop_toBottomOf="@id/guidelineH1"
-        tools:srcCompat="@android:drawable/ic_menu_preferences" />
+        app:srcCompat="@drawable/efewf_removebg_preview" />
 
     <ImageView
         android:id="@+id/imageView"

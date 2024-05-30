@@ -56,7 +56,7 @@ class httPettitions {
 
         }
     }
-    suspend fun postUser(user: User,ip:String): Boolean {
+    suspend fun postUser(user: User,ip:String): Boolean? {
         return withContext(Dispatchers.IO) {
             val client = OkHttpClient()
             val gson = Gson()
@@ -68,13 +68,18 @@ class httPettitions {
                 .url(url)
                 .post(requestBody)
                 .build()
-            /*Falla al hacer la publicación del json*/
+            try{
+
             val response = client.newCall(request).execute()
-
-
-            /*Pone "Method not allowed*/
-            val responseBody = response.body?.string()
-            return@withContext response.isSuccessful && !responseBody.isNullOrEmpty()
+                val responseBody = response.body?.string()
+            if (response.isSuccessful&&!responseBody.isNullOrEmpty()) {
+                return@withContext true
+            }else{
+                return@withContext false
+            }
+        }catch (exception:IOException){
+            return@withContext  null
+        }
         }
     }
 
@@ -135,6 +140,7 @@ class httPettitions {
     suspend fun getUserByDNI(user:User,ip:String): User? {
         return withContext(Dispatchers.IO) {
             val client = OkHttpClient()
+            val userEmpty=User()
             val url:String="http://$ip:8080/getUser"
             val gson = Gson()
             val json = gson.toJson(user)
@@ -154,7 +160,7 @@ class httPettitions {
                     val useR=gson2.fromJson(responseBody, User::class.java)
                     return@withContext useR
                 }else {
-                    return@withContext null
+                    return@withContext userEmpty
                 }
             }catch(e:IOException){
                 return@withContext null
@@ -163,7 +169,7 @@ class httPettitions {
         }
     }
 
-    suspend fun getProductos(user:User?,ip:String):ArrayList<Product>{
+    suspend fun getProductos(user:User?,ip:String):ArrayList<Product>?{
         return withContext(Dispatchers.IO) {
             val products = object : TypeToken<ArrayList<Product>>() {}.type
             val client = OkHttpClient()
@@ -189,13 +195,13 @@ class httPettitions {
                     return@withContext listProductos
                 }
             }catch(e:IOException){
-                return@withContext listProductos
+                return@withContext null
             }
 
         }
     }
 
-    suspend fun getReviewsByUser(user:User,ip:String):ArrayList<Review>{
+    suspend fun getReviewsByUser(user:User,ip:String):ArrayList<Review>?{
         return withContext(Dispatchers.IO) {
             val reviews = object : TypeToken<ArrayList<Review>>() {}.type
             val client = OkHttpClient()
@@ -221,13 +227,13 @@ class httPettitions {
                     return@withContext listReviews
                 }
             }catch(e:IOException){
-                return@withContext listReviews
+                return@withContext null
             }
 
         }
     }
 
-    suspend fun getAllCategories(ip:String):ArrayList<Category>{
+    suspend fun getAllCategories(ip:String):ArrayList<Category>?{
         return withContext(Dispatchers.IO) {
             val categories = object : TypeToken<ArrayList<Category>>() {}.type
             val client = OkHttpClient()
@@ -248,7 +254,7 @@ class httPettitions {
                     return@withContext listCategories
                 }
             }catch(e:IOException){
-                return@withContext listCategories
+                return@withContext null
             }
 
         }
@@ -416,7 +422,7 @@ class httPettitions {
             }
         }
     }
-    suspend fun getProductsHigh(ip:String):ArrayList<Product>{
+    suspend fun getProductsHigh(ip:String):ArrayList<Product>?{
         return withContext(Dispatchers.IO) {
             val products = object : TypeToken<ArrayList<Product>>() {}.type
             val client = OkHttpClient()
@@ -437,12 +443,12 @@ class httPettitions {
                     return@withContext listProductos
                 }
             }catch(e:IOException){
-                return@withContext listProductos
+                return@withContext null
             }
 
         }
     }
-    suspend fun getProductsLow(ip:String):ArrayList<Product>{
+    suspend fun getProductsLow(ip:String):ArrayList<Product>?{
         return withContext(Dispatchers.IO) {
             val products = object : TypeToken<ArrayList<Product>>() {}.type
             val client = OkHttpClient()
@@ -463,7 +469,7 @@ class httPettitions {
                     return@withContext listProductos
                 }
             }catch(e:IOException){
-                return@withContext listProductos
+                return@withContext null
             }
 
         }

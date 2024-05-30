@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,25 +13,8 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
-import model.Product;
-
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import java.util.ArrayList;
-
-import model.Product;
 import model.Review;
-import model.User;
+
 public class reviewAdapter extends BaseAdapter {
         private ArrayList<Review> reviews;
         private Context context;
@@ -61,14 +43,15 @@ public class reviewAdapter extends BaseAdapter {
         @SuppressLint("MissingInflatedId")
         public View getView(int position, @Nullable View view, @Nullable ViewGroup parent) {
             LayoutInflater layout= LayoutInflater.from(context);
-            View elemento= layout.inflate(R.layout.plantilla_listview,parent,false);
+            View elemento= layout.inflate(R.layout.plantilla_review,parent,false);
             Review currentReview=(Review)getItem(position);
-            TextView nombre=elemento.findViewById(R.id.nombreP);
+            TextView nombre=elemento.findViewById(R.id.nombreR);
             TextView puntuacion=elemento.findViewById(R.id.precioP);
-            TextView descripcion=elemento.findViewById(R.id.descripcionPR);
+            TextView descripcion=elemento.findViewById(R.id.descripcionR);
 
             nombre.setText(currentReview.getNombre());
             puntuacion.setText( String.valueOf(currentReview.getPuntuacion()));
+            descripcion.setText(currentReview.getDescripcion());
             descripcion.setText(currentReview.getDescripcion());
             return elemento;
         }

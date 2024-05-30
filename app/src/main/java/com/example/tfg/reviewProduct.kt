@@ -46,22 +46,23 @@ class reviewProduct : AppCompatActivity() {
         val hintPuntuacion=puntuacion.hint
         /*Obtenemos el DNI del usuario a través de las sharedpreferences*/
         val DNI:String=functions.decrypt(functions.clave,sharedPreff.getUser(context).toString()).toString()
-        nombre.text.clear()
-        descripcion.text.clear()
-        puntuacion.text.clear()
-        /*functions.clearHint(listOf(nombre,descripcion,puntuacion),
+        functions.clearHint(listOf(nombre,descripcion,puntuacion),
             listOf (hintNombre,hintDescripcion,hintPuntuacion)
-        )*/
+        )
         lifecycleScope.launch(Dispatchers.Main) {
-            var products: ArrayList<Product>
+            var products: ArrayList<Product>?
             withContext(Dispatchers.IO) {
                 /*Obtenemos los productos de ese usuario en especifico*/
-                products = pettitions.getProductos(User(DNI),ip)
+                products = pettitions.getProductos(User(DNI),ip)!!
             }
-            if (products.isEmpty()) {
-                Toast.makeText(this@reviewProduct, "Peticion denegada", Toast.LENGTH_SHORT).show()
+            if(products==null){
+                Toast.makeText(this@reviewProduct, this@reviewProduct.getString(R.string.problemas)
+                    , Toast.LENGTH_SHORT).show()
+            } else if (products!!.isEmpty()) {
+                Toast.makeText(this@reviewProduct,  this@reviewProduct.getString(R.string.errorObtencion)
+                    , Toast.LENGTH_SHORT).show()
             } else {
-                for(p in products){
+                for(p in products!!){
                     /*Metemos en la lista de nombres de productos para el spinner los nombres de los productos
                     que tiene el usuario
                      */
@@ -82,7 +83,7 @@ class reviewProduct : AppCompatActivity() {
             /*Comprobamos que no haya ningun campo vacio*/
             if(nombreTXT.isEmpty()||descripcionTXT.isEmpty()||puntuacionTXT.isEmpty()){
                 Toast.makeText(this@reviewProduct, "Los campos no puden estar vacios", Toast.LENGTH_SHORT).show()
-            }else if(functions.isInt(puntuacionTXT)) {
+            }else if(!functions.isInt(puntuacionTXT)) {
                 Toast.makeText(this@reviewProduct, "El valor puntuacion tiene que ser un número entero", Toast.LENGTH_SHORT).show()
             }else if(puntuacionTXT.toInt()<0 || puntuacionTXT.toInt()>10) {
                 Toast.makeText(
@@ -110,7 +111,9 @@ class reviewProduct : AppCompatActivity() {
                         }
 
                         true -> {
-                            startActivity(functions.logOutFun(this@reviewProduct))
+                            Toast.makeText(this@reviewProduct, "Publicacion realizada", Toast.LENGTH_SHORT).show()
+                            functions.manipulateEdits(listOf(nombre,descripcion,puntuacion))
+                            functions.clearText(listOf(nombre,descripcion,puntuacion))
                         }
 
                         else -> {

@@ -99,11 +99,13 @@ class perfilUser : AppCompatActivity() {
                        }
                         when (done) {
                             null -> {
-                                Toast.makeText(this@perfilUser,"error en la conexion",Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@perfilUser,this@perfilUser.getString(R.string.problemas),
+                                    Toast.LENGTH_SHORT).show()
                                 startActivity(functions.logOutFun(this@perfilUser))
                             }
                             true -> {
-                                Toast.makeText(this@perfilUser,"afasd+",Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@perfilUser,this@perfilUser.getString(R.string.errorObtencion)
+                                    ,Toast.LENGTH_SHORT).show()
                                 startActivity(functions.logOutFun(this@perfilUser))
                             }
                             else -> {

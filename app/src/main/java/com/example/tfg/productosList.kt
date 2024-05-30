@@ -52,15 +52,24 @@ class productosList : AppCompatActivity() {
         /*En este lo que hacemos es listar los productos del usuario*/
         showProducts.setOnClickListener {
             lifecycleScope.launch(Dispatchers.Main) {
-                var newProducts:ArrayList<Product>
+                var newProducts:ArrayList<Product>?
                 withContext(Dispatchers.IO) {
-                    newProducts = httPetitions.getProductos(User(DNI),ip)
+                    newProducts = httPetitions.getProductos(User(DNI),ip)!!
                 }
-                if(newProducts.isEmpty()){
-                    Toast.makeText(this@productosList,"Peticion denegada", Toast.LENGTH_SHORT).show()
+                if(newProducts==null) {
+                    Toast.makeText(
+                        this@productosList,
+                        this@productosList.getString(R.string.problemas), Toast.LENGTH_SHORT
+                    ).show()
+                }else if(newProducts!!.isEmpty()){
+                    Toast.makeText(
+                        this@productosList,
+                        this@productosList.getString(R.string.errorObtencion),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }else{
                     listProductos.clear()
-                    listProductos.addAll(newProducts)
+                    listProductos.addAll(newProducts!!)
                     adapterProductos.notifyDataSetChanged()
                 }
             }
@@ -70,16 +79,25 @@ class productosList : AppCompatActivity() {
         /*En este listamos las reseñas del usuario*/
         showReviews.setOnClickListener {
             lifecycleScope.launch(Dispatchers.Main) {
-                var newReviews:ArrayList<Review>
+                var newReviews:ArrayList<Review>?
                 withContext(Dispatchers.IO) {
-                    newReviews = httPetitions.getReviewsByUser(User(DNI),ip)
+                    newReviews = httPetitions.getReviewsByUser(User(DNI),ip)!!
                 }
-                if(newReviews.isEmpty()){
-                    Toast.makeText(this@productosList,"Peticion denegada", Toast.LENGTH_SHORT).show()
+                if(newReviews==null) {
+                    Toast.makeText(
+                        this@productosList,
+                        this@productosList.getString(R.string.problemas), Toast.LENGTH_SHORT
+                    ).show()
+                }else if(newReviews!!.isEmpty()){
+                    Toast.makeText(
+                        this@productosList,
+                        this@productosList.getString(R.string.errorObtencion),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }else{
                     listReviews.clear()
-                    listReviews.addAll(newReviews)
-                    adapterResenas.notifyDataSetChanged()
+                    listReviews.addAll(newReviews!!)
+                    adapterProductos.notifyDataSetChanged()
                 }
             }
             lista.adapter=adapterResenas
@@ -100,7 +118,7 @@ class productosList : AppCompatActivity() {
                     a un menú de modificación de la reseña
                      */
                     val review=parent.getItemAtPosition(position) as Review
-                    var done:Boolean
+                    var done:Boolean?
                     val builder: AlertDialog.Builder =
                         AlertDialog.Builder(this)/*Creamos el objeto diálogo*/
                     builder.setTitle("¿Que quieres hacer?")/*Establecemos el título, el mensaje principal y las dos opciones*/
@@ -110,8 +128,12 @@ class productosList : AppCompatActivity() {
                             withContext(Dispatchers.IO) {
                                 done = httPetitions.deleteReview(review.id,ip)!!
                             }
-                            if(!done){
-                                Toast.makeText(this@productosList,"Peticion denegada", Toast.LENGTH_SHORT).show()
+                            if(done==null){
+                                Toast.makeText(this@productosList,this@productosList.getString(R.string.problemas),
+                                    Toast.LENGTH_SHORT).show()
+                            } else if(!done!!){
+                                Toast.makeText(this@productosList,this@productosList.getString(R.string.errorObtencion),
+                                    Toast.LENGTH_SHORT).show()
                             }else{
                                 Toast.makeText(this@productosList,"Resena eliminada", Toast.LENGTH_SHORT).show()
                                 listReviews.remove(review)

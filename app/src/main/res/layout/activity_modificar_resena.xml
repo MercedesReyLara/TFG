@@ -127,6 +127,7 @@
         android:inputType="textMultiLine"
         android:maxLines="5"
         android:hint="Escribe aqui"
+        android:textColorHint="@color/gray"
         android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@id/guidelineV1"

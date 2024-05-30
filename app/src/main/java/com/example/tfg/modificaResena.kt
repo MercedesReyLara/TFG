@@ -70,6 +70,7 @@ class modificaResena : AppCompatActivity() {
                }
             }
         }
+        functions.clearHint(listOf(text), listOf(text.hint))
         /*Comprobaremos cual de los botones esta on click y formaremos el objeto con ese texto modificado*/
         modificar.setOnClickListener {
             val texto:String=text.text.toString()
@@ -105,7 +106,8 @@ class modificaResena : AppCompatActivity() {
                /*Una vez hecha la peticion con la modificacion, manejamos lo que nos devuelve*/
                when(done){
                    null->{
-                       Toast.makeText(this@modificaResena,"Error en la conexion",Toast.LENGTH_SHORT).show()
+                       Toast.makeText(this@modificaResena,this@modificaResena.getString(R.string.problemas)
+                           ,Toast.LENGTH_SHORT).show()
                    }
                    true->{
                        Toast.makeText(this@modificaResena,"Reseña modificada con exito",Toast.LENGTH_SHORT).show()

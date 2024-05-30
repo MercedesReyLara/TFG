@@ -70,6 +70,9 @@ class register : AppCompatActivity() {
         val helper:GalleryDbHelper= GalleryDbHelper(context)
         val DAO:ImageDAO= ImageDAO()
         var asigned=false
+        //Utilizamos el método para limpiar los inputs cuando esten on click
+        functions.clearHint(listOf(DNIT,name,lastName,mail,password,passwordConfirm),
+            listOf(DNIT.hint,name.hint,lastName.hint,mail.hint,password.hint,passwordConfirm.hint))
         profileP.setImageResource(R.drawable.uno)
         spinnerImg.isVisible=false
         val resultado=registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
@@ -88,14 +91,6 @@ class register : AppCompatActivity() {
         if(asigned&&imagenRecogida.isNotEmpty()){
             profileP.setImageBitmap(functions.stringToBitmap(imagenRecogida))
         }
-
-        //Utilizamos el método para limpiar los inputs cuando esten on click
-        functions.clearHint(DNIT)
-        functions.clearHint(name)
-        functions.clearHint(lastName)
-        functions.clearHint(mail)
-        functions.clearHint(password)
-        functions.clearHint(passwordConfirm)
         registerButton.setOnClickListener {
             val dniTXT=DNIT.text.toString().trim()
             val nameTXT=name.text.toString().trim()
@@ -126,20 +121,27 @@ class register : AppCompatActivity() {
                 }*/
                 val pfp=functions.bitmapToString(profileP.drawable.toBitmap())
                 val newUser= User(dniTXT,nameTXT,lastNameTXT,mailTXT,passwordConfTXT,"Sin descripcion",pfp,true)
-                var success:Boolean=false
+                var success:Boolean?=false
                 lifecycleScope.launch (Dispatchers.IO){
-                    success=pettitions.postUser(newUser,ip)
+                    success=pettitions.postUser(newUser,ip)!!
                 }
-                if(success==true){
-                    Toast.makeText(this,"Usuario registrado con exito",Toast.LENGTH_SHORT).show()
-                    functions.clearText(listOf(DNIT,name,lastName,password,passwordConfirm,mail))
-                    sharedPreff.saveLogin(context, true)
-                    val encryptedDNI = functions.encrypt(dniTXT, functions.clave)
-                    sharedPreff.saveUser(context, encryptedDNI)
-                    val intentMainMenu= Intent(this,mainMenu::class.java)
-                    startActivity(intentMainMenu)
-                }else{
-                    Toast.makeText(this,"ERROR",Toast.LENGTH_SHORT).show()
+                when (success) {
+                    null -> {
+                        Toast.makeText(this,this@register.getString(R.string.problemas),Toast.LENGTH_SHORT).show()
+                    }
+                    true -> {
+                        Toast.makeText(this,"Usuario registrado con exito",Toast.LENGTH_SHORT).show()
+                        functions.clearText(listOf(DNIT,name,lastName,password,passwordConfirm,mail))
+                        functions.manipulateEdits(listOf(DNIT,name,lastName,mail,password,passwordConfirm))
+                        sharedPreff.saveLogin(context, true)
+                        val encryptedDNI = functions.encrypt(dniTXT, functions.clave)
+                        sharedPreff.saveUser(context, encryptedDNI)
+                        val intentMainMenu= Intent(this,mainMenu::class.java)
+                        startActivity(intentMainMenu)
+                    }
+                    else -> {
+                        Toast.makeText(this,this@register.getString(R.string.errorObtencion),Toast.LENGTH_SHORT).show()
+                    }
                 }
 
             }

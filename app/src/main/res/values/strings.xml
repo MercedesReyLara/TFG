@@ -21,6 +21,7 @@
     <string name="panel">Panel de reseñas-filtro por categoría de produto</string>
     <string name="panelProdutos">Panel de produtos-filtro por puntuacion de reseña</string>
     <string name="fotoDefecto">Seleccionar foto</string>
+    <string name="problemas">Problemas na conexion co servidor. Tente de novo mais tarde</string>
     <string name="letra">Seleccione o tamaño da letra</string>
     <string name="pequeña">Letra pequena</string>
     <string name="grande">Letra grande</string>
@@ -36,6 +37,7 @@
     <string name="detalles">Detalles do produto</string>
     <string name="descripcionResena">Descripcion da reseña</string>
     <string name="descripcionDoProducto">Descripcion do producto</string>
+    <string name="errorObtencion">Non se encontraron datos con estas caracteristicas</string>
     <string name="precio">Precio do producto</string>
     <string name="ip">Introduza a dirección IP</string>
     <string name="aplicar">Aplicar este tamaño</string>

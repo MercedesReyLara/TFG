@@ -43,15 +43,24 @@ class listaResenas : AppCompatActivity() {
         val spinner: Spinner = findViewById(R.id.filtroCategory)
         val nombresCategorias = arrayListOf("Ninguna categoria")
         lifecycleScope.launch(Dispatchers.Main) {
-            var categories: ArrayList<Category>
+            var categories: ArrayList<Category>?
             withContext(Dispatchers.IO) {
                 categories = petitions.getAllCategories(ip)
             }
-            if (categories.isEmpty()) {
-                Toast.makeText(this@listaResenas, "Peticion denegada", Toast.LENGTH_SHORT).show()
-            } else {
-                for(c in categories){
-                    nombresCategorias.add("Categoria de $c.nombre")
+            if(categories==null) {
+                Toast.makeText(
+                    this@listaResenas,
+                    this@listaResenas.getString(R.string.problemas), Toast.LENGTH_SHORT
+                ).show()
+            }else if(categories!!.isEmpty()){
+                Toast.makeText(
+                    this@listaResenas,
+                    this@listaResenas.getString(R.string.errorObtencion),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }else{
+                for(c in categories!!) {
+                    nombresCategorias.add(c.nombre)
                 }
             }
         }
@@ -72,33 +81,47 @@ class listaResenas : AppCompatActivity() {
             val categoryN = spinner.selectedItem.toString()
             if(categoryN == "ninguna") {
                 lifecycleScope.launch(Dispatchers.Main) {
-                    var reviews: ArrayList<Review>
+                    var reviews: ArrayList<Review>?
                     withContext(Dispatchers.IO) {
                         reviews = petitions.getAllReviews(ip)!!
                     }
-                    if (reviews.isEmpty()) {
-                        Toast.makeText(this@listaResenas, "Peticion denegada", Toast.LENGTH_SHORT).show()
-                    } else {
+                    if(reviews==null) {
+                        Toast.makeText(
+                            this@listaResenas,
+                            this@listaResenas.getString(R.string.problemas), Toast.LENGTH_SHORT
+                        ).show()
+                    }else if(reviews!!.isEmpty()){
+                        Toast.makeText(
+                            this@listaResenas,
+                            this@listaResenas.getString(R.string.errorObtencion),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }else{
                         listReviews.clear()
-                        listReviews.addAll(reviews)
+                        listReviews.addAll(reviews!!)
                         adapterResenas.notifyDataSetChanged()
                     }
                 }
             }else{
                 lifecycleScope.launch(Dispatchers.Main) {
-                    var newReviews: ArrayList<Review>
+                    var newReviews: ArrayList<Review>?
                     withContext(Dispatchers.IO) {
                         newReviews = petitions.getReviewsByCategorie(Category(categoryN),ip)!!
                     }
-                    if (newReviews.isEmpty()) {
+                    if(newReviews==null) {
                         Toast.makeText(
                             this@listaResenas,
-                            "Ha habido problemas en la peticion",
+                            this@listaResenas.getString(R.string.problemas), Toast.LENGTH_SHORT
+                        ).show()
+                    }else if(newReviews!!.isEmpty()){
+                        Toast.makeText(
+                            this@listaResenas,
+                            this@listaResenas.getString(R.string.errorObtencion),
                             Toast.LENGTH_SHORT
                         ).show()
-                    } else {
+                    }else{
                         listReviews.clear()
-                        listReviews.addAll(newReviews)
+                        listReviews.addAll(newReviews!!)
                         adapterResenas.notifyDataSetChanged()
                     }
                 }

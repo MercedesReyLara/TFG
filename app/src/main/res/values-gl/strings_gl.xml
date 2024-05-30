@@ -28,10 +28,12 @@
     <string name="DNI">DNI</string>
     <string name="panel">Panel de reseñas-filtro por categoría de produto</string>
     <string name="panelProdutos">Panel de produtos-filtro por puntuacion de reseña</string>
+    <string name="problemas">Problemas na conexion co servidor. Tente de novo mais tarde</string>
     <string name="fotoDefecto">Seleccionar foto</string>
     <string name="letra">Seleccione o tamaño da letra</string>
     <string name="pequeña">Letra pequena</string>
     <string name="grande">Letra grande</string>
+    <string name="errorObtencion">Non se encontraron datos con estas caracteristicas</string>
     <string name="tp">O teu inventario</string>
     <string name="eliminaR">Eliminar reseña</string>
     <string name="mp">Listar os meus produtos</string>
