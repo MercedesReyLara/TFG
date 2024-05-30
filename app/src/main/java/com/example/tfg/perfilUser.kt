@@ -10,14 +10,16 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.example.tfg.petitionsAndFunctions.generalFunctions
+import com.example.tfg.petitionsAndFunctions.httPettitions
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import model.SharedPreff
+import com.example.tfg.petitionsAndFunctions.SharedPreff
 import model.User
 
 class perfilUser : AppCompatActivity() {
-    private val httPettitions=httPettitions()
+    private val httPettitions= httPettitions()
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,8 +36,8 @@ class perfilUser : AppCompatActivity() {
         val deleteButton:ImageButton=findViewById(R.id.editDelete)
         /*Declaracion de variables*/
         val context=baseContext
-        val sharedPreff=SharedPreff(context)
-        val functions=generalFunctions()
+        val sharedPreff= SharedPreff(context)
+        val functions= generalFunctions()
         val ip=sharedPreff.getIp(context)
         val DNIu=functions.decrypt(functions.clave,sharedPreff.getUser(context).toString()).toString()
         /*val DNIRecuperado:String=functions.decrypt(functions.clave,sharedPreff.getUser(context).toString()).toString()*/
@@ -79,53 +81,11 @@ class perfilUser : AppCompatActivity() {
         me redirige a la actividad de modificación del usuario
          */
         deleteButton.setOnClickListener {
-            val builderOpciones: AlertDialog.Builder =
-                AlertDialog.Builder(this)/*Creamos el objeto diálogo*/
-            builderOpciones.setTitle("¿Que deseas hacer?")/*Establecemos el título, el mensaje principal y las dos opciones*/
-            builderOpciones.setPositiveButton("Eliminar") { _, _ ->
-                /*Nos abre un dialog para saber si queremos eliminar de verdad el usuario*/
-                val builderEliminar: AlertDialog.Builder =
-                    AlertDialog.Builder(this)/*Creamos el objeto diálogo*/
-                builderEliminar.setTitle("¿Desactivar cuenta?")/*Establecemos el título, el mensaje principal y las dos opciones*/
-                builderEliminar.setMessage("Si eliminas tu usuario no podrás volver a acceder a tu cuenta hasta volver a reactivarla")
-                builderEliminar.setPositiveButton("Desactivar") { _, _ ->
-                    /*Si le damos a desactivar se lanzará la petición que hará que nuestro usuario
-                    se desactive y por lo tanto cerrará sesión
-                     */
-                    lifecycleScope.launch(Dispatchers.Main) {
-                        var done:Boolean?=false
-                       withContext(Dispatchers.IO){
-                            done=httPettitions.deleteUser(DNIu,ip)
-                       }
-                        when (done) {
-                            null -> {
-                                Toast.makeText(this@perfilUser,this@perfilUser.getString(R.string.problemas),
-                                    Toast.LENGTH_SHORT).show()
-                                startActivity(functions.logOutFun(this@perfilUser))
-                            }
-                            true -> {
-                                Toast.makeText(this@perfilUser,this@perfilUser.getString(R.string.errorObtencion)
-                                    ,Toast.LENGTH_SHORT).show()
-                                startActivity(functions.logOutFun(this@perfilUser))
-                            }
-                            else -> {
-                                Toast.makeText(this@perfilUser,"ERROR",Toast.LENGTH_SHORT).show()
-                            }
-                        }
-                    }
-                }
-                /*Si cancelamos no hace nada*/
-                builderEliminar.setNegativeButton(("Cancelar"), { _, _ -> })
-                val dialog = builderEliminar.create()/*Lo construímos con las distintas partes*/
-                dialog.show()/*Lo mostramos*/
-            }
+
             /*Nos redirige a la actividad de modificacion del usuario*/
-            builderOpciones.setNegativeButton("Modificar") { _, _ ->
                 val intentModify=Intent(this,modificaResena::class.java)
                 startActivity(intentModify)
             }
-            val dialog = builderOpciones.create()/*Lo construímos con las distintas partes*/
-            dialog.show()/*Lo mostramos*/
+
         }
     }
-}

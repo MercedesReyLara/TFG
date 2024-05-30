@@ -10,18 +10,15 @@ import android.widget.ImageButton
 import android.widget.ListView
 import android.widget.Spinner
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import com.example.tfg.adapters.ProductAdapter
+import com.example.tfg.petitionsAndFunctions.httPettitions
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import model.Category
 import model.Product
-import model.Review
-import model.SharedPreff
+import com.example.tfg.petitionsAndFunctions.SharedPreff
 
 class allProductList : AppCompatActivity() {
     var listProducts: ArrayList<Product> = arrayListOf()
@@ -42,7 +39,8 @@ class allProductList : AppCompatActivity() {
         val filtro: Button =findViewById(R.id.aplicarPuntuacion)
         val puntuaciones = arrayListOf("Ninguna puntuacion","Puntuacion alta","Puntuacion baja")
 
-        val adapterProduct = ProductAdapter(context, listProducts)
+        val adapterProduct =
+            ProductAdapter(context, listProducts)
         val adapter: ArrayAdapter<String> = ArrayAdapter(this,android.R.layout.simple_spinner_item,puntuaciones)
         spinnerPuntuacion.adapter=adapter
         spinnerPuntuacion.setSelection(0)

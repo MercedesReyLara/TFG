@@ -12,12 +12,14 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.example.tfg.petitionsAndFunctions.generalFunctions
+import com.example.tfg.petitionsAndFunctions.httPettitions
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import model.Product
 import model.Review
-import model.SharedPreff
+import com.example.tfg.petitionsAndFunctions.SharedPreff
 import model.User
 
 class reviewProduct : AppCompatActivity() {
@@ -36,9 +38,9 @@ class reviewProduct : AppCompatActivity() {
         val back:ImageButton=findViewById(R.id.backMainR)
         /*Declaracion de variables*/
         val context: Context =baseContext
-        val functions=generalFunctions()
-        val sharedPreff=SharedPreff(context)
-        val pettitions=httPettitions()
+        val functions= generalFunctions()
+        val sharedPreff= SharedPreff(context)
+        val pettitions= httPettitions()
         val ip=sharedPreff.getIp(context)
         val nombresProductos = arrayListOf("-")
         val hintNombre=nombre.hint

@@ -1,4 +1,4 @@
-package com.example.tfg
+package com.example.tfg.petitionsAndFunctions
 
 
 import android.annotation.SuppressLint
@@ -7,10 +7,7 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.util.Base64
-import android.view.View
-import android.widget.ArrayAdapter
 import android.widget.EditText
-import android.widget.Spinner
 import java.util.Locale
 import java.util.regex.Matcher
 import java.util.regex.Pattern
@@ -21,9 +18,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.DisplayMetrics
 import android.util.Log
-import android.widget.ImageView
-import androidx.core.graphics.drawable.toBitmap
-import model.SharedPreff
+import com.example.tfg.logIn
 import java.io.ByteArrayOutputStream
 
 
@@ -206,7 +201,7 @@ class generalFunctions {
         val resources:Resources=context.resources
         val DM:DisplayMetrics=resources.displayMetrics
         val configuration:Configuration=resources.configuration
-        val sharedPreff=SharedPreff(context)
+        val sharedPreff= SharedPreff(context)
         configuration.setLocale(Locale(sharedPreff.getLanguage(context)))
         resources.updateConfiguration(configuration,DM)
     }

@@ -1,4 +1,4 @@
-package com.example.tfg
+package com.example.tfg.petitionsAndFunctions
 
 import android.net.Uri
 import com.google.gson.Gson
@@ -8,7 +8,6 @@ import kotlinx.coroutines.withContext
 import model.Category
 import model.Product
 import model.Review
-import model.SharedPreff
 import model.User
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -372,6 +371,37 @@ class httPettitions {
         }
     }
 
+    suspend fun bajaUser(user:User,ip:String):Boolean? {
+        /*Le mando el DNI para que pueda buscar a usuario por DNI*/
+        return withContext(Dispatchers.IO) {
+            val client = OkHttpClient()
+            val url = "http://$ip:8080/darDeBaja"
+            val gson = Gson()
+            val json = gson.toJson(user)
+            val mediaType = "application/json; charset=utf-8".toMediaTypeOrNull()
+            val requestBody = json.toRequestBody(mediaType)
+            val request = Request.Builder()
+                .url(url)
+                .put(requestBody)
+                .build()
+
+            try {
+                /*Try catch para que no crashee por error de conexion*/
+                val response = client.newCall(request).execute()
+                val responseBody = response.body?.string()
+                /*Verificar si el DNI del usuario encontrado coincide con el DNI buscado y que se ha borrado
+                Si es así devuelve true, si no devuelve false
+                 */
+                if (response.isSuccessful&&!responseBody.isNullOrEmpty()) {
+                    return@withContext true
+                }else{
+                    return@withContext false
+                }
+            }catch (exception:IOException){
+                return@withContext  null
+            }
+        }
+    }
     suspend fun reactivarUsuario(user:User,ip:String):Boolean?{
         return withContext(Dispatchers.IO) {
             val client = OkHttpClient()

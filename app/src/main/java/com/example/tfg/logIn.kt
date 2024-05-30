@@ -3,32 +3,26 @@ package com.example.tfg
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.content.res.Configuration
 import android.os.Bundle
-import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
-import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.example.tfg.petitionsAndFunctions.generalFunctions
+import com.example.tfg.petitionsAndFunctions.httPettitions
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import model.Category
-import model.Review
-import model.SharedPreff
+import com.example.tfg.petitionsAndFunctions.SharedPreff
 import model.User
-import java.util.Locale
 
 
 class logIn : AppCompatActivity() {
     private lateinit var context: Context
-    private lateinit var sharedPreff:SharedPreff
+    private lateinit var sharedPreff: SharedPreff
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -36,29 +30,36 @@ class logIn : AppCompatActivity() {
         Thread.sleep(1500)
         /*Aplicamos el tema por defecto de mi app*/
         setTheme(R.style.Base_Theme_TFG)
+
         super.onCreate(savedInstanceState)
+
         /*Instanciamos el contexto y las shared prefferences, que por tema del cambio de idioma tienen que
         estar declaradas fuera del onCreate para poder referenciarlas en la función del cambio de idioma */
         context = baseContext
         sharedPreff = SharedPreff(context)
         val functions = generalFunctions()
-        /*Hacemos que las preferencias pillen la ip indicada*/
-        sharedPreff.saveIP(context,"192.168.144.2")
+
+        /*Hacemos que las preferencias seleccionamos la ip indicada*/
+        /*sharedPreff.saveIP(context,"192.168.1.73")*/
+
         /*Establecemos el idioma porque al salir de la app se resetea
         entonces buscamos en las preferencias el codigo y aplicamos el idioma*/
         functions.setLanguage(context)
+
         /*Esta función está más abajo, y se ejecuta en el onCreate porque cuando ejecutamos la funcion,
         esta cuenta con el método recreate() que lo que hace es llamar al onCreate para poder aplicar el idioma */
         setContentView(R.layout.log_in)
-        /*^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$ regex ip igual la uso*/
+
+
         //Búsqueda de elementos visuales
         val logIn: Button = findViewById(R.id.iniciarSesion)
         val registerBut: Button = findViewById(R.id.registrar)
         val email: EditText = findViewById(R.id.editTextUsername)
         val password: EditText = findViewById(R.id.passwordUser)
         val ajustesButton:ImageButton=findViewById(R.id.ajustes)
+
         //Declaración de variables
-        val httPettitions=httPettitions()
+        val httPettitions= httPettitions()
         /*Si las shared preferences tienen inciada sesión, vamos directamente al menú principal
         si no nos quedamos en la actividad y hacemos las operaciones adecuadas
          */
@@ -66,8 +67,7 @@ class logIn : AppCompatActivity() {
             val intent = Intent(this, mainMenu::class.java)
             startActivity(intent)
         } else {
-            functions.clearHint(email)
-            functions.clearHint(password)
+            functions.clearHint(listOf(email,password),listOf(email.hint,password.hint))
 
             /*Iniciar sesión:
             1-Comprueba que los campos no estén vacíos
@@ -115,7 +115,7 @@ class logIn : AppCompatActivity() {
                            if(encontrado==null){
                                Toast.makeText(this@logIn,this@logIn.getString(R.string.problemas),Toast.LENGTH_SHORT).show()
                              }else if(encontrado.toString().isEmpty()) {
-
+                               Toast.makeText(this@logIn,this@logIn.getString(R.string.errorObtencion),Toast.LENGTH_SHORT).show()
                            }else{
                                     if(!encontrado.activo){
                                         val builderActivar: AlertDialog.Builder =
@@ -134,7 +134,7 @@ class logIn : AppCompatActivity() {
                                                 }
                                                 when (done) {
                                                     null -> {
-                                                        Toast.makeText(this@logIn,"error en la conexion",Toast.LENGTH_SHORT).show()
+                                                        Toast.makeText(this@logIn,this@logIn.getString(R.string.problemas),Toast.LENGTH_SHORT).show()
                                                     }
                                                     true -> {
                                                         sharedPreff.saveLogin(context, true)

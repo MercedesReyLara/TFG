@@ -4,23 +4,22 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.provider.MediaStore.Audio.Radio
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.RadioButton
 import android.widget.RadioGroup
-import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
-import com.google.android.material.circularreveal.CircularRevealWidget.RevealInfo
+import com.example.tfg.petitionsAndFunctions.generalFunctions
+import com.example.tfg.petitionsAndFunctions.httPettitions
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import model.Review
-import model.SharedPreff
+import com.example.tfg.petitionsAndFunctions.SharedPreff
 
 class modificaResena : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
@@ -34,10 +33,10 @@ class modificaResena : AppCompatActivity() {
         val text:EditText=findViewById(R.id.textModificacion)
         val back:ImageButton=findViewById(R.id.backToMainD)
         /*Declaraion de variables*/
-        val functions=generalFunctions()
-        val pettitions=httPettitions()
+        val functions= generalFunctions()
+        val pettitions= httPettitions()
         val context: Context =baseContext
-        val sharedPreff=SharedPreff(context)
+        val sharedPreff= SharedPreff(context)
         var nombre:Boolean=false
         var desc:Boolean=false
         var punt:Boolean=false

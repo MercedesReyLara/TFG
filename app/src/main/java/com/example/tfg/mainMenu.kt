@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.tfg.petitionsAndFunctions.generalFunctions
 
 class mainMenu : AppCompatActivity() {
     private lateinit var context:Context
@@ -26,7 +27,7 @@ class mainMenu : AppCompatActivity() {
         val ajustesButton:ImageButton=findViewById(R.id.ajustes)
 
         //Declaración de variables que vamos a utilizar
-        val functions=generalFunctions()
+        val functions= generalFunctions()
         val context:Context=baseContext
         /*Establecemos el idioma porque al salir de la app se resetea
         entonces buscamos en las preferencias el codigo y aplicamos el idioma

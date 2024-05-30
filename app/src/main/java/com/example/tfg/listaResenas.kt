@@ -5,8 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
-import android.view.View
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ImageButton
@@ -15,13 +13,14 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.example.tfg.adapters.reviewAdapter
+import com.example.tfg.petitionsAndFunctions.httPettitions
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import model.Category
 import model.Review
-import model.SharedPreff
-import model.User
+import com.example.tfg.petitionsAndFunctions.SharedPreff
 
 class listaResenas : AppCompatActivity() {
     var listReviews: ArrayList<Review> = arrayListOf()
@@ -34,7 +33,7 @@ class listaResenas : AppCompatActivity() {
         /*Declaración de elementos de uso*/
         val petitions = httPettitions()
         val context: Context = baseContext
-        val sharedPreff=SharedPreff(context)
+        val sharedPreff= SharedPreff(context)
         val ip=sharedPreff.getIp(context)
         /*Declaracion de elementos visuales*/
         val back: ImageButton = findViewById(R.id.backMainList)
@@ -64,7 +63,8 @@ class listaResenas : AppCompatActivity() {
                 }
             }
         }
-        val adapterResenas = reviewAdapter(context, listReviews)
+        val adapterResenas =
+            reviewAdapter(context, listReviews)
         val adapter: ArrayAdapter<String> = ArrayAdapter(this,android.R.layout.simple_spinner_item,nombresCategorias)
         spinner.adapter=adapter
         spinner.setSelection(0)
@@ -79,7 +79,7 @@ class listaResenas : AppCompatActivity() {
 
         filter.setOnClickListener {
             val categoryN = spinner.selectedItem.toString()
-            if(categoryN == "ninguna") {
+            if(categoryN == "Ninguna categoria") {
                 lifecycleScope.launch(Dispatchers.Main) {
                     var reviews: ArrayList<Review>?
                     withContext(Dispatchers.IO) {

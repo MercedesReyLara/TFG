@@ -17,6 +17,7 @@ class GalleryDbHelper(context: Context) : SQLiteOpenHelper(
     }
 
     override fun onCreate(database: SQLiteDatabase) {
+        database.execSQL(ImageContract.ImageEntry.SQL_DELETE_ENTRIES)
         database.execSQL(ImageContract.ImageEntry.SQL_CREATE_ENTRIES)
     }
 

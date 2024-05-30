@@ -27,7 +27,7 @@ class DetailsProduct : AppCompatActivity() {
 
         /*Recperamos el producto mandado a través del intent y lo partimos en las distintas partes del prodcuto
         * para poder asignárselos a los distintos campos*/
-        val partes=intent.getStringExtra("producto").toString().split("/")
+        val partes=intent.getStringExtra("product").toString().split("/")
         name.text=partes[0]
         price.text=partes[2]
         description.text=partes[1]

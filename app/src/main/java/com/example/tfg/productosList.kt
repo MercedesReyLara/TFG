@@ -3,7 +3,6 @@ package com.example.tfg
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.ListView
@@ -11,18 +10,20 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.example.tfg.adapters.ProductAdapter
+import com.example.tfg.adapters.reviewAdapter
+import com.example.tfg.petitionsAndFunctions.generalFunctions
+import com.example.tfg.petitionsAndFunctions.httPettitions
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import model.Product
 import model.Review
-import model.SharedPreff
+import com.example.tfg.petitionsAndFunctions.SharedPreff
 import model.User
 
 class productosList : AppCompatActivity() {
-    private val httPetitions=httPettitions()
+    private val httPetitions= httPettitions()
     private var listProductos:ArrayList<Product> = arrayListOf()
     private var listReviews:ArrayList<Review> = arrayListOf()
     @SuppressLint("NotifyDataSetChanged")
@@ -31,9 +32,9 @@ class productosList : AppCompatActivity() {
         /*Esta activity la voy a usar tanto como para mostrar productos como reseñas, voy a reutilizar un listview
         Haré 2 botones, cuando pulse no hará la petición de productos y cuando pulse el otro de reseñas
          */
-        val functions=generalFunctions()
+        val functions= generalFunctions()
         val context: Context =baseContext
-        val sharedPreff=SharedPreff(context)
+        val sharedPreff= SharedPreff(context)
         val DNI:String=functions.decrypt(functions.clave,sharedPreff.getUser(context).toString()).toString()
 
         super.onCreate(savedInstanceState)
@@ -46,8 +47,10 @@ class productosList : AppCompatActivity() {
 
         val showProducts:ImageButton=findViewById(R.id.listarProductos)
         val showReviews:ImageButton=findViewById(R.id.listarResenas)
-        val adapterProductos = ProductAdapter(context,listProductos)
-        val adapterResenas = reviewAdapter(context,listReviews)
+        val adapterProductos =
+            ProductAdapter(context, listProductos)
+        val adapterResenas =
+            reviewAdapter(context, listReviews)
         val ip=sharedPreff.getIp(context)
         /*En este lo que hacemos es listar los productos del usuario*/
         showProducts.setOnClickListener {

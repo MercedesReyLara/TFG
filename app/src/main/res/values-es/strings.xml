@@ -33,7 +33,8 @@
     <string name="ipText">Cambiar la dirección IP</string>
     <string name="detalles">Detalles del producto</string>
     <string name="ip">Introduzca la dirección IP</string>
-    <string name="aplicar">Aplicar este tamaño</string>
+    <string name="aplicar">Aplicar esta IP</string>
+    <string name="cuenta">Dar de baja o eliminar cuenta</string>
     <string name="btnModificar">Modificar una reseña</string>
     <string name="txtModificar">Elija un producto a modificar</string>
     <string name="escogerEliminar">Elija un producto</string>
@@ -46,7 +47,7 @@
     <string name="nombreEdit">Nombre de usuario</string>
     <string name="apellidosEdit">Apellidos</string>
     <string name="faceReseña">Hacer una reseña</string>
-    <string name="opcions">Opciones de perfil</string>
+    <string name="opcions">Modificar perfil</string>
     <string name="lista">Inventario</string>
     <string name="nombreCategoria">Nombre de la categoría</string>
     <string name="mailEdit">Correo electrónico</string>

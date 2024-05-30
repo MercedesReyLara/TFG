@@ -25,6 +25,9 @@
         android:theme="@style/Base.Theme.TFG"
         tools:targetApi="31">
         <activity
+            android:name=".modifyUser"
+            android:exported="false" />
+        <activity
             android:name=".allProductList"
             android:exported="false" />
         <activity

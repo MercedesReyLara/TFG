@@ -1,22 +1,26 @@
 package com.example.tfg.sqlite
 import android.content.ContentValues
 import android.database.Cursor
+import android.database.sqlite.SQLiteDatabase
 import android.provider.BaseColumns
 
 class ImageDAO {
 
-    fun crearImagen(galllery: GalleryDbHelper, image: Image): Long {
-        val db = galllery.writableDatabase
-
-        val values = ContentValues().apply {
-            put(ImageContract.ImageEntry.COLUMN_NAME_CONTENIDO, image.valor)
+    fun crearImagen(galllery: GalleryDbHelper, list: List<Image>): Boolean {
+        val db :SQLiteDatabase= galllery.writableDatabase
+        galllery.onCreate(db)
+            for(image in list){
+                val values = ContentValues().apply {
+                put(ImageContract.ImageEntry.COLUMN_NAME_CONTENIDO, image.valor)
+            }
+                db.insert(ImageContract.ImageEntry.TABLE_NAME, null, values)
         }
 
-        return db.insert(ImageContract.ImageEntry.TABLE_NAME, null, values)
+        return true
     }
 
-    fun visualizarImagenes(galllery: GalleryDbHelper): ArrayList<Image> {
-        val db = galllery.readableDatabase
+    fun visualizarImagenes(gallery: GalleryDbHelper): ArrayList<Image> {
+        val db = gallery.readableDatabase
 
         val projection = arrayOf(
             BaseColumns._ID,
@@ -44,4 +48,6 @@ class ImageDAO {
         cursor.close()
         return lista
     }
+
+
 }

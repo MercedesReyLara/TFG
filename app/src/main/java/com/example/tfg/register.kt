@@ -21,21 +21,23 @@ import androidx.core.graphics.drawable.toBitmap
 import androidx.core.view.drawToBitmap
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
+import com.example.tfg.petitionsAndFunctions.generalFunctions
+import com.example.tfg.petitionsAndFunctions.httPettitions
 import com.example.tfg.sqlite.GalleryDbHelper
 import com.example.tfg.sqlite.Image
 import com.example.tfg.sqlite.ImageDAO
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import model.SharedPreff
+import com.example.tfg.petitionsAndFunctions.SharedPreff
 import model.User
 import java.io.IOException
 
 
 class register : AppCompatActivity() {
-    private lateinit var sharedPreff:SharedPreff
+    private lateinit var sharedPreff: SharedPreff
     private lateinit var context:Context
     private var imagenRecogida: String=""
-    private val functions=generalFunctions()
+    private val functions= generalFunctions()
     @SuppressLint("MissingInflatedId", "SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,21 +61,24 @@ class register : AppCompatActivity() {
         val spinnerImg: Spinner =findViewById(R.id.spinnerImg)
 
         //Declaracion de variables
-        val listaSpinner:List<String> = listOf("Imagen 1","Imagen 2","Imagen 3","Imagen 4")
+        val listaSpinner:List<String> = listOf("-","Imagen 1","Imagen 2","Imagen 3","Imagen 4","Imagen 5")
         val adapter: ArrayAdapter<String> = ArrayAdapter(this,android.R.layout.simple_spinner_item,listaSpinner)
         spinnerImg.adapter=adapter
         spinnerImg.setSelection(0)
-        val pettitions=httPettitions()
+        val pettitions= httPettitions()
         context =baseContext
-        sharedPreff=SharedPreff(context)
+        sharedPreff= SharedPreff(context)
         val ip=sharedPreff.getIp(context)
         val helper:GalleryDbHelper= GalleryDbHelper(context)
         val DAO:ImageDAO= ImageDAO()
-        var asigned=false
-        //Utilizamos el método para limpiar los inputs cuando esten on click
+        var asigned:Boolean=false
+        if(asigned && imagenRecogida.isNotEmpty()){
+            profileP.setImageBitmap(functions.stringToBitmap(imagenRecogida))
+        }
+        //Utilizamos el método para limpiar los inputs cuando esten on focus
         functions.clearHint(listOf(DNIT,name,lastName,mail,password,passwordConfirm),
             listOf(DNIT.hint,name.hint,lastName.hint,mail.hint,password.hint,passwordConfirm.hint))
-        profileP.setImageResource(R.drawable.uno)
+        profileP.setImageResource(R.drawable.imagen_2024_05_14_213155645_removebg_preview)
         spinnerImg.isVisible=false
         val resultado=registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
                 activityResult->
@@ -87,9 +92,6 @@ class register : AppCompatActivity() {
                     exception.toString()
                 }
             }
-        }
-        if(asigned&&imagenRecogida.isNotEmpty()){
-            profileP.setImageBitmap(functions.stringToBitmap(imagenRecogida))
         }
         registerButton.setOnClickListener {
             val dniTXT=DNIT.text.toString().trim()
@@ -114,11 +116,6 @@ class register : AppCompatActivity() {
                 Toast.makeText(this,this.getString(R.string.coincidir),Toast.LENGTH_LONG).show()
                 passwordConfirm.text.clear()
             }else{
-               /* val pfp:ByteArray = if(profileP.drawable==null){
-                    functions.imageToByteArray(context,R.drawable.uno)
-                }else {
-                    functions.imageViewToByteArray(profileP)
-                }*/
                 val pfp=functions.bitmapToString(profileP.drawable.toBitmap())
                 val newUser= User(dniTXT,nameTXT,lastNameTXT,mailTXT,passwordConfTXT,"Sin descripcion",pfp,true)
                 var success:Boolean?=false
@@ -162,8 +159,6 @@ class register : AppCompatActivity() {
             var listaObtenidas:ArrayList<Image> = arrayListOf()
             try{
               listaObtenidas=DAO.visualizarImagenes(helper)
-                Toast.makeText(this,"Obtenidas",
-                    Toast.LENGTH_SHORT).show()
                 spinnerImg.isVisible=true
                 spinnerImg.onItemSelectedListener= object : AdapterView.OnItemSelectedListener {
                     override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
@@ -174,6 +169,7 @@ class register : AppCompatActivity() {
                                 "Imagen 2"->profileP.setImageBitmap(functions.byteArrayToBitmap(listaObtenidas[1].valor))
                                 "Imagen 3"->profileP.setImageBitmap(functions.byteArrayToBitmap(listaObtenidas[2].valor))
                                 "Imagen 4"->profileP.setImageBitmap(functions.byteArrayToBitmap(listaObtenidas[3].valor))
+                                "Imagen 5"->profileP.setImageBitmap(functions.byteArrayToBitmap(listaObtenidas[4].valor))
                             }
                         }
                     }
@@ -188,7 +184,9 @@ class register : AppCompatActivity() {
         }
 
         insertar.setOnClickListener {
+            val listaImg:ArrayList<Image> = arrayListOf()
             val listaFotos:ArrayList<ByteArray> = arrayListOf(
+                functions.imageToByteArray(context,R.drawable.uno),
                 functions.imageToByteArray(context,R.drawable.dos),
                 functions.imageToByteArray(context,R.drawable.tres),
                 functions.imageToByteArray(context,R.drawable.cuatro),
@@ -196,10 +194,11 @@ class register : AppCompatActivity() {
 
             helper.writableDatabase
 
+            for(foto in listaFotos){
+                listaImg.add(Image(foto))
+            }
             try{
-                for(foto in listaFotos){
-                    DAO.crearImagen(helper, Image(foto))
-                }
+                DAO.crearImagen(helper, listaImg)
             }catch(exception:IOException){
                 Toast.makeText(this,"Error en la inserción de imagenes",
                     Toast.LENGTH_SHORT).show()

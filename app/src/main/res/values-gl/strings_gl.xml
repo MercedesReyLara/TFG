@@ -15,7 +15,7 @@
     <string name="consultar">Buscar por produto</string>
     <string name="ver">Ver todas as reseñas</string>
     <string name="faceReseña">Facer unha reseña</string>
-    <string name="opcions">Opcions de perfil</string>
+    <string name="opcions">Modificar perfil</string>
     <string name="lista">Inventario</string>
     <string name="nombreCategoria">Nome da categoria</string>
     <string name="modificarUsuario">Modificar o meu perfil</string>
@@ -41,7 +41,8 @@
     <string name="ipText">Cambia a dirección IP</string>
     <string name="detalles">Detalles do produto</string>
     <string name="ip">Introduza a dirección IP</string>
-    <string name="aplicar">Aplicar este tamaño</string>
+    <string name="aplicar">Aplicar esta IP</string>
+    <string name="cuenta">Dar de baixa ou eliminar conta</string>
     <string name="btnModificar">Modificar unha reseña</string>
     <string name="txtModificar">Escolla un produto a modificar</string>
     <string name="escogerEliminar">Escolla un produto</string>

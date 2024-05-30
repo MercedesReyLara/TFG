@@ -1,6 +1,7 @@
 package com.example.tfg
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -8,12 +9,20 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import model.SharedPreff
+import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
+import com.example.tfg.petitionsAndFunctions.generalFunctions
+import com.example.tfg.petitionsAndFunctions.SharedPreff
+import com.example.tfg.petitionsAndFunctions.httPettitions
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import model.User
 
 class ajustes : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
@@ -21,20 +30,26 @@ class ajustes : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ajustes_tamano_letra)
 
-        val functions=generalFunctions()
+        val functions= generalFunctions()
         val context: Context =baseContext
         /*Declaración de elementos visuales*/
         val volverMain: ImageButton =findViewById(R.id.backToMain)
         val ip:Button=findViewById(R.id.aplicarIp)
+        val eliminar:Button=findViewById(R.id.eliminarCuenta)
         val direcIP:EditText=findViewById(R.id.direccionIP)
         val spinnerIdiomas: Spinner = findViewById(R.id.spinnerLanguages)
         //Declaración de variables
-        val tamanoFuente:Int=12
-        val sharedPreff=SharedPreff(context)
+        val sharedPreff= SharedPreff(context)
+        val pettitions=httPettitions()
+        functions.clearHint(listOf(direcIP), listOf(ip.hint))
         /*Crearemos el spinner que se encarga de los idiomas. Creamos una lista con 3 elementos, 2 códigos y un string
         * indicando al usuario que escoja el idioma. Según el código cambiaremos el local del dispositivo para que
         * se aplique el idioma en cuestión*/
-
+        val DNIu:String=functions.decrypt(functions.clave,sharedPreff.getUser(context).toString()).toString()
+        val iP:String=sharedPreff.getIp(context)
+        if(DNIu.isEmpty()){
+            eliminar.isVisible=false
+        }
         val languages = arrayListOf("es", "gl","SELECCIONE IDIOMA")
         val adapter: ArrayAdapter<String> = ArrayAdapter(this,android.R.layout.simple_spinner_item,languages)
         spinnerIdiomas.adapter=adapter
@@ -65,11 +80,75 @@ class ajustes : AppCompatActivity() {
             override fun onNothingSelected(p0: AdapterView<*>?) {
             }
         }
-
+        eliminar.setOnClickListener {
+            val builderOpciones: AlertDialog.Builder =
+                AlertDialog.Builder(this)/*Creamos el objeto diálogo*/
+            builderOpciones.setTitle("¿Que deseas hacer?")/*Establecemos el título, el mensaje principal y las dos opciones*/
+            builderOpciones.setPositiveButton("Eliminar") { _, _ ->
+                /*Nos abre un dialog para saber si queremos eliminar de verdad el usuario*/
+                val builderEliminar: AlertDialog.Builder =
+                    AlertDialog.Builder(this)/*Creamos el objeto diálogo*/
+                builderEliminar.setTitle("¿Desactivar cuenta?")/*Establecemos el título, el mensaje principal y las dos opciones*/
+                builderEliminar.setMessage("Si eliminas tu usuario no podrás volver a acceder a tu cuenta hasta volver a reactivarla")
+                builderEliminar.setPositiveButton("Desactivar") { _, _ ->
+                    /*Si le damos a desactivar se lanzará la petición que hará que nuestro usuario
+                    se desactive y por lo tanto cerrará sesión
+                     */
+                    lifecycleScope.launch(Dispatchers.Main) {
+                        var done:Boolean?=false
+                       withContext(Dispatchers.IO){
+                            done=pettitions.bajaUser(User(DNIu),iP)
+                       }
+                        when (done) {
+                            null -> {
+                                Toast.makeText(this@ajustes,this@ajustes.getString(R.string.problemas),
+                                    Toast.LENGTH_SHORT).show()
+                                startActivity(functions.logOutFun(this@ajustes))
+                            }
+                            true -> {
+                                Toast.makeText(this@ajustes,this@ajustes.getString(R.string.errorObtencion)
+                                    ,Toast.LENGTH_SHORT).show()
+                                startActivity(functions.logOutFun(this@ajustes))
+                            }
+                            else -> {
+                                Toast.makeText(this@ajustes,"ERROR",Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+                }
+                /*Si cancelamos no hace nada*/
+                builderEliminar.setNegativeButton("Eliminar"){ _, _ ->
+                    lifecycleScope.launch(Dispatchers.Main) {
+                        var done:Boolean?=false
+                        withContext(Dispatchers.IO){
+                            done=pettitions.deleteUser(DNIu,iP)
+                        }
+                        when (done) {
+                            null -> {
+                                Toast.makeText(this@ajustes,this@ajustes.getString(R.string.problemas),
+                                    Toast.LENGTH_SHORT).show()
+                                startActivity(functions.logOutFun(this@ajustes))
+                            }
+                            true -> {
+                                Toast.makeText(this@ajustes,this@ajustes.getString(R.string.errorObtencion)
+                                    ,Toast.LENGTH_SHORT).show()
+                                startActivity(functions.logOutFun(this@ajustes))
+                            }
+                            else -> {
+                                Toast.makeText(this@ajustes,"ERROR",Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+                }
+                val dialog = builderEliminar.create()/*Lo construímos con las distintas partes*/
+                dialog.show()/*Lo mostramos*/
+            }
+        }
         /*Boton para establecer el cambio de ip*/
         ip.setOnClickListener {
             val IP:String=direcIP.text.trim().toString()
             sharedPreff.saveIP(context,IP)
+            direcIP.text.clear()
         }
         volverMain.setOnClickListener {
             val intentMain= Intent(this,logIn::class.java)

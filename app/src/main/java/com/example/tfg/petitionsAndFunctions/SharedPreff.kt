@@ -1,4 +1,4 @@
-package model
+package com.example.tfg.petitionsAndFunctions
 
 import android.content.Context
 import androidx.preference.PreferenceManager
@@ -51,14 +51,6 @@ class SharedPreff(val contexto:Context) {
         val sharedPreff=PreferenceManager.getDefaultSharedPreferences(context)
         val editor=sharedPreff.edit()
         editor.putString("IP",ip)
-        editor.commit()
-    }
-
-
-    fun saveIPReal(context:Context){
-        val sharedPreff=PreferenceManager.getDefaultSharedPreferences(context)
-        val editor=sharedPreff.edit()
-        editor.putString("IP","192.168.5.14")
         editor.commit()
     }
 

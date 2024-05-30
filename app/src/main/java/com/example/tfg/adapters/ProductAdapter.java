@@ -1,4 +1,4 @@
-package com.example.tfg;
+package com.example.tfg.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.example.tfg.R;
 
 import java.util.ArrayList;
 

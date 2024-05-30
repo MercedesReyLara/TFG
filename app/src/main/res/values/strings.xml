@@ -26,7 +26,7 @@
     <string name="pequeña">Letra pequena</string>
     <string name="grande">Letra grande</string>
     <string name="tp">O teu inventario</string>
-    <string name="opcions">Opcions de perfil</string>
+    <string name="opcions">Modificar perfil</string>
     <string name="lista">Inventario</string>
     <string name="nombreCategoria">Nome da categoria</string>
     <string name="faceReseña">Facer unha reseña</string>
@@ -40,7 +40,8 @@
     <string name="errorObtencion">Non se encontraron datos con estas caracteristicas</string>
     <string name="precio">Precio do producto</string>
     <string name="ip">Introduza a dirección IP</string>
-    <string name="aplicar">Aplicar este tamaño</string>
+    <string name="aplicar">Aplicar esta IP</string>
+    <string name="cuenta">Dar de baixa ou eliminar conta</string>
     <string name="btnModificar">Modificar unha reseña</string>
     <string name="txtModificar">Escolla un produto a modificar</string>
     <string name="escogerEliminar">Escolla un produto</string>

@@ -71,7 +71,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/button"
-        android:text="Button"
+        android:text="@string/aplicar"
         app:layout_constraintBottom_toBottomOf="@id/guidelineH4"
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
         app:layout_constraintHorizontal_bias="0.5"
@@ -102,13 +102,13 @@
     <Spinner
         android:id="@+id/spinnerLanguages"
         style="@style/spinner"
-        android:layout_width="246dp"
-        android:layout_height="25dp"
+        android:layout_width="315dp"
+        android:layout_height="33dp"
         android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@id/guidelineH5"
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@id/guidelineV1"
-        app:layout_constraintBottom_toTopOf="@id/guidelineH5"
         app:layout_constraintTop_toBottomOf="@id/guidelineH1" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -117,6 +117,18 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.16" />
+
+    <Button
+        android:id="@+id/eliminarCuenta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="@color/button"
+        android:text="@string/cuenta"
+        app:layout_constraintBottom_toTopOf="@id/guidelineH2"
+        app:layout_constraintEnd_toStartOf="@id/guidelineV2"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toEndOf="@id/guidelineV1" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

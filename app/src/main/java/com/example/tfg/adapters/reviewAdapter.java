@@ -1,4 +1,4 @@
-package com.example.tfg;
+package com.example.tfg.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.example.tfg.R;
 
 import java.util.ArrayList;
 
@@ -46,12 +48,11 @@ public class reviewAdapter extends BaseAdapter {
             View elemento= layout.inflate(R.layout.plantilla_review,parent,false);
             Review currentReview=(Review)getItem(position);
             TextView nombre=elemento.findViewById(R.id.nombreR);
-            TextView puntuacion=elemento.findViewById(R.id.precioP);
+            TextView puntuacion=elemento.findViewById(R.id.puntuacionR);
             TextView descripcion=elemento.findViewById(R.id.descripcionR);
 
             nombre.setText(currentReview.getNombre());
             puntuacion.setText( String.valueOf(currentReview.getPuntuacion()));
-            descripcion.setText(currentReview.getDescripcion());
             descripcion.setText(currentReview.getDescripcion());
             return elemento;
         }
