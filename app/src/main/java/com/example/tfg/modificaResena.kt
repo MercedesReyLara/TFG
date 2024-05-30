@@ -1,6 +1,7 @@
 package com.example.tfg
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore.Audio.Radio
@@ -19,6 +20,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import model.Review
+import model.SharedPreff
 
 class modificaResena : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
@@ -34,10 +36,13 @@ class modificaResena : AppCompatActivity() {
         /*Declaraion de variables*/
         val functions=generalFunctions()
         val pettitions=httPettitions()
+        val context: Context =baseContext
+        val sharedPreff=SharedPreff(context)
         var nombre:Boolean=false
         var desc:Boolean=false
         var punt:Boolean=false
         var resenaModificada:Review=Review()
+        val ip=sharedPreff.getIp(context)
         /*Recuperamos la resena que he mandado a través del intent y hacemos el split
         * para poder coger cada una de las partes y poder crear un objeto reseña con la nueva modificacion*/
         text.isVisible=false
@@ -95,7 +100,7 @@ class modificaResena : AppCompatActivity() {
            lifecycleScope.launch (Dispatchers.Main){
                var done:Boolean?=false
                withContext(Dispatchers.IO){
-                  done= pettitions.modifyReview(resenaModificada)
+                  done= pettitions.modifyReview(resenaModificada,ip)
                }
                /*Una vez hecha la peticion con la modificacion, manejamos lo que nos devuelve*/
                when(done){

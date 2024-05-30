@@ -36,13 +36,14 @@ class perfilUser : AppCompatActivity() {
         val context=baseContext
         val sharedPreff=SharedPreff(context)
         val functions=generalFunctions()
-        val DNIu=sharedPreff.getUser(context).toString()
+        val ip=sharedPreff.getIp(context)
+        val DNIu=functions.decrypt(functions.clave,sharedPreff.getUser(context).toString()).toString()
         /*val DNIRecuperado:String=functions.decrypt(functions.clave,sharedPreff.getUser(context).toString()).toString()*/
         var userData:User?= User()
         /*Hacemos la peticion*/
         lifecycleScope.launch (Dispatchers.IO){
             /*Buscamos el usuario a través del DNI guardado anteriormente en las preferencias*/
-            userData=httPettitions.getUserByDNI(User(DNIu))
+            userData=httPettitions.getUserByDNI(User(DNIu),ip)
             withContext(Dispatchers.Main){
                 if(userData!=null){
                     /*Cargamos los datos del usuario obtenido en cada campo correspondiente
@@ -94,7 +95,7 @@ class perfilUser : AppCompatActivity() {
                     lifecycleScope.launch(Dispatchers.Main) {
                         var done:Boolean?=false
                        withContext(Dispatchers.IO){
-                            done=httPettitions.deleteUser(DNIu)
+                            done=httPettitions.deleteUser(DNIu,ip)
                        }
                         when (done) {
                             null -> {

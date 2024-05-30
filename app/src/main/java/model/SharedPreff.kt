@@ -42,9 +42,9 @@ class SharedPreff(val contexto:Context) {
         sharedPreferences.edit().putString("idioma", language).apply()
     }
 
-    fun getIp(context: Context): String? {
+    fun getIp(context: Context): String {
         val sharedPreff=PreferenceManager.getDefaultSharedPreferences(context)
-        return sharedPreff.getString("IP","192.168.5.14")
+        return sharedPreff.getString("IP","192.168.5.14").toString()
     }
 
     fun saveIP(context:Context,ip:String){
@@ -54,10 +54,6 @@ class SharedPreff(val contexto:Context) {
         editor.commit()
     }
 
-    fun ipReal(context:Context):String?{
-        val sharedPreff=PreferenceManager.getDefaultSharedPreferences(context)
-        return sharedPreff.getString("IP","192.168.5.14")
-    }
 
     fun saveIPReal(context:Context){
         val sharedPreff=PreferenceManager.getDefaultSharedPreferences(context)
@@ -69,7 +65,7 @@ class SharedPreff(val contexto:Context) {
     fun saveImg(context: Context,imagen:String){
         val sharedPreff=PreferenceManager.getDefaultSharedPreferences(context)
         val editor=sharedPreff.edit()
-        editor.putString("imagen","")
+        editor.putString("imagen",imagen)
         editor.commit()
     }
 

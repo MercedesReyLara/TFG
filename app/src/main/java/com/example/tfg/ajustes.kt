@@ -24,9 +24,6 @@ class ajustes : AppCompatActivity() {
         val functions=generalFunctions()
         val context: Context =baseContext
         /*Declaración de elementos visuales*/
-        val lpequena:CheckBox=findViewById(R.id.pequena)
-        val lgrande:CheckBox=findViewById(R.id.grande)
-        val aplicar:Button=findViewById(R.id.aplicarButton)
         val volverMain: ImageButton =findViewById(R.id.backToMain)
         val ip:Button=findViewById(R.id.aplicarIp)
         val direcIP:EditText=findViewById(R.id.direccionIP)
@@ -68,19 +65,10 @@ class ajustes : AppCompatActivity() {
             override fun onNothingSelected(p0: AdapterView<*>?) {
             }
         }
-        /*Declaracion de elementos de uso
-        lgrande.isEnabled = !lpequena.isChecked
-        aplicar.setOnClickListener {
-            val configuration = resources.configuration
-            configuration.fontScale = tamanoFuente.toFloat()
-            resources.updateConfiguration(configuration, resources.displayMetrics)
-            finish()
-            val intent=Intent(this,ajustes::class.java)
-            startActivity(intent)
-        }*/
+
         /*Boton para establecer el cambio de ip*/
         ip.setOnClickListener {
-            val IP:String=direcIP.text.toString()
+            val IP:String=direcIP.text.trim().toString()
             sharedPreff.saveIP(context,IP)
         }
         volverMain.setOnClickListener {

@@ -34,7 +34,7 @@ class productosList : AppCompatActivity() {
         val functions=generalFunctions()
         val context: Context =baseContext
         val sharedPreff=SharedPreff(context)
-        val DNI:String=/*functions.decrypt(functions.clave,*/sharedPreff.getUser(context).toString()
+        val DNI:String=functions.decrypt(functions.clave,sharedPreff.getUser(context).toString()).toString()
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_productos_list)
@@ -48,13 +48,13 @@ class productosList : AppCompatActivity() {
         val showReviews:ImageButton=findViewById(R.id.listarResenas)
         val adapterProductos = ProductAdapter(context,listProductos)
         val adapterResenas = reviewAdapter(context,listReviews)
-
+        val ip=sharedPreff.getIp(context)
         /*En este lo que hacemos es listar los productos del usuario*/
         showProducts.setOnClickListener {
             lifecycleScope.launch(Dispatchers.Main) {
                 var newProducts:ArrayList<Product>
                 withContext(Dispatchers.IO) {
-                    newProducts = httPetitions.getProductos(User(DNI))
+                    newProducts = httPetitions.getProductos(User(DNI),ip)
                 }
                 if(newProducts.isEmpty()){
                     Toast.makeText(this@productosList,"Peticion denegada", Toast.LENGTH_SHORT).show()
@@ -72,7 +72,7 @@ class productosList : AppCompatActivity() {
             lifecycleScope.launch(Dispatchers.Main) {
                 var newReviews:ArrayList<Review>
                 withContext(Dispatchers.IO) {
-                    newReviews = httPetitions.getReviewsByUser(User(DNI))
+                    newReviews = httPetitions.getReviewsByUser(User(DNI),ip)
                 }
                 if(newReviews.isEmpty()){
                     Toast.makeText(this@productosList,"Peticion denegada", Toast.LENGTH_SHORT).show()
@@ -108,7 +108,7 @@ class productosList : AppCompatActivity() {
                     builder.setPositiveButton("Eliminar reseña") { _, _ ->
                         lifecycleScope.launch(Dispatchers.Main) {
                             withContext(Dispatchers.IO) {
-                                done = httPetitions.deleteReview(review.id)!!
+                                done = httPetitions.deleteReview(review.id,ip)!!
                             }
                             if(!done){
                                 Toast.makeText(this@productosList,"Peticion denegada", Toast.LENGTH_SHORT).show()
@@ -125,6 +125,7 @@ class productosList : AppCompatActivity() {
                         intentModificar.putExtra("resena",resena.toString())
                         startActivity(intentModificar)
                     }
+                    builder.setIcon(R.drawable.imagen_2024_04_22_110039483_removebg_preview)
                     val dialog = builder.create()/*Lo construímos con las distintas partes*/
                     dialog.show()/*Lo mostramos*/
                 }

@@ -20,6 +20,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import model.Category
 import model.Review
+import model.SharedPreff
 import model.User
 
 class listaResenas : AppCompatActivity() {
@@ -33,6 +34,8 @@ class listaResenas : AppCompatActivity() {
         /*Declaración de elementos de uso*/
         val petitions = httPettitions()
         val context: Context = baseContext
+        val sharedPreff=SharedPreff(context)
+        val ip=sharedPreff.getIp(context)
         /*Declaracion de elementos visuales*/
         val back: ImageButton = findViewById(R.id.backMainList)
         val list: ListView = findViewById(R.id.listReviews)
@@ -42,7 +45,7 @@ class listaResenas : AppCompatActivity() {
         lifecycleScope.launch(Dispatchers.Main) {
             var categories: ArrayList<Category>
             withContext(Dispatchers.IO) {
-                categories = petitions.getAllCategories()
+                categories = petitions.getAllCategories(ip)
             }
             if (categories.isEmpty()) {
                 Toast.makeText(this@listaResenas, "Peticion denegada", Toast.LENGTH_SHORT).show()
@@ -58,7 +61,6 @@ class listaResenas : AppCompatActivity() {
         spinner.setSelection(0)
 
         list.adapter = adapterResenas
-
         list.setOnItemClickListener { parent, view, position, id ->
             val review = parent.getItemAtPosition(position) as Review
             val intentDetails = Intent(this, detailsReview::class.java)
@@ -72,7 +74,7 @@ class listaResenas : AppCompatActivity() {
                 lifecycleScope.launch(Dispatchers.Main) {
                     var reviews: ArrayList<Review>
                     withContext(Dispatchers.IO) {
-                        reviews = petitions.getAllReviews()!!
+                        reviews = petitions.getAllReviews(ip)!!
                     }
                     if (reviews.isEmpty()) {
                         Toast.makeText(this@listaResenas, "Peticion denegada", Toast.LENGTH_SHORT).show()
@@ -86,7 +88,7 @@ class listaResenas : AppCompatActivity() {
                 lifecycleScope.launch(Dispatchers.Main) {
                     var newReviews: ArrayList<Review>
                     withContext(Dispatchers.IO) {
-                        newReviews = petitions.getReviewsByCategorie(Category(categoryN))!!
+                        newReviews = petitions.getReviewsByCategorie(Category(categoryN),ip)!!
                     }
                     if (newReviews.isEmpty()) {
                         Toast.makeText(

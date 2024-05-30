@@ -66,6 +66,7 @@ class register : AppCompatActivity() {
         val pettitions=httPettitions()
         context =baseContext
         sharedPreff=SharedPreff(context)
+        val ip=sharedPreff.getIp(context)
         val helper:GalleryDbHelper= GalleryDbHelper(context)
         val DAO:ImageDAO= ImageDAO()
         var asigned=false
@@ -76,7 +77,7 @@ class register : AppCompatActivity() {
             if(activityResult.resultCode== RESULT_OK){
                 try {
                     val result =activityResult.data?.extras?.get("data") as Bitmap
-                    profileP.setImageBitmap(/*functions.byteArrayToBitmap*/(result))
+                    profileP.setImageBitmap(result)
                     imagenRecogida=functions.bitmapToString(profileP.drawToBitmap())
                     asigned = true
                 }catch(exception:Exception){
@@ -127,14 +128,14 @@ class register : AppCompatActivity() {
                 val newUser= User(dniTXT,nameTXT,lastNameTXT,mailTXT,passwordConfTXT,"Sin descripcion",pfp,true)
                 var success:Boolean=false
                 lifecycleScope.launch (Dispatchers.IO){
-                    success=pettitions.postUser(newUser)
+                    success=pettitions.postUser(newUser,ip)
                 }
                 if(success==true){
                     Toast.makeText(this,"Usuario registrado con exito",Toast.LENGTH_SHORT).show()
                     functions.clearText(listOf(DNIT,name,lastName,password,passwordConfirm,mail))
                     sharedPreff.saveLogin(context, true)
-                    /*val encryptedDNI = functions.encrypt(dniTXT, functions.clave)*/
-                    sharedPreff.saveUser(context, dniTXT)
+                    val encryptedDNI = functions.encrypt(dniTXT, functions.clave)
+                    sharedPreff.saveUser(context, encryptedDNI)
                     val intentMainMenu= Intent(this,mainMenu::class.java)
                     startActivity(intentMainMenu)
                 }else{
@@ -209,7 +210,7 @@ class register : AppCompatActivity() {
         super.onSaveInstanceState(outState)
         // Guardar datos en el Bundle
        if(imagenRecogida.isNotEmpty()) {
-           val imagen=imagenRecogida.toString()
+           val imagen=imagenRecogida
            sharedPreff.saveImg(context,imagen)
        }
     }

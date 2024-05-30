@@ -39,12 +39,13 @@ class reviewProduct : AppCompatActivity() {
         val functions=generalFunctions()
         val sharedPreff=SharedPreff(context)
         val pettitions=httPettitions()
+        val ip=sharedPreff.getIp(context)
         val nombresProductos = arrayListOf("-")
         val hintNombre=nombre.hint
         val hintDescripcion=descripcion.hint
         val hintPuntuacion=puntuacion.hint
         /*Obtenemos el DNI del usuario a través de las sharedpreferences*/
-        val DNI:String=sharedPreff.getUser(context).toString()
+        val DNI:String=functions.decrypt(functions.clave,sharedPreff.getUser(context).toString()).toString()
         nombre.text.clear()
         descripcion.text.clear()
         puntuacion.text.clear()
@@ -55,7 +56,7 @@ class reviewProduct : AppCompatActivity() {
             var products: ArrayList<Product>
             withContext(Dispatchers.IO) {
                 /*Obtenemos los productos de ese usuario en especifico*/
-                products = pettitions.getProductos(User(DNI))
+                products = pettitions.getProductos(User(DNI),ip)
             }
             if (products.isEmpty()) {
                 Toast.makeText(this@reviewProduct, "Peticion denegada", Toast.LENGTH_SHORT).show()
@@ -96,7 +97,7 @@ class reviewProduct : AppCompatActivity() {
                     var done:Boolean?=false
                     withContext(Dispatchers.IO){
                         /*Hacemos la peticion para publicar la reseña*/
-                        done=pettitions.postReview(review)
+                        done=pettitions.postReview(review,ip)
                     }
                     when (done) {
                         null -> {

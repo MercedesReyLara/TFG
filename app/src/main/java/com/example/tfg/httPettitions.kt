@@ -8,6 +8,7 @@ import kotlinx.coroutines.withContext
 import model.Category
 import model.Product
 import model.Review
+import model.SharedPreff
 import model.User
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -18,7 +19,7 @@ import java.io.IOException
 class httPettitions {
 
 
-    suspend fun getUser(nombre:String,contrasena:String): User? {
+    suspend fun getUser(nombre:String,contrasena:String,ip:String): User? {
         /*La hago suspend para poder lanzarla en hilo secundario*/
         /*El return este te lo pone automático pero basicamente le estás diciendo
         que te mande la respuesta al hilo secundario
@@ -26,7 +27,7 @@ class httPettitions {
         return withContext(Dispatchers.IO) {
             val client = OkHttpClient()
             /*Peticion en este caso con nombre y contraseña*/
-            val uri:String= Uri.parse("http://192.168.1.73:8080/logIn").buildUpon()
+            val uri:String= Uri.parse("http://$ip:8080/logIn").buildUpon()
                 .appendQueryParameter("nombreU",nombre)
                 .appendQueryParameter("contrasena",contrasena)
                 .build().toString()
@@ -55,14 +56,14 @@ class httPettitions {
 
         }
     }
-    suspend fun postUser(user: User): Boolean {
+    suspend fun postUser(user: User,ip:String): Boolean {
         return withContext(Dispatchers.IO) {
             val client = OkHttpClient()
             val gson = Gson()
             val json = gson.toJson(user)
             val mediaType = "application/json; charset=utf-8".toMediaTypeOrNull()
             val requestBody = json.toRequestBody(mediaType)
-            val url = "http://192.168.1.73:8080/postUser"
+            val url = "http://$ip:8080/postUser"
             val request: Request = Request.Builder()
                 .url(url)
                 .post(requestBody)
@@ -78,11 +79,11 @@ class httPettitions {
     }
 
 
-    suspend fun deleteUser(dni:String):Boolean? {
+    suspend fun deleteUser(dni:String,ip:String):Boolean? {
         /*Le mando el DNI para que pueda buscar a usuario por DNI*/
         return withContext(Dispatchers.IO) {
             val client = OkHttpClient()
-            val url = "http://192.168.5.5:8080/deleteUser/$dni"
+            val url = "http://$ip:8080/deleteUser/$dni"
 
             val request = Request.Builder()
                 .url(url)
@@ -107,10 +108,10 @@ class httPettitions {
         }
     }
 
-        suspend fun deleteReview(id:Int):Boolean? {
+        suspend fun deleteReview(id:Int,ip:String):Boolean? {
             return withContext(Dispatchers.IO) {
                 val client = OkHttpClient()
-                val url = "http://192.168.1.73:8080/deleteReview/$id"
+                val url = "http://$ip:8080/deleteReview/$id"
 
                 val request = Request.Builder()
                     .url(url)
@@ -131,10 +132,10 @@ class httPettitions {
             }
     }
 
-    suspend fun getUserByDNI(user:User): User? {
+    suspend fun getUserByDNI(user:User,ip:String): User? {
         return withContext(Dispatchers.IO) {
             val client = OkHttpClient()
-            val url:String="http://192.168.1.73:8080/getUser"
+            val url:String="http://$ip:8080/getUser"
             val gson = Gson()
             val json = gson.toJson(user)
             val mediaType = "application/json; charset=utf-8".toMediaTypeOrNull()
@@ -162,11 +163,11 @@ class httPettitions {
         }
     }
 
-    suspend fun getProductos(user:User?):ArrayList<Product>{
+    suspend fun getProductos(user:User?,ip:String):ArrayList<Product>{
         return withContext(Dispatchers.IO) {
             val products = object : TypeToken<ArrayList<Product>>() {}.type
             val client = OkHttpClient()
-            val url:String= "http://192.168.1.73:8080/getUserProducts"
+            val url:String= "http://$ip:8080/getUserProducts"
             val gson = Gson()
             val json = gson.toJson(user)
             val mediaType = "application/json; charset=utf-8".toMediaTypeOrNull()
@@ -194,11 +195,11 @@ class httPettitions {
         }
     }
 
-    suspend fun getReviewsByUser(user:User):ArrayList<Review>{
+    suspend fun getReviewsByUser(user:User,ip:String):ArrayList<Review>{
         return withContext(Dispatchers.IO) {
             val reviews = object : TypeToken<ArrayList<Review>>() {}.type
             val client = OkHttpClient()
-            val url:String= "http://192.168.1.73:8080/getReviewsUser"
+            val url:String= "http://$ip:8080/getReviewsUser"
             val gsonA = Gson()
             val json = gsonA.toJson(user)
             val mediaType = "application/json; charset=utf-8".toMediaTypeOrNull()
@@ -226,11 +227,11 @@ class httPettitions {
         }
     }
 
-    suspend fun getAllCategories():ArrayList<Category>{
+    suspend fun getAllCategories(ip:String):ArrayList<Category>{
         return withContext(Dispatchers.IO) {
             val categories = object : TypeToken<ArrayList<Category>>() {}.type
             val client = OkHttpClient()
-            val url:String= "http://192.168.1.73:8080/getCategories"
+            val url:String= "http://$ip:8080/getCategories"
             var listCategories:ArrayList<Category> = arrayListOf()
             val request: Request = Request.Builder()
                 .url(url)
@@ -253,11 +254,11 @@ class httPettitions {
         }
     }
 
-    suspend fun getAllReviews():ArrayList<Review>?{
+    suspend fun getAllReviews(ip:String):ArrayList<Review>?{
         return withContext(Dispatchers.IO) {
             val reviews = object : TypeToken<ArrayList<Review>>() {}.type
             val client = OkHttpClient()
-            val url:String= "http://192.168.1.73:8080/getReviews"
+            val url:String= "http://$ip:8080/getReviews"
             var listReviews:ArrayList<Review> = arrayListOf()
             val request: Request = Request.Builder()
                 .url(url)
@@ -280,11 +281,11 @@ class httPettitions {
         }
     }
 
-    suspend fun getAllProducts():ArrayList<Product>?{
+    suspend fun getAllProducts(ip:String):ArrayList<Product>?{
         return withContext(Dispatchers.IO) {
             val products = object : TypeToken<ArrayList<Product>>() {}.type
             val client = OkHttpClient()
-            val url:String= "http://192.168.1.73:8080/getProducts"
+            val url:String= "http://$ip:8080/getProducts"
             var listProducts:ArrayList<Product> = arrayListOf()
             val request: Request = Request.Builder()
                 .url(url)
@@ -307,11 +308,11 @@ class httPettitions {
         }
     }
 
-    suspend fun getReviewsByCategorie(category: Category):ArrayList<Review>?{
+    suspend fun getReviewsByCategorie(category: Category,ip:String):ArrayList<Review>?{
         return withContext(Dispatchers.IO) {
             val reviewType = object : TypeToken<ArrayList<Review>>() {}.type
             val client = OkHttpClient()
-            val url:String= "http://192.168.1.73:8080/getPBC"
+            val url:String= "http://$ip:8080/getPBC"
             val gsonA = Gson()
             val json = gsonA.toJson(category)
             val mediaType = "application/json; charset=utf-8".toMediaTypeOrNull()
@@ -339,14 +340,14 @@ class httPettitions {
         }
     }
 
-    suspend fun postReview(review: Review): Boolean? {
+    suspend fun postReview(review: Review,ip:String): Boolean? {
         return withContext(Dispatchers.IO) {
             val client = OkHttpClient()
             val gson = Gson()
             val json = gson.toJson(review)
             val mediaType = "application/json; charset=utf-8".toMediaTypeOrNull()
             val requestBody = json.toRequestBody(mediaType)
-            val url = "http://192.168.1.73:8080/postReview"
+            val url = "http://$ip:8080/postReview"
             val request: Request = Request.Builder()
                 .url(url)
                 .post(requestBody)
@@ -365,14 +366,14 @@ class httPettitions {
         }
     }
 
-    suspend fun reactivarUsuario(user:User):Boolean?{
+    suspend fun reactivarUsuario(user:User,ip:String):Boolean?{
         return withContext(Dispatchers.IO) {
             val client = OkHttpClient()
             val gson = Gson()
             val json = gson.toJson(user)
             val mediaType = "application/json; charset=utf-8".toMediaTypeOrNull()
             val requestBody = json.toRequestBody(mediaType)
-            val url = "http://192.168.5.5:8080/reactivarUser"
+            val url = "http://$ip:8080/reactivarUser"
             val request: Request = Request.Builder()
                 .url(url)
                 .put(requestBody)
@@ -390,14 +391,14 @@ class httPettitions {
             }
         }
     }
-    suspend fun modifyReview(review: Review): Boolean? {
+    suspend fun modifyReview(review: Review,ip:String): Boolean? {
         return withContext(Dispatchers.IO) {
             val client = OkHttpClient()
             val gson = Gson()
             val json = gson.toJson(review)
             val mediaType = "application/json; charset=utf-8".toMediaTypeOrNull()
             val requestBody = json.toRequestBody(mediaType)
-            val url = "http://192.168.1.73:8080/updateR"
+            val url = "http://$ip:8080/updateR"
             val request: Request = Request.Builder()
                 .url(url)
                 .put(requestBody)

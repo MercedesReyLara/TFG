@@ -36,52 +36,6 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.90" />
 
-    <TextView
-        android:id="@+id/textView16"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/letra"
-        app:layout_constraintBottom_toTopOf="@+id/pequena"
-        app:layout_constraintEnd_toStartOf="@id/guidelineV2"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/guidelineV1"
-        app:layout_constraintTop_toTopOf="@id/guidelineH3" />
-
-    <CheckBox
-        android:id="@+id/grande"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/grande"
-        app:layout_constraintBottom_toTopOf="@+id/aplicarButton"
-        app:layout_constraintEnd_toStartOf="@id/guidelineV2"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/guidelineV1"
-        app:layout_constraintTop_toBottomOf="@+id/pequena" />
-
-    <CheckBox
-        android:id="@+id/pequena"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/pequeña"
-        app:layout_constraintBottom_toTopOf="@+id/grande"
-        app:layout_constraintEnd_toStartOf="@id/guidelineV2"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/guidelineV1"
-        app:layout_constraintTop_toBottomOf="@+id/textView16" />
-
-
-    <Button
-        android:id="@+id/aplicarButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/button"
-        android:text="@string/aplicar"
-        app:layout_constraintBottom_toTopOf="@id/guidelineH5"
-        app:layout_constraintEnd_toStartOf="@id/guidelineV2"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/guidelineV1"
-        app:layout_constraintTop_toBottomOf="@+id/grande" />
-
 
     <TextView
         android:id="@+id/textView20"
@@ -140,14 +94,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.9" />
+        app:layout_constraintGuide_percent="0.75" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineH3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.15" />
 
     <Spinner
         android:id="@+id/spinnerLanguages"
@@ -158,6 +106,7 @@
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@id/guidelineV1"
+        app:layout_constraintBottom_toTopOf="@id/guidelineH5"
         app:layout_constraintTop_toBottomOf="@id/guidelineH1" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -165,7 +114,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.47" />
+        app:layout_constraintGuide_percent="0.16" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
