@@ -82,29 +82,31 @@ class modifyUser : AppCompatActivity() {
         modificar.setOnClickListener {
             val texto:String=text.text.toString()
             if(nombre){
-                if(texto.isEmpty()){
-                    Toast.makeText(this,this.getString(R.string.errorVacios), Toast.LENGTH_SHORT).show()
-                }else{
+                if(texto.isEmpty()) {
+                    Toast.makeText(this, this.getString(R.string.errorVacios), Toast.LENGTH_SHORT)
+                        .show()
+                    /*}else{
                     userModificado= User(userParts[0],texto,userParts[2],userParts[3],userParts[4],
-                        userParts[5],userParts[6],true)
+                        userParts[5],userParts[6],true)*/
                 }
             }else if(correo){
                 if(texto.isEmpty()){
                     Toast.makeText(this,this.getString(R.string.errorVacios), Toast.LENGTH_SHORT).show()
                 }else if(!functions.validateEmail(texto)) {
-                    Toast.makeText(this,this.getString(R.string.errorCorreo),Toast.LENGTH_SHORT).show()
-                }else{
+                    Toast.makeText(this, this.getString(R.string.errorCorreo), Toast.LENGTH_SHORT)
+                        .show()
+                    /*}else{
                     userModificado= User(userParts[0],userParts[1],userParts[2],texto,userParts[4],
-                        userParts[5],userParts[6],true)
+                        userParts[5],userParts[6].,true)*/
                 }
             }else if(contrasena){
                 if(texto.isEmpty()){
                     Toast.makeText(this,this.getString(R.string.errorVacios), Toast.LENGTH_SHORT).show()
                 }else if(!functions.validatePassword(texto)){
                     Toast.makeText(this,this.getString(R.string.errorContraseña),Toast.LENGTH_SHORT).show()
-                }else{
+                /*}else{
                     userModificado= User(userParts[0],userParts[1],userParts[2],userParts[3],texto,
-                        userParts[5],userParts[6],true)
+                        userParts[5],userParts[6],true)*/
                 }
             }
             lifecycleScope.launch (Dispatchers.Main){

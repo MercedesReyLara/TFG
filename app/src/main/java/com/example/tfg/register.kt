@@ -110,7 +110,7 @@ class register : AppCompatActivity() {
                 Toast.makeText(this,this.getString(R.string.coincidir),Toast.LENGTH_LONG).show()
                 passwordConfirm.text.clear()
             }else{
-                val pfp=functions.bitmapToString(profileP.drawable.toBitmap())
+                val pfp=functions.imageViewToByteArray(profileP)
                 val newUser= User(dniTXT,nameTXT,lastNameTXT,mailTXT,passwordConfTXT,"Sin descripcion",pfp,true)
                 var success:Boolean?=false
                 lifecycleScope.launch (Dispatchers.IO){

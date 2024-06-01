@@ -18,6 +18,8 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.DisplayMetrics
 import android.util.Log
+import android.widget.ImageView
+import androidx.core.graphics.drawable.toBitmap
 import com.example.tfg.logIn
 import java.io.ByteArrayOutputStream
 
@@ -152,7 +154,7 @@ class generalFunctions {
     }
 
 
-   /* fun imageViewToByteArray(imageView: ImageView): ByteArray {
+    fun imageViewToByteArray(imageView: ImageView): ByteArray {
         // Obtener el Bitmap del ImageView
         val bitmap = imageView.drawable.toBitmap()
 
@@ -162,7 +164,7 @@ class generalFunctions {
 
         // Obtener el byte array desde el ByteArrayOutputStream
         return stream.toByteArray()
-    }*/
+    }
    fun isInt(puntuacion: String): Boolean {
        try {
            puntuacion.toInt()
@@ -171,14 +173,6 @@ class generalFunctions {
        }
        return true
    }
-
-    fun bitmapToString(bitmap: Bitmap): String {
-        val byteArrayOutputStream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.WEBP_LOSSLESS, 100, byteArrayOutputStream)
-        val byteArray = byteArrayOutputStream.toByteArray()
-        return Base64.encodeToString(byteArray, Base64.URL_SAFE and Base64.NO_WRAP)
-    }
-
 
     @SuppressLint("SuspiciousIndentation")
     fun byteArrayToBitmap(image:ByteArray):Bitmap ?{

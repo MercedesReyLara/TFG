@@ -106,7 +106,7 @@ class ajustes : AppCompatActivity() {
                         true -> {
                             Toast.makeText(
                                 this@ajustes,
-                                this@ajustes.getString(R.string.errorObtencion),
+                                "Usuario eliminado con éxito",
                                 Toast.LENGTH_SHORT
                             ).show()
                             startActivity(functions.logOutFun(this@ajustes))

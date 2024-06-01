@@ -60,7 +60,7 @@ class perfilUser : AppCompatActivity() {
                     DNI.text=userData!!.dni
                     about.setTextColor(Color.BLACK)
                     about.text=userData!!.descripcion
-                    profilePick.setImageBitmap(functions.stringToBitmap(userData!!.profileP))
+                    profilePick.setImageBitmap(functions.byteArrayToBitmap(userData!!.profileP))
                 }else{
                     Toast.makeText(this@perfilUser,this@perfilUser.getString(R.string.problemas),Toast.LENGTH_SHORT).show()
                 }

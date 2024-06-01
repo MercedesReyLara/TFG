@@ -10,7 +10,7 @@ class User :Serializable {
     var correo: String=""
     var contrasena: String=""
     var descripcion:String=""
-    var profileP:String= "Hola"
+    var profileP:ByteArray= byteArrayOf()
     var activo:Boolean=false
     constructor()
 
@@ -21,7 +21,7 @@ class User :Serializable {
         correo: String,
         contrasena: String,
         descripcion: String,
-        profileP:String,
+        profileP:ByteArray,
         activo:Boolean
     ) {
         this.dni = dni
