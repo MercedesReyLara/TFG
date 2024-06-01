@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ListView
 import android.widget.Toast
@@ -45,8 +46,8 @@ class productosList : AppCompatActivity() {
 
         val lista:ListView=findViewById(R.id.listaProductos)
 
-        val showProducts:ImageButton=findViewById(R.id.listarProductos)
-        val showReviews:ImageButton=findViewById(R.id.listarResenas)
+        val showProducts:Button=findViewById(R.id.listarProductos)
+        val showReviews: Button =findViewById(R.id.listarResenas)
         val adapterProductos =
             ProductAdapter(context, listProductos)
         val adapterResenas =
@@ -100,7 +101,7 @@ class productosList : AppCompatActivity() {
                 }else{
                     listReviews.clear()
                     listReviews.addAll(newReviews!!)
-                    adapterProductos.notifyDataSetChanged()
+                    adapterResenas.notifyDataSetChanged()
                 }
             }
             lista.adapter=adapterResenas
@@ -124,8 +125,7 @@ class productosList : AppCompatActivity() {
                     var done:Boolean?
                     val builder: AlertDialog.Builder =
                         AlertDialog.Builder(this)/*Creamos el objeto diálogo*/
-                    builder.setTitle("¿Que quieres hacer?")/*Establecemos el título, el mensaje principal y las dos opciones*/
-                    builder.setMessage("Elige una opción")
+                    builder.setTitle(this.getString(R.string.opcionesAlert))/*Establecemos el título, el mensaje principal y las dos opciones*/
                     builder.setPositiveButton("Eliminar reseña") { _, _ ->
                         lifecycleScope.launch(Dispatchers.Main) {
                             withContext(Dispatchers.IO) {
@@ -138,13 +138,13 @@ class productosList : AppCompatActivity() {
                                 Toast.makeText(this@productosList,this@productosList.getString(R.string.errorObtencion),
                                     Toast.LENGTH_SHORT).show()
                             }else{
-                                Toast.makeText(this@productosList,"Resena eliminada", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@productosList,"Reseña eliminada", Toast.LENGTH_SHORT).show()
                                 listReviews.remove(review)
                                 adapterResenas.notifyDataSetChanged()
                             }
                         }
                     }
-                    builder.setNegativeButton("Modificar mi reseña") { _, _ ->
+                    builder.setNegativeButton("Modificar reseña") { _, _ ->
                         val intentModificar=Intent(this,modificaResena::class.java)
                         val resena=parent.getItemAtPosition(position) as Review
                         intentModificar.putExtra("resena",resena.toString())

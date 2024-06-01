@@ -55,77 +55,84 @@ class allProductList : AppCompatActivity() {
 
         filtro.setOnClickListener {
             val puntuacion = spinnerPuntuacion.selectedItem.toString()
-            if(puntuacion == "Ninguna puntuacion") {
-                lifecycleScope.launch(Dispatchers.Main) {
-                    var products: ArrayList<Product>?
-                    withContext(Dispatchers.IO) {
-                        products= petitions.getAllProducts(ip)!!
-                    }
-                    if(products==null) {
-                        Toast.makeText(
-                            this@allProductList,
-                            this@allProductList.getString(R.string.problemas), Toast.LENGTH_SHORT
-                        ).show()
-                    }else if(products!!.isEmpty()){
-                        Toast.makeText(
-                            this@allProductList,
-                            this@allProductList.getString(R.string.errorObtencion),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }else{
-                        listProducts.clear()
-                        listProducts.addAll(products!!)
-                        adapterProduct.notifyDataSetChanged()
-                    }
-                }
-            }else if(puntuacion=="Puntuacion alta"){
-                lifecycleScope.launch(Dispatchers.Main) {
-                    var highProducts: ArrayList<Product>?
-                    withContext(Dispatchers.IO) {
-                        highProducts = petitions.getProductsHigh(ip)!!
-                    }
-                    if(highProducts==null) {
-                        Toast.makeText(
-                            this@allProductList,
-                            this@allProductList.getString(R.string.problemas), Toast.LENGTH_SHORT
-                        ).show()
-                    }else if(highProducts!!.isEmpty()){
-                        Toast.makeText(
-                            this@allProductList,
-                            this@allProductList.getString(R.string.errorObtencion),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }else{
-                        listProducts.clear()
-                        listProducts.addAll(highProducts!!)
-                        adapterProduct.notifyDataSetChanged()
+            when (puntuacion) {
+                "Ninguna puntuacion" -> {
+                    lifecycleScope.launch(Dispatchers.Main) {
+                        var products: ArrayList<Product>?
+                        withContext(Dispatchers.IO) {
+                            products= petitions.getAllProducts(ip)!!
+                        }
+                        if(products==null) {
+                            Toast.makeText(
+                                this@allProductList,
+                                this@allProductList.getString(R.string.problemas), Toast.LENGTH_SHORT
+                            ).show()
+                        }else if(products!!.isEmpty()){
+                            listProducts.clear()
+                            Toast.makeText(
+                                this@allProductList,
+                                this@allProductList.getString(R.string.errorObtencion),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }else{
+                            listProducts.clear()
+                            listProducts.addAll(products!!)
+                            adapterProduct.notifyDataSetChanged()
+                        }
                     }
                 }
-            }else if(puntuacion=="Puntuacion baja"){
-                lifecycleScope.launch(Dispatchers.Main) {
-                    var lowProducts: ArrayList<Product>?
-                    withContext(Dispatchers.IO) {
-                        lowProducts = petitions.getProductsLow(ip)!!
+                "Puntuacion alta" -> {
+                    lifecycleScope.launch(Dispatchers.Main) {
+                        var highProducts: ArrayList<Product>?
+                        withContext(Dispatchers.IO) {
+                            highProducts = petitions.getProductsHigh(ip)!!
+                        }
+                        if(highProducts==null) {
+                            Toast.makeText(
+                                this@allProductList,
+                                this@allProductList.getString(R.string.problemas), Toast.LENGTH_SHORT
+                            ).show()
+                        }else if(highProducts!!.isEmpty()){
+                            listProducts.clear()
+                            Toast.makeText(
+                                this@allProductList,
+                                this@allProductList.getString(R.string.errorObtencion),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }else{
+                            listProducts.clear()
+                            listProducts.addAll(highProducts!!)
+                            adapterProduct.notifyDataSetChanged()
+                        }
                     }
-                    if(lowProducts==null) {
-                        Toast.makeText(
-                            this@allProductList,
-                            this@allProductList.getString(R.string.problemas), Toast.LENGTH_SHORT
-                        ).show()
-                    }else if(lowProducts!!.isEmpty()){
-                        Toast.makeText(
-                            this@allProductList,
-                            this@allProductList.getString(R.string.errorObtencion),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }else{
-                        listProducts.clear()
-                        listProducts.addAll(lowProducts!!)
-                        adapterProduct.notifyDataSetChanged()
-                    }
+                }
+                "Puntuacion baja" -> {
+                    lifecycleScope.launch(Dispatchers.Main) {
+                        var lowProducts: ArrayList<Product>?
+                        withContext(Dispatchers.IO) {
+                            lowProducts = petitions.getProductsLow(ip)!!
+                        }
+                        if(lowProducts==null) {
+                            Toast.makeText(
+                                this@allProductList,
+                                this@allProductList.getString(R.string.problemas), Toast.LENGTH_SHORT
+                            ).show()
+                        }else if(lowProducts!!.isEmpty()){
+                            listProducts.clear()
+                            Toast.makeText(
+                                this@allProductList,
+                                this@allProductList.getString(R.string.noP),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }else{
+                            listProducts.clear()
+                            listProducts.addAll(lowProducts!!)
+                            adapterProduct.notifyDataSetChanged()
+                        }
 
                     }
                 }
+            }
             }
         back.setOnClickListener {
             val intentMain = Intent(this, mainMenu::class.java)

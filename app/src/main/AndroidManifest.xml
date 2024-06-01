@@ -16,6 +16,7 @@
         android:allowBackup="true"
         android:configChanges="locale"
         android:dataExtractionRules="@xml/data_extraction_rules"
+        android:usesCleartextTraffic="true"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/imagen_2024_04_22_110039483_removebg_preview"
         android:label="@string/app_name"
@@ -26,44 +27,55 @@
         tools:targetApi="31">
         <activity
             android:name=".modifyUser"
+            android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
             android:name=".allProductList"
             android:exported="false" />
         <activity
             android:name=".detailsReview"
+            android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
             android:name=".listaResenas"
+            android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
             android:name=".DetailsProduct"
+            android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
             android:name=".productosList"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:configChanges="orientation|screenSize" />
         <activity
             android:name=".ajustes"
+            android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
             android:name=".perfilUser"
+            android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
             android:name=".modificaResena"
+            android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
             android:name=".reviewProduct"
+            android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
             android:name=".mainMenu"
+            android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
             android:name=".register"
+            android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
             android:name=".logIn"
             android:exported="true"
+            android:configChanges="orientation|screenSize"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

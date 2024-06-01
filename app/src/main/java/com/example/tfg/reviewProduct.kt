@@ -84,13 +84,11 @@ class reviewProduct : AppCompatActivity() {
 
             /*Comprobamos que no haya ningun campo vacio*/
             if(nombreTXT.isEmpty()||descripcionTXT.isEmpty()||puntuacionTXT.isEmpty()){
-                Toast.makeText(this@reviewProduct, "Los campos no puden estar vacios", Toast.LENGTH_SHORT).show()
-            }else if(!functions.isInt(puntuacionTXT)) {
-                Toast.makeText(this@reviewProduct, "El valor puntuacion tiene que ser un número entero", Toast.LENGTH_SHORT).show()
-            }else if(puntuacionTXT.toInt()<0 || puntuacionTXT.toInt()>10) {
+                Toast.makeText(this@reviewProduct, this.getString(R.string.errorVacios), Toast.LENGTH_SHORT).show()
+            }else if(puntuacionTXT.toInt()<0 || puntuacionTXT.toInt()>10 ||!functions.isInt(puntuacionTXT)) {
                 Toast.makeText(
                     this@reviewProduct,
-                    "El valor puntuacion tiene que ser un número entero entre el 1 y e 10",
+                    this.getString(R.string.erroPuntuacion),
                     Toast.LENGTH_SHORT
                 ).show()
             }else{
@@ -106,7 +104,7 @@ class reviewProduct : AppCompatActivity() {
                         null -> {
                             Toast.makeText(
                                 this@reviewProduct,
-                                "error en la conexion",
+                                this@reviewProduct.getString(R.string.problemas),
                                 Toast.LENGTH_SHORT
                             ).show()
                             startActivity(functions.logOutFun(this@reviewProduct))

@@ -67,8 +67,8 @@ class logIn : AppCompatActivity() {
             val intent = Intent(this, mainMenu::class.java)
             startActivity(intent)
         } else {
-            functions.clearHint(listOf(email,password),listOf(email.hint,password.hint))
-
+            functions.clearHint(listOf(email, password), listOf(email.hint, password.hint))
+        }
             /*Iniciar sesión:
             1-Comprueba que los campos no estén vacíos
             2-Comprueba si el email cumple el patrón: @gmail.com
@@ -88,21 +88,13 @@ class logIn : AppCompatActivity() {
                     )
                         .show()
                     /*Validamos contraseña con la regex establecida*/
-                   /* } else if (!functions.validatePassword(passwordText)) {
+                   } else if (!functions.validatePassword(passwordText)) {
                         Toast.makeText(
                             this,
                             this.getString(R.string.errorContraseña),
                             Toast.LENGTH_LONG
-                        ).show()*/
-                } else {
-                    /*val direcIP = sharedPreff.getIp(this@logIn)
-                    if (direcIP != sharedPreff.ipReal(context)) {
-                        Toast.makeText(
-                            this@logIn,
-                            "IP no válida, fallo en la conexión con el servidor",
-                            Toast.LENGTH_SHORT
                         ).show()
-                    } else {*/
+                } else {
                     /*Llamo al hilo principal para saber donde tiene que ejecutar las acciones siguiente*/
                        lifecycleScope.launch(Dispatchers.Main) {
                            val encontrado: User?
@@ -114,62 +106,18 @@ class logIn : AppCompatActivity() {
                            /*Acaba la petición entonces manejo los datos*/
                            if(encontrado==null){
                                Toast.makeText(this@logIn,this@logIn.getString(R.string.problemas),Toast.LENGTH_SHORT).show()
-                             }else if(encontrado.toString().isEmpty()) {
-                               Toast.makeText(this@logIn,this@logIn.getString(R.string.errorObtencion),Toast.LENGTH_SHORT).show()
+                             }else if(encontrado.dni==null) {
+                               Toast.makeText(this@logIn,this@logIn.getString(R.string.errorLogIn),Toast.LENGTH_SHORT).show()
                            }else{
-                                    if(!encontrado.activo){
-                                        val builderActivar: AlertDialog.Builder =
-                                            AlertDialog.Builder(this@logIn)/*Creamos el objeto diálogo*/
-                                        builderActivar.setTitle("¿Reactivar cuenta?")/*Establecemos el título, el mensaje principal y las dos opciones*/
-                                        builderActivar.setMessage("¿Desea reactivar su cuenta de PRORATER?")
-                                        builderActivar.setIcon(R.drawable.imagen_2024_04_22_110039483_removebg_preview)
-                                        builderActivar.setPositiveButton("Reactivar") { _, _ ->
-                                            /*Si le damos a reactivar se lanzará la petición que hará que nuestro usuario
-                                            se reactivo e iniciará sesión de nuevo, volverá a guardar el dni...
-                                             */
-                                            lifecycleScope.launch(Dispatchers.Main) {
-                                                var done:Boolean?=false
-                                                withContext(Dispatchers.IO){
-                                                    done=httPettitions.reactivarUsuario(encontrado,ip)
-                                                }
-                                                when (done) {
-                                                    null -> {
-                                                        Toast.makeText(this@logIn,this@logIn.getString(R.string.problemas),Toast.LENGTH_SHORT).show()
-                                                    }
-                                                    true -> {
-                                                        sharedPreff.saveLogin(context, true)
-                                                        val encryptedDNI = functions.encrypt(encontrado.dni, functions.clave)
-                                                        sharedPreff.saveUser(context, encryptedDNI)
-                                                        val intentLogIn = Intent(this@logIn, mainMenu::class.java)
-                                                        startActivity(intentLogIn)
-                                                    }
-                                                    else -> {
-                                                        Toast.makeText(this@logIn,this@logIn.getString(R.string.errorObtencion)
-                                                            ,Toast.LENGTH_SHORT).show()
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        /*Si cancelamos no hace nada*/
-                                        builderActivar.setNegativeButton(("Cancelar"), { _, _ -> })
-                                        val dialog = builderActivar.create()/*Lo construímos con las distintas partes*/
-                                        dialog.show()/*Lo mostramos*/
-                                    }else {
-                                        sharedPreff.saveLogin(context, true)
-                                        val encryptedDNI = functions.encrypt(encontrado.dni, functions.clave)
-                                        sharedPreff.saveUser(context, encryptedDNI)
-                                        val intentLogIn = Intent(this@logIn, mainMenu::class.java)
-                                        startActivity(intentLogIn)
+                               sharedPreff.saveLogin(context, true)
+                               val encryptedDNI = functions.encrypt(encontrado.dni, functions.clave)
+                               sharedPreff.saveUser(context, encryptedDNI)
+                               val intentLogIn = Intent(this@logIn, mainMenu::class.java)
+                               startActivity(intentLogIn)
                                     }
                                 }
                             }
                         }
-
-
-                    }
-
-                }
-
         /*Cambio de pantalla al registro por si no tienes cuenta*/
             registerBut.setOnClickListener {
                 val intentRegister = Intent(this, register::class.java)

@@ -1,6 +1,7 @@
 package com.example.tfg
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
@@ -29,9 +30,13 @@ class DetailsProduct : AppCompatActivity() {
         * para poder asignárselos a los distintos campos*/
         val partes=intent.getStringExtra("product").toString().split("/")
         name.text=partes[0]
+        name.setTextColor(Color.BLACK)
         price.text=partes[2]
+        name.setTextColor(Color.BLACK)
         description.text=partes[1]
+        name.setTextColor(Color.BLACK)
         category.text=partes[3]
+        name.setTextColor(Color.BLACK)
 
 
         /*Este nos dirige a la pantalla de la lista de productos del usuario en cuestión*/

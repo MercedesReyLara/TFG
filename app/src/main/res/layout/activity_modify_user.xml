@@ -5,6 +5,135 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondo"
     tools:context=".modifyUser">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineV1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.02" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineV2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.98"  />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineH1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.02" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineH2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.98"  />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineH3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1"  />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineH4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75"  />
+
+    <RadioGroup
+        android:id="@+id/modificationRadioGroup"
+        android:layout_width="270dp"
+        android:layout_height="150dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toEndOf="@id/guidelineV1"
+        app:layout_constraintEnd_toStartOf="@id/guidelineV2"
+        app:layout_constraintBottom_toTopOf="@id/modificationEditText"
+        app:layout_constraintTop_toBottomOf="@id/guidelineH3">
+
+        <RadioButton
+            android:id="@+id/modifyNameRadioButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/modificarNomeU" />
+
+        <RadioButton
+            android:id="@+id/modifyDescriptionRadioButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/modificarContrasena" />
+
+        <RadioButton
+            android:id="@+id/modifyRatingRadioButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/modificarCorreo" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/deleteTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/txtEliminar"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toStartOf="@id/guidelineV2"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toEndOf="@id/guidelineV1"
+        app:layout_constraintTop_toBottomOf="@id/guidelineH1"
+        app:layout_constraintBottom_toTopOf="@id/guidelineH3"/>
+
+    <Button
+        android:id="@+id/modUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/button"
+        android:text="@string/eliminar"
+        app:layout_constraintBottom_toTopOf="@id/backToMainButton"
+        app:layout_constraintEnd_toStartOf="@id/guidelineV2"
+        app:layout_constraintStart_toEndOf="@id/guidelineV1"
+        app:layout_constraintTop_toBottomOf="@id/guidelineH4"
+        app:layout_constraintVertical_bias="0.691" />
+
+    <ImageButton
+        android:id="@+id/backToMainButton"
+        android:layout_width="21dp"
+        android:layout_height="26dp"
+        android:layout_marginBottom="12dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        android:src="@android:drawable/ic_menu_revert"
+        app:layout_constraintBottom_toTopOf="@id/guidelineH2"
+        app:layout_constraintEnd_toStartOf="@id/guidelineV2"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toEndOf="@id/guidelineV1" />
+
+    <EditText
+        android:id="@+id/modificationEditText"
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:background="@drawable/input_personalizado"
+        android:ems="10"
+        android:gravity="top|start"
+        android:imeOptions="actionDone"
+        android:inputType="textMultiLine"
+        android:maxLines="5"
+        android:hint="Escribe aqui"
+        android:textColorHint="@color/gray"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/guidelineV1"
+        app:layout_constraintTop_toBottomOf="@id/modificationRadioGroup"
+        app:layout_constraintEnd_toStartOf="@id/guidelineV2"
+        app:layout_constraintBottom_toTopOf="@id/guidelineH4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -67,6 +68,7 @@ class listaResenas : AppCompatActivity() {
             reviewAdapter(context, listReviews)
         val adapter: ArrayAdapter<String> = ArrayAdapter(this,android.R.layout.simple_spinner_item,nombresCategorias)
         spinner.adapter=adapter
+        spinner.setBackgroundColor(Color.WHITE)
         spinner.setSelection(0)
 
         list.adapter = adapterResenas
@@ -93,7 +95,7 @@ class listaResenas : AppCompatActivity() {
                     }else if(reviews!!.isEmpty()){
                         Toast.makeText(
                             this@listaResenas,
-                            this@listaResenas.getString(R.string.errorObtencion),
+                            this@listaResenas.getString(R.string.nonRR),
                             Toast.LENGTH_SHORT
                         ).show()
                     }else{
@@ -116,7 +118,7 @@ class listaResenas : AppCompatActivity() {
                     }else if(newReviews!!.isEmpty()){
                         Toast.makeText(
                             this@listaResenas,
-                            this@listaResenas.getString(R.string.errorObtencion),
+                            this@listaResenas.getString(R.string.nonR),
                             Toast.LENGTH_SHORT
                         ).show()
                     }else{

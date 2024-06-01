@@ -2,6 +2,7 @@ package com.example.tfg
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
@@ -24,10 +25,16 @@ class detailsReview : AppCompatActivity() {
 
         val partes=intent.getStringExtra("review").toString().split("/")
         nombre.text=partes[1]
+        nombre.setTextColor(Color.BLACK)
         puntuacion.text=partes[3]
+        puntuacion.setTextColor(Color.BLACK)
         user.text=partes[6]
+        user.setTextColor(Color.BLACK)
         producto.text=partes[5]
+        producto.setTextColor(Color.BLACK)
         about.text=partes[2]
+        about.setTextColor(Color.BLACK)
+        puntuaciones.setTextColor(Color.BLACK)
         if(partes[3].toInt()>5)  {
             puntuaciones.text=this.getString(R.string.positiva)
         }else{

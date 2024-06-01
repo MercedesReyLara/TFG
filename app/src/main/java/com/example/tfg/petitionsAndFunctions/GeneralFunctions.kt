@@ -105,18 +105,23 @@ class generalFunctions {
 
     val clave = "estaesmiclave123"
     fun encrypt(value:String,key:String):String{
-        /*Hacemos un método para pasarle el valor y la key*/
-        /*Usamos la librería cipher que nos proporciona funcionalidades de cifrado
+        /*Si esta vacia devolvemos una cadena vacía para que no de error. Si no, la decodifica*/
+        if(value.isEmpty()){
+            return ""
+        }else {
+            /*Hacemos un método para pasarle el valor y la key*/
+            /*Usamos la librería cipher que nos proporciona funcionalidades de cifrado
         y ciframos a través de el algoritmo AES.
         Luego configuramos el IV que utilizaremos para la encriptacion y lo encriptamos.
         Por ultimo hacemos un return para poder guardarlo en la preferencias
          */
-        val encryptSystem = Cipher.getInstance("AES/CBC/PKCS5Padding")
-        val secretKeySpec = SecretKeySpec(key.toByteArray(Charsets.UTF_8), "AES")
-        val ivParameterSpec = IvParameterSpec(key.toByteArray(Charsets.UTF_8))
-        encryptSystem.init(Cipher.ENCRYPT_MODE, secretKeySpec, ivParameterSpec)
-        val encrypted = encryptSystem.doFinal(value.toByteArray(Charsets.UTF_8))
-        return Base64.encodeToString(encrypted, Base64.DEFAULT)
+            val encryptSystem = Cipher.getInstance("AES/CBC/PKCS5Padding")
+            val secretKeySpec = SecretKeySpec(key.toByteArray(Charsets.UTF_8), "AES")
+            val ivParameterSpec = IvParameterSpec(key.toByteArray(Charsets.UTF_8))
+            encryptSystem.init(Cipher.ENCRYPT_MODE, secretKeySpec, ivParameterSpec)
+            val encrypted = encryptSystem.doFinal(value.toByteArray(Charsets.UTF_8))
+            return Base64.encodeToString(encrypted, Base64.DEFAULT)
+        }
     }
 
     fun decrypt(key:String,encryptedValue:String):String?{

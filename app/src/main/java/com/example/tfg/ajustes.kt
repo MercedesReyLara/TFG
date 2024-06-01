@@ -46,10 +46,13 @@ class ajustes : AppCompatActivity() {
         * indicando al usuario que escoja el idioma. Según el código cambiaremos el local del dispositivo para que
         * se aplique el idioma en cuestión*/
         val DNIu:String=functions.decrypt(functions.clave,sharedPreff.getUser(context).toString()).toString()
-        val iP:String=sharedPreff.getIp(context)
         if(DNIu.isEmpty()){
             eliminar.isVisible=false
         }
+        val iP:String=sharedPreff.getIp(context)
+        /*if(DNIu.isEmpty()){
+            eliminar.isVisible=false
+        }*/
         val languages = arrayListOf("es", "gl","SELECCIONE IDIOMA")
         val adapter: ArrayAdapter<String> = ArrayAdapter(this,android.R.layout.simple_spinner_item,languages)
         spinnerIdiomas.adapter=adapter
@@ -83,67 +86,44 @@ class ajustes : AppCompatActivity() {
         eliminar.setOnClickListener {
             val builderOpciones: AlertDialog.Builder =
                 AlertDialog.Builder(this)/*Creamos el objeto diálogo*/
-            builderOpciones.setTitle("¿Que deseas hacer?")/*Establecemos el título, el mensaje principal y las dos opciones*/
+            builderOpciones.setTitle(this.getString(R.string.eliminarC))/*Establecemos el título, el mensaje principal y las dos opciones*/
+            builderOpciones.setMessage(this.getString(R.string.eliminarD))
             builderOpciones.setPositiveButton("Eliminar") { _, _ ->
-                /*Nos abre un dialog para saber si queremos eliminar de verdad el usuario*/
-                val builderEliminar: AlertDialog.Builder =
-                    AlertDialog.Builder(this)/*Creamos el objeto diálogo*/
-                builderEliminar.setTitle("¿Desactivar cuenta?")/*Establecemos el título, el mensaje principal y las dos opciones*/
-                builderEliminar.setMessage("Si eliminas tu usuario no podrás volver a acceder a tu cuenta hasta volver a reactivarla")
-                builderEliminar.setPositiveButton("Desactivar") { _, _ ->
-                    /*Si le damos a desactivar se lanzará la petición que hará que nuestro usuario
-                    se desactive y por lo tanto cerrará sesión
-                     */
-                    lifecycleScope.launch(Dispatchers.Main) {
-                        var done:Boolean?=false
-                       withContext(Dispatchers.IO){
-                            done=pettitions.bajaUser(User(DNIu),iP)
-                       }
-                        when (done) {
-                            null -> {
-                                Toast.makeText(this@ajustes,this@ajustes.getString(R.string.problemas),
-                                    Toast.LENGTH_SHORT).show()
-                                startActivity(functions.logOutFun(this@ajustes))
-                            }
-                            true -> {
-                                Toast.makeText(this@ajustes,this@ajustes.getString(R.string.errorObtencion)
-                                    ,Toast.LENGTH_SHORT).show()
-                                startActivity(functions.logOutFun(this@ajustes))
-                            }
-                            else -> {
-                                Toast.makeText(this@ajustes,"ERROR",Toast.LENGTH_SHORT).show()
-                            }
+                lifecycleScope.launch(Dispatchers.Main) {
+                    var done: Boolean? = false
+                    withContext(Dispatchers.IO) {
+                        done = pettitions.deleteUser(DNIu, iP)
+                    }
+                    when (done) {
+                        null -> {
+                            Toast.makeText(
+                                this@ajustes, this@ajustes.getString(R.string.problemas),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            startActivity(functions.logOutFun(this@ajustes))
+                        }
+
+                        true -> {
+                            Toast.makeText(
+                                this@ajustes,
+                                this@ajustes.getString(R.string.errorObtencion),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            startActivity(functions.logOutFun(this@ajustes))
+                        }
+
+                        else -> {
+                            Toast.makeText(this@ajustes, "ERROR", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
+            }
                 /*Si cancelamos no hace nada*/
-                builderEliminar.setNegativeButton("Eliminar"){ _, _ ->
-                    lifecycleScope.launch(Dispatchers.Main) {
-                        var done:Boolean?=false
-                        withContext(Dispatchers.IO){
-                            done=pettitions.deleteUser(DNIu,iP)
-                        }
-                        when (done) {
-                            null -> {
-                                Toast.makeText(this@ajustes,this@ajustes.getString(R.string.problemas),
-                                    Toast.LENGTH_SHORT).show()
-                                startActivity(functions.logOutFun(this@ajustes))
-                            }
-                            true -> {
-                                Toast.makeText(this@ajustes,this@ajustes.getString(R.string.errorObtencion)
-                                    ,Toast.LENGTH_SHORT).show()
-                                startActivity(functions.logOutFun(this@ajustes))
-                            }
-                            else -> {
-                                Toast.makeText(this@ajustes,"ERROR",Toast.LENGTH_SHORT).show()
-                            }
-                        }
-                    }
-                }
-                val dialog = builderEliminar.create()/*Lo construímos con las distintas partes*/
+                builderOpciones.setNegativeButton("Cancelar"){ _, _ -> }
+                val dialog = builderOpciones.create()/*Lo construímos con las distintas partes*/
                 dialog.show()/*Lo mostramos*/
             }
-        }
+
         /*Boton para establecer el cambio de ip*/
         ip.setOnClickListener {
             val IP:String=direcIP.text.trim().toString()

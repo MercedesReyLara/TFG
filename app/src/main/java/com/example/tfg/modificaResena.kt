@@ -51,18 +51,22 @@ class modificaResena : AppCompatActivity() {
             val selectedOption = radioButton.text
             when(selectedOption){
                 "Modificar nome","Modificar nombre" ->{
-                    text.hint="Introduce "
+                    text.hint=this.getString(R.string.nN)
                     text.isVisible=true
                     nombre=true
                     desc=false
                     punt=false
                 }
                "Modificar descripcion" ->{
+                   text.hint=this.getString(R.string.nD)
+                   text.isVisible=true
                    desc=true
                    nombre=false
                    punt=false
                }
                "Modificar puntuacion" ->{
+                   text.hint=this.getString(R.string.nP)
+                   text.isVisible=true
                    punt=true
                    nombre=false
                    desc=false
@@ -75,23 +79,23 @@ class modificaResena : AppCompatActivity() {
             val texto:String=text.text.toString()
             if(nombre){
                 if(texto.isEmpty()){
-                    Toast.makeText(this,"El texto esta vacio",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,this.getString(R.string.errorVacios),Toast.LENGTH_SHORT).show()
                 }else{
                     resenaModificada= Review(resenaParts[0].toInt(),texto,resenaParts[2],
                         resenaParts[3].toInt(),resenaParts[4],resenaParts[5])
                 }
             }else if(desc){
                 if(texto.isEmpty()){
-                    Toast.makeText(this,"El texto esta vacio",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,this.getString(R.string.errorVacios),Toast.LENGTH_SHORT).show()
                 }else{
                     resenaModificada= Review(resenaParts[0].toInt(),resenaParts[1],texto,
                         resenaParts[3].toInt(),resenaParts[4],resenaParts[5])
                 }
             }else if(punt){
                 if(texto.isEmpty()){
-                    Toast.makeText(this,"El texto esta vacio",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,this.getString(R.string.errorVacios),Toast.LENGTH_SHORT).show()
                 }else if(!functions.isInt(texto)||texto.toInt()<0||texto.toInt()>10){
-                    Toast.makeText(this,"El texto tiene que ser un entero entre 1 y 10",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,this.getString(R.string.erroPuntuacion),Toast.LENGTH_SHORT).show()
                 }else{
                     resenaModificada= Review(resenaParts[0].toInt(),resenaParts[1],resenaParts[2],
                         texto.toInt(),resenaParts[4],resenaParts[5])
@@ -109,13 +113,14 @@ class modificaResena : AppCompatActivity() {
                            ,Toast.LENGTH_SHORT).show()
                    }
                    true->{
-                       Toast.makeText(this@modificaResena,"Reseña modificada con exito",Toast.LENGTH_SHORT).show()
+                       Toast.makeText(this@modificaResena,this@modificaResena.getString(R.string.modR),Toast.LENGTH_SHORT).show()
                        val intentLista=Intent(this@modificaResena,productosList::class.java)
+                       text.text.clear()
                        Thread.sleep(1000)
                        startActivity(intentLista)
                    }
                    false->{
-                       Toast.makeText(this@modificaResena,"Error durante la modificacion",Toast.LENGTH_SHORT).show()
+                       Toast.makeText(this@modificaResena,this@modificaResena.getString(R.string.errorMOD),Toast.LENGTH_SHORT).show()
                    }
                }
            }

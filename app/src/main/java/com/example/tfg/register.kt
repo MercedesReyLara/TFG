@@ -71,10 +71,6 @@ class register : AppCompatActivity() {
         val ip=sharedPreff.getIp(context)
         val helper:GalleryDbHelper= GalleryDbHelper(context)
         val DAO:ImageDAO= ImageDAO()
-        var asigned:Boolean=false
-        if(asigned && imagenRecogida.isNotEmpty()){
-            profileP.setImageBitmap(functions.stringToBitmap(imagenRecogida))
-        }
         //Utilizamos el método para limpiar los inputs cuando esten on focus
         functions.clearHint(listOf(DNIT,name,lastName,mail,password,passwordConfirm),
             listOf(DNIT.hint,name.hint,lastName.hint,mail.hint,password.hint,passwordConfirm.hint))
@@ -86,8 +82,6 @@ class register : AppCompatActivity() {
                 try {
                     val result =activityResult.data?.extras?.get("data") as Bitmap
                     profileP.setImageBitmap(result)
-                    imagenRecogida=functions.bitmapToString(profileP.drawToBitmap())
-                    asigned = true
                 }catch(exception:Exception){
                     exception.toString()
                 }

@@ -46,8 +46,8 @@ class mainMenu : AppCompatActivity() {
         cerrarSesion.setOnClickListener {
             val builder: AlertDialog.Builder =
                 AlertDialog.Builder(this)/*Creamos el objeto diálogo*/
-            builder.setTitle("¿Cerrar sesión?")/*Establecemos el título, el mensaje principal y las dos opciones*/
-            builder.setMessage("¿Seguro que quieres cerrar sesión?")
+            builder.setTitle(this.getString(R.string.cerrarSesion))/*Establecemos el título, el mensaje principal y las dos opciones*/
+            builder.setMessage(this.getString(R.string.cerrarSesionD))
             builder.setPositiveButton("Si") { _, _ ->
                 startActivity(functions.logOutFun(this@mainMenu))
             }

@@ -65,7 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.35" />
+        app:layout_constraintGuide_percent="0.45" />
 
     <Button
         android:id="@+id/subirResena"
@@ -77,7 +77,8 @@
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@id/guidelineV1"
-        app:layout_constraintTop_toBottomOf="@+id/guidelineH3" />
+        app:layout_constraintTop_toBottomOf="@+id/guidelineH3"
+        app:layout_constraintVertical_chainStyle="packed" />
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -108,10 +109,10 @@
         android:layout_marginTop="56dp"
         android:text="@string/cerrarSesion"
         android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/pechar"
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@id/guidelineV1"
-        app:layout_constraintBottom_toTopOf="@+id/pechar"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <ImageButton
@@ -126,6 +127,7 @@
         app:layout_constraintHorizontal_bias="0.044"
         app:layout_constraintStart_toEndOf="@id/guidelineV1"
         app:layout_constraintTop_toBottomOf="@id/guidelineH1"
+        app:layout_constraintVertical_chainStyle="packed"
         app:srcCompat="@drawable/efewf_removebg_preview" />
 
     <ImageView
@@ -135,11 +137,11 @@
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toTopOf="@+id/textView14"
-        app:layout_constraintTop_toBottomOf="@+id/textView13"
-        app:srcCompat="@drawable/imagen_2024_04_22_110039483_removebg_preview"
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/guidelineV1" />
+        app:layout_constraintStart_toEndOf="@id/guidelineV1"
+        app:layout_constraintTop_toBottomOf="@+id/textView13"
+        app:srcCompat="@drawable/imagen_2024_04_22_110039483_removebg_preview" />
 
     <TextView
         android:id="@+id/textView14"
@@ -148,10 +150,10 @@
         android:text="@string/opciones"
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/guidelineH3"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/guidelineV1" />
+        app:layout_constraintStart_toEndOf="@id/guidelineV1"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <TextView
         android:id="@+id/textView13"
@@ -184,8 +186,8 @@
         android:fontFamily="sans-serif-smallcaps"
         android:text="@string/irUsuario"
         android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@id/botonPerfilU"
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
         app:layout_constraintHorizontal_bias="0.02"
-        app:layout_constraintStart_toEndOf="@id/guidelineV1"
-        app:layout_constraintBottom_toTopOf="@id/botonPerfilU" />
+        app:layout_constraintStart_toEndOf="@id/guidelineV1" />
 </androidx.constraintlayout.widget.ConstraintLayout>

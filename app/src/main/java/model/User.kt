@@ -38,4 +38,8 @@ class User :Serializable {
         this.dni = dni
     }
 
+    override fun toString(): String {
+        return "$dni/$nombreU/$apellidosU/$correo/$contrasena/$descripcion/$profileP/$activo"
+    }
+
 }

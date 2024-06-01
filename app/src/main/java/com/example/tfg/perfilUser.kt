@@ -2,6 +2,7 @@ package com.example.tfg
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -40,7 +41,6 @@ class perfilUser : AppCompatActivity() {
         val functions= generalFunctions()
         val ip=sharedPreff.getIp(context)
         val DNIu=functions.decrypt(functions.clave,sharedPreff.getUser(context).toString()).toString()
-        /*val DNIRecuperado:String=functions.decrypt(functions.clave,sharedPreff.getUser(context).toString()).toString()*/
         var userData:User?= User()
         /*Hacemos la peticion*/
         lifecycleScope.launch (Dispatchers.IO){
@@ -50,14 +50,19 @@ class perfilUser : AppCompatActivity() {
                 if(userData!=null){
                     /*Cargamos los datos del usuario obtenido en cada campo correspondiente
                     * Hago la consulta otra vez para que si hemos cambiado los datos anteriormente se pueda actualizar*/
+                    nombre.setTextColor(Color.BLACK)
                     nombre.text=userData!!.nombreU
+                    apellidos.setTextColor(Color.BLACK)
                     apellidos.text=userData!!.apellidosU
+                    correo.setTextColor(Color.BLACK)
                     correo.text=userData!!.correo
+                    DNI.setTextColor(Color.BLACK)
                     DNI.text=userData!!.dni
+                    about.setTextColor(Color.BLACK)
                     about.text=userData!!.descripcion
                     profilePick.setImageBitmap(functions.stringToBitmap(userData!!.profileP))
                 }else{
-                    Toast.makeText(this@perfilUser,"Error en la obtencion de datos",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@perfilUser,this@perfilUser.getString(R.string.problemas),Toast.LENGTH_SHORT).show()
                 }
 
             }
@@ -81,9 +86,9 @@ class perfilUser : AppCompatActivity() {
         me redirige a la actividad de modificación del usuario
          */
         deleteButton.setOnClickListener {
-
             /*Nos redirige a la actividad de modificacion del usuario*/
-                val intentModify=Intent(this,modificaResena::class.java)
+                val intentModify=Intent(this,modifyUser::class.java)
+                intentModify.putExtra("user",userData.toString())
                 startActivity(intentModify)
             }
 

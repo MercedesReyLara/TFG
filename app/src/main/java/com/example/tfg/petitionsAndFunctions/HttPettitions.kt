@@ -42,8 +42,8 @@ class httPettitions {
                 /*Si responde manda un objeto parsedo de json a user*/
                 if (response.isSuccessful&&!responseBody.isNullOrEmpty()) {
                     val gson = Gson()
-                    user=gson.fromJson(responseBody, User::class.java)
-                    return@withContext user
+                   val  userF=gson.fromJson(responseBody, User::class.java)
+                    return@withContext userF
                 }else {
                     /*Si no returnea el user vacío para saber que el fallo ha sido en la peticion*/
                     return@withContext user
@@ -370,8 +370,8 @@ class httPettitions {
             }
         }
     }
-
-    suspend fun bajaUser(user:User,ip:String):Boolean? {
+    /*Por falta de tiempo no las implementé, pero tenía pensado hacerlo*/
+    /*suspend fun bajaUser(user:User,ip:String):Boolean? {
         /*Le mando el DNI para que pueda buscar a usuario por DNI*/
         return withContext(Dispatchers.IO) {
             val client = OkHttpClient()
@@ -401,8 +401,8 @@ class httPettitions {
                 return@withContext  null
             }
         }
-    }
-    suspend fun reactivarUsuario(user:User,ip:String):Boolean?{
+    }*/
+   /* suspend fun reactivarUsuario(user:User,ip:String):Boolean?{
         return withContext(Dispatchers.IO) {
             val client = OkHttpClient()
             val gson = Gson()
@@ -426,7 +426,7 @@ class httPettitions {
                 return@withContext  null
             }
         }
-    }
+    }*/
     suspend fun modifyReview(review: Review,ip:String): Boolean? {
         return withContext(Dispatchers.IO) {
             val client = OkHttpClient()
@@ -502,6 +502,32 @@ class httPettitions {
                 return@withContext null
             }
 
+        }
+    }
+
+    suspend fun modifyUser(user: User,ip:String): Boolean? {
+        return withContext(Dispatchers.IO) {
+            val client = OkHttpClient()
+            val gson = Gson()
+            val json = gson.toJson(user)
+            val mediaType = "application/json; charset=utf-8".toMediaTypeOrNull()
+            val requestBody = json.toRequestBody(mediaType)
+            val url = "http://$ip:8080/updateUser"
+            val request: Request = Request.Builder()
+                .url(url)
+                .put(requestBody)
+                .build()
+            try{
+                val response = client.newCall(request).execute()
+                val responseBody = response.body?.string()
+                if (response.isSuccessful&&!responseBody.isNullOrEmpty()) {
+                    return@withContext true
+                }else{
+                    return@withContext false
+                }
+            }catch (exception:IOException){
+                return@withContext  null
+            }
         }
     }
 }

@@ -8,7 +8,7 @@ class Review:Serializable {
     var descripcion:String=""
     var puntuacion:Int=0
     var id_user:String=""
-    var user_name:String=""
+    var userName:String=""
     var id_product:Int=0
     var nombreProducto:String=""
 
@@ -19,7 +19,7 @@ class Review:Serializable {
         descripcion: String,
         puntuacion:Int,
         id_user: String,
-        user_name: String,
+        userName: String,
         id_product: Int,
         nombreProducto: String
     ) {
@@ -28,7 +28,7 @@ class Review:Serializable {
         this.descripcion = descripcion
         this.puntuacion=puntuacion
         this.id_user = id_user
-        this.user_name = user_name
+        this.userName = userName
         this.id_product= id_product
         this.nombreProducto = nombreProducto
     }
@@ -60,7 +60,7 @@ class Review:Serializable {
 
 
     override fun toString(): String {
-        return "$id/$nombre/$descripcion/$puntuacion/$id_user/$nombreProducto/$user_name"
+        return "$id/$nombre/$descripcion/$puntuacion/$id_user/$nombreProducto/$userName"
     }
 
 
