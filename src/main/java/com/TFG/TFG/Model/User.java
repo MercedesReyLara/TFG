@@ -32,8 +32,8 @@ public class User {
     private String descripcion;
 
     @Lob
-    @Column(name="profileP",columnDefinition = "BLOB")
-    private byte[] profileP;
+    @Column(name="profileP",columnDefinition = "LONGBLOB")
+    private String profileP;
 
     @Column(name="activo")
     private Boolean activo;
@@ -49,6 +49,20 @@ public class User {
     )
     @JsonIgnore
     private List<Producto> productsU=new ArrayList<>();
+
+    public User(){}
+    public User(String DNI, String nombreU, String apellidosU, String correo,
+                String contrasena, String descripcion, String profileP, Boolean activo) {
+        this.DNI = DNI;
+        this.nombreU = nombreU;
+        this.apellidosU = apellidosU;
+        this.correo = correo;
+        this.contrasena = contrasena;
+        this.descripcion = descripcion;
+        this.profileP = profileP;
+        this.activo = activo;
+    }
+
     public String getDNI() {
         return DNI;
     }
@@ -89,14 +103,6 @@ public class User {
         this.descripcion = descripcion;
     }
 
-    /*public Blob getProfileP() {
-        return profileP;
-    }
-
-    public void setProfileP(Blob profileP) {
-        this.profileP = profileP;
-    }*/
-
     public String getContrasena() {
         return contrasena;
     }
@@ -121,11 +127,11 @@ public class User {
         this.productsU = productsU;
     }
 
-    public byte[] getProfileP() {
+    public String getProfileP() {
         return profileP;
     }
 
-    public void setProfileP(byte[] profileP) {
+    public void setProfileP(String profileP) {
         this.profileP = profileP;
     }
 

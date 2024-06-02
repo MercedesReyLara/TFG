@@ -11,7 +11,6 @@ public class ProductDTO {
     private String descripcionP;
     @JsonProperty
     private Double precio;
-    /*private String imagen;*/
     @JsonProperty
     private String nombreCategoria;
 

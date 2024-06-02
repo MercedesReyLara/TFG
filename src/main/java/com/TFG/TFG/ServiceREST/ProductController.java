@@ -54,7 +54,7 @@ public class ProductController {
         List<ProductDTO>DTOS=new ArrayList<>();
         for(Producto p:listaAll){
             for(Review r:p.getResenas()){
-                if(r.getPuntuacion()<5){
+                if(r.getPuntuacion()<=5){
                     ProductDTO pDTO=new ProductDTO(
                             p.getId(),
                             p.getNombreP(),

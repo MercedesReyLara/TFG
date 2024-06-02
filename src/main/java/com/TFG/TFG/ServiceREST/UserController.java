@@ -9,10 +9,12 @@ import com.TFG.TFG.Model.User;
 import com.TFG.TFG.Respository.ProductRepository;
 import com.TFG.TFG.Respository.ReviewRepository;
 import com.TFG.TFG.Respository.UserRepository;
+import com.fasterxml.jackson.databind.ser.Serializers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -41,7 +43,7 @@ public class UserController {
                    un.getCorreo(),
                    un.getContrasena(),
                    un.getDescripcion(),
-                   /*un.getProfileP().toString(),*/
+                        Base64.getDecoder().decode(un.getProfileP()),
                    un.getActivo()
                 );
                 activos.add(DTO);
@@ -53,15 +55,19 @@ public class UserController {
     @GetMapping(value = "/logIn")
     public UserDTO getUser(@RequestParam (value = "nombreU",defaultValue = "")String nombreU,
                         @RequestParam (value = "contrasena",defaultValue = "")String contrasena){
+        if(ur.findByNombreU(nombreU)==null){
+            return new UserDTO();
+        }
         User u=ur.findByNombreU(nombreU);
-            if(u.getContrasena().equals(contrasena)){
-                UserDTO DTO=new UserDTO(u.getDNI(),
+        if(u.getContrasena().equals(contrasena)){
+                UserDTO DTO=new UserDTO(
+                        u.getDNI(),
                         u.getNombreU(),
                         u.getApellidosU(),
                         u.getCorreo(),
                         u.getContrasena(),
                         u.getDescripcion(),
-                        /*Base64.getEncoder().encodeToString(u.getProfileP()),*/
+                        Base64.getDecoder().decode(u.getProfileP()),
                         u.getActivo() );
                 return DTO;
             }
@@ -72,24 +78,26 @@ public class UserController {
     public UserDTO getDNI(@RequestBody UserDTO user){
         User u=ur.findByDNI(user.getDni());
         UserDTO uDTO=new UserDTO(u.getDNI(),u.getNombreU(),u.getApellidosU(),
-                u.getCorreo(),u.getContrasena(),u.getDescripcion()
-                /*Base64.getEncoder().encodeToString(u.getProfileP())*/,u.getActivo());
+                u.getCorreo(),u.getContrasena(),u.getDescripcion(),
+                Base64.getDecoder().decode(u.getProfileP()),u.getActivo());
         return uDTO;
     }
+
+
     @PostMapping(value = "/postUser")
-    public boolean postUser(@RequestBody User user){
+    public boolean postUser(@RequestBody UserDTO user){
         List<User> us=ur.findAll();
         for(User uT:us) {
-            if (uT.getDNI().equals(user.getDNI())) {
+            if (uT.getDNI().equals(user.getDni())) {
                 return false;
             }
             if (uT.getCorreo().equals(user.getCorreo())||uT.getNombreU().equals(user.getNombreU())) {
                 return false;
             }
         }
-        byte[] imageData = Base64.getUrlDecoder().decode(user.getProfileP());
-        user.setProfileP(imageData);
-        ur.save(user);
+        User u=new User(user.getDni(),user.getNombreU(),user.getApellidosU(),user.getCorreo(),user.getContrasena(),
+                user.getDescripcion(), user.codearImagen(user.getProfileP()),user.isActivo());
+        ur.save(u);
         return true;
     }
 
@@ -117,6 +125,7 @@ public class UserController {
         for(Producto p:u.getProductsU()){
             p.getUsers().remove(u);
         }
+        ur.delete(u);
         return true;
     }
 
@@ -183,9 +192,9 @@ public class UserController {
         if(u==null){
             return false;
         }
-        u.setCorreo(user.getCorreo());
+        u.setDescripcion(user.getDescripcion());
         u.setNombreU(user.getNombreU());
-        u.setApellidosU(user.getApellidosU());
+        u.setContrasena(user.getContrasena());
 
         ur.save(u);
         return true;

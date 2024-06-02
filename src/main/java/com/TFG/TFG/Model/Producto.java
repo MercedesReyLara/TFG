@@ -28,7 +28,7 @@ public class Producto {
     @JsonIgnore
     private List<Review> resenas=new ArrayList<>();
 
-    @ManyToOne/*MIRAR(cascade = CascadeType.DETACH)*/
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "category_id",nullable = false)
     private Category category;
 
