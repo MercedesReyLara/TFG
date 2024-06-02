@@ -29,7 +29,7 @@
     <string name="nP">Introduce nova puntuación</string>
     <string name="nombreP">Nome do produto</string>
     <string name="nContrasena">Introduce nova contrasinal</string>
-    <string name="nCorreo">Introduce novo correo</string>
+    <string name="nDescripcion">Introduce nova descripcion</string>
     <string name="nNombreUser">Introduce novo nome de usuario</string>
     <string name="panel">Panel de reseñas-filtro por categoría de produto</string>
     <string name="panelProdutos">Panel de produtos-filtro por puntuacion de reseña</string>
@@ -55,6 +55,9 @@
     <string name="ip">Introduza a dirección IP</string>
     <string name="aplicar">Aplicar esta IP</string>
     <string name="cuentaE">Eliminar conta</string>
+    <string name="nonProductos">Non se atoparon produtos</string>
+    <string name="nonResenas">Non se atoparon reseñas</string>
+    <string name="cuenta">Dar de baixa ou eliminar conta</string>
     <string name="btnModificar">Modificar unha reseña</string>
     <string name="txtModificar">Escolla un produto a modificar</string>
     <string name="escogerEliminar">Escolla un produto</string>

@@ -3,12 +3,23 @@ package com.example.tfg
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.Toast
+import com.example.tfg.petitionsAndFunctions.httPettitions
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
+import com.example.tfg.petitionsAndFunctions.SharedPreff
 import com.example.tfg.petitionsAndFunctions.generalFunctions
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import model.Product
+import model.User
 
 class mainMenu : AppCompatActivity() {
     private lateinit var context:Context
@@ -25,10 +36,26 @@ class mainMenu : AppCompatActivity() {
         val perfilU:ImageButton=findViewById(R.id.botonPerfilU)
         val cerrarSesion:ImageButton=findViewById(R.id.pechar)
         val ajustesButton:ImageButton=findViewById(R.id.ajustes)
-
-        //Declaración de variables que vamos a utilizar
-        val functions= generalFunctions()
+        val pettitions=httPettitions()
         val context:Context=baseContext
+        val sharedPreff=SharedPreff(context)
+        val functions= generalFunctions()
+        val DNIu=functions.decrypt(functions.clave,sharedPreff.getUser(context).toString()).toString()
+        val ip=sharedPreff.getIp(context)
+        lifecycleScope.launch (Dispatchers.IO){
+            /*Buscamos el usuario a través del DNI guardado anteriormente en las preferencias*/
+            var products:ArrayList<Product>? = arrayListOf()
+            products=pettitions.getProductos(User(DNIu),ip)
+            withContext(Dispatchers.Main){
+                if(products==null){
+                    Toast.makeText(this@mainMenu,this@mainMenu.getString(R.string.problemas),
+                        Toast.LENGTH_SHORT).show()
+                }else if(products.isEmpty()){
+                    subir.isVisible=false
+                }
+            }
+        }
+        //Declaración de variables que vamos a utilizar
         /*Establecemos el idioma porque al salir de la app se resetea
         entonces buscamos en las preferencias el codigo y aplicamos el idioma
         Se hace tanto en el log in como en el main por si cerramos sesión y cerramos la app

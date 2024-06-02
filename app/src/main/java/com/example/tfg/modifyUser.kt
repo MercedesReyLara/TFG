@@ -41,7 +41,7 @@ class modifyUser : AppCompatActivity() {
         val context: Context =baseContext
         val sharedPreff= SharedPreff(context)
         var nombre:Boolean=false
-        var correo:Boolean=false
+        var descripcion:Boolean=false
         var contrasena:Boolean=false
         var userModificado: User = User()
         val ip=sharedPreff.getIp(context)
@@ -58,13 +58,13 @@ class modifyUser : AppCompatActivity() {
                     text.hint=this.getString(R.string.nNombreUser)
                     text.isVisible=true
                     nombre=true
-                    correo=false
+                    descripcion=false
                     contrasena=false
                 }
-                "Modificar correo" ->{
-                    text.hint=this.getString(R.string.nCorreo)
+                "Modificar descripción" ->{
+                    text.hint=this.getString(R.string.nDescripcion)
                     text.isVisible=true
-                    correo=true
+                    descripcion=true
                     nombre=false
                     contrasena=false
                 }
@@ -73,7 +73,7 @@ class modifyUser : AppCompatActivity() {
                     text.isVisible=true
                     contrasena=true
                     nombre=false
-                    correo=false
+                    descripcion=false
                 }
             }
         }
@@ -85,28 +85,25 @@ class modifyUser : AppCompatActivity() {
                 if(texto.isEmpty()) {
                     Toast.makeText(this, this.getString(R.string.errorVacios), Toast.LENGTH_SHORT)
                         .show()
-                    /*}else{
+                    }else{
                     userModificado= User(userParts[0],texto,userParts[2],userParts[3],userParts[4],
-                        userParts[5],userParts[6],true)*/
+                        userParts[5],userParts[6].toByteArray(),true)
                 }
-            }else if(correo){
+            }else if(descripcion){
                 if(texto.isEmpty()){
                     Toast.makeText(this,this.getString(R.string.errorVacios), Toast.LENGTH_SHORT).show()
-                }else if(!functions.validateEmail(texto)) {
-                    Toast.makeText(this, this.getString(R.string.errorCorreo), Toast.LENGTH_SHORT)
-                        .show()
-                    /*}else{
-                    userModificado= User(userParts[0],userParts[1],userParts[2],texto,userParts[4],
-                        userParts[5],userParts[6].,true)*/
+                }else{
+                    userModificado= User(userParts[0],userParts[1],userParts[2],userParts[3],userParts[4],
+                        texto,userParts[6].toByteArray(),true)
                 }
             }else if(contrasena){
                 if(texto.isEmpty()){
                     Toast.makeText(this,this.getString(R.string.errorVacios), Toast.LENGTH_SHORT).show()
                 }else if(!functions.validatePassword(texto)){
                     Toast.makeText(this,this.getString(R.string.errorContraseña),Toast.LENGTH_SHORT).show()
-                /*}else{
+                }else{
                     userModificado= User(userParts[0],userParts[1],userParts[2],userParts[3],texto,
-                        userParts[5],userParts[6],true)*/
+                        userParts[5],userParts[6].toByteArray(),true)
                 }
             }
             lifecycleScope.launch (Dispatchers.Main){

@@ -44,7 +44,29 @@ class allProductList : AppCompatActivity() {
         val adapter: ArrayAdapter<String> = ArrayAdapter(this,android.R.layout.simple_spinner_item,puntuaciones)
         spinnerPuntuacion.adapter=adapter
         spinnerPuntuacion.setSelection(0)
-
+        lifecycleScope.launch(Dispatchers.Main) {
+            var products: ArrayList<Product>?
+            withContext(Dispatchers.IO) {
+                products= petitions.getAllProducts(ip)!!
+            }
+            if(products==null) {
+                Toast.makeText(
+                    this@allProductList,
+                    this@allProductList.getString(R.string.problemas), Toast.LENGTH_SHORT
+                ).show()
+            }else if(products!!.isEmpty()){
+                listProducts.clear()
+                Toast.makeText(
+                    this@allProductList,
+                    this@allProductList.getString(R.string.errorObtencion),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }else{
+                listProducts.clear()
+                listProducts.addAll(products!!)
+                adapterProduct.notifyDataSetChanged()
+            }
+        }
         listaP.adapter = adapterProduct
         /*listaP.setOnItemClickListener { parent, view, position, id ->
             val review = parent.getItemAtPosition(position) as Product

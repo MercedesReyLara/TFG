@@ -67,14 +67,15 @@
 
     <ImageView
         android:id="@+id/profilePD"
-        android:layout_width="209dp"
-        android:layout_height="138dp"
+        android:layout_width="125dp"
+        android:layout_height="0dp"
         android:background="@android:color/transparent"
         android:textColor="@color/black"
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@id/guidelineV1"
         app:layout_constraintTop_toBottomOf="@id/guidelineH1"
+        app:layout_constraintBottom_toTopOf="@id/guidelineH3"
         app:srcCompat="@drawable/imagen_2024_04_22_110039483_removebg_preview" />
 
     <TextView
@@ -212,8 +213,8 @@
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toTopOf="@id/textView30"
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
-        app:layout_constraintHorizontal_bias="0.8"
-        app:layout_constraintStart_toEndOf="@id/guidelineV3"
+        app:layout_constraintHorizontal_bias="0.739"
+        app:layout_constraintStart_toEndOf="@id/editDelete"
         app:layout_constraintTop_toBottomOf="@id/guidelineH2"
         app:layout_constraintVertical_bias="0.486"
         app:srcCompat="@drawable/imagen_2024_05_13_183223206_removebg_preview" />
@@ -239,8 +240,8 @@
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toTopOf="@id/textView31"
-        app:layout_constraintEnd_toStartOf="@id/guidelineV2"
-        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintEnd_toStartOf="@id/detailsR"
+        app:layout_constraintHorizontal_bias="0.295"
         app:layout_constraintStart_toEndOf="@id/guidelineV3"
         app:layout_constraintTop_toBottomOf="@id/guidelineH2"
         app:layout_constraintVertical_bias="0.25"

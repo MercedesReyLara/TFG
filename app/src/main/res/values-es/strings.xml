@@ -57,7 +57,7 @@
     <string name="modR">Reseña modificada con éxtio</string>
     <string name="modU">Usuario modificado con éxito</string>
     <string name="nContrasena">Introduce nueva contraseña</string>
-    <string name="nCorreo">Introduce nuevo correo</string>
+    <string name="nDescripcion">Introduce nueva descripcion</string>
     <string name="nNombreUser">Introduce nuevo nombre de usuario</string>
     <string name="txtModificar">Elija un producto a modificar</string>
     <string name="escogerEliminar">Elija un producto</string>
@@ -67,10 +67,13 @@
     <string name="errorVacios">Los campos no pueden estar vacíos</string>
     <string name="cerrarSesion">Cerrar sesión</string>
     <string name="opcionesAlert">¿Que quieres hacer?</string>
+    <string name="cuenta">Dar de baixa ou eliminar conta</string>
     <string name="erroPuntuacion">El valor de la puntuacion tiene que ser un valor entero del 1 al 10</string>
     <string name="txtRegistro">Introduzca estos datos para registrarse</string>
     <string name="nombreEdit">Nombre de usuario</string>
     <string name="apellidosEdit">Apellidos</string>
+    <string name="nonProductos">No se encontraron productos</string>
+    <string name="nonResenas">No se encontraron reseñas</string>
     <string name="faceReseña">Hacer una reseña</string>
     <string name="opcions">Modificar perfil</string>
     <string name="lista">Inventario</string>

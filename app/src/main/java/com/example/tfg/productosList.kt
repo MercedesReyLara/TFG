@@ -68,7 +68,7 @@ class productosList : AppCompatActivity() {
                 }else if(newProducts!!.isEmpty()){
                     Toast.makeText(
                         this@productosList,
-                        this@productosList.getString(R.string.errorObtencion),
+                        this@productosList.getString(R.string.nonProductos),
                         Toast.LENGTH_SHORT
                     ).show()
                 }else{
@@ -95,7 +95,7 @@ class productosList : AppCompatActivity() {
                 }else if(newReviews!!.isEmpty()){
                     Toast.makeText(
                         this@productosList,
-                        this@productosList.getString(R.string.errorObtencion),
+                        this@productosList.getString(R.string.nonResenas),
                         Toast.LENGTH_SHORT
                     ).show()
                 }else{

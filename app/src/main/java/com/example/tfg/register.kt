@@ -29,6 +29,7 @@ import com.example.tfg.sqlite.ImageDAO
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import com.example.tfg.petitionsAndFunctions.SharedPreff
+import kotlinx.coroutines.withContext
 import model.User
 import java.io.IOException
 
@@ -112,29 +113,39 @@ class register : AppCompatActivity() {
             }else{
                 val pfp=functions.imageViewToByteArray(profileP)
                 val newUser= User(dniTXT,nameTXT,lastNameTXT,mailTXT,passwordConfTXT,"Sin descripcion",pfp,true)
-                var success:Boolean?=false
-                lifecycleScope.launch (Dispatchers.IO){
-                    success=pettitions.postUser(newUser,ip)!!
-                }
-                when (success) {
-                    null -> {
-                        Toast.makeText(this,this@register.getString(R.string.problemas),Toast.LENGTH_SHORT).show()
+                lifecycleScope.launch(Dispatchers.Main) {
+                    val success = withContext(Dispatchers.IO) {
+                        pettitions.postUser(newUser, ip)
                     }
-                    true -> {
-                        Toast.makeText(this,"Usuario registrado con exito",Toast.LENGTH_SHORT).show()
-                        functions.clearText(listOf(DNIT,name,lastName,password,passwordConfirm,mail))
-                        functions.manipulateEdits(listOf(DNIT,name,lastName,mail,password,passwordConfirm))
-                        sharedPreff.saveLogin(context, true)
-                        val encryptedDNI = functions.encrypt(dniTXT, functions.clave)
-                        sharedPreff.saveUser(context, encryptedDNI)
-                        val intentMainMenu= Intent(this,mainMenu::class.java)
-                        startActivity(intentMainMenu)
-                    }
-                    else -> {
-                        Toast.makeText(this,this@register.getString(R.string.errorObtencion),Toast.LENGTH_SHORT).show()
-                    }
-                }
 
+                    when (success) {
+                        null -> {
+                            Toast.makeText(
+                                this@register,
+                                this@register.getString(R.string.problemas),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+
+                        true -> {
+                            Toast.makeText(this@register, "Usuario registrado con exito", Toast.LENGTH_SHORT)
+                                .show()
+                            sharedPreff.saveLogin(context, true)
+                            val encryptedDNI = functions.encrypt(dniTXT, functions.clave)
+                            sharedPreff.saveUser(context, encryptedDNI)
+                            val intentLogIn = Intent(this@register, logIn::class.java)
+                            startActivity(intentLogIn)
+                        }
+
+                        false -> {
+                            Toast.makeText(
+                                this@register,
+                                this@register.getString(R.string.errorObtencion),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                }
             }
 
         }

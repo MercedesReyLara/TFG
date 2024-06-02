@@ -70,7 +70,28 @@ class listaResenas : AppCompatActivity() {
         spinner.adapter=adapter
         spinner.setBackgroundColor(Color.WHITE)
         spinner.setSelection(0)
-
+        lifecycleScope.launch(Dispatchers.Main) {
+            var reviews: ArrayList<Review>?
+            withContext(Dispatchers.IO) {
+                reviews = petitions.getAllReviews(ip)!!
+            }
+            if(reviews==null) {
+                Toast.makeText(
+                    this@listaResenas,
+                    this@listaResenas.getString(R.string.problemas), Toast.LENGTH_SHORT
+                ).show()
+            }else if(reviews!!.isEmpty()){
+                Toast.makeText(
+                    this@listaResenas,
+                    this@listaResenas.getString(R.string.nonRR),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }else{
+                listReviews.clear()
+                listReviews.addAll(reviews!!)
+                adapterResenas.notifyDataSetChanged()
+            }
+        }
         list.adapter = adapterResenas
         list.setOnItemClickListener { parent, view, position, id ->
             val review = parent.getItemAtPosition(position) as Review

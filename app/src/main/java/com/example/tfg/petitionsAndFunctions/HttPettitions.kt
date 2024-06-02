@@ -2,6 +2,7 @@ package com.example.tfg.petitionsAndFunctions
 
 import android.net.Uri
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -41,7 +42,9 @@ class httPettitions {
                 val responseBody = response.body?.string()
                 /*Si responde manda un objeto parsedo de json a user*/
                 if (response.isSuccessful&&!responseBody.isNullOrEmpty()) {
-                    val gson = Gson()
+                    val gson = GsonBuilder()
+                        .registerTypeAdapter(ByteArray::class.java, ByteArrayFunctions())
+                        .create()
                    val  userF=gson.fromJson(responseBody, User::class.java)
                     return@withContext userF
                 }else {
@@ -155,7 +158,9 @@ class httPettitions {
                 val responseBody = response.body?.string()
                 if (response.isSuccessful&&!responseBody.isNullOrEmpty()) {
                     /*Transformamos el response body recibido en nuestra clase usuario*/
-                    val gson2 = Gson()
+                    val gson2 = GsonBuilder()
+                        .registerTypeAdapter(ByteArray::class.java, ByteArrayFunctions())
+                        .create()
                     val useR=gson2.fromJson(responseBody, User::class.java)
                     return@withContext useR
                 }else {
