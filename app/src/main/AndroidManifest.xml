@@ -16,7 +16,6 @@
         android:allowBackup="true"
         android:configChanges="locale"
         android:dataExtractionRules="@xml/data_extraction_rules"
-        android:usesCleartextTraffic="true"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/imagen_2024_04_22_110039483_removebg_preview"
         android:label="@string/app_name"
@@ -24,7 +23,11 @@
         android:roundIcon="@drawable/imagen_2024_04_22_110039483_removebg_preview"
         android:supportsRtl="true"
         android:theme="@style/Base.Theme.TFG"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".changePass"
+            android:exported="false" />
         <activity
             android:name=".modifyUser"
             android:configChanges="orientation|screenSize"
@@ -46,8 +49,8 @@
             android:exported="false" />
         <activity
             android:name=".productosList"
-            android:exported="false"
-            android:configChanges="orientation|screenSize" />
+            android:configChanges="orientation|screenSize"
+            android:exported="false" />
         <activity
             android:name=".ajustes"
             android:configChanges="orientation|screenSize"
@@ -74,8 +77,8 @@
             android:exported="false" />
         <activity
             android:name=".logIn"
-            android:exported="true"
             android:configChanges="orientation|screenSize"
+            android:exported="true"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

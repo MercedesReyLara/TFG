@@ -64,7 +64,7 @@
             android:layout_height="42dp"
             android:backgroundTint="@color/button"
             android:text="@string/registro"
-            app:layout_constraintBottom_toBottomOf="@id/guidelineH2"
+            app:layout_constraintBottom_toBottomOf="@id/guidelineH5"
             app:layout_constraintEnd_toEndOf="@id/guidelineV2"
             app:layout_constraintHorizontal_bias="0.499"
             app:layout_constraintStart_toStartOf="@id/guidelineV1"
@@ -115,7 +115,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.15" />
+            app:layout_constraintGuide_percent="0.12" />
 
         <ImageButton
             android:id="@+id/ajustes"
@@ -128,6 +128,7 @@
             app:layout_constraintHorizontal_bias="0.888"
             app:layout_constraintStart_toEndOf="@id/guidelineV1"
             app:layout_constraintTop_toBottomOf="@id/guidelineH1"
+            app:layout_constraintBottom_toTopOf="@id/guidelineH3"
             app:srcCompat="@drawable/efewf_removebg_preview" />
 
         <androidx.constraintlayout.widget.Guideline
@@ -136,5 +137,35 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.65" />
+
+        <ImageButton
+            android:id="@+id/changePassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@id/guidelineH2"
+            app:layout_constraintEnd_toStartOf="@id/guidelineV2"
+            app:layout_constraintHorizontal_bias="0.863"
+            app:layout_constraintStart_toEndOf="@id/guidelineV1"
+            app:layout_constraintTop_toBottomOf="@id/textView27"
+            app:srcCompat="@android:drawable/ic_menu_help" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineH5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.9" />
+
+        <TextView
+            android:id="@+id/textView27"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cambiarC"
+            app:layout_constraintEnd_toStartOf="@id/guidelineV2"
+            app:layout_constraintHorizontal_bias="0.917"
+            app:layout_constraintStart_toEndOf="@id/guidelineV1"
+            app:layout_constraintBottom_toTopOf="@id/changePassword"
+            app:layout_constraintTop_toBottomOf="@id/guidelineH5"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

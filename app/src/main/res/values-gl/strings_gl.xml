@@ -6,6 +6,13 @@
     <string name="subir">Subir a miña reseña</string>
     <string name="modificarNome">Modificar nome</string>
     <string name="modificarPuntuacion">Modificar puntuación</string>
+    <string name="buscarNome">Introduza o seu nome de usuario para poder cambiar a contrasinal</string>ç
+    <string name="atopado">Usuario atopado. Por favor, introduza o novo contrasinal</string>
+    <string name="cambiarPass">Introduza a nova contrasinal</string>
+    <string name="cambiarPassC">Confirme a nova contrasinal</string>
+    <string name="buscar">Buscar o meu usuario</string>
+    <string name="cambiarC">Cambiar contrasinal</string>
+    <string name="cambiadaC">Contrasinal cambiada</string>
     <string name="modificarDescripcion">Modificar descrición</string>
     <string name="reactivar">¿Reactivar conta?</string>
     <string name="reactivarD">¿Desexa reactivar a súa conta de PRODRATER?</string>

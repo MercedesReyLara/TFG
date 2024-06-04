@@ -57,7 +57,7 @@ class logIn : AppCompatActivity() {
         val email: EditText = findViewById(R.id.editTextUsername)
         val password: EditText = findViewById(R.id.passwordUser)
         val ajustesButton:ImageButton=findViewById(R.id.ajustes)
-
+        val changePassword:ImageButton=findViewById(R.id.changePassword)
         //Declaración de variables
         val httPettitions= httPettitions()
         /*Si las shared preferences tienen inciada sesión, vamos directamente al menú principal
@@ -125,12 +125,17 @@ class logIn : AppCompatActivity() {
 
             }
         /*Ir al boton de ajustes para cambiar ip e idioma*/
-        ajustesButton.setOnClickListener {
-        val intentAjustes=Intent(this,ajustes::class.java)
-        startActivity(intentAjustes)
-        }
+            ajustesButton.setOnClickListener {
+                val intentAjustes=Intent(this,ajustes::class.java)
+                startActivity(intentAjustes)
             }
-        }
+
+            changePassword.setOnClickListener {
+                val intentCambiarContrasena=Intent(this,changePass::class.java)
+                startActivity(intentCambiarContrasena)
+            }
+    }
+}
 
 
 

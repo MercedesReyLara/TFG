@@ -172,7 +172,39 @@ class httPettitions {
 
         }
     }
+    suspend fun getUserByName(user:User,ip:String): User? {
+        return withContext(Dispatchers.IO) {
+            val client = OkHttpClient()
+            val userEmpty=User()
+            val url:String="http://$ip:8080/getUserByName"
+            val gson = Gson()
+            val json = gson.toJson(user)
+            val mediaType = "application/json; charset=utf-8".toMediaTypeOrNull()
+            val requestBody = json.toRequestBody(mediaType)
+            val request: Request = Request.Builder()
+                .url(url)
+                .post(requestBody)
+                .build()
+            val response:Response
+            try {
+                response = client.newCall(request).execute()
+                val responseBody = response.body?.string()
+                if (response.isSuccessful&&!responseBody.isNullOrEmpty()) {
+                    /*Transformamos el response body recibido en nuestra clase usuario*/
+                    val gson2 = GsonBuilder()
+                        .registerTypeAdapter(ByteArray::class.java, ByteArrayFunctions())
+                        .create()
+                    val useR=gson2.fromJson(responseBody, User::class.java)
+                    return@withContext useR
+                }else {
+                    return@withContext userEmpty
+                }
+            }catch(e:IOException){
+                return@withContext null
+            }
 
+        }
+    }
     suspend fun getProductos(user:User?,ip:String):ArrayList<Product>?{
         return withContext(Dispatchers.IO) {
             val products = object : TypeToken<ArrayList<Product>>() {}.type

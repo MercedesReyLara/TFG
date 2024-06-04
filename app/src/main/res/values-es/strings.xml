@@ -6,6 +6,13 @@
     <string name="subir">Subir mi reseña</string>
     <string name="modificarNome">Modificar nombre</string>
     <string name="cerrarSesionD">¿Seguro que quieres cerrar sesion?</string>
+    <string name="buscarNome">Introduzca su nombre de usuario para poder cambiar la contraseña</string>
+    <string name="atopado">Usuario encontrado. Por favor, introduzca la nueva contraseña</string>
+    <string name="cambiarPass">Introduzca la nueva contraseña</string>
+    <string name="cambiarPassC">Confirme la nueva contrasseña</string>
+    <string name="buscar">Buscar mi usuario</string>
+    <string name="cambiadaC">Contraseña cambiada</string>
+    <string name="cambiarC">Cambiar contraseña</string>
     <string name="modificarPuntuacion">Modificar puntuación</string>
     <string name="modificarDescripcion">Modificar descripción</string>
     <string name="eliminar">Modificar esta reseña</string>

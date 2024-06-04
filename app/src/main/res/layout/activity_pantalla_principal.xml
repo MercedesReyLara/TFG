@@ -88,6 +88,7 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.83" />
 
+
     <ImageButton
         android:id="@+id/pechar"
         android:layout_width="50dp"
@@ -97,22 +98,19 @@
         app:layout_constraintBottom_toBottomOf="@id/guidelineH2"
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
         app:layout_constraintHorizontal_bias="0.934"
-        app:layout_constraintStart_toEndOf="@id/guidelineV1"
-        app:layout_constraintVertical_bias="0.20"
-        app:srcCompat="@drawable/free_sign_out_icon_3300_thumb" />
-
+        app:layout_constraintStart_toEndOf="@id/botonPerfilU"
+        app:srcCompat="@drawable/imagen_2024_06_04_095053755_removebg_preview" />
 
     <TextView
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
         android:text="@string/cerrarSesion"
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/pechar"
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@id/guidelineV1"
+        app:layout_constraintStart_toEndOf="@id/textView8"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <ImageButton
@@ -173,7 +171,7 @@
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toTopOf="@id/guidelineH2"
-        app:layout_constraintEnd_toStartOf="@id/guidelineV2"
+        app:layout_constraintEnd_toStartOf="@id/pechar"
         app:layout_constraintHorizontal_bias="0.06"
         app:layout_constraintStart_toEndOf="@id/guidelineV1"
         app:srcCompat="@drawable/imagen_2024_05_14_213155645_removebg_preview" />
@@ -186,7 +184,7 @@
         android:text="@string/irUsuario"
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@id/botonPerfilU"
-        app:layout_constraintEnd_toStartOf="@id/guidelineV2"
+        app:layout_constraintEnd_toStartOf="@id/textView17"
         app:layout_constraintHorizontal_bias="0.02"
         app:layout_constraintStart_toEndOf="@id/guidelineV1" />
 </androidx.constraintlayout.widget.ConstraintLayout>
