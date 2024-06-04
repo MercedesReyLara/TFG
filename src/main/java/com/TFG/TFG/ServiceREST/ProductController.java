@@ -49,12 +49,18 @@ public class ProductController {
 
    @GetMapping(value="/lowProducts")
    private List<ProductDTO> lowProducts(){
+        int puntuacion=0;
+        int cantidad=0;
         List<Producto> listaAll=new ArrayList<>();
         listaAll=pr.findAll();
         List<ProductDTO>DTOS=new ArrayList<>();
         for(Producto p:listaAll){
-            for(Review r:p.getResenas()){
-                if(r.getPuntuacion()<=5){
+            for(Review r:p.getResenas()) {
+                cantidad = cantidad + 1;
+                puntuacion = puntuacion + r.getPuntuacion();
+            }
+            float media= (float) puntuacion /cantidad;
+            if(media<=5){
                     ProductDTO pDTO=new ProductDTO(
                             p.getId(),
                             p.getNombreP(),
@@ -64,18 +70,23 @@ public class ProductController {
                     );
                     DTOS.add(pDTO);
                 }
-            }
         }
         return DTOS;
    }
     @GetMapping(value="/highProducts")
     private List<ProductDTO> highProducts(){
+        int cantidad=0;
+        int puntuacion=0;
         List<Producto> listaAll=new ArrayList<>();
         listaAll=pr.findAll();
         List<ProductDTO>DTOS=new ArrayList<>();
         for(Producto p:listaAll){
             for(Review r:p.getResenas()){
-                if(r.getPuntuacion()>5){
+                cantidad = cantidad + 1;
+                puntuacion = puntuacion + r.getPuntuacion();
+            }
+            float media= (float) puntuacion /cantidad;
+            if(media>5){
                     ProductDTO pDTO=new ProductDTO(
                             p.getId(),
                             p.getNombreP(),
@@ -86,7 +97,6 @@ public class ProductController {
                     DTOS.add(pDTO);
                 }
             }
-        }
         return DTOS;
     }
 

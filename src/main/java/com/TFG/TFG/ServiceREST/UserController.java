@@ -199,4 +199,15 @@ public class UserController {
         ur.save(u);
         return true;
     }
+
+    @PostMapping(value="/getUserByName")
+    public UserDTO userByName(@RequestBody UserDTO user){
+        User u=ur.findByNombreU(user.getNombreU());
+        if(u==null){
+            return new UserDTO();
+        }
+        UserDTO userN=new UserDTO(u.getDNI(),u.getNombreU(),u.getApellidosU(),u.getCorreo(),u.getContrasena(),
+                u.getDescripcion(),Base64.getDecoder().decode(u.getProfileP()),u.getActivo());
+        return userN;
+    }
 }
