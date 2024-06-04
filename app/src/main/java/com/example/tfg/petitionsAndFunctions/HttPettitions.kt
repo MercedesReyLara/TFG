@@ -549,9 +549,7 @@ class httPettitions {
     suspend fun modifyUser(user: User,ip:String): Boolean? {
         return withContext(Dispatchers.IO) {
             val client = OkHttpClient()
-            val gson = GsonBuilder()
-                .registerTypeAdapter(ByteArray::class.java, ByteArrayFunctions())
-                .create()
+            val gson = Gson()
             val json = gson.toJson(user)
             val mediaType = "application/json; charset=utf-8".toMediaTypeOrNull()
             val requestBody = json.toRequestBody(mediaType)

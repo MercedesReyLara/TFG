@@ -45,6 +45,7 @@ class changePass : AppCompatActivity() {
         confiCambio.isVisible=false
         textC.isVisible=false
         var encontrado:User?=User()
+        var user:String=""
         buscar.setOnClickListener {
             val nombreText=nombre.text.toString()
             if(nombreText.isEmpty()){
@@ -52,7 +53,7 @@ class changePass : AppCompatActivity() {
             }else{
                 lifecycleScope.launch(Dispatchers.Main) {
                     withContext(Dispatchers.IO){
-                          encontrado=pettitions.getUserByName(User(nombreText),ip)
+                          encontrado=pettitions.getUserByName(User(nombreText,true),ip)
                         }
                     if(encontrado==null){
                         Toast.makeText(this@changePass,this@changePass.getString(R.string.problemas),Toast.LENGTH_SHORT).show()
@@ -63,11 +64,11 @@ class changePass : AppCompatActivity() {
                         contrasenaConf.isVisible=true
                         confiCambio.isVisible=true
                         textC.isVisible=true
+                        user=encontrado.toString()
                     }
                     }
                 }
             }
-
         confiCambio.setOnClickListener {
             val contrasenaText=contrasena.text.toString()
             val confContrasena=contrasenaConf.text.toString()
@@ -76,12 +77,14 @@ class changePass : AppCompatActivity() {
             }else if(contrasenaText!=confContrasena){
                 Toast.makeText(this,this.getString(R.string.coincidir),Toast.LENGTH_SHORT).show()
             }else{
-                val userModificado=User(encontrado!!.dni,encontrado!!.nombreU,encontrado!!.apellidosU,encontrado!!.correo,
-                    contrasenaText,encontrado!!.descripcion,encontrado!!.profileP,encontrado!!.activo)
+                val parts=user.split("/")
+                val userAModificar=User(parts[0],parts[1],parts[2],parts[3],parts[4],
+                    parts[5],parts[6].toByteArray(),true)
+                userAModificar.contrasena=contrasenaText
                 lifecycleScope.launch(Dispatchers.Main) {
                     var cambiado:Boolean?=false
                     withContext(Dispatchers.IO){
-                        cambiado=pettitions.modifyUser(userModificado,ip)
+                        cambiado=pettitions.modifyUser(userAModificar,ip)
                     }
                     when (cambiado) {
                         null -> {
@@ -90,12 +93,12 @@ class changePass : AppCompatActivity() {
                         false -> {
                             Toast.makeText(this@changePass,this@changePass.getString(R.string.errorObtencion),Toast.LENGTH_SHORT).show()
                         }
-                        else -> {
+                        true -> {
                             Toast.makeText(this@changePass,this@changePass.getString(R.string.cambiadaC),Toast.LENGTH_SHORT).show()
                             nombre.text.clear()
                             contrasena.text.clear()
                             contrasenaConf.text.clear()
-                            Thread.sleep(1000)
+                            Thread.sleep(500)
                             val intentMain=Intent(this@changePass,logIn::class.java)
                             startActivity(intentMain)
                         }

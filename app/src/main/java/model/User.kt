@@ -37,7 +37,10 @@ class User :Serializable {
     constructor(dni: String) {
         this.dni = dni
     }
-
+    constructor(nombreU: String,activo: Boolean){
+        this.nombreU=nombreU
+        this.activo=activo
+    }
     override fun toString(): String {
         return "$dni/$nombreU/$apellidosU/$correo/$contrasena/$descripcion/$profileP/$activo"
     }
