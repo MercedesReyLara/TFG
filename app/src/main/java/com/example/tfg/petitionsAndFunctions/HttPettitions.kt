@@ -178,7 +178,9 @@ class httPettitions {
             val products = object : TypeToken<ArrayList<Product>>() {}.type
             val client = OkHttpClient()
             val url:String= "http://$ip:8080/getUserProducts"
-            val gson = Gson()
+            val gson = GsonBuilder()
+                .registerTypeAdapter(ByteArray::class.java, ByteArrayFunctions())
+                .create()
             val json = gson.toJson(user)
             val mediaType = "application/json; charset=utf-8".toMediaTypeOrNull()
             val requestBody = json.toRequestBody(mediaType)
@@ -192,8 +194,8 @@ class httPettitions {
                 response = client.newCall(request).execute()
                 val responseBody = response.body?.string()
                 if (response.isSuccessful&&!responseBody.isNullOrEmpty()) {
-                    val gson = Gson()
-                    listProductos= gson.fromJson(responseBody, products)
+                    val gson2 = Gson()
+                    listProductos= gson2.fromJson(responseBody, products)
                     return@withContext listProductos
                 }else {
                     return@withContext listProductos
@@ -210,7 +212,9 @@ class httPettitions {
             val reviews = object : TypeToken<ArrayList<Review>>() {}.type
             val client = OkHttpClient()
             val url:String= "http://$ip:8080/getReviewsUser"
-            val gsonA = Gson()
+            val gsonA = GsonBuilder()
+                .registerTypeAdapter(ByteArray::class.java, ByteArrayFunctions())
+                .create()
             val json = gsonA.toJson(user)
             val mediaType = "application/json; charset=utf-8".toMediaTypeOrNull()
             val requestBody = json.toRequestBody(mediaType)
@@ -513,7 +517,9 @@ class httPettitions {
     suspend fun modifyUser(user: User,ip:String): Boolean? {
         return withContext(Dispatchers.IO) {
             val client = OkHttpClient()
-            val gson = Gson()
+            val gson = GsonBuilder()
+                .registerTypeAdapter(ByteArray::class.java, ByteArrayFunctions())
+                .create()
             val json = gson.toJson(user)
             val mediaType = "application/json; charset=utf-8".toMediaTypeOrNull()
             val requestBody = json.toRequestBody(mediaType)

@@ -48,6 +48,7 @@ class DetailsProduct : AppCompatActivity() {
         /*Este botón nos dirige a la pantalla para hacer una review de este producto*/
         review.setOnClickListener {
             val intentReview=Intent(this,reviewProduct::class.java)
+            intentReview.putExtra("nombreProducto",name.text)
             startActivity(intentReview)
         }
     }

@@ -103,6 +103,8 @@ class listaResenas : AppCompatActivity() {
         filter.setOnClickListener {
             val categoryN = spinner.selectedItem.toString()
             if(categoryN == "Ninguna categoria") {
+                listReviews.clear()
+                adapterResenas.notifyDataSetChanged()
                 lifecycleScope.launch(Dispatchers.Main) {
                     var reviews: ArrayList<Review>?
                     withContext(Dispatchers.IO) {
@@ -126,6 +128,8 @@ class listaResenas : AppCompatActivity() {
                     }
                 }
             }else{
+                listReviews.clear()
+                adapterResenas.notifyDataSetChanged()
                 lifecycleScope.launch(Dispatchers.Main) {
                     var newReviews: ArrayList<Review>?
                     withContext(Dispatchers.IO) {

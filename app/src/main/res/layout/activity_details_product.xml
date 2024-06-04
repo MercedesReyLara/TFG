@@ -163,7 +163,7 @@
         app:layout_constraintEnd_toStartOf="@id/guidelineV2"
         app:layout_constraintStart_toEndOf="@id/guidelineV1"
         app:layout_constraintTop_toBottomOf="@id/textView29"
-        app:srcCompat="@drawable/cinco" />
+        app:srcCompat="@drawable/imagen_2024_06_04_092706803_removebg_preview" />
 
     <ImageButton
         android:id="@+id/backList"

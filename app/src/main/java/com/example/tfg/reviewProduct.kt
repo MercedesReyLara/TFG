@@ -46,6 +46,7 @@ class reviewProduct : AppCompatActivity() {
         val hintNombre=nombre.hint
         val hintDescripcion=descripcion.hint
         val hintPuntuacion=puntuacion.hint
+        val nombreProducto=intent.getStringExtra("nombreProducto")
         /*Obtenemos el DNI del usuario a través de las sharedpreferences*/
         val DNI:String=functions.decrypt(functions.clave,sharedPreff.getUser(context).toString()).toString()
         functions.clearHint(listOf(nombre,descripcion,puntuacion),
@@ -75,7 +76,10 @@ class reviewProduct : AppCompatActivity() {
         /*Creamos el adapter para obtener los productos que tiene ese usuario unicamente*/
         val adapter: ArrayAdapter<String> = ArrayAdapter(this,android.R.layout.simple_spinner_item,nombresProductos)
         spinnerProductos.adapter=adapter
-        spinnerProductos.setSelection(0)
+        if(nombreProducto!=null){
+            spinnerProductos.setSelection(nombresProductos.indexOf(nombreProducto))
+        }
+
 
         publicar.setOnClickListener {
             val nombreTXT=nombre.text.toString()
