@@ -1,0 +1,55 @@
+DROP DATABASE if exists restcrud;
+CREATE DATABASE restcrud;
+use restcrud;
+CREATE TABLE useer (
+    DNI varchar(9) PRIMARY KEY,
+    nombreU varchar(50) not null unique,
+    apellidosU varchar(100) not null,
+    correo varchar(50) not null unique,
+    contrasena varchar(30) not null,
+    descripcion varchar(150),
+    profileP LONGBLOB,
+    activo boolean
+);
+
+CREATE TABLE category(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre varchar(50) not null unique,
+    descripcion varchar(100) not null
+    );
+    CREATE TABLE product(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombreP varchar(100) not null unique,
+    descripcionP varchar(100) not null,
+    precio float not null,
+    category_id INT not null,
+    FOREIGN KEY (category_id) REFERENCES category(id)
+    ); 
+CREATE TABLE review(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombreR varchar(100) not null,
+    opinion varchar(100) not null,
+    puntuacion int not null,
+    user_id varchar(9) not null,
+    FOREIGN KEY (user_id) references useer(DNI),
+    product_id INT not null,
+    FOREIGN KEY(product_id) REFERENCES product(id)
+    );
+CREATE TABLE pU(
+    user_id varchar(9),
+    product_id INT,
+    PRIMARY KEY(user_id,product_id),
+    FOREIGN KEY (user_id) references useer(DNI),
+    FOREIGN KEY(product_id) references product(id)
+    );
+    
+INSERT INTO useer(DNI,nombreU,apellidosU,correo,contrasena,descripcion,profileP,activo)
+VALUES("54131912D","MercedesUWU","Rey Lara","merel2060@gmail.com","12345","Me gustan los perros",null,1);
+
+INSERT INTO category(nombre,descripcion) VALUES("Cocina","Categoria destinada a los utensilios de cocina");
+INSERT INTO product(nombreP,descripcionP,precio,category_id)VALUES("Espatula","Es una utensilio super util",
+5.20,1);
+
+INSERT INTO pu(user_id,product_id)VALUES("54131912D",1);
+INSERT INTO review(nombreR,opinion,puntuacion,user_id,product_id) VALUES("Un muy buen producto","Me parece un producto con 
+una calidad excelente, lo recomendaria siempre",5,"54131912D",1);
