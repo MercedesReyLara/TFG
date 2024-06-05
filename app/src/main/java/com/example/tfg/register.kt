@@ -36,9 +36,10 @@ import java.io.IOException
 
 class register : AppCompatActivity() {
     private lateinit var sharedPreff: SharedPreff
-    private lateinit var context:Context
-    private var imagenRecogida: String=""
-    private val functions= generalFunctions()
+    private lateinit var context: Context
+    private var imagenRecogida: String = ""
+    private val functions = generalFunctions()
+
     @SuppressLint("MissingInflatedId", "SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,72 +48,94 @@ class register : AppCompatActivity() {
 
         //Registro de elementos visuales
 
-        val backButton: Button =findViewById(R.id.goBackLogIn)
-        val registerButton:Button=findViewById(R.id.rexistro)
-        val DNIT:EditText=findViewById(R.id.DNI)
-        val name:EditText=findViewById(R.id.nameUser)
-        val lastName:EditText=findViewById(R.id.lastNameUser)
-        val mail:EditText=findViewById(R.id.mailUser)
-        val password:EditText=findViewById(R.id.passwordUser)
-        val passwordConfirm:EditText=findViewById(R.id.confirmPassword)
-        val buscarFotos:Button=findViewById(R.id.changeProfileP)
-        val camera:ImageButton=findViewById(R.id.camara)
-        val profileP: ImageView =findViewById(R.id.profileP)
-        val insertar:ImageButton=findViewById(R.id.insertar)
-        val spinnerImg: Spinner =findViewById(R.id.spinnerImg)
+        val backButton: Button = findViewById(R.id.goBackLogIn)
+        val registerButton: Button = findViewById(R.id.rexistro)
+        val DNIT: EditText = findViewById(R.id.DNI)
+        val name: EditText = findViewById(R.id.nameUser)
+        val lastName: EditText = findViewById(R.id.lastNameUser)
+        val mail: EditText = findViewById(R.id.mailUser)
+        val password: EditText = findViewById(R.id.passwordUser)
+        val passwordConfirm: EditText = findViewById(R.id.confirmPassword)
+        val buscarFotos: Button = findViewById(R.id.changeProfileP)
+        val camera: ImageButton = findViewById(R.id.camara)
+        val profileP: ImageView = findViewById(R.id.profileP)
+        val insertar: ImageButton = findViewById(R.id.insertar)
+        val spinnerImg: Spinner = findViewById(R.id.spinnerImg)
 
         //Declaracion de variables
-        val listaSpinner:List<String> = listOf("-","Imagen 1","Imagen 2","Imagen 3","Imagen 4","Imagen 5")
-        val adapter: ArrayAdapter<String> = ArrayAdapter(this,android.R.layout.simple_spinner_item,listaSpinner)
-        spinnerImg.adapter=adapter
+        val listaSpinner: List<String> =
+            listOf("-", "Imagen 1", "Imagen 2", "Imagen 3", "Imagen 4", "Imagen 5")
+        val adapter: ArrayAdapter<String> =
+            ArrayAdapter(this, android.R.layout.simple_spinner_item, listaSpinner)
+        spinnerImg.adapter = adapter
         spinnerImg.setSelection(0)
-        val pettitions= httPettitions()
-        context =baseContext
-        sharedPreff= SharedPreff(context)
-        val ip=sharedPreff.getIp(context)
-        val helper:GalleryDbHelper= GalleryDbHelper(context)
-        val DAO:ImageDAO= ImageDAO()
+        val pettitions = httPettitions()
+        context = baseContext
+        sharedPreff = SharedPreff(context)
+        val ip = sharedPreff.getIp(context)
+        val helper: GalleryDbHelper = GalleryDbHelper(context)
+        val DAO: ImageDAO = ImageDAO()
         //Utilizamos el método para limpiar los inputs cuando esten on focus
-        functions.clearHint(listOf(DNIT,name,lastName,mail,password,passwordConfirm),
-            listOf(DNIT.hint,name.hint,lastName.hint,mail.hint,password.hint,passwordConfirm.hint))
+        functions.clearHint(
+            listOf(DNIT, name, lastName, mail, password, passwordConfirm),
+            listOf(
+                DNIT.hint,
+                name.hint,
+                lastName.hint,
+                mail.hint,
+                password.hint,
+                passwordConfirm.hint
+            )
+        )
         profileP.setImageResource(R.drawable.imagen_2024_05_14_213155645_removebg_preview)
-        spinnerImg.isVisible=false
-        val resultado=registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-                activityResult->
-            if(activityResult.resultCode== RESULT_OK){
-                try {
-                    val result =activityResult.data?.extras?.get("data") as Bitmap
-                    profileP.setImageBitmap(result)
-                }catch(exception:Exception){
-                    exception.toString()
+        spinnerImg.isVisible = false
+        val resultado =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
+                if (activityResult.resultCode == RESULT_OK) {
+                    try {
+                        val result = activityResult.data?.extras?.get("data") as Bitmap
+                        profileP.setImageBitmap(result)
+                    } catch (exception: Exception) {
+                        exception.toString()
+                    }
                 }
             }
-        }
         registerButton.setOnClickListener {
-            val dniTXT=DNIT.text.toString().trim()
-            val nameTXT=name.text.toString().trim()
-            val lastNameTXT=lastName.text.toString()
-            val mailTXT=mail.text.toString().trim()
-            val passwordTXT=password.text.toString().trim()
-            val passwordConfTXT=passwordConfirm.text.toString().trim()
+            val dniTXT = DNIT.text.toString().trim()
+            val nameTXT = name.text.toString().trim()
+            val lastNameTXT = lastName.text.toString()
+            val mailTXT = mail.text.toString().trim()
+            val passwordTXT = password.text.toString().trim()
+            val passwordConfTXT = passwordConfirm.text.toString().trim()
 
-            if(nameTXT.isEmpty()||lastNameTXT.isEmpty()||
-                mailTXT.isEmpty()||passwordTXT.isEmpty()||passwordConfTXT.isEmpty()||dniTXT.isEmpty()){
-                Toast.makeText(this,this.getString(R.string.errorVacios),Toast.LENGTH_LONG).show()
-            }else if(!functions.validateDNI(dniTXT)){
-                Toast.makeText(this,this.getString(R.string.DNI),Toast.LENGTH_LONG).show()
-            } else if(!functions.validateEmail(mailTXT)){
-                Toast.makeText(this,this.getString(R.string.errorCorreo),Toast.LENGTH_LONG).show()
-            }else if(!functions.validatePassword(passwordTXT)){
+            if (nameTXT.isEmpty() || lastNameTXT.isEmpty() ||
+                mailTXT.isEmpty() || passwordTXT.isEmpty() || passwordConfTXT.isEmpty() || dniTXT.isEmpty()
+            ) {
+                Toast.makeText(this, this.getString(R.string.errorVacios), Toast.LENGTH_LONG).show()
+            } else if (!functions.validateDNI(dniTXT)) {
+                Toast.makeText(this, this.getString(R.string.DNI), Toast.LENGTH_LONG).show()
+            } else if (!functions.validateEmail(mailTXT)) {
+                Toast.makeText(this, this.getString(R.string.errorCorreo), Toast.LENGTH_LONG).show()
+            } else if (!functions.validatePassword(passwordTXT)) {
                 password.text.clear()
                 passwordConfirm.text.clear()
-                Toast.makeText(this,this.getString(R.string.errorContraseña),Toast.LENGTH_LONG).show()
-            }else if(passwordTXT != passwordConfTXT){
-                Toast.makeText(this,this.getString(R.string.coincidir),Toast.LENGTH_LONG).show()
+                Toast.makeText(this, this.getString(R.string.errorContraseña), Toast.LENGTH_LONG)
+                    .show()
+            } else if (passwordTXT != passwordConfTXT) {
+                Toast.makeText(this, this.getString(R.string.coincidir), Toast.LENGTH_LONG).show()
                 passwordConfirm.text.clear()
-            }else{
-                val pfp=functions.imageViewToByteArray(profileP)
-                val newUser= User(dniTXT,nameTXT,lastNameTXT,mailTXT,passwordConfTXT,"Sin descripcion",pfp,true)
+            } else {
+                val pfp = functions.imageViewToByteArray(profileP)
+                val newUser = User(
+                    dniTXT,
+                    nameTXT,
+                    lastNameTXT,
+                    mailTXT,
+                    passwordConfTXT,
+                    "Sin descripcion",
+                    pfp,
+                    true
+                )
                 lifecycleScope.launch(Dispatchers.Main) {
                     val success = withContext(Dispatchers.IO) {
                         pettitions.postUser(newUser, ip)
@@ -128,7 +151,11 @@ class register : AppCompatActivity() {
                         }
 
                         true -> {
-                            Toast.makeText(this@register, "Usuario registrado con exito", Toast.LENGTH_SHORT)
+                            Toast.makeText(
+                                this@register,
+                                "Usuario registrado con exito",
+                                Toast.LENGTH_SHORT
+                            )
                                 .show()
                             sharedPreff.saveLogin(context, true)
                             val encryptedDNI = functions.encrypt(dniTXT, functions.clave)
@@ -150,79 +177,101 @@ class register : AppCompatActivity() {
 
         }
         backButton.setOnClickListener {
-            val intentBack=Intent(this,logIn::class.java)
+            val intentBack = Intent(this, logIn::class.java)
             startActivity(intentBack)
         }
 
         camera.setOnClickListener {
-            val imagenCaptura=Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            setResult(RESULT_OK,imagenCaptura)
+            val imagenCaptura = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            setResult(RESULT_OK, imagenCaptura)
             resultado.launch(imagenCaptura)
         }
 
         buscarFotos.setOnClickListener {
-            var listaObtenidas:ArrayList<Image> = arrayListOf()
-            try{
-              listaObtenidas=DAO.visualizarImagenes(helper)
-                spinnerImg.isVisible=true
-                spinnerImg.onItemSelectedListener= object : AdapterView.OnItemSelectedListener {
-                    override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                        val imgSelect=spinnerImg.selectedItem.toString()
-                        for(img in listaObtenidas){
-                            when(imgSelect){
-                                "Imagen 1"->profileP.setImageBitmap(functions.byteArrayToBitmap(listaObtenidas[0].valor))
-                                "Imagen 2"->profileP.setImageBitmap(functions.byteArrayToBitmap(listaObtenidas[1].valor))
-                                "Imagen 3"->profileP.setImageBitmap(functions.byteArrayToBitmap(listaObtenidas[2].valor))
-                                "Imagen 4"->profileP.setImageBitmap(functions.byteArrayToBitmap(listaObtenidas[3].valor))
-                                "Imagen 5"->profileP.setImageBitmap(functions.byteArrayToBitmap(listaObtenidas[4].valor))
+            var listaObtenidas: ArrayList<Image> = arrayListOf()
+            try {
+                listaObtenidas = DAO.visualizarImagenes(helper)
+                spinnerImg.isVisible = true
+                spinnerImg.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(
+                        parent: AdapterView<*>,
+                        view: View?,
+                        position: Int,
+                        id: Long
+                    ) {
+                        val imgSelect = spinnerImg.selectedItem.toString()
+                        for (img in listaObtenidas) {
+                            when (imgSelect) {
+                                "Imagen 1" -> profileP.setImageBitmap(
+                                    functions.byteArrayToBitmap(
+                                        listaObtenidas[0].valor
+                                    )
+                                )
+
+                                "Imagen 2" -> profileP.setImageBitmap(
+                                    functions.byteArrayToBitmap(
+                                        listaObtenidas[1].valor
+                                    )
+                                )
+
+                                "Imagen 3" -> profileP.setImageBitmap(
+                                    functions.byteArrayToBitmap(
+                                        listaObtenidas[2].valor
+                                    )
+                                )
+
+                                "Imagen 4" -> profileP.setImageBitmap(
+                                    functions.byteArrayToBitmap(
+                                        listaObtenidas[3].valor
+                                    )
+                                )
+
+                                "Imagen 5" -> profileP.setImageBitmap(
+                                    functions.byteArrayToBitmap(
+                                        listaObtenidas[4].valor
+                                    )
+                                )
                             }
                         }
                     }
+
                     override fun onNothingSelected(p0: AdapterView<*>?) {
                         TODO("Not yet implemented")
                     }
                 }
-            }catch (exception:IOException){
-                Toast.makeText(this,"Error en la visualizacion de imagenes",
-                    Toast.LENGTH_SHORT).show()
+            } catch (exception: IOException) {
+                Toast.makeText(
+                    this, "Error en la visualizacion de imagenes",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
 
         insertar.setOnClickListener {
-            val listaImg:ArrayList<Image> = arrayListOf()
-            val listaFotos:ArrayList<ByteArray> = arrayListOf(
-                functions.imageToByteArray(context,R.drawable.uno),
-                functions.imageToByteArray(context,R.drawable.dos),
-                functions.imageToByteArray(context,R.drawable.tres),
-                functions.imageToByteArray(context,R.drawable.cuatro),
-                functions.imageToByteArray(context,R.drawable.cinco))
+            val listaImg: ArrayList<Image> = arrayListOf()
+            val listaFotos: ArrayList<ByteArray> = arrayListOf(
+                functions.imageToByteArray(context, R.drawable.uno),
+                functions.imageToByteArray(context, R.drawable.dos),
+                functions.imageToByteArray(context, R.drawable.tres),
+                functions.imageToByteArray(context, R.drawable.cuatro),
+                functions.imageToByteArray(context, R.drawable.cinco)
+            )
 
             helper.writableDatabase
 
-            for(foto in listaFotos){
+            for (foto in listaFotos) {
                 listaImg.add(Image(foto))
             }
-            try{
+            try {
                 DAO.crearImagen(helper, listaImg)
-            }catch(exception:IOException){
-                Toast.makeText(this,"Error en la inserción de imagenes",
-                    Toast.LENGTH_SHORT).show()
+            } catch (exception: IOException) {
+                Toast.makeText(
+                    this, "Error en la inserción de imagenes",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
 
         }
-        }
+    }
+}
 
-   override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        // Guardar datos en el Bundle
-       if(imagenRecogida.isNotEmpty()) {
-           val imagen=imagenRecogida
-           sharedPreff.saveImg(context,imagen)
-       }
-    }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
-        imagenRecogida=sharedPreff.getImg(context)
-    }
-    }

@@ -54,15 +54,27 @@ class SharedPreff(val contexto:Context) {
         editor.commit()
     }
 
-    fun saveImg(context: Context,imagen:String){
+    fun saveNumProductos(context: Context,num:Int){
         val sharedPreff=PreferenceManager.getDefaultSharedPreferences(context)
         val editor=sharedPreff.edit()
-        editor.putString("imagen",imagen)
+        editor.putInt("numProductos",num)
         editor.commit()
     }
 
-    fun getImg(context: Context):String{
+    fun getNumProductos(context: Context): Int {
         val sharedPreff=PreferenceManager.getDefaultSharedPreferences(context)
-        return sharedPreff.getString("imagen"," ") .toString()
+        return sharedPreff.getInt("numProductos",0)
+    }
+
+    fun savePermisos(context: Context,pedidos:Boolean){
+        val sharedPreff=PreferenceManager.getDefaultSharedPreferences(context)
+        val editor=sharedPreff.edit()
+        editor.putBoolean("permisos",pedidos)
+        editor.commit()
+    }
+
+    fun getPermisos(context: Context):Boolean {
+        val sharedPreff=PreferenceManager.getDefaultSharedPreferences(context)
+        return sharedPreff.getBoolean("permisos",false)
     }
 }

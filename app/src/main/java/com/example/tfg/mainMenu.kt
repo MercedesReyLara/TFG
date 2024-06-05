@@ -1,16 +1,26 @@
 package com.example.tfg
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import com.example.tfg.petitionsAndFunctions.httPettitions
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.example.tfg.petitionsAndFunctions.SharedPreff
@@ -22,7 +32,11 @@ import model.Product
 import model.User
 
 class mainMenu : AppCompatActivity() {
+    private val notificactionID=1
+    private val codigoPermisos = 111
     private lateinit var context:Context
+    private var permisos=false
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +53,10 @@ class mainMenu : AppCompatActivity() {
         val pettitions=httPettitions()
         val context:Context=baseContext
         val sharedPreff=SharedPreff(context)
+        sharedPreff.savePermisos(context,false)
         val functions= generalFunctions()
+        val cantidadProductos=0
+        val permisosPedidos=sharedPreff.getPermisos(context)
         val DNIu=functions.decrypt(functions.clave,sharedPreff.getUser(context).toString()).toString()
         val ip=sharedPreff.getIp(context)
         lifecycleScope.launch (Dispatchers.IO){
@@ -52,8 +69,25 @@ class mainMenu : AppCompatActivity() {
                         Toast.LENGTH_SHORT).show()
                 }else if(products.isEmpty()){
                     subir.isVisible=false
+                }else{
+                    sharedPreff.saveNumProductos(context,products.size)
                 }
             }
+        }
+        if(cantidadProductos<sharedPreff.getNumProductos(context)){
+            if(!permisosPedidos){
+                requestAllPermissions()
+                channel()
+                if(permisos){
+                    notification()
+                }
+            }else{
+                channel()
+                if(permisos){
+                    notification()
+                }
+            }
+
         }
         //Declaración de variables que vamos a utilizar
         /*Establecemos el idioma porque al salir de la app se resetea
@@ -105,6 +139,73 @@ class mainMenu : AppCompatActivity() {
         subir.setOnClickListener {
             val intentResenar=Intent(this,reviewProduct::class.java)
             startActivity(intentResenar)
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun notification() {
+        var builderN = NotificationCompat.Builder(this, "channel")
+            .setSmallIcon(R.drawable.imagen_2024_04_22_110039483_removebg_preview)
+            .setContentTitle("RESEÑE SU NUEVO PRODUCTO!!")
+            .setStyle(NotificationCompat.BigTextStyle().bigText(("Gracias por comprar un producto. Por favor, " +
+                    "deje su reseña en nuestro foro para ayudarnos a mejorar")))
+            .setAutoCancel(true)
+        /*val intent=Intent(this,workButton::class.java)
+        val pendingIntent= PendingIntent.getActivity(this,0,intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        builderN.setContentIntent(pendingIntent)*/
+        /*Nos sirve para volver a la app una vez que clickamos(tendría que ver como conservar el estado de la app al salirte
+        */
+        with(NotificationManagerCompat.from(this)) {
+            notify(notificactionID, builderN.build())
+        }
+    }
+    fun channel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val chanel = NotificationChannel(
+                "channel",
+                "My Channel",
+                NotificationManager.IMPORTANCE_HIGH
+            ).apply {
+                description = "A"
+            }
+            val notificationManager: NotificationManager =getSystemService(Context.NOTIFICATION_SERVICE)as NotificationManager
+            notificationManager.createNotificationChannel(chanel)
+        }
+
+    }
+
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    private fun requestAllPermissions() {
+            val permissionsNeeded = arrayOf(
+                Manifest.permission.POST_NOTIFICATIONS,
+                Manifest.permission.VIBRATE
+            )
+
+            val permissionsToRequest = permissionsNeeded.filter {
+                ContextCompat.checkSelfPermission(
+                    this,
+                    "Acepte los permisos"
+                ) != PackageManager.PERMISSION_GRANTED
+            }
+
+            if (permissionsToRequest.isNotEmpty()) {
+                ActivityCompat.requestPermissions(
+                    this,
+                    permissionsToRequest.toTypedArray(),
+                    codigoPermisos
+                )
+            }
+        }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == codigoPermisos) {
+            val permissionsGranted = grantResults.all { it == PackageManager.PERMISSION_GRANTED }
+            if (permissionsGranted) {
+                permisos=true
+            } else {
+                permisos=false
+            }
         }
     }
 }
