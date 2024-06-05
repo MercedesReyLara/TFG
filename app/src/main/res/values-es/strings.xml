@@ -12,7 +12,7 @@
     <string name="cambiarPassC">Confirme la nueva contrasseña</string>
     <string name="buscar">Buscar mi usuario</string>
     <string name="cambiadaC">Contraseña cambiada</string>
-    <string name="cambiarC">Cambiar contraseña</string>
+    <string name="cambiarC">¿Olvidaste tu contraseña?</string>
     <string name="modificarPuntuacion">Modificar puntuación</string>
     <string name="modificarDescripcion">Modificar descripción</string>
     <string name="eliminar">Modificar esta reseña</string>

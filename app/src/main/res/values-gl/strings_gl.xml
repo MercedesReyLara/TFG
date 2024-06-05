@@ -11,7 +11,7 @@
     <string name="cambiarPass">Introduza a nova contrasinal</string>
     <string name="cambiarPassC">Confirme a nova contrasinal</string>
     <string name="buscar">Buscar o meu usuario</string>
-    <string name="cambiarC">Cambiar contrasinal</string>
+    <string name="cambiarC">¿Esqueciches o teu contrasinal?</string>
     <string name="cambiadaC">Contrasinal cambiada</string>
     <string name="modificarDescripcion">Modificar descrición</string>
     <string name="reactivar">¿Reactivar conta?</string>

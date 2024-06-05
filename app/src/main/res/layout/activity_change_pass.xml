@@ -54,7 +54,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/input_personalizado"
         android:ems="10"
-        android:hint="@string/credencialCorreo"
+        android:hint="@string/mailEdit"
         android:textColor="@color/black"
         android:textColorHint="@color/gray"
         android:textSize="14sp"

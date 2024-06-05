@@ -37,8 +37,8 @@ class User :Serializable {
     constructor(dni: String) {
         this.dni = dni
     }
-    constructor(nombreU: String,activo: Boolean){
-        this.nombreU=nombreU
+    constructor(correo: String,activo: Boolean){
+        this.correo=correo
         this.activo=activo
     }
     override fun toString(): String {
