@@ -200,9 +200,9 @@ public class UserController {
         return true;
     }
 
-    @PostMapping(value="/getUserByName")
+    @PostMapping(value="/getUserByCorreo")
     public UserDTO userByName(@RequestBody UserDTO user){
-        User u=ur.findByNombreU(user.getNombreU());
+        User u=ur.findByCorreo(user.getCorreo());
         if(u==null){
             return new UserDTO();
         }
