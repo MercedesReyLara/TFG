@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fondo"
@@ -11,33 +12,32 @@
         <TextView
             android:id="@+id/textView"
             android:layout_width="133dp"
-            android:layout_height="26dp"
+            android:layout_height="20dp"
             android:text="@string/app_name"
             android:textAlignment="center"
             android:textColor="@color/black"
-            app:flow_horizontalBias="0."
             app:layout_constraintBottom_toTopOf="@+id/guidelineH3"
             app:layout_constraintEnd_toEndOf="@id/guidelineV2"
             app:layout_constraintHorizontal_bias="0.499"
             app:layout_constraintStart_toStartOf="@id/guidelineV1"
-            app:layout_constraintTop_toTopOf="@id/spinnerLanguages" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/imagenP"
-            android:layout_width="124dp"
-            android:layout_height="98dp"
+            android:layout_width="104dp"
+            android:layout_height="55dp"
             android:src="@drawable/imagen_2024_04_22_110039483_removebg_preview"
             app:layout_constraintBottom_toTopOf="@+id/editTextUsername"
             app:layout_constraintEnd_toEndOf="@id/guidelineV2"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@id/guidelineV1"
             app:layout_constraintTop_toBottomOf="@+id/guidelineH3"
-            app:layout_constraintVertical_chainStyle="packed" />
+            app:layout_constraintVertical_chainStyle="spread" />
 
         <EditText
             android:id="@+id/passwordUser"
             android:layout_width="295dp"
-            android:layout_height="45dp"
+            android:layout_height="30dp"
             android:background="@drawable/input_personalizado"
             android:hint="@string/credencialCotraseña"
             android:inputType="textPassword"
@@ -49,8 +49,8 @@
 
         <Button
             android:id="@+id/iniciarSesion"
-            android:layout_width="300dp"
-            android:layout_height="48dp"
+            android:layout_width="312dp"
+            android:layout_height="38dp"
             android:backgroundTint="@color/button"
             android:text="@string/iniciar_sesion"
             app:layout_constraintBottom_toTopOf="@+id/registrar"
@@ -62,8 +62,8 @@
 
         <Button
             android:id="@+id/registrar"
-            android:layout_width="300dp"
-            android:layout_height="42dp"
+            android:layout_width="312dp"
+            android:layout_height="38dp"
             android:backgroundTint="@color/button"
             android:text="@string/registro"
             app:layout_constraintBottom_toBottomOf="@id/guidelineH5"
@@ -75,7 +75,7 @@
         <EditText
             android:id="@+id/editTextUsername"
             android:layout_width="295dp"
-            android:layout_height="45dp"
+            android:layout_height="30dp"
             android:background="@drawable/input_personalizado"
             android:hint="@string/credencialCorreo"
             app:layout_constraintBottom_toTopOf="@+id/passwordUser"
@@ -103,7 +103,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.02" />
+            app:layout_constraintGuide_percent="0.0" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineH2"
@@ -117,7 +117,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.12" />
+            app:layout_constraintGuide_percent="0.08" />
 
         <ImageButton
             android:id="@+id/ajustes"
@@ -138,17 +138,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.61" />
+            app:layout_constraintGuide_percent="0.6" />
 
         <ImageButton
             android:id="@+id/changePassword"
             android:layout_width="60dp"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:backgroundTint="@android:color/transparent"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toTopOf="@id/guidelineH2"
             app:layout_constraintEnd_toStartOf="@id/guidelineV2"
             app:layout_constraintHorizontal_bias="0.836"
+            app:layout_constraintVertical_bias="1"
             app:layout_constraintStart_toEndOf="@id/guidelineV1"
             app:layout_constraintTop_toBottomOf="@id/textView27"
             app:srcCompat="@drawable/imagen_2024_06_05_083608227_removebg_preview" />
@@ -158,7 +159,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.83" />
+            app:layout_constraintGuide_percent="0.79" />
 
         <TextView
             android:id="@+id/textView27"
