@@ -46,6 +46,7 @@ class changePass : AppCompatActivity() {
         textC.isVisible=false
         var encontrado:User?=User()
         var user:String=""
+        functions.clearHint(listOf(nombre,contrasena,contrasenaConf), listOf(nombre.hint,contrasena.hint,contrasenaConf.hint))
         buscar.setOnClickListener {
             val nombreText=nombre.text.toString()
             if(nombreText.isEmpty()){
@@ -53,7 +54,7 @@ class changePass : AppCompatActivity() {
             }else{
                 lifecycleScope.launch(Dispatchers.Main) {
                     withContext(Dispatchers.IO){
-                          encontrado=pettitions.getUserByName(User(nombreText,true),ip)
+                          encontrado=pettitions.getUserByCorreo(User(nombreText,true),ip)
                         }
                     if(encontrado==null){
                         Toast.makeText(this@changePass,this@changePass.getString(R.string.problemas),Toast.LENGTH_SHORT).show()
@@ -95,9 +96,7 @@ class changePass : AppCompatActivity() {
                         }
                         true -> {
                             Toast.makeText(this@changePass,this@changePass.getString(R.string.cambiadaC),Toast.LENGTH_SHORT).show()
-                            nombre.text.clear()
-                            contrasena.text.clear()
-                            contrasenaConf.text.clear()
+                            functions.manipulateEdits(listOf(nombre,contrasena,contrasenaConf))
                             Thread.sleep(500)
                             val intentMain=Intent(this@changePass,logIn::class.java)
                             startActivity(intentMain)

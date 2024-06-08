@@ -11,6 +11,7 @@
     <string name="cambiarPass">Introduza a nova contrasinal</string>
     <string name="cambiarPassC">Confirme a nova contrasinal</string>
     <string name="buscar">Buscar o meu usuario</string>
+    <string name="change">Cambiar contrasinal</string>
     <string name="cambiarC">¿Esqueciches o teu contrasinal?</string>
     <string name="cambiadaC">Contrasinal cambiada</string>
     <string name="modificarDescripcion">Modificar descrición</string>
@@ -23,9 +24,12 @@
     <string name="eliminar">Modificar esta reseña</string>
     <string name="puntuacionResenas">Tipo de reseña</string>
     <string name="detallesR">Detalles da reseña</string>
+    <string name="detallesU">Detalles do usuario</string>
     <string name="positiva">Positiva ou moi positiva</string>
+    <string name="cantP">Cantidade de produtos</string>
+    <string name="cantR">Cantidade de reseñas</string>
     <string name="negativa">Negativa ou moi negativa</string>
-    <string name="consultar">Buscar por produto</string>
+    <string name="consultar">Buscar por puntuación media de produto</string>
     <string name="ver">Ver todas as reseñas</string>
     <string name="faceReseña">Facer unha reseña</string>
     <string name="opcions">Modificar perfil</string>

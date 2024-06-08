@@ -8,6 +8,7 @@
     <string name="atopado">Usuario atopado. Por favor, introduza o novo contrasinal</string>
     <string name="cambiarPass">Introduza a nova contrasinal</string>
     <string name="cambiarPassC">Confirme a nova contrasinal</string>
+    <string name="change">Cambiar contrasinal</string>
     <string name="modificarPuntuacion">Modificar puntuación</string>
     <string name="buscar">Buscar o meu usuario</string>
     <string name="cambiarC">¿Esqueciches o teu contrasinal?</string>
@@ -24,8 +25,11 @@
     <string name="detallesR">Detalles da reseña</string>
     <string name="positiva">Positiva ou moi positiva</string>
     <string name="negativa">Negativa ou moi negativa</string>
-    <string name="consultar">Buscar por produto</string>
+    <string name="consultar">Buscar por puntuación media de produto</string>
     <string name="ver">Ver todas as reseñas</string>
+    <string name="detallesU">Detalles do usuario</string>
+    <string name="cantP">Cantidade de produtos</string>
+    <string name="cantR">Cantidade de reseñas</string>
     <string name="modificarUsuario">Modificar o meu perfil</string>
     <string name="irUsuario">Ir ao meu perfil</string>
     <string name="DNIMal">O DNI ten que ser formato XXXXXXXXA</string>

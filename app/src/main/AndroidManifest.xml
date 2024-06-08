@@ -26,7 +26,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".detailsOtherUser"
+            android:configChanges="orientation|screenSize"
+            android:exported="false" />
+        <activity
             android:name=".changePass"
+            android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
             android:name=".modifyUser"

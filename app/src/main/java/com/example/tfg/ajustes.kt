@@ -46,7 +46,8 @@ class ajustes : AppCompatActivity() {
         * indicando al usuario que escoja el idioma. Según el código cambiaremos el local del dispositivo para que
         * se aplique el idioma en cuestión*/
         val DNIu:String=functions.decrypt(functions.clave,sharedPreff.getUser(context).toString()).toString()
-        if(DNIu.isEmpty()){
+        val logeado=sharedPreff.getLogin(context)
+        if(!logeado){
             eliminar.isVisible=false
         }
         val iP:String=sharedPreff.getIp(context)
@@ -128,7 +129,9 @@ class ajustes : AppCompatActivity() {
         ip.setOnClickListener {
             val IP:String=direcIP.text.trim().toString()
             sharedPreff.saveIP(context,IP)
+            Toast.makeText(this,"Dirección ip actuaizada",Toast.LENGTH_SHORT).show()
             direcIP.text.clear()
+            functions.manipulateEdits(listOf(direcIP))
         }
         volverMain.setOnClickListener {
             val intentMain= Intent(this,logIn::class.java)

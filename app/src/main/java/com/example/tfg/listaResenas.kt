@@ -96,7 +96,7 @@ class listaResenas : AppCompatActivity() {
         list.setOnItemClickListener { parent, view, position, id ->
             val review = parent.getItemAtPosition(position) as Review
             val intentDetails = Intent(this, detailsReview::class.java)
-            intentDetails.putExtra("review", review.toString())
+            sharedPreff.saveReview(context,review.toString())
             startActivity(intentDetails)
         }
 

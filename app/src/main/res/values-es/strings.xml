@@ -11,11 +11,15 @@
     <string name="cambiarPass">Introduzca la nueva contraseña</string>
     <string name="cambiarPassC">Confirme la nueva contrasseña</string>
     <string name="buscar">Buscar mi usuario</string>
+    <string name="change">Cambiar contraseña</string>
     <string name="cambiadaC">Contraseña cambiada</string>
     <string name="cambiarC">¿Olvidaste tu contraseña?</string>
     <string name="modificarPuntuacion">Modificar puntuación</string>
     <string name="modificarDescripcion">Modificar descripción</string>
     <string name="eliminar">Modificar esta reseña</string>
+    <string name="cantP">Cantidad de productos</string>
+    <string name="cantR">Cantidad de reseñas</string>
+    <string name="detallesU">Detalles del usuario</string>
     <string name="puntuacionResenas">Tipo de reseña</string>
     <string name="modificarNomeU">Modificar nombre de usuario</string>
     <string name="modificarContrasena">Modificar contraseña</string>
@@ -23,7 +27,7 @@
     <string name="detallesR">Detalles de la reseña</string>
     <string name="positiva">Positiva o muy positiva</string>
     <string name="negativa">Negativa o muy negativa</string>
-    <string name="consultar">Buscar por producto</string>
+    <string name="consultar">Buscar por puntuación media de producto</string>
     <string name="ver">Ver todas las reseñas</string>
     <string name="modificarUsuario">Modificar mi perfil</string>
     <string name="irUsuario">Ir a mi perfil</string>

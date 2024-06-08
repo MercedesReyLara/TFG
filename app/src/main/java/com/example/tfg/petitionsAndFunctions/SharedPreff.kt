@@ -77,4 +77,16 @@ class SharedPreff(val contexto:Context) {
         val sharedPreff=PreferenceManager.getDefaultSharedPreferences(context)
         return sharedPreff.getBoolean("permisos",false)
     }
+
+    fun saveReview(context: Context,review:String){
+        val sharedPreff=PreferenceManager.getDefaultSharedPreferences(context)
+        val editor=sharedPreff.edit()
+        editor.putString("reseña",review)
+        editor.commit()
+    }
+
+    fun getReview(context: Context):String{
+        val sharedPreff=PreferenceManager.getDefaultSharedPreferences(context)
+        return sharedPreff.getString("permisos","").toString()
+    }
 }

@@ -42,7 +42,6 @@ class mainMenu : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         context=baseContext
         setContentView(R.layout.activity_pantalla_principal)
-
         //Búsqueda de elementos visuales
         val productos: Button =findViewById(R.id.listarProductosR)
         val listar:Button=findViewById(R.id.listaResenasGlobal)

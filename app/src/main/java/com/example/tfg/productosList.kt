@@ -83,9 +83,9 @@ class productosList : AppCompatActivity() {
         /*En este listamos las reseñas del usuario*/
         showReviews.setOnClickListener {
             lifecycleScope.launch(Dispatchers.Main) {
-                var newReviews:ArrayList<Review>?
+                var newReviews:ArrayList<Review>? = arrayListOf()
                 withContext(Dispatchers.IO) {
-                    newReviews = httPetitions.getReviewsByUser(User(DNI),ip)!!
+                    newReviews = httPetitions.getReviewsByUser(User(DNI),ip)
                 }
                 if(newReviews==null) {
                     Toast.makeText(
