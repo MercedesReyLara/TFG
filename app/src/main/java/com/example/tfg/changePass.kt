@@ -52,6 +52,7 @@ class changePass : AppCompatActivity() {
             if(nombreText.isEmpty()){
                 Toast.makeText(this,this.getString(R.string.errorVacios),Toast.LENGTH_SHORT).show()
             }else{
+                /*Buscamos que el usuario exista*/
                 lifecycleScope.launch(Dispatchers.Main) {
                     withContext(Dispatchers.IO){
                           encontrado=pettitions.getUserByCorreo(User(nombreText,true),ip)
@@ -70,6 +71,8 @@ class changePass : AppCompatActivity() {
                     }
                 }
             }
+
+        /*Si existe, cambiamos la contraseña. Introducimos 2 veces para asegurarnos que es verídico y modificamos*/
         confiCambio.setOnClickListener {
             val contrasenaText=contrasena.text.toString()
             val confContrasena=contrasenaConf.text.toString()

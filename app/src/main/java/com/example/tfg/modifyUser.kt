@@ -119,7 +119,7 @@ class modifyUser : AppCompatActivity() {
                     }
                     true->{
                         Toast.makeText(this@modifyUser,this@modifyUser.getString(R.string.modU), Toast.LENGTH_SHORT).show()
-                        val intentLista= Intent(this@modifyUser,productosList::class.java)
+                        val intentLista= Intent(this@modifyUser,perfilUser::class.java)
                         text.text.clear()
                         Thread.sleep(1000)
                         startActivity(intentLista)

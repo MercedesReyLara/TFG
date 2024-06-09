@@ -54,14 +54,14 @@ class SharedPreff(val contexto:Context) {
         editor.commit()
     }
 
-    fun saveNumProductos(context: Context,num:Int){
+    fun saveNumResenas(context: Context,num:Int){
         val sharedPreff=PreferenceManager.getDefaultSharedPreferences(context)
         val editor=sharedPreff.edit()
         editor.putInt("numProductos",num)
         editor.commit()
     }
 
-    fun getNumProductos(context: Context): Int {
+    fun getNumResenas(context: Context): Int {
         val sharedPreff=PreferenceManager.getDefaultSharedPreferences(context)
         return sharedPreff.getInt("numProductos",0)
     }

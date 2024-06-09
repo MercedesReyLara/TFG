@@ -68,12 +68,7 @@ class allProductList : AppCompatActivity() {
             }
         }
         listaP.adapter = adapterProduct
-        /*listaP.setOnItemClickListener { parent, view, position, id ->
-            val review = parent.getItemAtPosition(position) as Product
-            val intentDetails = Intent(this, detailsReview::class.java)
-            intentDetails.putExtra("review", review.toString())
-            startActivity(intentDetails)
-        }*/
+
 
         filtro.setOnClickListener {
             val puntuacion = spinnerPuntuacion.selectedItem.toString()

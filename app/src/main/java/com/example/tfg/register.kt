@@ -100,6 +100,8 @@ class register : AppCompatActivity() {
                     }
                 }
             }
+
+        /*Comprobamos que todos los campos sean correctos e insertamos*/
         registerButton.setOnClickListener {
             val dniTXT = DNIT.text.toString().trim()
             val nameTXT = name.text.toString().trim()
@@ -181,12 +183,14 @@ class register : AppCompatActivity() {
             startActivity(intentBack)
         }
 
+        /*Este botón nos sirve para saccar una foto y poder usarla como foto de perfil*/
         camera.setOnClickListener {
             val imagenCaptura = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             setResult(RESULT_OK, imagenCaptura)
             resultado.launch(imagenCaptura)
         }
 
+        /*Botón para cargar las fotos de sqlite*/
         buscarFotos.setOnClickListener {
             var listaObtenidas: ArrayList<Image> = arrayListOf()
             try {

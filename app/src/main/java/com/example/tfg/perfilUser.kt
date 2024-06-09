@@ -80,10 +80,7 @@ class perfilUser : AppCompatActivity() {
             startActivity(intentProductos)
         }
 
-        /*Este boton hará la función tanto de eliminar como de modificar, es decir
-        si yo le pulso a la opción eliminar, da de baja al usuario, si le pulso a modificar
-        me redirige a la actividad de modificación del usuario
-         */
+        /*Este boton hará la función modificar, es decir usuario */
         deleteButton.setOnClickListener {
             /*Nos redirige a la actividad de modificacion del usuario*/
                 val intentModify=Intent(this,modifyUser::class.java)

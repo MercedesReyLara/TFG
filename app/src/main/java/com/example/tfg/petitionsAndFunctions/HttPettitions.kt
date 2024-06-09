@@ -273,6 +273,40 @@ class httPettitions {
         }
     }
 
+    suspend fun getProductsToReview(user:User?,ip:String):ArrayList<Product>?{
+        return withContext(Dispatchers.IO) {
+            val products = object : TypeToken<ArrayList<Product>>() {}.type
+            val client = OkHttpClient()
+            val url:String= "http://$ip:8080/getProductsToReview"
+            val gson = GsonBuilder()
+                .registerTypeAdapter(ByteArray::class.java, ByteArrayFunctions())
+                .create()
+            val json = gson.toJson(user)
+            val mediaType = "application/json; charset=utf-8".toMediaTypeOrNull()
+            val requestBody = json.toRequestBody(mediaType)
+            var listProductos:ArrayList<Product> = arrayListOf()
+            val request: Request = Request.Builder()
+                .url(url)
+                .post(requestBody)
+                .build()
+            val response:Response
+            try {
+                response = client.newCall(request).execute()
+                val responseBody = response.body?.string()
+                if (response.isSuccessful&&!responseBody.isNullOrEmpty()) {
+                    val gson2 = Gson()
+                    listProductos= gson2.fromJson(responseBody, products)
+                    return@withContext listProductos
+                }else {
+                    return@withContext listProductos
+                }
+            }catch(e:IOException){
+                return@withContext null
+            }
+
+        }
+    }
+
     suspend fun getReviewsByUser(user:User,ip:String):ArrayList<Review>?{
         return withContext(Dispatchers.IO) {
             val reviews = object : TypeToken<ArrayList<Review>>() {}.type

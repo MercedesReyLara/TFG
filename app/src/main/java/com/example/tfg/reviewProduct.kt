@@ -56,7 +56,7 @@ class reviewProduct : AppCompatActivity() {
             var products: ArrayList<Product>?
             withContext(Dispatchers.IO) {
                 /*Obtenemos los productos de ese usuario en especifico*/
-                products = pettitions.getProductos(User(DNI),ip)!!
+                products = pettitions.getProductsToReview(User(DNI),ip)!!
             }
             if(products==null){
                 Toast.makeText(this@reviewProduct, this@reviewProduct.getString(R.string.problemas)

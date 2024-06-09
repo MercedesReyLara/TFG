@@ -29,6 +29,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import model.Product
+import model.Review
 import model.User
 
 class mainMenu : AppCompatActivity() {
@@ -54,39 +55,24 @@ class mainMenu : AppCompatActivity() {
         val sharedPreff=SharedPreff(context)
         sharedPreff.savePermisos(context,false)
         val functions= generalFunctions()
-        val cantidadProductos=0
+        val cantidadResenas=sharedPreff.getNumResenas(context)
         val permisosPedidos=sharedPreff.getPermisos(context)
         val DNIu=functions.decrypt(functions.clave,sharedPreff.getUser(context).toString()).toString()
         val ip=sharedPreff.getIp(context)
         lifecycleScope.launch (Dispatchers.IO){
             /*Buscamos el usuario a través del DNI guardado anteriormente en las preferencias*/
-            var products:ArrayList<Product>? = arrayListOf()
-            products=pettitions.getProductos(User(DNIu),ip)
+            var reviews:ArrayList<Review>? = arrayListOf()
+            reviews=pettitions.getAllReviews(ip)
             withContext(Dispatchers.Main){
-                if(products==null){
+                if(reviews==null){
                     Toast.makeText(this@mainMenu,this@mainMenu.getString(R.string.problemas),
                         Toast.LENGTH_SHORT).show()
-                }else if(products.isEmpty()){
+                }else if(reviews.isEmpty()){
                     subir.isVisible=false
                 }else{
-                    sharedPreff.saveNumProductos(context,products.size)
+                    sharedPreff.saveNumResenas(context,reviews.size)
                 }
             }
-        }
-        if(cantidadProductos<sharedPreff.getNumProductos(context)){
-            if(!permisosPedidos){
-                requestAllPermissions()
-                channel()
-                if(permisos){
-                    notification()
-                }
-            }else{
-                channel()
-                if(permisos){
-                    notification()
-                }
-            }
-
         }
         //Declaración de variables que vamos a utilizar
         /*Establecemos el idioma porque al salir de la app se resetea
@@ -138,73 +124,6 @@ class mainMenu : AppCompatActivity() {
         subir.setOnClickListener {
             val intentResenar=Intent(this,reviewProduct::class.java)
             startActivity(intentResenar)
-        }
-    }
-
-    @SuppressLint("MissingPermission")
-    private fun notification() {
-        var builderN = NotificationCompat.Builder(this, "channel")
-            .setSmallIcon(R.drawable.imagen_2024_04_22_110039483_removebg_preview)
-            .setContentTitle("RESEÑE SU NUEVO PRODUCTO!!")
-            .setStyle(NotificationCompat.BigTextStyle().bigText(("Gracias por comprar un producto. Por favor, " +
-                    "deje su reseña en nuestro foro para ayudarnos a mejorar")))
-            .setAutoCancel(true)
-        /*val intent=Intent(this,workButton::class.java)
-        val pendingIntent= PendingIntent.getActivity(this,0,intent, PendingIntent.FLAG_UPDATE_CURRENT)
-        builderN.setContentIntent(pendingIntent)*/
-        /*Nos sirve para volver a la app una vez que clickamos(tendría que ver como conservar el estado de la app al salirte
-        */
-        with(NotificationManagerCompat.from(this)) {
-            notify(notificactionID, builderN.build())
-        }
-    }
-    fun channel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val chanel = NotificationChannel(
-                "channel",
-                "My Channel",
-                NotificationManager.IMPORTANCE_HIGH
-            ).apply {
-                description = "A"
-            }
-            val notificationManager: NotificationManager =getSystemService(Context.NOTIFICATION_SERVICE)as NotificationManager
-            notificationManager.createNotificationChannel(chanel)
-        }
-
-    }
-
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-    private fun requestAllPermissions() {
-            val permissionsNeeded = arrayOf(
-                Manifest.permission.POST_NOTIFICATIONS,
-                Manifest.permission.VIBRATE
-            )
-
-            val permissionsToRequest = permissionsNeeded.filter {
-                ContextCompat.checkSelfPermission(
-                    this,
-                    "Acepte los permisos"
-                ) != PackageManager.PERMISSION_GRANTED
-            }
-
-            if (permissionsToRequest.isNotEmpty()) {
-                ActivityCompat.requestPermissions(
-                    this,
-                    permissionsToRequest.toTypedArray(),
-                    codigoPermisos
-                )
-            }
-        }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == codigoPermisos) {
-            val permissionsGranted = grantResults.all { it == PackageManager.PERMISSION_GRANTED }
-            if (permissionsGranted) {
-                permisos=true
-            } else {
-                permisos=false
-            }
         }
     }
 }

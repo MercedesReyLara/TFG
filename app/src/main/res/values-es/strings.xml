@@ -103,7 +103,7 @@
     <string name="errorCorreo">El correo tiene que acabar en @gmail.com</string>
     <string name="errorContraseña">La contraseña tiene que tener mayúsculas, minúsculas, números y símbolos</string>
     <string name="coincidir">Las contraseñas tienen que coincidir</string>
-    <string name="menuReseñas">Publique su reseña</string>
+    <string name="menuReseñas">Publique su reseña(5 reseñas máximo por producto)</string>
     <string name="botonPublicar">Publicar esta reseña</string>
     <string name="nomeReseña">Título de la reseña</string>
     <string name="puntuacionReseña">Puntuación de la reseña</string>

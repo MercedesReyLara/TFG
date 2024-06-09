@@ -131,7 +131,6 @@ class ajustes : AppCompatActivity() {
             sharedPreff.saveIP(context,IP)
             Toast.makeText(this,"Dirección ip actuaizada",Toast.LENGTH_SHORT).show()
             direcIP.text.clear()
-            functions.manipulateEdits(listOf(direcIP))
         }
         volverMain.setOnClickListener {
             val intentMain= Intent(this,logIn::class.java)
