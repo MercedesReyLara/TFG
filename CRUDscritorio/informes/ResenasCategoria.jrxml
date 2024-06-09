@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="900" pageHeight="842" columnWidth="860" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c2e5d8cb-3fdc-4215-9787-5de185746faa">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="277"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT * FROM review r
+JOIN product p ON r.product_id=p.id
+JOIN category c ON p.category_id=c.id
+WHERE c.id=3]]>
+	</queryString>
+	<field name="nombreR" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="puntuacion" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="user_id" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombreP" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="precio" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="0" y="0" width="860" height="79" forecolor="#FFFFFF" backcolor="#FF99CC" uuid="d54692cb-a648-46eb-87a4-a4923152b3d3"/>
+			</textField>
+			<staticText>
+				<reportElement x="13" y="11" width="427" height="28" uuid="25f19b46-3720-4227-8308-3bd5000285de"/>
+				<textElement textAlignment="Center">
+					<font fontName="Gentium Book Basic" size="20"/>
+				</textElement>
+				<text><![CDATA[INFORME REVIEWS DE CATEGORIA CASA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="50" width="144" height="29" uuid="bbde93b0-f49a-4abf-8cd6-ea7468ae8a35"/>
+				<textElement textAlignment="Center">
+					<font fontName="Gentium Book Basic" size="12"/>
+				</textElement>
+				<text><![CDATA[INFORME COMPLETO]]></text>
+			</staticText>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="781" y="0" width="79" height="68" uuid="7e671911-edf8-4ac0-8131-c5bee401db2b"/>
+				<imageExpression><![CDATA["C:\\Users\\manca\\Downloads\\file-removebg-preview.png"]]></imageExpression>
+			</image>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="681" y="50" width="100" height="20" uuid="f7379c4a-108b-4a05-ae99-20010ff9b1a6"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="619" y="50" width="100" height="20" uuid="7ec523ba-47dd-46aa-b6d8-dc5c6a05a663"/>
+				<text><![CDATA[Informe del:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="1" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="49" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="29" width="106" height="20" uuid="c89579fd-2bc6-4c86-9f8f-be65d75949bc"/>
+				<textElement textAlignment="Center">
+					<font fontName="Gentium Book Basic" size="12"/>
+				</textElement>
+				<text><![CDATA[Nombre reseña]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="147" y="29" width="109" height="20" uuid="a8cd3941-bc14-4c36-af24-97d562f1493e"/>
+				<textElement textAlignment="Center">
+					<font fontName="Gentium Book Basic" size="12"/>
+				</textElement>
+				<text><![CDATA[Puntuación]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="286" y="29" width="110" height="20" uuid="023b21f1-e501-46e3-99e9-20e2fc589c6b"/>
+				<textElement textAlignment="Center">
+					<font fontName="Gentium Book Basic" size="12"/>
+				</textElement>
+				<text><![CDATA[Usuario]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="429" y="29" width="113" height="20" uuid="17e4e23d-178e-4fdd-88df-ee0e46b0937f"/>
+				<textElement textAlignment="Center">
+					<font fontName="Gentium Book Basic" size="12"/>
+				</textElement>
+				<text><![CDATA[Producto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="572" y="29" width="112" height="20" uuid="83ab29bb-22ab-4772-a3e0-39d4f997cf48"/>
+				<textElement textAlignment="Center">
+					<font fontName="Gentium Book Basic" size="12"/>
+				</textElement>
+				<text><![CDATA[Precio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="719" y="29" width="112" height="20" uuid="1f39d263-89e7-4745-bdaf-a32c2746271e"/>
+				<textElement textAlignment="Center">
+					<font fontName="Gentium Book Basic" size="12"/>
+				</textElement>
+				<text><![CDATA[Categoria]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="95" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="9" width="106" height="80" uuid="8c993a74-3bac-480d-90e8-75bbdc9ba51e"/>
+				<textElement textAlignment="Center">
+					<font fontName="Gentium Book Basic" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombreR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="147" y="1" width="109" height="88" uuid="f413944a-dcec-4daa-9fb8-96ea235792ea"/>
+				<textElement textAlignment="Center">
+					<font fontName="Gentium Book Basic" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{puntuacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="286" y="2" width="110" height="87" uuid="263ae074-7a8f-4605-8776-aee78974eaf5"/>
+				<textElement textAlignment="Center">
+					<font fontName="Gentium Book Basic" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{user_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="429" y="0" width="113" height="89" uuid="78d13b14-4706-4aaf-8984-a357a85abcae"/>
+				<textElement textAlignment="Center">
+					<font fontName="Gentium Book Basic" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombreP}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="719" y="2" width="112" height="87" uuid="ae335a8e-10e0-4679-8ca3-9495e30c97d8"/>
+				<textElement textAlignment="Center">
+					<font fontName="Gentium Book Basic" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="572" y="2" width="112" height="87" uuid="af97d4cc-b4c4-49f8-bf5f-bc53431a3d87"/>
+				<textElement textAlignment="Center">
+					<font fontName="Gentium Book Basic" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{precio}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="27" splitType="Stretch">
+			<textField>
+				<reportElement x="373" y="7" width="100" height="20" uuid="25ca18f1-ab71-4560-9ccf-24563497930c"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="719" y="7" width="72" height="20" uuid="14a0a1a6-84a6-41d0-af0d-ed7bda8ec9b3"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="791" y="7" width="40" height="20" uuid="28ec56ae-2cc7-4691-8016-158728c783b8"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
