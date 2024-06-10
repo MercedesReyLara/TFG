@@ -98,6 +98,7 @@
     <string name="volverInicio">Volver al inicio de sesión</string>
     <string name="registrarse">Registrarme</string>
     <string name="saludo">Bienvenido a PRORATER</string>
+    <string name="mod">Modificar</string>
     <string name="volverMain">Volver al menú principal</string>
     <string name="opciones">¿Qué quieres hacer hoy?</string>
     <string name="errorCorreo">El correo tiene que acabar en @gmail.com</string>

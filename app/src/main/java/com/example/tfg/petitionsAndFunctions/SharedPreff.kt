@@ -87,6 +87,6 @@ class SharedPreff(val contexto:Context) {
 
     fun getReview(context: Context):String{
         val sharedPreff=PreferenceManager.getDefaultSharedPreferences(context)
-        return sharedPreff.getString("permisos","").toString()
+        return sharedPreff.getString("reseña","").toString()
     }
 }

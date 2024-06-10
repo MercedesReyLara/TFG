@@ -35,6 +35,7 @@
     <string name="DNIMal">O DNI ten que ser formato XXXXXXXXA</string>
     <string name="filtrar">Aplicar filtro</string>
     <string name="DNI">DNI</string>
+    <string name="mod">Modificar</string>
     <string name="nD">Introduce nova descripción</string>
     <string name="nN">Introduce novo título</string>
     <string name="nP">Introduce nova puntuación</string>

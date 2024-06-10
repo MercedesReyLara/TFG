@@ -57,14 +57,14 @@ class modificaResena : AppCompatActivity() {
                     desc=false
                     punt=false
                 }
-               "Modificar descripcion" ->{
+               "Modificar descrición","Modificar descripción"->{
                    text.hint=this.getString(R.string.nD)
                    text.isVisible=true
                    desc=true
                    nombre=false
                    punt=false
                }
-               "Modificar puntuacion" ->{
+               "Modificar puntuación" ->{
                    text.hint=this.getString(R.string.nP)
                    text.isVisible=true
                    punt=true

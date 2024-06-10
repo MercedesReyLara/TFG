@@ -61,14 +61,14 @@ class modifyUser : AppCompatActivity() {
                     descripcion=false
                     contrasena=false
                 }
-                "Modificar descripción" ->{
+                "Modificar descripción","Modificar descrición" ->{
                     text.hint=this.getString(R.string.nDescripcion)
                     text.isVisible=true
                     descripcion=true
                     nombre=false
                     contrasena=false
                 }
-                "Modificar contraseña" ->{
+                "Modificar contraseña","Modificar contrasinal" ->{
                     text.hint=this.getString(R.string.nContrasena)
                     text.isVisible=true
                     contrasena=true
