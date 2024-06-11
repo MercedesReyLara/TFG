@@ -45,7 +45,10 @@ class ajustes : AppCompatActivity() {
         /*Crearemos el spinner que se encarga de los idiomas. Creamos una lista con 3 elementos, 2 códigos y un string
         * indicando al usuario que escoja el idioma. Según el código cambiaremos el local del dispositivo para que
         * se aplique el idioma en cuestión*/
-        val DNIu:String=functions.decrypt(functions.clave,sharedPreff.getUser(context).toString()).toString()
+        var DNIu:String=""
+        if(sharedPreff.getUser(context)!="A"){
+           DNIu=functions.decrypt(functions.clave,sharedPreff.getUser(context).toString()).toString()
+        }
         val logeado=sharedPreff.getLogin(context)
         if(!logeado){
             eliminar.isVisible=false
