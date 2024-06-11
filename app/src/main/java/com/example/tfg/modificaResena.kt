@@ -94,7 +94,9 @@ class modificaResena : AppCompatActivity() {
             }else if(punt){
                 if(texto.isEmpty()){
                     Toast.makeText(this,this.getString(R.string.errorVacios),Toast.LENGTH_SHORT).show()
-                }else if(!functions.isInt(texto)||texto.toInt()<1||texto.toInt()>10){
+                }else if(!functions.isInt(texto)){
+                    Toast.makeText(this,this.getString(R.string.erroPuntuacion),Toast.LENGTH_SHORT).show()
+                }else if(texto.toInt()<1||texto.toInt()>10) {
                     Toast.makeText(this,this.getString(R.string.erroPuntuacion),Toast.LENGTH_SHORT).show()
                 }else{
                     resenaModificada= Review(resenaParts[0].toInt(),resenaParts[1],resenaParts[2],

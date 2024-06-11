@@ -89,12 +89,14 @@ class reviewProduct : AppCompatActivity() {
             /*Comprobamos que no haya ningun campo vacio*/
             if(nombreTXT.isEmpty()||descripcionTXT.isEmpty()||puntuacionTXT.isEmpty()){
                 Toast.makeText(this@reviewProduct, this.getString(R.string.errorVacios), Toast.LENGTH_SHORT).show()
-            }else if(puntuacionTXT.toInt()<1 || puntuacionTXT.toInt()>10 ||!functions.isInt(puntuacionTXT)) {
+            }else if(!functions.isInt(puntuacionTXT)) {
                 Toast.makeText(
                     this@reviewProduct,
                     this.getString(R.string.erroPuntuacion),
                     Toast.LENGTH_SHORT
                 ).show()
+            }else if(puntuacionTXT.toInt()<1||puntuacionTXT.toInt()>10) {
+                Toast.makeText(this,this.getString(R.string.erroPuntuacion),Toast.LENGTH_SHORT).show()
             }else{
                 /*Creamos el objeto review*/
                 val review= Review(nombreTXT,descripcionTXT,puntuacionTXT.toInt(),DNI,spinnerProductos.selectedItem.toString())
