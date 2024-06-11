@@ -111,7 +111,7 @@ class logIn : AppCompatActivity() {
                            /*Acaba la petición entonces manejo los datos*/
                            if(encontrado==null){
                                Toast.makeText(this@logIn,this@logIn.getString(R.string.problemas),Toast.LENGTH_SHORT).show()
-                             }else if(encontrado.dni==null) {
+                             }else if(encontrado.dni=="") {
                                Toast.makeText(this@logIn,this@logIn.getString(R.string.errorLogIn),Toast.LENGTH_SHORT).show()
                            }else{
                                sharedPreff.saveLogin(context, true)

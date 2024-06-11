@@ -61,16 +61,16 @@ class mainMenu : AppCompatActivity() {
         val ip=sharedPreff.getIp(context)
         lifecycleScope.launch (Dispatchers.IO){
             /*Buscamos el usuario a través del DNI guardado anteriormente en las preferencias*/
-            var reviews:ArrayList<Review>? = arrayListOf()
-            reviews=pettitions.getAllReviews(ip)
+            var products:ArrayList<Product>? = arrayListOf()
+            products=pettitions.getProductos(User(DNIu),ip)
             withContext(Dispatchers.Main){
-                if(reviews==null){
+                if(products==null){
                     Toast.makeText(this@mainMenu,this@mainMenu.getString(R.string.problemas),
                         Toast.LENGTH_SHORT).show()
-                }else if(reviews.isEmpty()){
+                }else if(products.isEmpty()){
                     subir.isVisible=false
                 }else{
-                    sharedPreff.saveNumResenas(context,reviews.size)
+                    sharedPreff.saveNumResenas(context,products.size)
                 }
             }
         }
